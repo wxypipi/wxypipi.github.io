@@ -13,7 +13,7 @@ function openMenuBar() {
 
 function closeMenuBar() {
     $("#mainBox").css("-webkit-transform","translate3d(0em, 0, 0)");
-    $("#menuBox").css("-webkit-transform","translate3d(-8, 0, 0)");
+    $("#menuBox").css("-webkit-transform","translate3d(-8em, 0, 0)");
     $("#mainMask").css("pointer-events","none");
 };
 
