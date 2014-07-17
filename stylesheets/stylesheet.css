@@ -56,7 +56,7 @@ body, html{
 }
 
 #contentsPage, #searchPage, #settingPage{
-    width: 33.333%;
+    width: 15em;
     height: 100%;
     float: left;
 }
@@ -89,7 +89,7 @@ body, html{
 
 #menuFooterBtn li{
     float: left;
-    width: 33.333%;
+    width: 5em;
     height: 100%;
     display: block;
     text-align: center;
