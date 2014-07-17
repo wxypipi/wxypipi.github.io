@@ -3,11 +3,11 @@ $(document).ready(function(){
     $("#menuBtn").click(function(){
         var mainBox = $("#mainBox");
         var menuBox = $("#menuBox")
-        var menuMask = $("#menuMask")
+        // var menuMask = $("#menuMask")
         // alert(mainBox.css("-webkit-transform"));
         if(mainBox.css("-webkit-transform") != "matrix(1, 0, 0, 1, 0, 0)"){
             mainBox.css("-webkit-transform","translate3d(0, 0, 0)");
-            menuMask.css("background-color","rgba(0,0,0,0.8)");
+            // menuMask.css("background-color","rgba(0,0,0,0.8)");
             menuBox.css("-webkit-transform","translate3d(-8em, 0, 0)");
             // menuMask.css("display","block");
 
@@ -15,7 +15,7 @@ $(document).ready(function(){
         }
         else{
             mainBox.css("-webkit-transform","translate3d(15em, 0, 0)");
-            menuMask.css("background-color","rgba(0,0,0,0)");
+            // menuMask.css("background-color","rgba(0,0,0,0)");
             menuBox.css("-webkit-transform","translate3d(0, 0, 0)");
             // menuMask.css("display","none");
             // alert("no");
