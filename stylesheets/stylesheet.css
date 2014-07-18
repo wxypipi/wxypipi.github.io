@@ -142,7 +142,7 @@ body, html{
     height: 100%;
     float: left;
     background-color: #63666E;
-    /*overflow: auto;*/
+    overflow: auto;
 }
 
 #contentsPage{
