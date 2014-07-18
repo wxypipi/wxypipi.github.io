@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 
-alert("run");
+// alert("run");
 
 var $mainBox = $("#mainBox"),
     $menuBox = $("#menuBox"),
