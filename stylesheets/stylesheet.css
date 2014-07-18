@@ -145,8 +145,23 @@ body, html{
     overflow: auto;
 }
 
-#contentsPage{
-    /*background-color: yellow;*/
+#contentsPage li{
+    line-height: 3em;
+    background-color: #6E727A;
+    text-indent: 1.5em;
+    font-size: 1.25em;
+    color: #A8AFBA;
+    font-weight: bold;
+}
+
+#contentsPage li li{
+    /*line-height: 3em;*/
+    background-color: #63666E;
+    font-size: 0.8em;
+    text-indent: 3em;
+    color: #9A9FA8;
+    /*font-weight: normal;*/
+    /*text-indent: 3em;*/
 }
 
 #searchPage{
@@ -176,6 +191,8 @@ body, html{
     width: 5em;
     height: 100%;
     text-align: center;
+    line-height: 4em;
+    color: #CCD3DD;
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-transition: box-shadow 0.1s linear;
 }
