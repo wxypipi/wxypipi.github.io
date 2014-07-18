@@ -1,57 +1,59 @@
+$(document).ready(function(){
+
+
 alert("run");
 
-// var mainBox = $("#mainBox"),
-// menuBox = $("#menuBox"),
-// mainMask = $("#mainMask");
-
+var $mainBox = $("#mainBox"),
+    $menuBox = $("#menuBox"),
+    $mainMask = $("#mainMask"),
+    $contentsBtn = $("#contentsBtn"),
+    $searchBtn = $("#searchBtn"),
+    $settingBtn = $("#settingBtn"),
+    $menu = $("#menu"),
+    $menuBtn = $("#menuBtn"),
+    $mainMask = $("#mainMask");
 
 function openMenuBar() {
-    $("#mainBox").css("-webkit-transform","translate3d(15em, 0, 0)");
-    $("#menuBox").css("-webkit-transform","translate3d(0, 0, 0)");
-    $("#mainMask").css("pointer-events","auto");
+    $mainBox.css("-webkit-transform","translate3d(15em, 0, 0)");
+    $menuBox.css("-webkit-transform","translate3d(0, 0, 0)");
+    $mainMask.css("pointer-events","auto");
 };
 
 function closeMenuBar() {
-    $("#mainBox").css("-webkit-transform","translate3d(0em, 0, 0)");
-    $("#menuBox").css("-webkit-transform","translate3d(-8em, 0, 0)");
-    $("#mainMask").css("pointer-events","none");
+    $mainBox.css("-webkit-transform","translate3d(0em, 0, 0)");
+    $menuBox.css("-webkit-transform","translate3d(-8em, 0, 0)");
+    $mainMask.css("pointer-events","none");
 };
 
-function menuTagTo(tag) {
-    $("#contentsBtn").css("box-shadow","0 0 #FF8164 inset");
-    $("#searchBtn").css("box-shadow","0 0 #FF8164 inset");
-    $("#settingBtn").css("box-shadow","0 0 #FF8164 inset");
-    if (tag == "content") {
-        $("#menu").css("-webkit-transform","translate3d(0, 0, 0)");
-        $("#contentsBtn").css("box-shadow","0 -0.25em #FF8164 inset");
-    }else if (tag == "search") {
-        $("#menu").css("-webkit-transform","translate3d(-15em, 0, 0)");
-        $("#searchBtn").css("box-shadow","0 -0.25em #FF8164 inset");
-    }else {
-        $("#menu").css("-webkit-transform","translate3d(-30em, 0, 0)");
-        $("#settingBtn").css("box-shadow","0 -0.25em #FF8164 inset");
-    }
+function menuTagTo(tag,translateX) {
+    var $tag = $(tag);
+    $contentsBtn.css("box-shadow","0 0 #FF8164 inset");
+    $searchBtn.css("box-shadow","0 0 #FF8164 inset");
+    $settingBtn.css("box-shadow","0 0 #FF8164 inset");
+    $tag.css("box-shadow","0 -0.25em #FF8164 inset");
+    $menu.css("-webkit-transform","translate3d(" + translateX + ", 0, 0)");
 };
-
-
-$(document).ready(function(){
     
-    $("#menuBtn").click(function(){
-        openMenuBar();
-    });
 
-    $("#mainMask").click(function(){
-        closeMenuBar();
-    });
-    $("#contentsBtn").click(function(){
-        menuTagTo("content");
-    });
-    $("#searchBtn").click(function(){
-        menuTagTo("search");
-    });
-    $("#settingBtn").click(function(){
-        menuTagTo("setting");
-    });
+$menuBtn.click(function(){
+    openMenuBar();
+});
+
+$mainMask.click(function(){
+    closeMenuBar();
+});
+
+$contentsBtn.click(function(){
+    menuTagTo(this,"0");
+});
+
+$searchBtn.click(function(){
+    menuTagTo(this,"-15em");
+});
+
+$settingBtn.click(function(){
+    menuTagTo(this,"-30em");
+});
 
 
 
