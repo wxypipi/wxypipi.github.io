@@ -36,13 +36,13 @@ body, html{
 #menuBox{
     width: 15em;
     -webkit-transform: translate3d(-8em, 0, 0);
-    transition: -webkit-transform 0.35s cubic-bezier(.08, .47, 0, 1);
+    -webkit-transition: -webkit-transform 0.35s cubic-bezier(.08, .47, 0, 1);
 }
 
 #mainBox{
     box-shadow: 0 0 1em 0.25em rgba(0,0,0,0.3);
     -webkit-transform: translate3d(0, 0, 0);
-    transition: -webkit-transform 0.35s cubic-bezier(.08, .47, 0, 1);
+    -webkit-transition: -webkit-transform 0.35s cubic-bezier(.08, .47, 0, 1);
 }
 
 #main{
@@ -129,7 +129,7 @@ body, html{
     width: 300%;
     height: 100%;
     position: relative;
-    transition: -webkit-transform 0.35s cubic-bezier(.08, .47, 0, 1);
+    -webkit-transition: -webkit-transform 0.35s cubic-bezier(.08, .47, 0, 1);
 }
 
 #contentsPage, #searchPage, #settingPage{
@@ -171,7 +171,7 @@ body, html{
     height: 100%;
     text-align: center;
     -webkit-transform: translate3d(0, 0, 0);
-    transition: box-shadow 0.15s linear;
+    -webkit-transition: box-shadow 0.1s linear;
 }
 
 #contentsBtn{
@@ -184,7 +184,7 @@ body, html{
     background-color: rgba(0,0,0,0.8);
     position: absolute;
     -webkit-transform: translate3d(0, 0, 0);
-    transition: background-color 0.35s cubic-bezier(.08, .47, 0, 1);
+    -webkit-transition: background-color 0.35s cubic-bezier(.08, .47, 0, 1);
     display: none;
     pointer-events: none;
 }*/
