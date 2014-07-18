@@ -160,6 +160,7 @@ body, html{
     font-size: 0.8em;
     text-indent: 3em;
     color: #9A9FA8;
+    -webkit-transition: box-shadow 0.1s linear;
     /*font-weight: normal;*/
     /*text-indent: 3em;*/
 }

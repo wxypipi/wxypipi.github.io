@@ -11,7 +11,9 @@ var $mainBox = $("#mainBox"),
     $settingBtn = $("#settingBtn"),
     $menu = $("#menu"),
     $menuBtn = $("#menuBtn"),
-    $mainMask = $("#mainMask");
+    $mainMask = $("#mainMask"),
+    $contentsItem = $("#contentsPage li li"),
+    lastItem = false;
 
 function openMenuBar() {
     $mainBox.css("-webkit-transform","translate3d(15em, 0, 0)");
@@ -33,6 +35,15 @@ function menuTagTo(tag,translateX) {
     $tag.css("box-shadow","0 -0.25em #FF8164 inset");
     $menu.css("-webkit-transform","translate3d(" + translateX + ", 0, 0)");
 };
+
+function selectItem(item) {
+    var $item = $(item);
+    var $lastItem = $(lastItem);
+    if(lastItem){
+        $lastItem.css("box-shadow","0 0 #FF8164 inset");
+    };
+    $item.css("box-shadow","0.25em 0 #FF8164 inset");
+};
     
 
 $menuBtn.click(function(){
@@ -53,6 +64,11 @@ $searchBtn.click(function(){
 
 $settingBtn.click(function(){
     menuTagTo(this,"-30em");
+});
+
+$contentsItem.click(function(){
+    selectItem(this);
+    lastItem = this;
 });
 
 
