@@ -53,33 +53,101 @@ body, html{
 }
 
 #mainHeader, #mainFooter{
-    height: 3em;
     width: 100%;
     position: absolute;
     text-align: center;
 }
 
 #mainHeader{
+    height: 3em;
     top: 0;
     background-color: #65B89C;
     text-align: left;
 }
 
+#headerText{
+    height: 3em;
+    line-height: 3em;
+    float: left;
+}
+
 #mainFooter{
+    height: 7em;
     bottom: 0;
     background-color: #EAEAEA;
+    /*background-color: grey;*/
+}
+
+#aniBtnBox{
+    width: 7em;
+    height: 7em;
+    background-color: #EAEAEA;
+    position: relative;
+    margin: auto;
+}
+
+#aniBtnR,#aniBtnG,#aniBtnB,#GBb,#GRr,#RBb,#RGBb{
+    width: 4.5em;
+    height: 4.5em;
+    position: absolute;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+#aniBtnR{
+    background-color: red;
+    -webkit-transform: translate(2em, 0);
+}
+
+#aniBtnG{
+    background-color: green;
+    -webkit-transform: translate(0, 2em);
+}
+
+#aniBtnB{
+    background-color: blue;
+}
+
+#GBb{
+    background-color: cyan;
+    -webkit-transform: translate(0, -2em);
+}
+#GRr{
+    background-color: yellow;
+    -webkit-transform: translate(2em, -2em);
+}
+#RBb{
+    background-color: pink;
+    -webkit-transform: translate(-2em, 0);
+}
+#RGBb{
+    background-color: white;
+    -webkit-transform: translate(-2em, 0);
+}
+
+
+#previousBtn, #nextBtn{
+    width: 3em;
+    height: 3em;
+    background-color: white;
+    position: absolute;
+    top: 2em;
+    bottom: 2em;
+    border-radius: 50%;
+}
+
+#previousBtn{
+    left: 2em;
+}
+
+#nextBtn{
+    right: 2em;
 }
 
 #menuBtn{
     height: 3em;
     width: 3em;
     background-color: #65B89C;
-    float: left;
-}
-
-#headerText{
-    height: 3em;
-    line-height: 3em;
     float: left;
 }
 
@@ -98,21 +166,6 @@ body, html{
     height: 75%;
     background-color: #EAEAEA;
 }
-
-#previous, #next{
-    width: 2em;
-    height: 100%;
-    background-color: #EAEAEA;
-}
-
-#previous{
-    float: left;
-}
-
-#next{
-    float: right;
-}
-
 
 #mainMask{
     width: 100%;
@@ -147,7 +200,7 @@ body, html{
 
 #contentsPage li{
     line-height: 3em;
-    background-color: #6E727A;
+    background-color: #6A6F76;
     text-indent: 1.5em;
     font-size: 1.25em;
     color: #A8AFBA;

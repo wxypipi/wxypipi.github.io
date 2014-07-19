@@ -69,6 +69,7 @@ $settingBtn.click(function(){
 $contentsItem.click(function(){
     selectItem(this);
     lastItem = this;
+    closeMenuBar()
 });
 
 
