@@ -74,6 +74,10 @@ body, html{
     float: left;
 }
 
+#headerText span{
+    font-size: 0.5em;
+}
+
 #mainFooter{
     height: 7em;
     bottom: 0;
@@ -213,8 +217,10 @@ body, html{
 
 #menuBtn{
     height: 3em;
-    width: 3em;
-    background-color: #65B89C;
+    width: 1.5em;
+    background: url(menu.svg);
+    background-size: 3em 3em;
+    /*background-color: #65B89C;*/
     float: left;
 }
 
