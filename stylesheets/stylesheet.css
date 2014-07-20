@@ -185,11 +185,12 @@ body, html{
     right: 1.5em;
 }
 
+
+
+/*UC和海豚不兼容
+
 #previousGlow, #nextGlow{
-    /*background-color: #65B89C;*/
-    /*-webkit-transform: scale3d(1, 1, 1);*/
     -webkit-animation: none;
-    /*-webkit-transition: -webkit-transform 0.35s,background-color 0.35s;*/
 }
 
 
@@ -202,8 +203,18 @@ body, html{
         background-color: #EAEAEA;
         -webkit-transform: scale3d(2, 2, 1);
     }
-}
+}*/
 
+ /*-webkit-transition: -webkit-transform 0.35s,background-color 0.35s;*/
+    /*background-color: #65B89C;*/
+    /*-webkit-transform: scale3d(1, 1, 1);*/
+
+
+#previousGlow, #nextGlow{
+    background-color: #65B89C;
+    -webkit-transform: scale3d(0.9, 0.9, 1);
+    -webkit-transition: -webkit-transform 0.35s,background-color 0.35s;
+}
 
 
 #menuBtn{
