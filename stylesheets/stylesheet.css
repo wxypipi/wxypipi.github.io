@@ -178,11 +178,11 @@ body, html{
 }
 
 #previousBtn, #previousGlow{
-    left: 2em;
+    left: 1.5em;
 }
 
 #nextBtn, #nextGlow{
-    right: 2em;
+    right: 1.5em;
 }
 
 #previousGlow, #nextGlow{
@@ -196,7 +196,7 @@ body, html{
 @-webkit-keyframes glow {
     from{
         background-color: #65B89C;
-        -webkit-transform: scale3d(1, 1, 1);
+        -webkit-transform: scale3d(0.9, 0.9, 1);
     }
     to{
         background-color: #EAEAEA;

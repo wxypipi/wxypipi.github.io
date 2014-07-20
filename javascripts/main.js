@@ -70,7 +70,7 @@ function btnGlow(glowObj) {
 
 // var menuBtn = $menuBtn[0];
 
-$menuBtn.bind('touchstart', function() { 
+$menuBtn.bind('touchend', function() { 
     openMenuBar();
 });
 
@@ -86,11 +86,14 @@ $searchBtn.bind('touchstart', function() {
     menuTagTo(this,"-15em");
 });
 
-$searchBtn.bind('touchstart', function() { 
+$settingBtn.bind('touchstart', function() { 
     menuTagTo(this,"-30em");
 });
 
-$contentsItem.click(function(){
+
+$contentsItem.bind('touchend', function() { 
+    // $contentsItem.bind('touchend', function() { 
+
     selectItem(this);
     lastItem = this;
     closeMenuBar();
