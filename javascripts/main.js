@@ -57,23 +57,24 @@ function selectItem(item) {
 };
 
 // UC和海豚不兼容
-// function btnGlow(glowObj) {
-//     glowObj.css("-webkit-animation","glow 0.3s cubic-bezier(0, .36, .44, .84)");
-//     setTimeout(function(){
-//         glowObj.css("-webkit-animation","none")
-//     },300);
-// };
-
 function btnGlow(glowObj) {
-    glowObj.css("-webkit-transition","-webkit-transform 0.3s,background-color 0.3s");
-    glowObj.css("background-color","#EAEAEA");
-    glowObj.css("-webkit-transform","scale3d(2, 2, 1)");
+    glowObj.css("-webkit-animation","glow 0.3s cubic-bezier(0, .36, .44, .84)");
     setTimeout(function(){
-        glowObj.css("-webkit-transition","none");
-        glowObj.css("-webkit-transform","scale3d(0.9, 0.9, 1)");
-        glowObj.css("background-color","#65B89C");
-    },310);  
+        glowObj.css("-webkit-animation","none")
+    },300);
 };
+
+// UC和海豚兼容但是效果怪怪的
+// function btnGlow(glowObj) {
+//     glowObj.css("-webkit-transition","-webkit-transform 0.3s,background-color 0.3s");
+//     glowObj.css("background-color","#EAEAEA");
+//     glowObj.css("-webkit-transform","scale3d(2, 2, 1)");
+//     setTimeout(function(){
+//         glowObj.css("-webkit-transition","none");
+//         glowObj.css("-webkit-transform","scale3d(0.9, 0.9, 1)");
+//         glowObj.css("background-color","#65B89C");
+//     },310);  
+// };
 
 
 $menuBtn.bind('touchend', function() { 

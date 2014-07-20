@@ -187,8 +187,7 @@ body, html{
 
 
 
-/*UC和海豚不兼容
-
+/*UC和海豚不兼容*/
 #previousGlow, #nextGlow{
     -webkit-animation: none;
 }
@@ -203,17 +202,13 @@ body, html{
         background-color: #EAEAEA;
         -webkit-transform: scale3d(2, 2, 1);
     }
-}*/
+}
 
- /*-webkit-transition: -webkit-transform 0.35s,background-color 0.35s;*/
-    /*background-color: #65B89C;*/
-    /*-webkit-transform: scale3d(1, 1, 1);*/
-
-
-#previousGlow, #nextGlow{
+/*UC和海豚兼容但是效果怪怪的*/
+/*#previousGlow, #nextGlow{
     background-color: #65B89C;
     -webkit-transform: scale3d(0.9, 0.9, 1);
-}
+}*/
 
 
 #menuBtn{
