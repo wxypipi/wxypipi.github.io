@@ -213,7 +213,6 @@ body, html{
 #previousGlow, #nextGlow{
     background-color: #65B89C;
     -webkit-transform: scale3d(0.9, 0.9, 1);
-    -webkit-transition: -webkit-transform 0.35s,background-color 0.35s;
 }
 
 

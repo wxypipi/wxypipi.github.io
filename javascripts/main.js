@@ -65,14 +65,14 @@ function selectItem(item) {
 // };
 
 function btnGlow(glowObj) {
-    glowObj.css("-webkit-transition","-webkit-transform 0.3s cubic-bezier(0, .36, .44, .84),background-color 0.35s cubic-bezier(0, .36, .44, .84)");
+    glowObj.css("-webkit-transition","-webkit-transform 0.3s,background-color 0.3s");
     glowObj.css("background-color","#EAEAEA");
     glowObj.css("-webkit-transform","scale3d(2, 2, 1)");
     setTimeout(function(){
         glowObj.css("-webkit-transition","none");
-        glowObj.css("background-color","#65B89C");
         glowObj.css("-webkit-transform","scale3d(0.9, 0.9, 1)");
-    },300);
+        glowObj.css("background-color","#65B89C");
+    },310);  
 };
 
 
