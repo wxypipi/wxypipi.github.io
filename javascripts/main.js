@@ -13,7 +13,12 @@ var $mainBox = $("#mainBox"),
     $menuBtn = $("#menuBtn"),
     $mainMask = $("#mainMask"),
     $contentsItem = $("#contentsPage li li"),
-    lastItem = false;
+    lastItem = false,
+    $previousBtn = $("#previousBtn"),
+    $nextBtn = $("#nextBtn"),
+    $previousGlow = $("#previousGlow")
+    $nextGlow = $("#nextGlow")
+    ;
 
 function openMenuBar() {
     $mainBox.css("-webkit-transform","translate3d(15em, 0, 0)");
@@ -44,6 +49,22 @@ function selectItem(item) {
     };
     $item.css("box-shadow","0.25em 0 #FF8164 inset");
 };
+
+
+function resetGlow(glowObj) {
+    glowObj.removeAttr("style");
+    glowObj.css("-webkit-transform","scale3d(1, 1, 1)");
+    glowObj.css("background-color","#65B89C");
+    // alert(glowObj.css("-webkit-transition"));
+};
+
+
+function btnGlow(glowObj) {
+    glowObj.css("-webkit-animation","glow 0.3s");
+    setTimeout(function(){
+        glowObj.css("-webkit-animation","none")
+    },300);
+};
     
 
 $menuBtn.click(function(){
@@ -69,9 +90,16 @@ $settingBtn.click(function(){
 $contentsItem.click(function(){
     selectItem(this);
     lastItem = this;
-    closeMenuBar()
+    closeMenuBar();
 });
 
+$previousBtn.click(function(){
+    btnGlow($previousGlow);
+});
+
+$nextBtn.click(function(){
+    btnGlow($nextGlow);
+});
 
 
 
