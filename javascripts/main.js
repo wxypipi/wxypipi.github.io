@@ -1,5 +1,8 @@
 $(document).ready(function(){
 
+document.body.addEventListener('touchmove',function(e){
+      e.preventDefault();
+  });
 
 // alert("run");
 
