@@ -1,28 +1,9 @@
 $(document).ready(function(){
 
-document.body.addEventListener('touchmove',function(e){
-      e.preventDefault();
-  });
+// document.body.addEventListener('touchmove',function(e){
+//       e.preventDefault();
+//   });
 
-//uses document because document will be topmost level in bubbling
-var selScrollable = '.scrollable';
-// Uses document because document will be topmost level in bubbling
-$(document).on('touchmove',function(e){
-  e.preventDefault();
-});
-// Uses body because jQuery on events are called off of the element they are
-// added to, so bubbling would not work if we used document instead.
-$('body').on('touchstart', selScrollable, function(e) {
-  if (e.currentTarget.scrollTop === 0) {
-    e.currentTarget.scrollTop = 1;
-  } else if (e.currentTarget.scrollHeight === e.currentTarget.scrollTop + e.currentTarget.offsetHeight) {
-    e.currentTarget.scrollTop -= 1;
-  }
-});
-// Stops preventDefault from being called on document if it sees a scrollable div
-$('body').on('touchmove', selScrollable, function(e) {
-  e.stopPropagation();
-});
 
 // alert("run");
 
@@ -67,46 +48,45 @@ function menuTagTo(tag,translateX) {
 function selectItem(item) {
     var $item = $(item);
     var $lastItem = $(lastItem);
-    if(lastItem){
-        $lastItem.css("box-shadow","0 0 #FF8164 inset");
-    };
-    $item.css("box-shadow","0.25em 0 #FF8164 inset");
+    setTimeout(function(){
+        if(lastItem){
+            $lastItem.css("box-shadow","0 0 #FF8164 inset");
+        };
+        $item.css("box-shadow","0.25em 0 #FF8164 inset");
+    },100);
 };
-
-
-function resetGlow(glowObj) {
-    glowObj.removeAttr("style");
-    glowObj.css("-webkit-transform","scale3d(1, 1, 1)");
-    glowObj.css("background-color","#65B89C");
-    // alert(glowObj.css("-webkit-transition"));
-};
-
 
 function btnGlow(glowObj) {
-    glowObj.css("-webkit-animation","glow 0.3s");
+    glowObj.css("-webkit-animation","glow 0.3s cubic-bezier(0, .36, .44, .84)");
     setTimeout(function(){
         glowObj.css("-webkit-animation","none")
     },300);
 };
     
 
-$menuBtn.click(function(){
+// $menuBtn.click(function(){
+//     openMenuBar();
+// });
+
+// var menuBtn = $menuBtn[0];
+
+$menuBtn.bind('touchstart', function() { 
     openMenuBar();
 });
 
-$mainMask.click(function(){
+$mainMask.bind('touchstart', function() { 
     closeMenuBar();
 });
 
-$contentsBtn.click(function(){
+$contentsBtn.bind('touchstart', function() { 
     menuTagTo(this,"0");
 });
 
-$searchBtn.click(function(){
+$searchBtn.bind('touchstart', function() { 
     menuTagTo(this,"-15em");
 });
 
-$settingBtn.click(function(){
+$searchBtn.bind('touchstart', function() { 
     menuTagTo(this,"-30em");
 });
 
@@ -116,16 +96,13 @@ $contentsItem.click(function(){
     closeMenuBar();
 });
 
-$previousBtn.click(function(){
+$previousBtn.bind('touchstart', function() { 
     btnGlow($previousGlow);
 });
 
-$nextBtn.click(function(){
+$nextBtn.bind('touchstart', function() { 
     btnGlow($nextGlow);
 });
-
-
-
 
 
 
