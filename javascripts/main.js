@@ -78,11 +78,15 @@ function btnGlow(glowObj) {
 // };
 
 
+$("body").bind('touchend', function() {
+});
+
+
 $aniBtn.bind('touchend', function() { 
     $aniBtn.css("-webkit-transform","translate(0, 0) scale3d(1,1,1)");
 });
 
-$menuBtn.bind('touchend', function() { 
+$menuBtn.bind('touchend', function() {
     openMenuBar();
 });
 
