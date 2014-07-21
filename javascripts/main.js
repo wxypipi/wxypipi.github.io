@@ -23,7 +23,8 @@ var $mainBox = $("#mainBox"),
     $previousGlow = $("#previousGlow"),
     $nextGlow = $("#nextGlow"),
     // $aniBtn = $("#aniBtnR,#aniBtnG,#aniBtnB,#GBb,#GRr,#RBb,#RGBb")
-    $aniBtn = $("#aniBtnBox")
+    $aniBtn = $("#aniBtnBox"),
+    separate = true
     ;
 
 function openMenuBar() {
@@ -69,19 +70,26 @@ function btnGlow(glowObj) {
 
 function btnAnimation() {
     var i = 0;
+    var n;
+    if (separate) {
+        n = 0;
+        separate = false;
+    }else {
+        n = -12;
+        separate = true;
+    }
     aaa();
     function aaa() {
-        // alert(i);
-        $aniBtn.css("background","url(./images/button.png) 0 " + (i*7) + "em");
+        $aniBtn.css("background","url(./images/button.png) 0 -" + (Math.abs(n)*7) + "em");
         $aniBtn.css("background-size","7em 91em");
+        n += 1;
         i += 1;
-        // alert($aniBtn.css("background"));
         if (i>12) {
             return;
         };
         setTimeout(function(){
             aaa();
-        },40);
+        },30);
     }; 
     
 };
@@ -147,6 +155,7 @@ $nextBtn.bind('touchstart', function() {
 
 $aniBtn.bind('touchstart', function() { 
     btnAnimation();
+    // alert($aniBtn.css("background"));
 });
 
 
