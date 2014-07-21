@@ -87,12 +87,15 @@ body, html{
 #aniBtnBox{
     width: 7em;
     height: 7em;
-    background-color: #EAEAEA;
+    background: url(../images/button.png);
+    background-size: 7em 91em;
     position: relative;
     margin: auto;
 }
 
-#aniBtnR,#aniBtnG,#aniBtnB,#GBb,#GRr,#RBb,#RGBb{
+
+/*在pc版chrome上没问题，但是在移动版chrome上显示不正常，套在里面的几个div变成方的了*/
+/*#aniBtnR,#aniBtnG,#aniBtnB,#GBb,#GRr,#RBb,#RGBb{
     width: 3.75em;
     height: 3.75em;
     position: absolute;
@@ -136,7 +139,7 @@ body, html{
 #RGBb{
     background-color: #FE9B81;
     -webkit-transform: translate(-28px, 6px) scale3d(0.8,0.8,1);
-}
+}*/
 
 
 #previousBtn, #nextBtn, #previousGlow, #nextGlow{
@@ -146,7 +149,7 @@ body, html{
     position: absolute;
     top: 2em;
     bottom: 2em;
-    border-radius: 50%;
+    
 }
 
 #previousBtn, #previousGlow{
@@ -157,9 +160,21 @@ body, html{
     right: 1.5em;
 }
 
+#previousBtn{
+    background: url(pandn.svg);
+    background-size: 3em 3em;
+}
+
+#nextBtn{
+    -webkit-transform: rotate(180deg);
+    background: url(pandn.svg);
+    background-size: 3em 3em;
+}
+
 
 /*UC和海豚不兼容*/
 #previousGlow, #nextGlow{
+    border-radius: 50%;
     -webkit-animation: none;
 }
 

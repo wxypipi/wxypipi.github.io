@@ -5,7 +5,7 @@ $(document).ready(function(){
 //   });
 
 
-// alert("run");
+alert("run");
 
 var $mainBox = $("#mainBox"),
     $menuBox = $("#menuBox"),
@@ -14,7 +14,7 @@ var $mainBox = $("#mainBox"),
     $searchBtn = $("#searchBtn"),
     $settingBtn = $("#settingBtn"),
     $menu = $("#menu"),
-    $menuBtn = $("#menuBtn"),
+    $menuBtn = $("#menuBtn,#headerText"),
     $mainMask = $("#mainMask"),
     $contentsItem = $("#contentsPage li li"),
     lastItem = false,
@@ -22,7 +22,8 @@ var $mainBox = $("#mainBox"),
     $nextBtn = $("#nextBtn"),
     $previousGlow = $("#previousGlow"),
     $nextGlow = $("#nextGlow"),
-    $aniBtn = $("#aniBtnR,#aniBtnG,#aniBtnB,#GBb,#GRr,#RBb,#RGBb")
+    // $aniBtn = $("#aniBtnR,#aniBtnG,#aniBtnB,#GBb,#GRr,#RBb,#RGBb")
+    $aniBtn = $("#aniBtnBox")
     ;
 
 function openMenuBar() {
@@ -65,6 +66,28 @@ function btnGlow(glowObj) {
     },300);
 };
 
+
+function btnAnimation() {
+    var i = 0;
+    aaa();
+    function aaa() {
+        // alert(i);
+        $aniBtn.css("background","url(./images/button.png) 0 " + (i*7) + "em");
+        $aniBtn.css("background-size","7em 91em");
+        i += 1;
+        // alert($aniBtn.css("background"));
+        if (i>12) {
+            return;
+        };
+        setTimeout(function(){
+            aaa();
+        },40);
+    }; 
+    
+};
+
+
+
 // UC和海豚兼容但是效果怪怪的
 // function btnGlow(glowObj) {
 //     glowObj.css("-webkit-transition","-webkit-transform 0.3s,background-color 0.3s");
@@ -77,14 +100,15 @@ function btnGlow(glowObj) {
 //     },310);  
 // };
 
-
+// 不加这句的话没有触摸事件的元素上方覆盖的透明元素的触摸事件也会失效（菜单栏收不回去）
 $("body").bind('touchend', function() {
 });
 
 
-$aniBtn.bind('touchend', function() { 
-    $aniBtn.css("-webkit-transform","translate(0, 0) scale3d(1,1,1)");
-});
+// 在pc版chrome上没问题，但是在移动版chrome上显示不正常，套在里面的几个div变成方的了
+// $aniBtn.bind('touchend', function() { 
+//     $aniBtn.css("-webkit-transform","translate(0, 0) scale3d(1,1,1)");
+// });
 
 $menuBtn.bind('touchend', function() {
     openMenuBar();
@@ -108,8 +132,6 @@ $settingBtn.bind('touchstart', function() {
 
 
 $contentsItem.bind('touchend', function() { 
-    // $contentsItem.bind('touchend', function() { 
-
     selectItem(this);
     lastItem = this;
     closeMenuBar();
@@ -122,6 +144,12 @@ $previousBtn.bind('touchstart', function() {
 $nextBtn.bind('touchstart', function() { 
     btnGlow($nextGlow);
 });
+
+$aniBtn.bind('touchstart', function() { 
+    btnAnimation();
+});
+
+
 
 
 
