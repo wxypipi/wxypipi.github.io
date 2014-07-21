@@ -5,7 +5,7 @@ $(document).ready(function(){
 //   });
 
 
-alert("run");
+// alert("run");
 
 var $mainBox = $("#mainBox"),
     $menuBox = $("#menuBox"),
@@ -20,8 +20,9 @@ var $mainBox = $("#mainBox"),
     lastItem = false,
     $previousBtn = $("#previousBtn"),
     $nextBtn = $("#nextBtn"),
-    $previousGlow = $("#previousGlow")
-    $nextGlow = $("#nextGlow")
+    $previousGlow = $("#previousGlow"),
+    $nextGlow = $("#nextGlow"),
+    $aniBtn = $("#aniBtnR,#aniBtnG,#aniBtnB,#GBb,#GRr,#RBb,#RGBb")
     ;
 
 function openMenuBar() {
@@ -76,6 +77,10 @@ function btnGlow(glowObj) {
 //     },310);  
 // };
 
+
+$aniBtn.bind('touchend', function() { 
+    $aniBtn.css("-webkit-transform","translate(0, 0) scale3d(1,1,1)");
+});
 
 $menuBtn.bind('touchend', function() { 
     openMenuBar();
