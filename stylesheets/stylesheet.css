@@ -93,7 +93,6 @@ body, html{
     position: relative;
     margin: auto;
     -webkit-transform: translateZ(0);
-    -webkit-backface-visibility:hidden;
     -webkit-animation: none;
 }
 

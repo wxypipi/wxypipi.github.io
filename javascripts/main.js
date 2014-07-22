@@ -101,14 +101,14 @@ function btnAnimation() {
         separate = false;
         setTimeout(function(){
             $aniBtn.css("-webkit-animation","none")
-        },350);
+        },300);
     }else {
         $aniBtn.css({"-webkit-animation":"changePos steps(12) 0.3s forwards reverse",
                      "background-position":"0 0"});
         separate = true;
         setTimeout(function(){
             $aniBtn.css("-webkit-animation","none")
-        },350);
+        },300);
     };
 };
 
