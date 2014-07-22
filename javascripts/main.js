@@ -67,34 +67,50 @@ function btnGlow(glowObj) {
     },300);
 };
 
+// 用js实现css sprite动画，
+// function btnAnimation() {
+//     var i = 0;
+//     var n;
+//     if (separate) {
+//         n = 0;
+//         separate = false;
+//     }else {
+//         n = -12;
+//         separate = true;
+//     }
+//     aaa();
+//     function aaa() {
+//         $aniBtn.css("background","url(./images/button.png) 0 -" + (Math.abs(n)*7) + "em");
+//         $aniBtn.css("background-size","7em 91em");
+//         n += 1;
+//         i += 1;
+//         if (i>12) {
+//             return;
+//         };
+//         setTimeout(function(){
+//             aaa();
+//         },30);
+//     }; 
+    
+// };
 
 function btnAnimation() {
-    var i = 0;
-    var n;
     if (separate) {
-        n = 0;
+        $aniBtn.css("-webkit-animation","changePos steps(12) 0.2s forwards");
+        $aniBtn.css("background-position","0em -84em");
         separate = false;
-    }else {
-        n = -12;
-        separate = true;
-    }
-    aaa();
-    function aaa() {
-        $aniBtn.css("background","url(./images/button.png) 0 -" + (Math.abs(n)*7) + "em");
-        $aniBtn.css("background-size","7em 91em");
-        n += 1;
-        i += 1;
-        if (i>12) {
-            return;
-        };
         setTimeout(function(){
-            aaa();
-        },30);
-    }; 
-    
+            $aniBtn.css("-webkit-animation","none")
+        },250);
+    }else {
+        $aniBtn.css("-webkit-animation","changePos steps(12) 0.2s forwards reverse");
+        $aniBtn.css("background-position","0em 0em");
+        separate = true;
+        setTimeout(function(){
+            $aniBtn.css("-webkit-animation","none")
+        },250);
+    };
 };
-
-
 
 // UC和海豚兼容但是效果怪怪的
 // function btnGlow(glowObj) {
@@ -108,15 +124,15 @@ function btnAnimation() {
 //     },310);  
 // };
 
-// 不加这句的话没有触摸事件的元素上方覆盖的透明元素的触摸事件也会失效（菜单栏收不回去）
-$("body").bind('touchend', function() {
-});
-
 
 // 在pc版chrome上没问题，但是在移动版chrome上显示不正常，套在里面的几个div变成方的了
 // $aniBtn.bind('touchend', function() { 
 //     $aniBtn.css("-webkit-transform","translate(0, 0) scale3d(1,1,1)");
 // });
+
+// 不加这句的话没有触摸事件的元素上方覆盖的透明元素的触摸事件也会失效（菜单栏收不回去）
+$("body").bind('touchend', function() {
+});
 
 $menuBtn.bind('touchend', function() {
     openMenuBar();

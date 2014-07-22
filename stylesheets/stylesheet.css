@@ -91,6 +91,13 @@ body, html{
     background-size: 7em 91em;
     position: relative;
     margin: auto;
+    -webkit-transform: translateZ(0);
+    -webkit-animation: none;
+}
+
+@-webkit-keyframes changePos {
+    from{background-position:0em 0em;}
+    to{background-position:0em -84em;}
 }
 
 
