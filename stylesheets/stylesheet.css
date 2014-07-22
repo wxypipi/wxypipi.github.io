@@ -87,6 +87,7 @@ body, html{
 #aniBtnBox{
     width: 7em;
     height: 7em;
+    -webkit-transform: translate3d(0, 0, 0);
     background: url(../images/button.png);
     background-size: 7em 91em;
     position: relative;
@@ -321,4 +322,3 @@ body, html{
     display: none;
     pointer-events: none;
 }*/
-
