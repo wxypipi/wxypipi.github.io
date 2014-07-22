@@ -5,7 +5,7 @@ $(document).ready(function(){
 //   });
 
 
-alert("run");
+// alert("run");
 
 var $mainBox = $("#mainBox"),
     $menuBox = $("#menuBox"),
@@ -96,19 +96,19 @@ function btnGlow(glowObj) {
 
 function btnAnimation() {
     if (separate) {
-        $aniBtn.css("-webkit-animation","changePos steps(12) 0.2s forwards");
-        $aniBtn.css("background-position","0em -84em");
+        $aniBtn.css({"-webkit-animation":"changePos steps(12) 0.3s forwards",
+                     "background-position":"0em -84em");
         separate = false;
         setTimeout(function(){
             $aniBtn.css("-webkit-animation","none")
-        },250);
+        },350);
     }else {
-        $aniBtn.css("-webkit-animation","changePos steps(12) 0.2s forwards reverse");
-        $aniBtn.css("background-position","0em 0em");
+        $aniBtn.css({"-webkit-animation":"changePos steps(12) 0.3s forwards reverse",
+                     "background-position":"0 0");
         separate = true;
         setTimeout(function(){
             $aniBtn.css("-webkit-animation","none")
-        },250);
+        },350);
     };
 };
 
