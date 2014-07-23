@@ -24,8 +24,27 @@ var $mainBox = $("#mainBox"),
     $nextGlow = $("#nextGlow"),
     // $aniBtn = $("#aniBtnR,#aniBtnG,#aniBtnB,#GBb,#GRr,#RBb,#RGBb")
     $aniBtn = $("#aniBtnBox"),
-    separate = true
-    ;
+    separate = true,
+    $aniBox = $("#aniBox"),
+    $animation = $("#animation1");
+
+function resize() {
+    var height = Number($aniBox.css("height").slice(0,-2));
+    var width = Number($aniBox.css("width").slice(0,-2));
+    // alert(height + " " + width);
+    if (height > width) {
+        $animation.css({"height":width + "px",
+                        "width":width + "px",
+                        "margin-top":((height - width) / 1.8) + "px"
+        });
+    }else{
+        $animation.css({"height":(height*0.9) + "px",
+                        "width":(height*0.9) + "px",
+                        "margin-top":(height*0.07) + "px"
+        });
+    }
+};
+
 
 function openMenuBar() {
     $mainBox.css("-webkit-transform","translate3d(15em, 0, 0)");
@@ -67,7 +86,7 @@ function btnGlow(glowObj) {
     },300);
 };
 
-// 用js实现css sprite动画，
+// 用js实现css sprite动画，可能性能没有用css实现的好
 // function btnAnimation() {
 //     var i = 0;
 //     var n;
@@ -134,6 +153,11 @@ function btnAnimation() {
 $("body").bind('touchend', function() {
 });
 
+$(window).resize(function() {
+  resize();
+});
+resize();
+
 $menuBtn.bind('touchend', function() {
     openMenuBar();
 });
@@ -153,7 +177,6 @@ $searchBtn.bind('touchstart', function() {
 $settingBtn.bind('touchstart', function() { 
     menuTagTo(this,"-30em");
 });
-
 
 $contentsItem.bind('touchend', function() { 
     selectItem(this);
