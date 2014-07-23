@@ -113,21 +113,33 @@ function btnGlow(glowObj) {
     
 // };
 
+
+// 用css的animation实现css sprite动画，没有用css的transition方便
+// function btnAnimation() {
+//     if (separate) {
+//         $aniBtn.css({"-webkit-animation":"changePos steps(12) 0.3s forwards",
+//                      "background-position":"0em -84em"});
+//         separate = false;
+//         setTimeout(function(){
+//             $aniBtn.css("-webkit-animation","none")
+//         },300);
+//     }else {
+//         $aniBtn.css({"-webkit-animation":"changePos steps(12) 0.3s forwards reverse",
+//                      "background-position":"0 0"});
+//         separate = true;
+//         setTimeout(function(){
+//             $aniBtn.css("-webkit-animation","none")
+//         },300);
+//     };
+// };
+
 function btnAnimation() {
     if (separate) {
-        $aniBtn.css({"-webkit-animation":"changePos steps(12) 0.3s forwards",
-                     "background-position":"0em -84em"});
+        $aniBtn.css("background-position","0em -84em");
         separate = false;
-        setTimeout(function(){
-            $aniBtn.css("-webkit-animation","none")
-        },300);
     }else {
-        $aniBtn.css({"-webkit-animation":"changePos steps(12) 0.3s forwards reverse",
-                     "background-position":"0 0"});
+        $aniBtn.css("background-position","0 0");
         separate = true;
-        setTimeout(function(){
-            $aniBtn.css("-webkit-animation","none")
-        },300);
     };
 };
 

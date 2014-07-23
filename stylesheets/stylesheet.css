@@ -89,16 +89,17 @@ body, html{
     height: 7em;
     background: url(../images/button.png);
     background-size: 7em 91em;
+    background-position: 0 0;
     position: relative;
     margin: auto;
     -webkit-transform: translateZ(0);
-    -webkit-animation: none;
+    -webkit-transition: background-position 0.3s steps(12);
 }
 
-@-webkit-keyframes changePos {
+/*@-webkit-keyframes changePos {
     from{background-position:0em 0em;}
     to{background-position:0em -84em;}
-}
+}*/
 
 
 /*在pc版chrome上没问题，但是在移动版chrome上显示不正常，套在里面的几个div变成方的了*/
@@ -182,17 +183,18 @@ body, html{
 /*UC和海豚不兼容*/
 #previousGlow, #nextGlow{
     border-radius: 50%;
+    background-color: #65B89C;
     -webkit-animation: none;
 }
 
 
 @-webkit-keyframes glow {
     from{
-        background-color: #65B89C;
+        opacity: 1;
         -webkit-transform: scale3d(0.9, 0.9, 1);
     }
     to{
-        background-color: #EAEAEA;
+        opacity: 0;
         -webkit-transform: scale3d(2, 2, 1);
     }
 }
@@ -237,7 +239,7 @@ body, html{
     margin: auto;
     width: 20em;
     height: 100%;
-    background: url(../images/testimag001.png);
+    background: url(../images/testimg001.png);
     background-size: 100% 100%;
 }
 
