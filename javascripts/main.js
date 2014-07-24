@@ -30,6 +30,8 @@ var $mainBox = $("#mainBox"),
     $aniBox2 = $("#aniBox2"),
     $animation1 = $("#animation1"),
     $animation2 = $("#animation2"),
+    $current = $animation1,
+    $nonCurrent = $animation2,
     currentStep = 1
     ;
 
@@ -94,21 +96,21 @@ function btnGlow(glowObj) {
 };
 
 function changeStep(target) {
-    if ($animation1.css("display") == "none") {
-        var $current = $animation2;
-        var $nonCurrent = $animation1;
-    }else{
-        var $current = $animation1;
-        var $nonCurrent = $animation2;
-    };
+    // if ($animation1.css("display") == "none") {
+    //     var $current = $animation2;
+    //     var $nonCurrent = $animation1;
+    // }else{
+        // var $current = $animation1;
+        // var $nonCurrent = $animation2;
+    // };
 
-    currentStep = Number($current.attr("title"));
+    // currentStep = Number($current.attr("title"));
 
-    if (target == "previous") {
-        target = currentStep-1;
-    }else if (target == "next") {
-        target = currentStep+1;
-    };
+    // if (target == "previous") {
+    //     target = currentStep-1;
+    // }else if (target == "next") {
+    //     target = currentStep+1;
+    // };
 
     if (target < 1 || target == currentStep || target > 3) {
         return;
@@ -136,6 +138,10 @@ function changeStep(target) {
         $nonCurrent.css({"-webkit-animation":"none"});
         $current.css({"-webkit-animation":"none"});
         $nonCurrent.attr("title",target);
+        currentStep = target;
+        var $xxxx = $current;
+        $current = $nonCurrent;
+        $nonCurrent = $xxxx;
     },300);
 
 };
@@ -255,12 +261,12 @@ $contentsItem.bind('touchend', function() {
 
 $previousBtn.bind('touchstart', function() { 
     btnGlow($previousGlow);
-    changeStep("previous");
+    changeStep(currentStep - 1);
 });
 
 $nextBtn.bind('touchstart', function() { 
     btnGlow($nextGlow);
-    changeStep("next");
+    changeStep(currentStep + 1);
 });
 
 $aniBtn.bind('touchstart', function() { 
