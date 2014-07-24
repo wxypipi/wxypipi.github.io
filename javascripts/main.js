@@ -30,7 +30,7 @@ var $mainBox = $("#mainBox"),
     $aniBox2 = $("#aniBox2"),
     $animation1 = $("#animation1"),
     $animation2 = $("#animation2"),
-    $current = $animation1
+    currentStep = 1
     ;
 
 function resize() {
@@ -95,24 +95,47 @@ function btnGlow(glowObj) {
 
 function changeStep(target) {
     if ($animation1.css("display") == "none") {
-        $current = $animation2;
-        $nonCurrent = $animation1;
+        var $current = $animation2;
+        var $nonCurrent = $animation1;
     }else{
-        $current = $animation1;
-        $nonCurrent = $animation2;
+        var $current = $animation1;
+        var $nonCurrent = $animation2;
     };
 
-    $nonCurrent.css({"-webkit-animation":"changeStepR 0.3s forwards reverse ease-in-out "
-                  
-    });
-    $current.css({"-webkit-animation":"changeStepL 0.3s forwards ease-in-out "
-                     
-    });
+    currentStep = Number($current.attr("title"));
+
+    if (target == "previous") {
+        target = currentStep-1;
+    }else if (target == "next") {
+        target = currentStep+1;
+    };
+
+    if (target < 1 || target == currentStep || target > 3) {
+        return;
+    };
+
+    $nonCurrent.css({"background":"url(./images/testimg00" + target + ".png)",
+                     "background-size":"100% 100%"});
+
+    if (target > currentStep) {
+        $nonCurrent.css("-webkit-animation","changeStepR 0.3s forwards reverse ease-in-out");
+        $current.css("-webkit-animation","changeStepL 0.3s forwards ease-in-out ");
+    }else{
+        $nonCurrent.css("-webkit-animation","changeStepL 0.3s forwards reverse ease-in-out");
+        $current.css("-webkit-animation","changeStepR 0.3s forwards ease-in-out ");
+    };
 
     $nonCurrent.css("display","block");
 
+    if (separate == false) {
+        btnAnimation();
+    };
+
     setTimeout(function(){
         $current.css("display","none");
+        $nonCurrent.css({"-webkit-animation":"none"});
+        $current.css({"-webkit-animation":"none"});
+        $nonCurrent.attr("title",target);
     },300);
 
 };
@@ -232,25 +255,18 @@ $contentsItem.bind('touchend', function() {
 
 $previousBtn.bind('touchstart', function() { 
     btnGlow($previousGlow);
+    changeStep("previous");
 });
 
 $nextBtn.bind('touchstart', function() { 
     btnGlow($nextGlow);
+    changeStep("next");
 });
 
 $aniBtn.bind('touchstart', function() { 
     btnAnimation();
     // alert($aniBtn.css("background"));
 });
-
-
-
-
-
-$nextBtn.bind('touchend', function() { 
-    changeStep(0);
-});
-
 
 
 //     $("#menuBtn").click(function(){
