@@ -27,7 +27,10 @@ var $mainBox = $("#mainBox"),
     separate = true,
     moveDis = 0,
     $aniBox1 = $("#aniBox1"),
-    $aniBox2 = $("#aniBox2");
+    $aniBox2 = $("#aniBox2"),
+    $animation1 = $("#animation1"),
+    $animation2 = $("#animation2")
+    ;
 
 function resize() {
     var height = Number($aniBox1.css("height").slice(0,-2));
@@ -220,6 +223,13 @@ $aniBtn.bind('touchstart', function() {
 });
 
 
+
+
+
+$nextBtn.bind('touchend', function() { 
+    $animation1.css("-webkit-animation","changeStepOut 1s forwards");
+    $animation2.css("-webkit-animation","changeStepIn 1s forwards");
+});
 
 
 

@@ -241,7 +241,7 @@ body, html{
     /*left: 50%;*/
     background: url(../images/testimg001.png);
     background-size: 100% 100%;
-    -webkit-animation: changeStepIn 1s forwards;
+    /*-webkit-animation: changeStepIn 1s forwards;*/
 }
 
 #animation2{
@@ -251,28 +251,28 @@ body, html{
     /*left: 50%;*/
     background: url(../images/testimg002.png);
     background-size: 100% 100%;
-    -webkit-animation: changeStepOut 1s forwards;
+    /*-webkit-animation: changeStepOut 1s forwards;*/
 }
 
 @-webkit-keyframes changeStepIn {
     from{
         opacity: 0;
-        -webkit-transform: translate3d(100%, 0, 0) scale3d(0.5, 0.5, 1);
+        -webkit-transform: translate3d(100%, 0, 0);
     }
     to{
         opacity: 1;
-        -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+        -webkit-transform: translate3d(0, 0, 0);
     }
 }
 
 @-webkit-keyframes changeStepOut {
     from{
         opacity: 1;
-        -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+        -webkit-transform: translate3d(0, 0, 0);
     }
     to{  
         opacity: 0;
-        -webkit-transform: translate3d(-100%, 0, 0) scale3d(0.5, 0.5, 1);
+        -webkit-transform: translate3d(-100%, 0, 0);
     }
 }
 
