@@ -25,24 +25,27 @@ var $mainBox = $("#mainBox"),
     // $aniBtn = $("#aniBtnR,#aniBtnG,#aniBtnB,#GBb,#GRr,#RBb,#RGBb")
     $aniBtn = $("#aniBtnBox"),
     separate = true,
-    $aniBox = $("#aniBox"),
-    $animation = $("#animation1");
+    moveDis = 0,
+    $aniBox1 = $("#aniBox1"),
+    $aniBox2 = $("#aniBox2");
 
 function resize() {
-    var height = Number($aniBox.css("height").slice(0,-2));
-    var width = Number($aniBox.css("width").slice(0,-2));
+    var height = Number($aniBox1.css("height").slice(0,-2));
+    var width = Number($aniBox1.css("width").slice(0,-2));
     // alert(height + " " + width);
     if (height > width) {
-        $animation.css({"height":width + "px",
+        $aniBox2.css({"height":width + "px",
                         "width":width + "px",
                         "margin-top":((height - width) / 1.8) + "px"
         });
+        moveDis = width;
     }else{
-        $animation.css({"height":(height*0.9) + "px",
+        $aniBox2.css({"height":(height*0.9) + "px",
                         "width":(height*0.9) + "px",
                         "margin-top":(height*0.07) + "px"
         });
-    }
+        moveDis = (width/2)+(height*0.9/2);
+    };
 };
 
 
@@ -85,6 +88,13 @@ function btnGlow(glowObj) {
         glowObj.css("-webkit-animation","none")
     },300);
 };
+
+// function changeStep(dir,target) {
+//     if(dir == "left"){
+//         $animation2.css("right","moveDis" + "px");
+
+//     }
+// }
 
 // 用js实现css sprite动画，可能性能没有用css实现的好
 // function btnAnimation() {
