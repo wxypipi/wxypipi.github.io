@@ -270,7 +270,7 @@ body, html{
 
 @-webkit-keyframes animation {
     from{-webkit-transform: translate3d(0, 0, 0)}
-    to{-webkit-transform: translate3d(0, -722em, 0)}
+    to{-webkit-transform: translate3d(0, -304em, 0)}
 }
 
 #mainMask{
