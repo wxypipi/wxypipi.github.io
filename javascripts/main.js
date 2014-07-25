@@ -117,14 +117,10 @@ function changeStep(target) {
     setTimeout(function(){
         $animationM.css("background-image","url(./images/testimg00" + target + ".png)");
         $aniBox2.css("-webkit-animation","none");
-        if (target != 1) {
-            $animationL.css("background-image","url(./images/testimg00" + (target-1) + ".png)");
-        };
-        if (target != maxStep) {
-            $animationR.css("background-image","url(./images/testimg00" + (target+1) + ".png)");
-        };
         currentStep = target;
-    },350);
+        $animationL.css("background-image","url(./images/testimg00" + (target-1) + ".png)");
+        $animationR.css("background-image","url(./images/testimg00" + (target+1) + ".png)");
+    },400);
 
 }
 
