@@ -34,7 +34,7 @@ var $mainBox = $("#mainBox"),
     $animationR = $("#animationR"),
     $animationAll = $("#animationL,#animationM,#animationR"),
     // $current = $animation1,
-    // $nonCurrent = $animation2,
+    $stepText = $("#stepText"),
     currentStep = 1,
     maxStep = 4
     ;
@@ -50,9 +50,9 @@ function resize() {
                       "left":"-" + width + "px"
         });
         $aniBox2.css("width",width + "px");
-        $animationAll.css({"height":width + "px",
+        $animationAll.css({"height":width*20 + "px",
                            "width":width + "px",
-                           "background-size":width + "px " + width + "px"
+                           "background-size":width + "px " + width*20 + "px"
         });
     }else{
         $aniBox3.css({"height":height + "px",
@@ -61,9 +61,9 @@ function resize() {
                       "margin-top":"0",
         });
         $aniBox2.css("width",((width+height)/2) + "px");
-        $animationAll.css({"height":height + "px",
+        $animationAll.css({"height":height*20 + "px",
                            "width":height + "px",
-                           "background-size":((width+height)/2) + "px " + height + "px"
+                           "background-size":height + "px " + height*20 + "px"
         });
     };
 };
@@ -112,22 +112,32 @@ function changeStep(target) {
         $aniBox2.css("-webkit-animation","moveR 0.3s forwards ease-in-out");
     };
 
-    if (separate == false) {
+    if (!separate) {
         btnAnimationS();
     };
 
+    currentStep = target;
+
     setTimeout(function(){
-        $animationM.css("background-image","url(./images/testimg00" + target + ".png)");
+        $animationM.css("background-image","url(./images/" + padding(target) + ".png)");
         $aniBox2.css("-webkit-animation","none");
-        currentStep = target;
-        if (target != 1 || target != maxStep) {
-            $animationL.css("background-image","url(./images/testimg00" + (target-1) + ".png)");
-            $animationR.css("background-image","url(./images/testimg00" + (target+1) + ".png)");
+        if (target != 1) {
+            $animationL.css("background-image","url(./images/" + padding((target-1)) + ".png)");
+        };
+        if (target != maxStep) {
+            $animationR.css("background-image","url(./images/" + padding((target+1)) + ".png)");
         };
     },400);//不多出100毫秒的话S2会卡，原因不明
+};
 
-}
+function changeStepText() {
+    $stepText.empty();
+    $stepText.append(padding(currentStep));
+};
 
+function padding(n) {
+    return(("00" + n).slice(-3));
+};
 
 // UC和海豚不兼容
 function btnGlow(glowObj) {
@@ -236,13 +246,30 @@ function btnAnimation() {
 };
 
 function btnAnimationS() {
-        $aniBtn.css("-webkit-transform","translate3d(0,0,0)");
-        separate = true;
+    $aniBtn.css("-webkit-transform","translate3d(0,0,0)");
+    separate = true;
 };
 
 function btnAnimationC() {
-        $aniBtn.css("-webkit-transform","translate3d(0,-84em,0)");
-        separate = false;
+    $aniBtn.css("-webkit-transform","translate3d(0,-84em,0)");
+    separate = false;
+};
+
+
+function mainAnimationS() {
+    $animationM.css("-webkit-animation","animation 0.5s steps(19) forwards reverse");
+    setTimeout(function(){
+        $animationM.css("-webkit-animation","none");
+        $animationM.css("-webkit-transform","translate3d(0, 0, 0)");
+    },600);
+};
+
+function mainAnimationC() {
+    $animationM.css("-webkit-animation","animation 0.5s steps(19) forwards");
+    setTimeout(function(){
+        $animationM.css("-webkit-animation","none");
+        $animationM.css("-webkit-transform","translate3d(0, -95%, 0)");
+    },600);
 };
 
 // UC和海豚兼容但是效果怪怪的
@@ -307,18 +334,22 @@ $contentsItem.bind('touchend', function() {
 $previousBtn.bind('touchstart', function() { 
     btnGlow($previousGlow);
     changeStep(currentStep - 1);
+    changeStepText()
 });
 
 $nextBtn.bind('touchstart', function() { 
     btnGlow($nextGlow);
     changeStep(currentStep + 1);
+    changeStepText()
 });
 
 $aniBtn.bind('touchstart', function() { 
     if (separate) {
         btnAnimationC();
+        mainAnimationC();
     }else {
         btnAnimationS();
+        mainAnimationS();
     };
 });
 

@@ -248,7 +248,7 @@ body, html{
     margin: 0 auto;
     width: 20em;
     height: 100%;
-    
+    overflow: hidden;
 }
 
 #animationL{
@@ -259,12 +259,18 @@ body, html{
 #animationR{
     position: absolute;
     right: 0;
-    background-image: url(../images/testimg002.png);
+    background-image: url(../images/002.png);
 }
 
 #animationM{
     margin: auto;
-    background-image: url(../images/testimg001.png);
+    background-image: url(../images/001.png);
+    -webkit-animation: none;
+}
+
+@-webkit-keyframes animation {
+    from{-webkit-transform: translate3d(0, 0, 0)}
+    to{-webkit-transform: translate3d(0, -95%, 0)}
 }
 
 #mainMask{
