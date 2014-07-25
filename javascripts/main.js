@@ -127,7 +127,7 @@ function changeStep(target) {
         if (target != maxStep) {
             $animationR.css("background-image","url(./images/" + padding((target+1)) + ".png)");
         };
-    },400);//不多出100毫秒的话S2会卡，原因不明
+    },300);//不多出100毫秒的话S2会卡，原因不明
 };
 
 function changeStepText() {
