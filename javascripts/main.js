@@ -268,7 +268,7 @@ function mainAnimationC() {
     $animationM.css("-webkit-animation","animation 0.5s steps(19) forwards");
     setTimeout(function(){
         $animationM.css("-webkit-animation","none");
-        $animationM.css("-webkit-transform","translate3d(0, -95%, 0)");
+        $animationM.css("-webkit-transform","translate3d(0, -722em, 0)");
     },600);
 };
 
