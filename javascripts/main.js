@@ -111,16 +111,18 @@ function changeStep(target) {
     };
 
     if (separate == false) {
-        btnAnimation();
+        btnAnimationS();
     };
 
     setTimeout(function(){
         $animationM.css("background-image","url(./images/testimg00" + target + ".png)");
         $aniBox2.css("-webkit-animation","none");
         currentStep = target;
-        $animationL.css("background-image","url(./images/testimg00" + (target-1) + ".png)");
-        $animationR.css("background-image","url(./images/testimg00" + (target+1) + ".png)");
-    },400);
+        if (target != 1 || target != maxStep) {
+            $animationL.css("background-image","url(./images/testimg00" + (target-1) + ".png)");
+            $animationR.css("background-image","url(./images/testimg00" + (target+1) + ".png)");
+        };
+    },400);//不多出100毫秒的话S2会卡，原因不明
 
 }
 
@@ -231,6 +233,16 @@ function btnAnimation() {
     };
 };
 
+function btnAnimationS() {
+        $aniBtn.css("background-position","0 0");
+        separate = true;
+};
+
+function btnAnimationC() {
+        $aniBtn.css("background-position","0em -84em");
+        separate = false;
+};
+
 // UC和海豚兼容但是效果怪怪的
 // function btnGlow(glowObj) {
 //     glowObj.css("-webkit-transition","-webkit-transform 0.3s,background-color 0.3s");
@@ -250,8 +262,9 @@ function btnAnimation() {
 // });
 
 // 不加这句的话没有触摸事件的元素上方覆盖的透明元素的触摸事件也会失效（菜单栏收不回去）
-$("body").bind('touchend', function() {
-});
+// 禁用掉默认的touchmove事件后好像就不用这句了
+// $("body").bind('touchend', function() {
+// });
 
 $(window).resize(function() {
   resize();
@@ -300,8 +313,11 @@ $nextBtn.bind('touchstart', function() {
 });
 
 $aniBtn.bind('touchstart', function() { 
-    btnAnimation();
-    // alert($aniBtn.css("background"));
+    if (separate) {
+        btnAnimationC();
+    }else {
+        btnAnimationS();
+    };
 });
 
 

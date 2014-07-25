@@ -223,6 +223,7 @@ body, html{
     top: 3em;
     /*padding-bottom: 7em;*/
     position: absolute;
+    overflow: hidden;
 }
 
 #aniBox2{
@@ -267,28 +268,6 @@ body, html{
     margin: auto;
     background-image: url(../images/testimg001.png);
     background-size: 100% 100%;
-}
-
-@-webkit-keyframes changeStepR {
-    from{
-        opacity: 1;
-        -webkit-transform: translate3d(0, 0, 0);
-    }
-    to{
-        opacity: 0;
-        -webkit-transform: translate3d(100%, 0, 0);
-    }
-}
-
-@-webkit-keyframes changeStepL {
-    from{
-        opacity: 1;
-        -webkit-transform: translate3d(0, 0, 0);
-    }
-    to{  
-        opacity: 0;
-        -webkit-transform: translate3d(-100%, 0, 0);
-    }
 }
 
 #mainMask{
