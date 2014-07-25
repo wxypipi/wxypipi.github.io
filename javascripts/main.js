@@ -104,9 +104,9 @@ function changeStep(target) {
     };
 
     if (target > currentStep) {
-        $aniBox2.css("-webkit-animation","moveL 0.5s forwards linear");
+        $aniBox2.css("-webkit-animation","moveL 0.5s forwards ease-in-out");
     }else{
-        $aniBox2.css("-webkit-animation","moveR 0.5s forwards linear");
+        $aniBox2.css("-webkit-animation","moveR 0.5s forwards ease-in-out");
     };
 
     if (separate == false) {
@@ -123,7 +123,7 @@ function changeStep(target) {
             $animationR.css("background-image","url(./images/testimg00" + (target+1) + ".png)");
         };
         currentStep = target;
-    },500);
+    },700);
 
 }
 
