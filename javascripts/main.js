@@ -28,11 +28,15 @@ var $mainBox = $("#mainBox"),
     // moveDis = 0,
     $aniBox1 = $("#aniBox1"),
     $aniBox2 = $("#aniBox2"),
-    $animation1 = $("#animation1"),
-    $animation2 = $("#animation2"),
-    $current = $animation1,
-    $nonCurrent = $animation2,
-    currentStep = 1
+    $aniBox3 = $("#aniBox3"),
+    $animationL = $("#animationL"),
+    $animationM = $("#animationM"),
+    $animationR = $("#animationR"),
+    $animationAll = $("#animationL,#animationM,#animationR"),
+    // $current = $animation1,
+    // $nonCurrent = $animation2,
+    currentStep = 1,
+    maxStep = 3
     ;
 
 function resize() {
@@ -40,17 +44,24 @@ function resize() {
     var width = Number($aniBox1.css("width").slice(0,-2));
     // alert(height + " " + width);
     if (height > width) {
-        $aniBox2.css({"height":width + "px",
-                        "width":width + "px",
-                        "margin-top":((height - width) / 1.8) + "px"
+        $aniBox3.css({"height":width + "px",
+                      "width":(width*3) + "px",
+                      "margin-top":((height - width) / 1.8) + "px",
+                      "left":"-" + width + "px"
         });
-        // moveDis = width;
+        $aniBox2.css("width",width + "px");
+        $animationAll.css({"height":width + "px",
+                           "width":width + "px"
+        });
     }else{
-        $aniBox2.css({"height":(height*0.9) + "px",
-                        "width":(height*0.9) + "px",
-                        "margin-top":(height*0.07) + "px"
+        $aniBox3.css({"height":height + "px",
+                      "width":(width+height*2) + "px",
+                      "left":"-" + height + "px"
         });
-        // moveDis = (width/2)+(height*0.9/2);
+        $aniBox2.css("width",((width+height)/2) + "px");
+        $animationAll.css({"height":height + "px",
+                           "width":height + "px"
+        });
     };
 };
 
@@ -87,6 +98,36 @@ function selectItem(item) {
     },100);
 };
 
+function changeStep(target) {
+    if (target < 1 || target == currentStep || target > maxStep) {
+        return;
+    };
+
+    if (target > currentStep) {
+        $aniBox2.css("-webkit-animation","moveL 0.5s forwards ease-in-out");
+    }else{
+        $aniBox2.css("-webkit-animation","moveR 0.5s forwards ease-in-out");
+    };
+
+    if (separate == false) {
+        btnAnimation();
+    };
+
+    setTimeout(function(){
+        $animationM.css("background-image","url(./images/testimg00" + target + ".png)");
+        $aniBox2.css("-webkit-animation","none");
+        if (target != 1) {
+            $animationL.css("background-image","url(./images/testimg00" + (target-1) + ".png)");
+        };
+        if (target != maxStep) {
+            $animationR.css("background-image","url(./images/testimg00" + (target+1) + ".png)");
+        };
+        currentStep = target;
+    },500);
+
+}
+
+
 // UC和海豚不兼容
 function btnGlow(glowObj) {
     glowObj.css("-webkit-animation","glow 0.3s cubic-bezier(0, .36, .44, .84)");
@@ -95,59 +136,46 @@ function btnGlow(glowObj) {
     },300);
 };
 
-function changeStep(target) {
-    // if ($animation1.css("display") == "none") {
-    //     var $current = $animation2;
-    //     var $nonCurrent = $animation1;
-    // }else{
-        // var $current = $animation1;
-        // var $nonCurrent = $animation2;
-    // };
-
-    // currentStep = Number($current.attr("title"));
-
-    // if (target == "previous") {
-    //     target = currentStep-1;
-    // }else if (target == "next") {
-    //     target = currentStep+1;
-    // };
-
-    if (target < 1 || target == currentStep || target > 3) {
-        return;
-    };
-
-    $nonCurrent.css({"background":"url(./images/testimg00" + target + ".png)",
-                     "background-size":"100% 100%"});
-
-    if (target > currentStep) {
-        $nonCurrent.css("-webkit-animation","changeStepR 0.3s forwards reverse ease-in-out");
-        $current.css("-webkit-animation","changeStepL 0.3s forwards ease-in-out ");
-    }else{
-        $nonCurrent.css("-webkit-animation","changeStepL 0.3s forwards reverse ease-in-out");
-        $current.css("-webkit-animation","changeStepR 0.3s forwards ease-in-out ");
-    };
-
-    $nonCurrent.css("display","block");
-
-    if (separate == false) {
-        btnAnimation();
-    };
-
-    setTimeout(function(){
-        $current.css("display","none");
-        $nonCurrent.css({"-webkit-animation":"none"});
-        $current.css({"-webkit-animation":"none"});
-        $nonCurrent.attr("title",target);
-        currentStep = target;
-        var $xxxx = $current;
-        $current = $nonCurrent;
-        $nonCurrent = $xxxx;
-    },300);
-
-};
 
 
-// alert($animation2.css("display"));
+// 这个方法太麻烦了
+// function changeStep(target) {
+
+//     if (target < 1 || target == currentStep || target > 3) {
+//         return;
+//     };
+
+//     $nonCurrent.css({"background":"url(./images/testimg00" + target + ".png)",
+//                      "background-size":"100% 100%"});
+
+//     if (target > currentStep) {
+//         $nonCurrent.css("-webkit-animation","changeStepR 0.3s forwards reverse ease-in-out");
+//         $current.css("-webkit-animation","changeStepL 0.3s forwards ease-in-out ");
+//     }else{
+//         $nonCurrent.css("-webkit-animation","changeStepL 0.3s forwards reverse ease-in-out");
+//         $current.css("-webkit-animation","changeStepR 0.3s forwards ease-in-out ");
+//     };
+
+//     $nonCurrent.css("display","block");
+
+//     if (separate == false) {
+//         btnAnimation();
+//     };
+
+//     setTimeout(function(){
+//         $current.css("display","none");
+//         $nonCurrent.css({"-webkit-animation":"none"});
+//         $current.css({"-webkit-animation":"none"});
+//         $nonCurrent.attr("title",target);
+//         currentStep = target;
+//         var $xxxx = $current;
+//         $current = $nonCurrent;
+//         $nonCurrent = $xxxx;
+//     },300);
+
+// };
+
+
 
 // 用js实现css sprite动画，可能性能没有用css实现的好
 // function btnAnimation() {
