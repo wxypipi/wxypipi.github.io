@@ -50,9 +50,9 @@ function resize() {
                       "left":"-" + width + "px"
         });
         $aniBox2.css("width",width + "px");
-        $animationAll.css({"height":width*8 + "px",
+        $animationAll.css({"height":width + "px",
                            "width":width + "px",
-                           "background-size":width + "px " + width*8 + "px"
+                           "background-size":width + "px " + width + "px"
         });
     }else{
         $aniBox3.css({"height":height + "px",
@@ -61,9 +61,9 @@ function resize() {
                       "margin-top":"0",
         });
         $aniBox2.css("width",((width+height)/2) + "px");
-        $animationAll.css({"height":height*8 + "px",
+        $animationAll.css({"height":height + "px",
                            "width":height + "px",
-                           "background-size":height + "px " + height*8 + "px"
+                           "background-size":height + "px " + height + "px"
         });
     };
 };
@@ -256,21 +256,21 @@ function btnAnimationC() {
 };
 
 
-function mainAnimationS() {
-    $animationM.css("-webkit-animation","animation 0.5s steps(7) forwards reverse");
-    setTimeout(function(){
-        $animationM.css("-webkit-animation","none");
-        $animationM.css("-webkit-transform","translate3d(0, 0, 0)");
-    },600);
-};
+// function mainAnimationS() {
+//     $animationM.css("-webkit-animation","animation 0.5s steps(7) forwards reverse");
+//     setTimeout(function(){
+//         $animationM.css("-webkit-animation","none");
+//         $animationM.css("-webkit-transform","translate3d(0, 0, 0)");
+//     },600);
+// };
 
-function mainAnimationC() {
-    $animationM.css("-webkit-animation","animation 0.5s steps(7) forwards");
-    setTimeout(function(){
-        $animationM.css("-webkit-animation","none");
-        $animationM.css("-webkit-transform","translate3d(0, -87.5%, 0)");
-    },600);
-};
+// function mainAnimationC() {
+//     $animationM.css("-webkit-animation","animation 0.5s steps(7) forwards");
+//     setTimeout(function(){
+//         $animationM.css("-webkit-animation","none");
+//         $animationM.css("-webkit-transform","translate3d(0, -87.5%, 0)");
+//     },600);
+// };
 
 // UC和海豚兼容但是效果怪怪的
 // function btnGlow(glowObj) {
@@ -346,10 +346,10 @@ $nextBtn.bind('touchstart', function() {
 $aniBtn.bind('touchstart', function() { 
     if (separate) {
         btnAnimationC();
-        mainAnimationC();
+        // mainAnimationC();
     }else {
         btnAnimationS();
-        mainAnimationS();
+        // mainAnimationS();
     };
 });
 
