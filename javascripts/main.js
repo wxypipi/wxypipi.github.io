@@ -104,9 +104,9 @@ function changeStep(target) {
     };
 
     if (target > currentStep) {
-        $aniBox2.css("-webkit-animation","moveL 0.5s forwards ease-in-out");
+        $aniBox2.css("-webkit-animation","moveL 0.5s forwards linear");
     }else{
-        $aniBox2.css("-webkit-animation","moveR 0.5s forwards ease-in-out");
+        $aniBox2.css("-webkit-animation","moveR 0.5s forwards linear");
     };
 
     if (separate == false) {
