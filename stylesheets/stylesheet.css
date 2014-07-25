@@ -268,14 +268,9 @@ body, html{
     -webkit-animation: none;
 }
 
-/*@-webkit-keyframes animation {
-    from{-webkit-transform: translate3d(0, 0, 0)}
-    to{-webkit-transform: translate3d(0, -304em, 0)}
-}*/
-
 @-webkit-keyframes animation {
-    from{background-position: 0 0}
-    to{background-position: 0 -722em}
+    from{-webkit-transform: translate3d(0, 0, 0)}
+    to{-webkit-transform: translate3d(0, -87.5%, 0)}
 }
 
 #mainMask{
