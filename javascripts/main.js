@@ -36,7 +36,7 @@ var $mainBox = $("#mainBox"),
     // $current = $animation1,
     // $nonCurrent = $animation2,
     currentStep = 1,
-    maxStep = 3
+    maxStep = 4
     ;
 
 function resize() {
@@ -51,7 +51,8 @@ function resize() {
         });
         $aniBox2.css("width",width + "px");
         $animationAll.css({"height":width + "px",
-                           "width":width + "px"
+                           "width":width + "px",
+                           "background-size":width + "px " + width + "px"
         });
     }else{
         $aniBox3.css({"height":height + "px",
@@ -61,7 +62,8 @@ function resize() {
         });
         $aniBox2.css("width",((width+height)/2) + "px");
         $animationAll.css({"height":height + "px",
-                           "width":height + "px"
+                           "width":height + "px",
+                           "background-size":((width+height)/2) + "px " + height + "px"
         });
     };
 };
@@ -234,12 +236,12 @@ function btnAnimation() {
 };
 
 function btnAnimationS() {
-        $aniBtn.css("background-position","0 0");
+        $aniBtn.css("-webkit-transform","translate3d(0,0,0)");
         separate = true;
 };
 
 function btnAnimationC() {
-        $aniBtn.css("background-position","0em -84em");
+        $aniBtn.css("-webkit-transform","translate3d(0,-84em,0)");
         separate = false;
 };
 

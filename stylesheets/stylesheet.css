@@ -82,18 +82,19 @@ body, html{
     height: 7em;
     bottom: 0;
     background-color: #EAEAEA;
+    overflow: hidden;
 }
 
 #aniBtnBox{
     width: 7em;
-    height: 7em;
-    background: url(../images/button.png);
+    height: 91em;
+    background-image: url(../images/button.png);
     background-size: 7em 91em;
-    background-position: 0 0;
+    /*background-position: 0 0;*/
     position: relative;
     margin: auto;
-    -webkit-transform: translateZ(0);
-    -webkit-transition: background-position 0.3s steps(12);
+    -webkit-transform: translate3d(0,0,0);
+    -webkit-transition: -webkit-transform 0.3s steps(12);
 }
 
 /*@-webkit-keyframes changePos {
@@ -150,48 +151,50 @@ body, html{
 }*/
 
 
-#previousBtn, #nextBtn, #previousGlow, #nextGlow{
+#previousBtn, #nextBtn{
     width: 3em;
     height: 3em;
-    background-color: white;
     position: absolute;
     top: 2em;
     bottom: 2em;
-    
+    background-image: url(pandn.svg);
+    background-size: 3em 3em;  
 }
 
-#previousBtn, #previousGlow{
-    left: 1.5em;
-}
-
-#nextBtn, #nextGlow{
-    right: 1.5em;
-}
-
-#previousBtn{
-    background: url(pandn.svg);
-    background-size: 3em 3em;
-}
-
-#nextBtn{
-    -webkit-transform: rotate(180deg);
-    background: url(pandn.svg);
-    background-size: 3em 3em;
-}
-
-
-/*UC和海豚不兼容*/
 #previousGlow, #nextGlow{
     border-radius: 50%;
     background-color: #65B89C;
     -webkit-animation: none;
+    position: absolute;
+    width: 2.8em;
+    height: 2.8em;
+    top: 2.1em;
+    bottom: 2.1em;
+}
+
+#previousGlow{
+    left: 1.6em; 
+}
+
+#nextGlow{
+    right: 1.6em;
+}
+
+#previousBtn{
+    left: 1.5em;
+}
+
+#nextBtn{
+    -webkit-transform: rotate(180deg);
+    right: 1.5em;
 }
 
 
+/*UC和海豚不兼容*/
 @-webkit-keyframes glow {
     from{
         opacity: 1;
-        -webkit-transform: scale3d(0.9, 0.9, 1);
+        -webkit-transform: scale3d(1, 1, 1);
     }
     to{
         opacity: 0;
@@ -216,12 +219,10 @@ body, html{
 }
 
 #aniBox1{
-    /*background-color: blue;*/
     width: 100%;
     height: auto;
     bottom: 7em;
     top: 3em;
-    /*padding-bottom: 7em;*/
     position: absolute;
     overflow: hidden;
 }
@@ -253,21 +254,17 @@ body, html{
 #animationL{
     position: absolute;
     left: 0;
-    /*background-image: url(../images/testimg001.png);*/
-    background-size: 100% 100%;
 }
 
 #animationR{
     position: absolute;
     right: 0;
     background-image: url(../images/testimg002.png);
-    background-size: 100% 100%;
 }
 
 #animationM{
     margin: auto;
     background-image: url(../images/testimg001.png);
-    background-size: 100% 100%;
 }
 
 #mainMask{
@@ -312,14 +309,10 @@ body, html{
 }
 
 #contentsPage li li{
-    /*line-height: 3em;*/
     background-color: #63666E;
     font-size: 0.8em;
     text-indent: 3em;
     color: #9A9FA8;
-    /*-webkit-transition: box-shadow 0.1s linear;*/
-    /*font-weight: normal;*/
-    /*text-indent: 3em;*/
 }
 
 #searchPage{
@@ -359,13 +352,3 @@ body, html{
     box-shadow: 0 -0.25em #FF8164 inset
 }
 
-/*#menuMask{
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.8);
-    position: absolute;
-    -webkit-transform: translate3d(0, 0, 0);
-    -webkit-transition: background-color 0.35s cubic-bezier(.08, .47, 0, 1);
-    display: none;
-    pointer-events: none;
-}*/
