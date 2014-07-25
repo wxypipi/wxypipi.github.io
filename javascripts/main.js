@@ -50,9 +50,9 @@ function resize() {
                       "left":"-" + width + "px"
         });
         $aniBox2.css("width",width + "px");
-        $animationAll.css({"height":width*8 + "px",
+        $animationAll.css({"height":width + "px",
                            "width":width + "px",
-                           "background-size":width + "px " + width*8 + "px"
+                           "background-size":width + "px " + width*20 + "px"
         });
     }else{
         $aniBox3.css({"height":height + "px",
@@ -61,9 +61,9 @@ function resize() {
                       "margin-top":"0",
         });
         $aniBox2.css("width",((width+height)/2) + "px");
-        $animationAll.css({"height":height*8 + "px",
+        $animationAll.css({"height":height + "px",
                            "width":height + "px",
-                           "background-size":height + "px " + height*8 + "px"
+                           "background-size":height + "px " + height*20 + "px"
         });
     };
 };
@@ -260,7 +260,7 @@ function mainAnimationS() {
     $animationM.css("-webkit-animation","animation 0.5s steps(19) forwards reverse");
     setTimeout(function(){
         $animationM.css("-webkit-animation","none");
-        $animationM.css("-webkit-transform","translate3d(0, 0, 0)");
+        // $animationM.css("-webkit-transform","translate3d(0, 0, 0)");
     },600);
 };
 
@@ -268,7 +268,7 @@ function mainAnimationC() {
     $animationM.css("-webkit-animation","animation 0.5s steps(19) forwards");
     setTimeout(function(){
         $animationM.css("-webkit-animation","none");
-        $animationM.css("-webkit-transform","translate3d(0, -200em, 0)");
+        // $animationM.css("-webkit-transform","translate3d(0, -200em, 0)");
     },600);
 };
 
