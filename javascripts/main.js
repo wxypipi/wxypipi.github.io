@@ -56,7 +56,8 @@ function resize() {
     }else{
         $aniBox3.css({"height":height + "px",
                       "width":(width+height*2) + "px",
-                      "left":"-" + height + "px"
+                      "left":"-" + height + "px",
+                      "margin-top":"0",
         });
         $aniBox2.css("width",((width+height)/2) + "px");
         $animationAll.css({"height":height + "px",
@@ -123,7 +124,7 @@ function changeStep(target) {
             $animationR.css("background-image","url(./images/testimg00" + (target+1) + ".png)");
         };
         currentStep = target;
-    },301);
+    },350);
 
 }
 
