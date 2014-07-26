@@ -17,7 +17,7 @@ var $mainBox = $("#mainBox"),
     $menuBtn = $("#menuBtn,#headerText"),
     $mainMask = $("#mainMask"),
     $contentsItem = $("#contentsPage li li"),
-    lastItem = false,
+    $lastItem = false,
     $previousBtn = $("#previousBtn"),
     $nextBtn = $("#nextBtn"),
     $previousGlow = $("#previousGlow"),
@@ -90,15 +90,16 @@ function menuTagTo(tag,translateX) {
     $menu.css("-webkit-transform","translate3d(" + translateX + ", 0, 0)");
 };
 
-function selectItem(item) {
+function selectStep(item) {
     var $item = $(item);
-    var $lastItem = $(lastItem);
-    setTimeout(function(){
-        if(lastItem){
-            $lastItem.css("box-shadow","0 0 #FF8164 inset");
-        };
-        $item.css("box-shadow","0.25em 0 #FF8164 inset");
-    },100);
+    if ($item == $lastItem) {
+        return;
+    };
+    if($lastItem){
+        $lastItem.css("box-shadow","0 0 #FF8164 inset");
+    };
+    $item.css("box-shadow","0.25em 0 #FF8164 inset");
+    $lastItem = $item;
 };
 
 function changeStep(target) {
@@ -106,10 +107,19 @@ function changeStep(target) {
         return;
     };
 
-    if (target > currentStep) {
+    if (target - currentStep == 1) {
         $aniBox2.css("-webkit-animation","moveL 0.3s forwards ease-in-out");
-    }else{
+    }else if (currentStep - target == 1) {
         $aniBox2.css("-webkit-animation","moveR 0.3s forwards ease-in-out");
+    }
+    else{
+        $animationM.css("background-image","url(./images/" + padding(target) + ".png)");
+        if (target != 1) {
+            $animationL.css("background-image","url(./images/" + padding((target-1)) + ".png)");
+        };
+        if (target != maxStep) {
+            $animationR.css("background-image","url(./images/" + padding((target+1)) + ".png)");
+        };
     };
 
     if (!separate) {
@@ -117,6 +127,8 @@ function changeStep(target) {
     };
 
     currentStep = target;
+    $stepText.empty();
+    $stepText.append(padding(currentStep));
     
     $aniBox2.bind('webkitAnimationEnd', function() {
         $animationM.css("background-image","url(./images/" + padding(target) + ".png)");
@@ -128,23 +140,6 @@ function changeStep(target) {
             $animationR.css("background-image","url(./images/" + padding((target+1)) + ".png)");
         };
     });
-
-    // setTimeout(function(){
-    //     $animationM.css("background-image","url(./images/" + padding(target) + ".png)");
-    //     $aniBox2.css("-webkit-animation","none");
-    //     if (target != 1) {
-    //         $animationL.css("background-image","url(./images/" + padding((target-1)) + ".png)");
-    //     };
-    //     if (target != maxStep) {
-    //         $animationR.css("background-image","url(./images/" + padding((target+1)) + ".png)");
-    //     };
-    // },400);
-};
-
-
-function changeStepText() {
-    $stepText.empty();
-    $stepText.append(padding(currentStep));
 };
 
 function padding(n) {
@@ -154,9 +149,9 @@ function padding(n) {
 // UC和海豚不兼容
 function btnGlow(glowObj) {
     glowObj.css("-webkit-animation","glow 0.3s cubic-bezier(0, .36, .44, .84)");
-    setTimeout(function(){
-        glowObj.css("-webkit-animation","none")
-    },300);
+    glowObj.bind('webkitAnimationEnd', function() {
+        glowObj.css("-webkit-animation","none");
+    });
 };
 
 
@@ -318,6 +313,7 @@ $(window).bind('onorientationchange', function() {
 resize();
 
 $menuBtn.bind('touchend', function() {
+    selectStep($contentsItem[currentStep-1]);
     openMenuBar();
 });
 
@@ -338,21 +334,20 @@ $settingBtn.bind('touchstart', function() {
 });
 
 $contentsItem.bind('touchend', function() { 
-    selectItem(this);
-    lastItem = this;
+    changeStep(($contentsItem.index(this))+1);
+    selectStep(this);
     closeMenuBar();
+    
 });
 
 $previousBtn.bind('touchstart', function() { 
     btnGlow($previousGlow);
     changeStep(currentStep - 1);
-    changeStepText()
 });
 
 $nextBtn.bind('touchstart', function() { 
     btnGlow($nextGlow);
     changeStep(currentStep + 1);
-    changeStepText()
 });
 
 $aniBtn.bind('touchstart', function() { 
