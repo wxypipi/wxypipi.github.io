@@ -5,7 +5,7 @@ $(document).ready(function(){
 //   });
 
 
-// alert("run");
+alert("33");
 
 var $mainBox = $("#mainBox"),
     $menuBox = $("#menuBox"),
