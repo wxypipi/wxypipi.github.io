@@ -117,8 +117,8 @@ function changeStep(target) {
     };
 
     currentStep = target;
-
-    setTimeout(function(){
+    
+    $aniBox2.bind('webkitAnimationEnd', function() {
         $animationM.css("background-image","url(./images/" + padding(target) + ".png)");
         $aniBox2.css("-webkit-animation","none");
         if (target != 1) {
@@ -127,8 +127,20 @@ function changeStep(target) {
         if (target != maxStep) {
             $animationR.css("background-image","url(./images/" + padding((target+1)) + ".png)");
         };
-    },400);//不多出100毫秒的话S2会卡，原因不明
+    });
+
+    // setTimeout(function(){
+    //     $animationM.css("background-image","url(./images/" + padding(target) + ".png)");
+    //     $aniBox2.css("-webkit-animation","none");
+    //     if (target != 1) {
+    //         $animationL.css("background-image","url(./images/" + padding((target-1)) + ".png)");
+    //     };
+    //     if (target != maxStep) {
+    //         $animationR.css("background-image","url(./images/" + padding((target+1)) + ".png)");
+    //     };
+    // },400);
 };
+
 
 function changeStepText() {
     $stepText.empty();
