@@ -127,7 +127,6 @@ function changeStep(target) {
         if (target != maxStep) {
             $animationR.css("background-image","url(./images/" + padding((target+1)) + ".png)");
         };
-<<<<<<< HEAD
     });
 
     // setTimeout(function(){
@@ -140,9 +139,6 @@ function changeStep(target) {
     //         $animationR.css("background-image","url(./images/" + padding((target+1)) + ".png)");
     //     };
     // },400);
-=======
-    },300);//不多出100毫秒的话S2会卡，原因不明
->>>>>>> 38f77f093e5c4f2f45ee07b67be068c6683f6108
 };
 
 
