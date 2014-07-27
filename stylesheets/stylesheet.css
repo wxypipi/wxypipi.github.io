@@ -97,68 +97,16 @@ body, html{
     -webkit-transition: -webkit-transform 0.3s steps(12);
 }
 
-/*@-webkit-keyframes changePos {
-    from{background-position:0em 0em;}
-    to{background-position:0em -84em;}
-}*/
-
-
-/*在pc版chrome上没问题，但是在移动版chrome上显示不正常，套在里面的几个div变成方的了*/
-/*#aniBtnR,#aniBtnG,#aniBtnB,#GBb,#GRr,#RBb,#RGBb{
-    width: 3.75em;
-    height: 3.75em;
-    position: absolute;
-    border-radius: 300px;
-    overflow: hidden;
-    -webkit-transition: -webkit-transform 3s;
-}
-
-#aniBtnR,#aniBtnG,#aniBtnB{
-    top: 1.625em;
-    left: 1.625em;
-}
-
-#aniBtnR{
-    background-color: #FE8063;
-    -webkit-transform: translate(13px, 11px) scale3d(1,1,1);
-}
-
-#aniBtnG{
-    background-color: #64B79B;
-    -webkit-transform: translate(-5px, -12px) scale3d(1.08,1.08,1);
-}
-
-#aniBtnB{
-    background-color: #5C6A88;
-    -webkit-transform: translate(-15px, 17px) scale3d(0.8,0.8,1);
-}
-
-#GBb{
-    background-color: #4898A3;
-    -webkit-transform: translate(-10px, 29px) scale3d(0.741,0.741,1);
-}
-#GRr{
-    background-color: #FEB979;
-    -webkit-transform: translate(18px, 23px) scale3d(0.926,0.926,1);
-}
-#RBb{
-    background-color: #FE6C6A;
-    -webkit-transform: translate(-28px, 6px) scale3d(0.8,0.8,1);
-}
-#RGBb{
-    background-color: #FE9B81;
-    -webkit-transform: translate(-28px, 6px) scale3d(0.8,0.8,1);
-}*/
-
-
 #previousBtn, #nextBtn{
-    width: 3em;
-    height: 3em;
+    width: 6em;
+    height: 7em;
     position: absolute;
-    top: 2em;
+    top: 0em;
     bottom: 2em;
     background-image: url(pandn.svg);
     background-size: 3em 3em;  
+    background-repeat: no-repeat;
+    background-position: 1.5em 2em;
 }
 
 #previousGlow, #nextGlow{
@@ -181,12 +129,12 @@ body, html{
 }
 
 #previousBtn{
-    left: 1.5em;
+    left: 0;
 }
 
 #nextBtn{
     -webkit-transform: rotate(180deg);
-    right: 1.5em;
+    right: 0;
 }
 
 
@@ -228,22 +176,6 @@ body, html{
 }
 
 #aniBox2{
-    height: 100%;
-    position: relative;
-    -webkit-animation: none;
-}
-
-@-webkit-keyframes moveR {
-    from{-webkit-transform: translate3d(0, 0, 0)}
-    to{-webkit-transform: translate3d(100%, 0, 0)}
-}
-
-@-webkit-keyframes moveL {
-    from{-webkit-transform: translate3d(0, 0, 0)}
-    to{-webkit-transform: translate3d(-100%, 0, 0)}
-}
-
-#aniBox3{
     position: absolute;
     margin: 0 auto;
     width: 20em;
@@ -251,26 +183,37 @@ body, html{
     overflow: hidden;
 }
 
-#animationL{
+#imageL{
     position: absolute;
     left: 0;
 }
 
-#animationR{
+#imageR{
     position: absolute;
     right: 0;
     background-image: url(../images/002.png);
 }
 
-#animationM{
+#imageM{
     margin: auto;
     background-image: url(../images/001.png);
     -webkit-animation: none;
 }
 
-@-webkit-keyframes animation {
+#animation1{
+    position: relative;
+    margin: auto;
+    -webkit-transform: translate3d(0, 0em, 0);
+    background-image: url(../images/1_1.png);
+    /*background-size: 100% 33.3333%;*/
+    /*background-position: 0 0,0 33.3333%,0 66.6667%;*/
+    background-repeat: no-repeat;
+    /*-webkit-animation: animation1 5s forwards steps(23);*/
+}
+
+@-webkit-keyframes animation1 {
     from{-webkit-transform: translate3d(0, 0, 0)}
-    to{-webkit-transform: translate3d(0, -87.5%, 0)}
+    to{-webkit-transform: translate3d(0, -95.8333%, 0)}
 }
 
 #mainMask{

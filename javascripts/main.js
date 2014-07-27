@@ -1,9 +1,5 @@
 $(document).ready(function(){
 
-// document.body.addEventListener('touchmove',function(e){
-//       e.preventDefault();
-//   });
-
 //uses document because document will be topmost level in bubbling
 $(document).on('touchmove',function(e){
   e.preventDefault();
@@ -22,8 +18,7 @@ $('body').on('touchmove','.scrollable',function(e) {
   e.stopPropagation();
 });
 
-
-alert("33");
+// alert("33");
 
 var $mainBox = $("#mainBox"),
     $menuBox = $("#menuBox"),
@@ -35,55 +30,81 @@ var $mainBox = $("#mainBox"),
     $menuBtn = $("#menuBtn,#headerText"),
     $mainMask = $("#mainMask"),
     $contentsItem = $("#contentsPage li li"),
-    $lastItem = false,
     $previousBtn = $("#previousBtn"),
     $nextBtn = $("#nextBtn"),
     $previousGlow = $("#previousGlow"),
     $nextGlow = $("#nextGlow"),
-    // $aniBtn = $("#aniBtnR,#aniBtnG,#aniBtnB,#GBb,#GRr,#RBb,#RGBb")
     $aniBtn = $("#aniBtnBox"),
-    separate = true,
-    // moveDis = 0,
     $aniBox1 = $("#aniBox1"),
     $aniBox2 = $("#aniBox2"),
-    $aniBox3 = $("#aniBox3"),
-    $animationL = $("#animationL"),
-    $animationM = $("#animationM"),
-    $animationR = $("#animationR"),
-    $animationAll = $("#animationL,#animationM,#animationR"),
-    // $current = $animation1,
+    $imageL = $("#imageL"),
+    $imageM = $("#imageM"),
+    $imageR = $("#imageR"),
+    $imageAll = $("#imageL,#imageM,#imageR"),
     $stepText = $("#stepText"),
+    $animation1 = $("#animation1"),
+    $lastItem = false,
+    separate = true,
     currentStep = 1,
     maxStep = 4
     ;
 
 function resize() {
+    $("style").remove();
     var height = Number($aniBox1.css("height").slice(0,-2));
     var width = Number($aniBox1.css("width").slice(0,-2));
     // alert(height + " " + width);
     if (height > width) {
-        $aniBox3.css({"height":width + "px",
+        $aniBox2.css({"height":width + "px",
                       "width":(width*3) + "px",
-                      "margin-top":((height - width) / 1.8) + "px",
+                      "margin-top":((height - width) / 2) + "px",
                       "left":"-" + width + "px"
         });
-        $aniBox2.css("width",width + "px");
-        $animationAll.css({"height":width + "px",
+        $imageAll.css({"height":width + "px",
                            "width":width + "px",
                            "background-size":width + "px " + width + "px"
         });
+        var moveDis = width;
+        var newWidth = width;
+        var newBoxwidth = width*3;
     }else{
-        $aniBox3.css({"height":height + "px",
+        $aniBox2.css({"height":height + "px",
                       "width":(width+height*2) + "px",
                       "left":"-" + height + "px",
                       "margin-top":"0",
         });
-        $aniBox2.css("width",((width+height)/2) + "px");
-        $animationAll.css({"height":height + "px",
+        $imageAll.css({"height":height + "px",
                            "width":height + "px",
                            "background-size":height + "px " + height + "px"
         });
+        var moveDis = (width+height)/2;
+        var newWidth = height;
+        var newBoxwidth = width+height*2;
     };
+
+    $animation1.css({"height":(newWidth*24) + "px",
+                    "width":newWidth + "px",
+                    "top":height + "px",
+                    "background-size":newWidth + "px " + (newWidth*8) + "px"
+    });
+
+
+
+
+    var cssAnimation = document.createElement('style');
+    cssAnimation.type = 'text/css';
+    var rules = document.createTextNode(
+    '@-webkit-keyframes moveR {'+
+    'from {-webkit-transform: translate3d(0, 0, 0)}'+
+    'to {-webkit-transform: translate3d('+moveDis+'px, 0, 0)}'+
+    '}'+
+    '@-webkit-keyframes moveL {'+
+    'from {-webkit-transform: translate3d(0, 0, 0)}'+
+    'to {-webkit-transform: translate3d(-'+moveDis+'px, 0, 0)}'+
+    '}'
+    );
+    cssAnimation.appendChild(rules);
+    document.getElementsByTagName("head")[0].appendChild(cssAnimation);
 };
 
 
@@ -122,7 +143,12 @@ function selectStep(item) {
 
 function changeStep(target) {
     if (target < 1 || target == currentStep || target > maxStep) {
+        $previousGlow.css("background-color","#FF9D82");
+        $nextGlow.css("background-color","#FF9D82");
         return;
+    }else{
+        $previousGlow.css("background-color","#65B89C");
+        $nextGlow.css("background-color","#65B89C");
     };
 
     if (target - currentStep == 1) {
@@ -131,12 +157,12 @@ function changeStep(target) {
         $aniBox2.css("-webkit-animation","moveR 0.3s forwards ease-in-out");
     }
     else{
-        $animationM.css("background-image","url(./images/" + padding(target) + ".png)");
+        $imageM.css("background-image","url(./images/" + padding(target) + ".png)");
         if (target != 1) {
-            $animationL.css("background-image","url(./images/" + padding((target-1)) + ".png)");
+            $imageL.css("background-image","url(./images/" + padding((target-1)) + ".png)");
         };
         if (target != maxStep) {
-            $animationR.css("background-image","url(./images/" + padding((target+1)) + ".png)");
+            $imageR.css("background-image","url(./images/" + padding((target+1)) + ".png)");
         };
     };
 
@@ -149,14 +175,15 @@ function changeStep(target) {
     $stepText.append(padding(currentStep));
     
     $aniBox2.bind('webkitAnimationEnd', function() {
-        $animationM.css("background-image","url(./images/" + padding(target) + ".png)");
+        $imageM.css("background-image","url(./images/" + padding(target) + ".png)");
         $aniBox2.css("-webkit-animation","none");
         if (target != 1) {
-            $animationL.css("background-image","url(./images/" + padding((target-1)) + ".png)");
+            $imageL.css("background-image","url(./images/" + padding((target-1)) + ".png)");
         };
         if (target != maxStep) {
-            $animationR.css("background-image","url(./images/" + padding((target+1)) + ".png)");
+            $imageR.css("background-image","url(./images/" + padding((target+1)) + ".png)");
         };
+        $aniBox2.unbind();
     });
 };
 
@@ -171,6 +198,80 @@ function btnGlow(glowObj) {
         glowObj.css("-webkit-animation","none");
     });
 };
+
+function btnAnimation() {
+    if (separate) {
+        $aniBtn.css("background-position","0em -84em");
+        separate = false;
+    }else {
+        $aniBtn.css("background-position","0 0");
+        separate = true;
+    };
+};
+
+function btnAnimationS() {
+    $aniBtn.css("-webkit-transform","translate3d(0,0,0)");
+    separate = true;
+};
+
+function btnAnimationC() {
+    $aniBtn.css("-webkit-transform","translate3d(0,-84em,0)");
+    separate = false;
+};
+
+
+$(window).bind('onorientationchange resize', function() {
+    resize();
+});
+resize();
+
+$menuBtn.bind('touchend', function() {
+    selectStep($contentsItem[currentStep-1]);
+    openMenuBar();
+});
+
+$mainMask.bind('touchstart', function() { 
+    closeMenuBar();
+});
+
+$contentsBtn.bind('touchstart', function() { 
+    menuTagTo(this,"0");
+});
+
+$searchBtn.bind('touchstart', function() { 
+    menuTagTo(this,"-15em");
+});
+
+$settingBtn.bind('touchstart', function() { 
+    menuTagTo(this,"-30em");
+});
+
+$contentsItem.bind('touchend', function() { 
+    changeStep(($contentsItem.index(this))+1);
+    selectStep(this);
+    closeMenuBar();
+});
+
+$previousBtn.bind('touchstart', function() { 
+    changeStep(currentStep - 1);
+    btnGlow($previousGlow);
+});
+
+$nextBtn.bind('touchstart', function() { 
+    changeStep(currentStep + 1);
+    btnGlow($nextGlow);
+});
+
+$aniBtn.bind('touchstart', function() { 
+    if (separate) {
+        btnAnimationC();
+        // mainAnimationC();
+    }else {
+        btnAnimationS();
+        // mainAnimationS();
+    };
+});
+
 
 
 
@@ -210,7 +311,6 @@ function btnGlow(glowObj) {
 //     },300);
 
 // };
-
 
 
 // 用js实现css sprite动画，可能性能没有用css实现的好
@@ -260,40 +360,20 @@ function btnGlow(glowObj) {
 //     };
 // };
 
-function btnAnimation() {
-    if (separate) {
-        $aniBtn.css("background-position","0em -84em");
-        separate = false;
-    }else {
-        $aniBtn.css("background-position","0 0");
-        separate = true;
-    };
-};
-
-function btnAnimationS() {
-    $aniBtn.css("-webkit-transform","translate3d(0,0,0)");
-    separate = true;
-};
-
-function btnAnimationC() {
-    $aniBtn.css("-webkit-transform","translate3d(0,-84em,0)");
-    separate = false;
-};
-
 
 // function mainAnimationS() {
-//     $animationM.css("-webkit-animation","animation 0.5s steps(7) forwards reverse");
+//     $imageM.css("-webkit-animation","animation 0.5s steps(7) forwards reverse");
 //     setTimeout(function(){
-//         $animationM.css("-webkit-animation","none");
-//         $animationM.css("-webkit-transform","translate3d(0, 0, 0)");
+//         $imageM.css("-webkit-animation","none");
+//         $imageM.css("-webkit-transform","translate3d(0, 0, 0)");
 //     },600);
 // };
 
 // function mainAnimationC() {
-//     $animationM.css("-webkit-animation","animation 0.5s steps(7) forwards");
+//     $imageM.css("-webkit-animation","animation 0.5s steps(7) forwards");
 //     setTimeout(function(){
-//         $animationM.css("-webkit-animation","none");
-//         $animationM.css("-webkit-transform","translate3d(0, -87.5%, 0)");
+//         $imageM.css("-webkit-animation","none");
+//         $imageM.css("-webkit-transform","translate3d(0, -87.5%, 0)");
 //     },600);
 // };
 
@@ -320,102 +400,5 @@ function btnAnimationC() {
 // $("body").bind('touchend', function() {
 // });
 
-$(window).resize(function() {
-  resize();
-});
 
-$(window).bind('onorientationchange', function() {
-    resize();
-});
-
-resize();
-
-$menuBtn.bind('touchend', function() {
-    selectStep($contentsItem[currentStep-1]);
-    openMenuBar();
-});
-
-$mainMask.bind('touchstart', function() { 
-    closeMenuBar();
-});
-
-$contentsBtn.bind('touchstart', function() { 
-    menuTagTo(this,"0");
-});
-
-$searchBtn.bind('touchstart', function() { 
-    menuTagTo(this,"-15em");
-});
-
-$settingBtn.bind('touchstart', function() { 
-    menuTagTo(this,"-30em");
-});
-
-$contentsItem.bind('touchend', function() { 
-    changeStep(($contentsItem.index(this))+1);
-    selectStep(this);
-    closeMenuBar();
-});
-
-$previousBtn.bind('touchstart', function() { 
-    btnGlow($previousGlow);
-    changeStep(currentStep - 1);
-});
-
-$nextBtn.bind('touchstart', function() { 
-    btnGlow($nextGlow);
-    changeStep(currentStep + 1);
-});
-
-$aniBtn.bind('touchstart', function() { 
-    if (separate) {
-        btnAnimationC();
-        // mainAnimationC();
-    }else {
-        btnAnimationS();
-        // mainAnimationS();
-    };
-});
-
-
-//     $("#menuBtn").click(function(){
-//         var mainBox = $("#mainBox");
-//         var menuBox = $("#menuBox");
-//         // var menuMask = $("#menuMask")
-//         // alert(mainBox.css("-webkit-transform"));
-//         if(mainBox.css("-webkit-transform") != "matrix(1, 0, 0, 1, 0, 0)"){
-//             mainBox.css("-webkit-transform","translate3d(0, 0, 0)");
-//             // menuMask.css("background-color","rgba(0,0,0,0.8)");
-//             menuBox.css("-webkit-transform","translate3d(-8em, 0, 0)");
-//             // menuMask.css("display","block");
-
-//             // alert("yes");
-//         }
-//         else{
-//             mainBox.css("-webkit-transform","translate3d(15em, 0, 0)");
-//             // menuMask.css("background-color","rgba(0,0,0,0)");
-//             menuBox.css("-webkit-transform","translate3d(0, 0, 0)");
-//             // menuMask.css("display","none");
-//             // alert("no");
-//         };
-//     });
-
-//     $("#contentsBtn").click(function(){
-//         $("#menu").css("-webkit-transform","translate3d(0, 0, 0)");
-//         $("#contentsBtn").css("box-shadow","0 -0.25em #FF8164 inset");
-//         $("#searchBtn").css("box-shadow","0 0 #FF8164 inset");
-//         $("#settingBtn").css("box-shadow","0 0 #FF8164 inset");
-//     });
-//     $("#searchBtn").click(function(){
-//         $("#menu").css("-webkit-transform","translate3d(-15em, 0, 0)");
-//         $("#searchBtn").css("box-shadow","0 -0.25em #FF8164 inset");
-//         $("#contentsBtn").css("box-shadow","0 0 #FF8164 inset");
-//         $("#settingBtn").css("box-shadow","0 0 #FF8164 inset");
-//     });
-//     $("#settingBtn").click(function(){
-//         $("#menu").css("-webkit-transform","translate3d(-30em, 0, 0)");
-//         $("#settingBtn").css("box-shadow","0 -0.25em #FF8164 inset");
-//         $("#searchBtn").css("box-shadow","0 0 #FF8164 inset");
-//         $("#contentsBtn").css("box-shadow","0 0 #FF8164 inset");
-//     });
 });
