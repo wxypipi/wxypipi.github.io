@@ -72,6 +72,7 @@ function resize() {
     $animation1.css({"height":(newWidth*24) + "px",
                     "width":newWidth + "px",
                     "top":(newWidth+marginTop) + "px",
+                    "background-position":"0 0, 0 " + (newWidth*8) + "px, 0 " + (newWidth*16) + "px",
                     "background-size":newWidth + "px " + (newWidth*8) + "px"
     });
 
@@ -84,10 +85,10 @@ function resize() {
     '@-webkit-keyframes moveL {'+
     'from {-webkit-transform: translate3d(0, 0, 0)}'+
     'to {-webkit-transform: translate3d(-'+moveDis+'px, 0, 0)}}'
-    // +
-    // '@-webkit-keyframes animation1 {'+
-    // 'from {-webkit-transform: translate3d(0, 0, 0)}'+
-    // 'to {-webkit-transform: translate3d( 0, -'+moveDis+'px, 0)}}'
+    +
+    '@-webkit-keyframes animation1 {'+
+    'from {-webkit-transform: translate3d(0, 0, 0)}'+
+    'to {-webkit-transform: translate3d( 0, -'+(newWidth*23)+'px, 0)}}'
 
     );
     cssAnimation.appendChild(rules);
@@ -142,15 +143,10 @@ function changeStep(target) {
         $aniBox2.css("-webkit-animation","moveL 0.3s forwards ease-in-out");
     }else if (currentStep - target == 1) {
         $aniBox2.css("-webkit-animation","moveR 0.3s forwards ease-in-out");
-    }
-    else{
-        $imageM.css("background-image","url(./images/" + padding(target) + ".png)");
-        if (target != 1) {
-            $imageL.css("background-image","url(./images/" + padding((target-1)) + ".png)");
-        };
-        if (target != maxStep) {
-            $imageR.css("background-image","url(./images/" + padding((target+1)) + ".png)");
-        };
+    }else{
+        $aniBox2.css("background-image","url(./images/" + padding(target) + ".png), " +
+                                        "url(./images/" + padding((target-1)) + ".png), "+
+                                        "url(./images/" + padding((target+1)) + ".png)");
     };
 
     if (!separate) {
@@ -162,17 +158,10 @@ function changeStep(target) {
     $stepText.append(padding(currentStep));
     
     $aniBox2.bind('webkitAnimationEnd', function() {
-        // $imageM.css("background-image","url(./images/" + padding(target) + ".png)");
         $aniBox2.css("background-image","url(./images/" + padding(target) + ".png), " +
                                         "url(./images/" + padding((target-1)) + ".png), "+
                                         "url(./images/" + padding((target+1)) + ".png)");
         $aniBox2.css("-webkit-animation","none");
-        // if (target == 1) {
-        //     $aniBox2.css("background-image","url(./images/001.png), url(#), url(./images/002.png)");
-        // };
-        // if (target == maxStep) {
-        //     $aniBox2.css("background-image","url(./images/" + padding(target) + ".png), url(./images/" + padding((target-1)) + ".png), url(#)");
-        // };
         $aniBox2.unbind();
     });
 };
