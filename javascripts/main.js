@@ -139,6 +139,8 @@ function changeStep(target) {
         $nextGlow.css("background-color","#65B89C");
     };
 
+    $animation1.css("display","none");
+
     if (target - currentStep == 1) {
         $aniBox2.css("-webkit-animation","moveL 0.3s forwards ease-in-out");
     }else if (currentStep - target == 1) {
@@ -162,6 +164,7 @@ function changeStep(target) {
                                         "url(./images/" + padding((target-1)) + ".png), "+
                                         "url(./images/" + padding((target+1)) + ".png)");
         $aniBox2.css("-webkit-animation","none");
+        $animation1.css("display","block");
         $aniBox2.unbind();
     });
 };
