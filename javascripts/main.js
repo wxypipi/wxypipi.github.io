@@ -150,10 +150,11 @@ function changeStep(target) {
                                         "url(./images/" + padding((target+1)) + ".png)");
             $previousGlow.css("background-color","#65B89C");
             $nextGlow.css("background-color","#65B89C");
-            if (!separate) {
-                btnAnimationS();
-            };
         };
+    };
+
+    if (!separate) {
+        btnAnimationS();
     };
 
     currentStep = target;
@@ -176,9 +177,6 @@ function changeStep(target) {
             $nextGlow.css("background-color","#65B89C");
         };
         $aniBox2.css("-webkit-animation","none");
-        if (!separate) {
-            btnAnimationS();
-        };
         $aniBox2.unbind();
     });
 
