@@ -198,6 +198,14 @@ function btnAnimationC() {
     separate = false;
 };
 
+function mainAnimationS() {
+    $animation1.css("-webkit-animation","none");
+};
+
+function mainAnimationC() {
+    $animation1.css("-webkit-animation","animation1 2s forwards steps(23)");
+};
+
 
 $(window).bind('onorientationchange resize', function() {
     resize();
@@ -244,10 +252,10 @@ $nextBtn.bind('touchstart', function() {
 $aniBtn.bind('touchstart', function() { 
     if (separate) {
         btnAnimationC();
-        // mainAnimationC();
+        mainAnimationC();
     }else {
         btnAnimationS();
-        // mainAnimationS();
+        mainAnimationS();
     };
 });
 
@@ -338,7 +346,6 @@ $aniBtn.bind('touchstart', function() {
 //         },300);
 //     };
 // };
-
 
 // function mainAnimationS() {
 //     $imageM.css("-webkit-animation","animation 0.5s steps(7) forwards reverse");
