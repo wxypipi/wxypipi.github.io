@@ -130,16 +130,15 @@ function selectStep(item) {
 };
 
 function changeStep(target) {
-    if (target < 1 || target == currentStep || target > maxStep) {
+    if (target == 0) {
         $previousGlow.css("background-color","#FF9D82");
+        return;
+    }else if (target > maxStep) {
         $nextGlow.css("background-color","#FF9D82");
         return;
-    }else{
-        $previousGlow.css("background-color","#65B89C");
-        $nextGlow.css("background-color","#65B89C");
+    }else if (target == currentStep) {
+        return;
     };
-
-    $animation1.css("display","none");
 
     if (target - currentStep == 1) {
         $aniBox2.css("-webkit-animation","moveL 0.3s forwards ease-in-out");
@@ -164,7 +163,8 @@ function changeStep(target) {
                                         "url(./images/" + padding((target-1)) + ".png), "+
                                         "url(./images/" + padding((target+1)) + ".png)");
         $aniBox2.css("-webkit-animation","none");
-        $animation1.css("display","block");
+        $previousGlow.css("background-color","#65B89C");
+        $nextGlow.css("background-color","#65B89C");
         $aniBox2.unbind();
     });
 };
