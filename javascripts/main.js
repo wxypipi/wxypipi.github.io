@@ -38,7 +38,7 @@ var $mainBox = $("#mainBox"),
     $aniBox1 = $("#aniBox1"),
     $aniBox2 = $("#aniBox2"),
     $stepText = $("#stepText"),
-    $animation1 = $("#animation1"),
+    // $animation1 = $("#animation1"),
     $lastItem = false,
     separate = true,
     currentStep = 1,
@@ -69,12 +69,12 @@ function resize() {
                   "background-size":newWidth + "px " + newWidth + "px"
     });
 
-    $animation1.css({"height":(newWidth*8) + "px",
-                    "width":newWidth + "px",
-                    "top":(newWidth+marginTop) + "px",
-                    // "background-position":"0 0, 0 " + (newWidth*8) + "px, 0 " + (newWidth*16) + "px",
-                    "background-size":newWidth + "px " + (newWidth*8) + "px"
-    });
+    // $animation1.css({"height":(newWidth*8) + "px",
+    //                 "width":newWidth + "px",
+    //                 "top":(newWidth+marginTop) + "px",
+    //                 // "background-position":"0 0, 0 " + (newWidth*8) + "px, 0 " + (newWidth*16) + "px",
+    //                 "background-size":newWidth + "px " + (newWidth*8) + "px"
+    // });
 
     var cssAnimation = document.createElement('style');
     cssAnimation.type = 'text/css';
@@ -137,7 +137,20 @@ function changeStep(target) {
     }else if (currentStep - target == 1) {
         $aniBox2.css("-webkit-animation","moveR 0.3s forwards ease-in-out");
     }else {
-        afterChangeStep();
+        if (target == 1) {
+            $aniBox2.css("background-image","url(./images/001.png), none, url(./images/002.png)");
+            $previousGlow.css("background-color","#FF9D82");
+        }else if (target == maxStep) {
+            $aniBox2.css("background-image","url(./images/" + padding(target) + ".png), " +
+                                        "url(./images/" + padding((target-1)) + ".png)");
+            $nextGlow.css("background-color","#FF9D82");
+        }else {
+            $aniBox2.css("background-image","url(./images/" + padding(target) + ".png), " +
+                                        "url(./images/" + padding((target-1)) + ".png), "+
+                                        "url(./images/" + padding((target+1)) + ".png)");
+            $previousGlow.css("background-color","#65B89C");
+            $nextGlow.css("background-color","#65B89C");
+        };
     };
 
     if (!separate) {
@@ -149,11 +162,6 @@ function changeStep(target) {
     $stepText.append(padding(currentStep));
     
     $aniBox2.bind('webkitAnimationEnd', function() {
-        afterChangeStep();
-        $aniBox2.unbind();
-    });
-
-    function afterChangeStep() {
         if (target == 1) {
             $aniBox2.css("background-image","url(./images/001.png), none, url(./images/002.png)");
             $previousGlow.css("background-color","#FF9D82");
@@ -169,7 +177,26 @@ function changeStep(target) {
             $nextGlow.css("background-color","#65B89C");
         };
         $aniBox2.css("-webkit-animation","none");
-    };
+        $aniBox2.unbind();
+    });
+
+    // function afterChangeStep() {
+    //     if (target == 1) {
+    //         $aniBox2.css("background-image","url(./images/001.png), none, url(./images/002.png)");
+    //         $previousGlow.css("background-color","#FF9D82");
+    //     }else if (target == maxStep) {
+    //         $aniBox2.css("background-image","url(./images/" + padding(target) + ".png), " +
+    //                                     "url(./images/" + padding((target-1)) + ".png)");
+    //         $nextGlow.css("background-color","#FF9D82");
+    //     }else {
+    //         $aniBox2.css("background-image","url(./images/" + padding(target) + ".png), " +
+    //                                     "url(./images/" + padding((target-1)) + ".png), "+
+    //                                     "url(./images/" + padding((target+1)) + ".png)");
+    //         $previousGlow.css("background-color","#65B89C");
+    //         $nextGlow.css("background-color","#65B89C");
+    //     };
+    //     $aniBox2.css("-webkit-animation","none");
+    // };
 };
 
 function padding(n) {
@@ -204,20 +231,19 @@ function btnAnimationC() {
     separate = false;
 };
 
-function mainAnimationS() {
-    $animation1.css("-webkit-animation","none");
-};
+// function mainAnimationS() {
+//     $animation1.css("-webkit-animation","none");
+// };
 
-function mainAnimationC() {
-    $animation1.css("-webkit-animation","animation1 0.3s forwards steps(7)");
-    $animation1.bind('webkitAnimationEnd', function() {
-        $animation1.css("background-image","url(./images/1_2.png)");
-        $animation1.css("-webkit-animation","none");
-        // $animation1.css("-webkit-animation","animation1 0.3s forwards steps(7)");
-        $animation1.unbind();
-    });
+// function mainAnimationC() {
+//     $animation1.css("-webkit-animation","animation1 0.3s forwards steps(7)");
+//     $animation1.bind('webkitAnimationEnd', function() {
+//         $animation1.css("background-image","url(./images/1_2.png)");
+//         $animation1.css("-webkit-animation","none");
+//         $animation1.unbind();
+//     });
 
-};
+// };
 
 
 $(window).bind('onorientationchange resize', function() {
@@ -253,13 +279,13 @@ $contentsItem.bind('touchend', function() {
 });
 
 $previousBtn.bind('touchstart', function() { 
-    changeStep(currentStep - 1);
     btnGlow($previousGlow);
+    changeStep(currentStep - 1);
 });
 
 $nextBtn.bind('touchstart', function() { 
-    changeStep(currentStep + 1);
     btnGlow($nextGlow);
+    changeStep(currentStep + 1);
 });
 
 $aniBtn.bind('touchstart', function() { 
