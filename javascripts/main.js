@@ -69,10 +69,10 @@ function resize() {
                   "background-size":newWidth + "px " + newWidth + "px"
     });
 
-    $animation1.css({"height":(newWidth*24) + "px",
+    $animation1.css({"height":(newWidth*8) + "px",
                     "width":newWidth + "px",
                     "top":(newWidth+marginTop) + "px",
-                    "background-position":"0 0, 0 " + (newWidth*8) + "px, 0 " + (newWidth*16) + "px",
+                    // "background-position":"0 0, 0 " + (newWidth*8) + "px, 0 " + (newWidth*16) + "px",
                     "background-size":newWidth + "px " + (newWidth*8) + "px"
     });
 
@@ -88,7 +88,7 @@ function resize() {
     +
     '@-webkit-keyframes animation1 {'+
     'from {-webkit-transform: translate3d(0, 0, 0)}'+
-    'to {-webkit-transform: translate3d( 0, -'+(newWidth*23)+'px, 0)}}'
+    'to {-webkit-transform: translate3d( 0, -'+(newWidth*7)+'px, 0)}}'
 
     );
     cssAnimation.appendChild(rules);
@@ -203,7 +203,7 @@ function mainAnimationS() {
 };
 
 function mainAnimationC() {
-    $animation1.css("-webkit-animation","animation1 2s forwards steps(23)");
+    $animation1.css("-webkit-animation","animation1 0.3s forwards steps(7)");
 };
 
 
