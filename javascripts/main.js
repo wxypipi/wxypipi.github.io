@@ -204,6 +204,13 @@ function mainAnimationS() {
 
 function mainAnimationC() {
     $animation1.css("-webkit-animation","animation1 0.3s forwards steps(7)");
+    $animation1.bind('webkitAnimationEnd', function() {
+        $animation1.css("background-image","url(./images/1_2.png)");
+        $animation1.css("-webkit-animation","none");
+        // $animation1.css("-webkit-animation","animation1 0.3s forwards steps(7)");
+        $animation1.unbind();
+    });
+
 };
 
 
