@@ -37,10 +37,6 @@ var $mainBox = $("#mainBox"),
     $aniBtn = $("#aniBtnBox"),
     $aniBox1 = $("#aniBox1"),
     $aniBox2 = $("#aniBox2"),
-    $imageL = $("#imageL"),
-    $imageM = $("#imageM"),
-    $imageR = $("#imageR"),
-    $imageAll = $("#imageL,#imageM,#imageR"),
     $stepText = $("#stepText"),
     $animation1 = $("#animation1"),
     $lastItem = false,
@@ -53,55 +49,46 @@ function resize() {
     $("style").remove();
     var height = Number($aniBox1.css("height").slice(0,-2));
     var width = Number($aniBox1.css("width").slice(0,-2));
-    // alert(height + " " + width);
     if (height > width) {
-        $aniBox2.css({"height":width + "px",
-                      "width":(width*3) + "px",
-                      "margin-top":((height - width) / 2) + "px",
-                      "left":"-" + width + "px"
-        });
-        $imageAll.css({"height":width + "px",
-                           "width":width + "px",
-                           "background-size":width + "px " + width + "px"
-        });
         var moveDis = width;
         var newWidth = width;
         var newBoxwidth = width*3;
+        var marginTop = (height - width) / 2;
     }else{
-        $aniBox2.css({"height":height + "px",
-                      "width":(width+height*2) + "px",
-                      "left":"-" + height + "px",
-                      "margin-top":"0",
-        });
-        $imageAll.css({"height":height + "px",
-                           "width":height + "px",
-                           "background-size":height + "px " + height + "px"
-        });
         var moveDis = (width+height)/2;
         var newWidth = height;
         var newBoxwidth = width+height*2;
+        var marginTop = 0;
     };
+    
+    $aniBox2.css({"height":newWidth + "px",
+                  "width":newBoxwidth + "px",
+                  "margin-top":marginTop + "px",
+                  "left":"-" + newWidth + "px",
+                  "background-position":moveDis + "px 0, " + "0 0, " + moveDis*2 + "px 0",
+                  "background-size":newWidth + "px " + newWidth + "px"
+    });
 
     $animation1.css({"height":(newWidth*24) + "px",
                     "width":newWidth + "px",
-                    "top":height + "px",
+                    "top":(newWidth+marginTop) + "px",
                     "background-size":newWidth + "px " + (newWidth*8) + "px"
     });
-
-
-
 
     var cssAnimation = document.createElement('style');
     cssAnimation.type = 'text/css';
     var rules = document.createTextNode(
     '@-webkit-keyframes moveR {'+
     'from {-webkit-transform: translate3d(0, 0, 0)}'+
-    'to {-webkit-transform: translate3d('+moveDis+'px, 0, 0)}'+
-    '}'+
+    'to {-webkit-transform: translate3d('+moveDis+'px, 0, 0)}}'+
     '@-webkit-keyframes moveL {'+
     'from {-webkit-transform: translate3d(0, 0, 0)}'+
-    'to {-webkit-transform: translate3d(-'+moveDis+'px, 0, 0)}'+
-    '}'
+    'to {-webkit-transform: translate3d(-'+moveDis+'px, 0, 0)}}'
+    // +
+    // '@-webkit-keyframes animation1 {'+
+    // 'from {-webkit-transform: translate3d(0, 0, 0)}'+
+    // 'to {-webkit-transform: translate3d( 0, -'+moveDis+'px, 0)}}'
+
     );
     cssAnimation.appendChild(rules);
     document.getElementsByTagName("head")[0].appendChild(cssAnimation);
@@ -175,14 +162,17 @@ function changeStep(target) {
     $stepText.append(padding(currentStep));
     
     $aniBox2.bind('webkitAnimationEnd', function() {
-        $imageM.css("background-image","url(./images/" + padding(target) + ".png)");
+        // $imageM.css("background-image","url(./images/" + padding(target) + ".png)");
+        $aniBox2.css("background-image","url(./images/" + padding(target) + ".png), " +
+                                        "url(./images/" + padding((target-1)) + ".png), "+
+                                        "url(./images/" + padding((target+1)) + ".png)");
         $aniBox2.css("-webkit-animation","none");
-        if (target != 1) {
-            $imageL.css("background-image","url(./images/" + padding((target-1)) + ".png)");
-        };
-        if (target != maxStep) {
-            $imageR.css("background-image","url(./images/" + padding((target+1)) + ".png)");
-        };
+        // if (target == 1) {
+        //     $aniBox2.css("background-image","url(./images/001.png), url(#), url(./images/002.png)");
+        // };
+        // if (target == maxStep) {
+        //     $aniBox2.css("background-image","url(./images/" + padding(target) + ".png), url(./images/" + padding((target-1)) + ".png), url(#)");
+        // };
         $aniBox2.unbind();
     });
 };
