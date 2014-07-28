@@ -130,24 +130,14 @@ function selectStep(item) {
 };
 
 function changeStep(target) {
-    if (target == 0) {
-        $previousGlow.css("background-color","#FF9D82");
+    if (target == 0 || target > maxStep || target == currentStep) {
         return;
-    }else if (target > maxStep) {
-        $nextGlow.css("background-color","#FF9D82");
-        return;
-    }else if (target == currentStep) {
-        return;
-    };
-
-    if (target - currentStep == 1) {
+    }else if (target - currentStep == 1) {
         $aniBox2.css("-webkit-animation","moveL 0.3s forwards ease-in-out");
     }else if (currentStep - target == 1) {
         $aniBox2.css("-webkit-animation","moveR 0.3s forwards ease-in-out");
-    }else{
-        $aniBox2.css("background-image","url(./images/" + padding(target) + ".png), " +
-                                        "url(./images/" + padding((target-1)) + ".png), "+
-                                        "url(./images/" + padding((target+1)) + ".png)");
+    }else {
+        afterChangeStep();
     };
 
     if (!separate) {
@@ -159,14 +149,27 @@ function changeStep(target) {
     $stepText.append(padding(currentStep));
     
     $aniBox2.bind('webkitAnimationEnd', function() {
-        $aniBox2.css("background-image","url(./images/" + padding(target) + ".png), " +
-                                        "url(./images/" + padding((target-1)) + ".png), "+
-                                        "url(./images/" + padding((target+1)) + ".png)");
-        $aniBox2.css("-webkit-animation","none");
-        $previousGlow.css("background-color","#65B89C");
-        $nextGlow.css("background-color","#65B89C");
+        afterChangeStep();
         $aniBox2.unbind();
     });
+
+    function afterChangeStep() {
+        if (target == 1) {
+            $aniBox2.css("background-image","url(./images/001.png), none, url(./images/002.png)");
+            $previousGlow.css("background-color","#FF9D82");
+        }else if (target == maxStep) {
+            $aniBox2.css("background-image","url(./images/" + padding(target) + ".png), " +
+                                        "url(./images/" + padding((target-1)) + ".png)");
+            $nextGlow.css("background-color","#FF9D82");
+        }else {
+            $aniBox2.css("background-image","url(./images/" + padding(target) + ".png), " +
+                                        "url(./images/" + padding((target-1)) + ".png), "+
+                                        "url(./images/" + padding((target+1)) + ".png)");
+            $previousGlow.css("background-color","#65B89C");
+            $nextGlow.css("background-color","#65B89C");
+        };
+        $aniBox2.css("-webkit-animation","none");
+    };
 };
 
 function padding(n) {
