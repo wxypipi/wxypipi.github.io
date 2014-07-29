@@ -129,6 +129,90 @@ function selectStep(item) {
     $lastItem = $item;
 };
 
+function changeStepN() {
+    if (currentStep == maxStep) {
+        $nextGlow.css("background-color","#FF9D82");
+        return
+    }
+
+    $aniBox2.css("-webkit-animation","moveL 0.3s forwards ease-in-out");
+
+    if (!separate) {
+        btnAnimationS();
+    };
+
+    currentStep += 1;
+    $stepText.empty();
+    $stepText.append(padding(currentStep));
+
+    $aniBox2.bind('webkitAnimationEnd', function() {
+        if (currentStep == maxStep) {
+            $aniBox2.css("background-image","url(./images/" + padding(currentStep) + ".png), " +
+                                            "url(./images/" + padding(currentStep-1) + ".png)");
+        }else {
+            $aniBox2.css("background-image","url(./images/" + padding(currentStep) + ".png), " +
+                                            "url(./images/" + padding(currentStep-1) + ".png), "+
+                                            "url(./images/" + padding(currentStep+1) + ".png)");
+        };
+        $nextGlow.css("background-color","#65B89C");
+        $aniBox2.css("-webkit-animation","none");
+        $aniBox2.unbind();
+    });
+};
+
+function changeStepP() {
+    if (currentStep == 1) {
+        $previousGlow.css("background-color","#FF9D82");
+        return
+    }
+
+    $aniBox2.css("-webkit-animation","moveR 0.3s forwards ease-in-out");
+
+    if (!separate) {
+        btnAnimationS();
+    };
+
+    currentStep -= 1;
+    $stepText.empty();
+    $stepText.append(padding(currentStep));
+
+    $aniBox2.bind('webkitAnimationEnd', function() {
+        if (currentStep == 1) {
+            $aniBox2.css("background-image","url(./images/001.png), none, url(./images/002.png)");
+        }else {
+            $aniBox2.css("background-image","url(./images/" + padding(currentStep) + ".png), " +
+                                            "url(./images/" + padding(currentStep-1) + ".png), "+
+                                            "url(./images/" + padding(currentStep+1) + ".png)");
+        };
+        $previousGlow.css("background-color","#65B89C");
+        $aniBox2.css("-webkit-animation","none");
+        $aniBox2.unbind();
+    });
+};
+
+function changeStepJ(target) {
+    if (currentStep == target) {
+        return
+    }else if (target == 1) {
+        $aniBox2.css("background-image","url(./images/001.png), none, url(./images/002.png)");
+    }else if (target == maxStep) {
+        $aniBox2.css("background-image","url(./images/" + padding(target) + ".png), " +
+                                    "url(./images/" + padding((target-1)) + ".png)");
+    }else {
+        $aniBox2.css("background-image","url(./images/" + padding(target) + ".png), " +
+                                    "url(./images/" + padding((target-1)) + ".png), "+
+                                    "url(./images/" + padding((target+1)) + ".png)");
+    };
+
+    if (!separate) {
+        btnAnimationS();
+    };
+
+    currentStep = target;
+    $stepText.empty();
+    $stepText.append(padding(currentStep));
+};
+
 function changeStep(target) {
     if (target == 0 || target > maxStep || target == currentStep) {
         return;
@@ -273,28 +357,28 @@ $settingBtn.bind('touchstart', function() {
 });
 
 $contentsItem.bind('touchend', function() { 
-    changeStep(($contentsItem.index(this))+1);
+    changeStepJ(($contentsItem.index(this))+1);
     selectStep(this);
     closeMenuBar();
 });
 
 $previousBtn.bind('touchstart', function() { 
     btnGlow($previousGlow);
-    changeStep(currentStep - 1);
+    changeStepP();
 });
 
 $nextBtn.bind('touchstart', function() { 
     btnGlow($nextGlow);
-    changeStep(currentStep + 1);
+    changeStepN();
 });
 
 $aniBtn.bind('touchstart', function() { 
     if (separate) {
         btnAnimationC();
-        mainAnimationC();
+        // mainAnimationC();
     }else {
         btnAnimationS();
-        mainAnimationS();
+        // mainAnimationS();
     };
 });
 
