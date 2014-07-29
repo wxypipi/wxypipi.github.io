@@ -147,20 +147,6 @@ function changeStepN() {
 
     currentStep += 1;
     stepText.innerHTML = padding(currentStep);
-
-    function afterchangeStepN() {
-        if (currentStep == maxStep) {
-            aniBox2.style.backgroundImage = "url(./images/" + padding(currentStep) + ".png), url(./images/" + padding(currentStep-1) + ".png)";
-        }else {
-            aniBox2.style.backgroundImage = "url(./images/" + padding(currentStep) + ".png), url(./images/" + padding(currentStep-1) + ".png), url(./images/" + padding(currentStep+1) + ".png)";
-        };
-        previousGlow.style.backgroundColor = "#65B89C";
-        nextGlow.style.webkitAnimation = "none";
-        aniBox2.style.webkitAnimation = "none";
-        aniBox2.removeEventListener('webkitAnimationEnd', afterchangeStepN, false);
-    };
-
-    aniBox2.addEventListener('webkitAnimationEnd', afterchangeStepN, false);
 };
 
 function changeStepP() {
@@ -177,21 +163,9 @@ function changeStepP() {
 
     currentStep -= 1;
     stepText.innerHTML = padding(currentStep);
-
-    function afterchangeStepP() {
-        if (currentStep == 1) {
-            aniBox2.style.backgroundImage = "url(./images/001.png), none, url(./images/002.png)";
-        }else {
-            aniBox2.style.backgroundImage = "url(./images/" + padding(currentStep) + ".png), url(./images/" + padding(currentStep-1) + ".png), url(./images/" + padding(currentStep+1) + ".png)";
-        };
-        nextGlow.style.backgroundColor = "#65B89C";
-        previousGlow.style.webkitAnimation = "none";
-        aniBox2.style.webkitAnimation = "none";
-        aniBox2.removeEventListener('webkitAnimationEnd', afterchangeStepP, false);
-    };
-
-    aniBox2.addEventListener('webkitAnimationEnd', afterchangeStepP, false);
 };
+
+
 
 function changeStepJ(target) {
     if (currentStep == target) {
@@ -363,10 +337,18 @@ $previousBtn.bind('touchstart', function() {
     changeStepP();
 });
 
+previousGlow.addEventListener('webkitAnimationEnd', function(){
+    previousGlow.style.webkitAnimation = "none";
+}, false);
+
 $nextBtn.bind('touchstart', function() { 
     nextGlow.style.webkitAnimation = "glow 0.3s cubic-bezier(0, .36, .44, .84)";
     changeStepN();
 });
+
+nextGlow.addEventListener('webkitAnimationEnd', function(){
+    nextGlow.style.webkitAnimation = "none";
+}, false);
 
 $aniBtn.bind('touchstart', function() { 
     if (separate) {
@@ -378,7 +360,18 @@ $aniBtn.bind('touchstart', function() {
     };
 });
 
-
+aniBox2.addEventListener('webkitAnimationEnd', function(){
+    if (currentStep == 1) {
+        aniBox2.style.backgroundImage = "url(./images/001.png), none, url(./images/002.png)";
+    }else if (currentStep == maxStep) {
+        aniBox2.style.backgroundImage = "url(./images/" + padding(currentStep) + ".png), url(./images/" + padding(currentStep-1) + ".png)";
+    }else {
+        aniBox2.style.backgroundImage = "url(./images/" + padding(currentStep) + ".png), url(./images/" + padding(currentStep-1) + ".png), url(./images/" + padding(currentStep+1) + ".png)";
+    };
+    aniBox2.style.webkitAnimation = "none";
+    nextGlow.style.backgroundColor = "#65B89C";
+    previousGlow.style.backgroundColor = "#65B89C";
+}, false);
 
 
 // 这个方法太麻烦了
