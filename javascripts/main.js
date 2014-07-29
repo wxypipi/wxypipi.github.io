@@ -37,6 +37,7 @@ var $mainBox = $("#mainBox"),
     $nextGlow = $("#nextGlow"),
     nextGlow = document.getElementById("nextGlow"),
     $aniBtn = $("#aniBtnBox"),
+    aniBtn = document.getElementById("aniBtnBox"),
     $aniBox1 = $("#aniBox1"),
     $aniBox2 = $("#aniBox2"),
     aniBox2 = document.getElementById("aniBox2"),
@@ -149,14 +150,12 @@ function changeStepN() {
 
     function afterchangeStepN() {
         if (currentStep == maxStep) {
-            aniBox2.style.backgroundImage = "url(./images/" + padding(currentStep) + ".png), " +
-                                            "url(./images/" + padding(currentStep-1) + ".png)";
+            aniBox2.style.backgroundImage = "url(./images/" + padding(currentStep) + ".png), url(./images/" + padding(currentStep-1) + ".png)";
         }else {
-            aniBox2.style.backgroundImage = "url(./images/" + padding(currentStep) + ".png), " +
-                                            "url(./images/" + padding(currentStep-1) + ".png), "+
-                                            "url(./images/" + padding(currentStep+1) + ".png)";
+            aniBox2.style.backgroundImage = "url(./images/" + padding(currentStep) + ".png), url(./images/" + padding(currentStep-1) + ".png), url(./images/" + padding(currentStep+1) + ".png)";
         };
         previousGlow.style.backgroundColor = "#65B89C";
+        nextGlow.style.webkitAnimation = "none";
         aniBox2.style.webkitAnimation = "none";
         aniBox2.removeEventListener('webkitAnimationEnd', afterchangeStepN, false);
     };
@@ -183,11 +182,10 @@ function changeStepP() {
         if (currentStep == 1) {
             aniBox2.style.backgroundImage = "url(./images/001.png), none, url(./images/002.png)";
         }else {
-            aniBox2.style.backgroundImage = "url(./images/" + padding(currentStep) + ".png), " +
-                                            "url(./images/" + padding(currentStep-1) + ".png), "+
-                                            "url(./images/" + padding(currentStep+1) + ".png)";
+            aniBox2.style.backgroundImage = "url(./images/" + padding(currentStep) + ".png), url(./images/" + padding(currentStep-1) + ".png), url(./images/" + padding(currentStep+1) + ".png)";
         };
         nextGlow.style.backgroundColor = "#65B89C";
+        previousGlow.style.webkitAnimation = "none";
         aniBox2.style.webkitAnimation = "none";
         aniBox2.removeEventListener('webkitAnimationEnd', afterchangeStepP, false);
     };
@@ -199,14 +197,11 @@ function changeStepJ(target) {
     if (currentStep == target) {
         return
     }else if (target == 1) {
-        $aniBox2.css("background-image","url(./images/001.png), none, url(./images/002.png)");
+        aniBox2.style.backgroundImage = "url(./images/001.png), none, url(./images/002.png)";
     }else if (target == maxStep) {
-        $aniBox2.css("background-image","url(./images/" + padding(target) + ".png), " +
-                                    "url(./images/" + padding((target-1)) + ".png)");
+        aniBox2.style.backgroundImage = "url(./images/" + padding(target) + ".png), url(./images/" + padding((target-1)) + ".png)";
     }else {
-        $aniBox2.css("background-image","url(./images/" + padding(target) + ".png), " +
-                                    "url(./images/" + padding((target-1)) + ".png), "+
-                                    "url(./images/" + padding((target+1)) + ".png)");
+        aniBox2.style.backgroundImage = "url(./images/" + padding(target) + ".png), url(./images/" + padding((target-1)) + ".png), url(./images/" + padding((target+1)) + ".png)";
     };
 
     if (!separate) {
@@ -292,30 +287,27 @@ function padding(n) {
 };
 
 // UC和海豚不兼容
-function btnGlow(glowObj) {
-    glowObj.css("-webkit-animation","glow 0.3s cubic-bezier(0, .36, .44, .84)");
-    glowObj.bind('webkitAnimationEnd', function() {
-        glowObj.css("-webkit-animation","none");
-    });
-};
+// function btnGlow(glowObj) {
+//     glowObj.style.webkitAnimation = "glow 0.3s cubic-bezier(0, .36, .44, .84)";
+// };
 
 function btnAnimation() {
     if (separate) {
-        $aniBtn.css("background-position","0em -84em");
+        aniBtn.style.backgroundPosition = "0em -84em";
         separate = false;
     }else {
-        $aniBtn.css("background-position","0 0");
+        aniBtn.style.backgroundPosition = "0 0";
         separate = true;
     };
 };
 
 function btnAnimationS() {
-    $aniBtn.css("-webkit-transform","translate3d(0,0,0)");
+    aniBtn.style.webkitTransform = "translate3d(0,0,0)";
     separate = true;
 };
 
 function btnAnimationC() {
-    $aniBtn.css("-webkit-transform","translate3d(0,-84em,0)");
+    aniBtn.style.webkitTransform = "translate3d(0,-84em,0)";
     separate = false;
 };
 
@@ -367,12 +359,12 @@ $contentsItem.bind('touchend', function() {
 });
 
 $previousBtn.bind('touchstart', function() { 
-    btnGlow($previousGlow);
+    previousGlow.style.webkitAnimation = "glow 0.3s cubic-bezier(0, .36, .44, .84)";
     changeStepP();
 });
 
 $nextBtn.bind('touchstart', function() { 
-    btnGlow($nextGlow);
+    nextGlow.style.webkitAnimation = "glow 0.3s cubic-bezier(0, .36, .44, .84)";
     changeStepN();
 });
 
