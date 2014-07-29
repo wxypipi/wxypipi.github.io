@@ -285,7 +285,7 @@ body, html{
 }
 
 #menuFooter{
-    height: 4em;
+    height: 5em;
     width: 100%;
     background-color: #54575E;
     position: absolute;
@@ -302,14 +302,30 @@ body, html{
     float: left;
     width: 5em;
     height: 100%;
-    text-align: center;
-    line-height: 4em;
-    color: #CCD3DD;
+    background-color: #54575E;
+    background-size: 1.875em 1.875em;
+    background-position: 1.5625em 1.5625em;
+    background-repeat: no-repeat;
     -webkit-transform: translate3d(0, 0, 0);
-    -webkit-transition: box-shadow 0.1s linear;
+    -webkit-transition: opacity 0.2s linear;
 }
 
 #contentsBtn{
-    box-shadow: 0 -0.25em #FF8164 inset
+    box-shadow: 0 -0.25em #FF8164 inset;
+    background-image: url(../images/contentsBtn.png);
+}
+
+#searchBtn{
+    background-image: url(../images/searchBtn.png);
+    opacity: 0.5;
+}
+
+#settingBtn{
+    background-image: url(../images/settingBtn.png);
+    opacity: 0.5;
+}
+
+#contentsBtn,#searchBtn,#settingBtn{
+    
 }
 
