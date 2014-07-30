@@ -118,9 +118,9 @@ function closeMenuBar() {
 
 function menuTagTo(tag,lineTranslate,pageTranslate) {
     var $tag = $(tag);
-    $contentsBtn.css("opacity","0.75");
-    $searchBtn.css("opacity","0.75");
-    $settingBtn.css("opacity","0.75");
+    $contentsBtn.css("opacity","0.8");
+    $searchBtn.css("opacity","0.8");
+    $settingBtn.css("opacity","0.8");
     $tag.css("opacity","1");
     menuFooterLine.style.webkitTransform = "translate3d(" + lineTranslate + ", 0, 0)"
     $menu.css("-webkit-transform","translate3d(" + pageTranslate + ", 0, 0)");
