@@ -241,12 +241,12 @@ body, html{
 
 
 #menu{
-    width: 300%;
+    width: 46.75em;
     height: auto;
     position: absolute; 
     top: 0;
     left:0;
-    bottom: 4em; 
+    bottom: 5em; 
     right:0; 
     -webkit-transition: -webkit-transform 0.35s cubic-bezier(.08, .47, 0, 1);
 }
@@ -255,24 +255,32 @@ body, html{
     width: 15em;
     height: 100%;
     float: left;
-    background-color: #63666E;
+    background-color: #54575E;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
 }
 
-#contentsPage li{
-    line-height: 3em;
-    background-color: #6A6F76;
+#contentsPage{
+    width: 16.75em;
+}
+
+#contentsPage div{
+    line-height: 3.5em;
+    background-color: #595D64;
     text-indent: 1.5em;
-    font-size: 1.25em;
+    /*font-size: 1em;*/
     color: #A8AFBA;
-    font-weight: bold;
+    height: 3.5em;
+    width: 100%;
+    border-radius: 0 1.75em 1.75em 0;
+    /*font-weight: bold;*/
 }
 
 #contentsPage li li{
-    background-color: #63666E;
-    font-size: 0.8em;
+    background-color: #54575E;
+    /*font-size: 0.8em;*/
     text-indent: 3em;
+    line-height: 3em;
     color: #9A9FA8;
 }
 
@@ -287,9 +295,10 @@ body, html{
 #menuFooter{
     height: 5em;
     width: 100%;
-    background-color: #54575E;
+    background-color: #6A6F76;
     position: absolute;
     bottom: 0;
+    box-shadow: 0 0 1.5em 0.25em rgba(0,0,0,0.075);
 }
 
 #menuFooterBtn{
@@ -302,7 +311,7 @@ body, html{
     float: left;
     width: 5em;
     height: 100%;
-    background-color: #54575E;
+    background-color: #6A6F76;
     background-size: 1.875em 1.875em;
     background-position: 1.5625em 1.5625em;
     background-repeat: no-repeat;
@@ -310,8 +319,18 @@ body, html{
     -webkit-transition: opacity 0.2s linear;
 }
 
+#menuFooterLine{
+    background-color: #FF8164;
+    height: 2px;
+    width: 5em;
+    position: absolute;
+    bottom: 0;
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-transition: -webkit-transform 0.35s cubic-bezier(.08, .47, 0, 1);
+}
+
 #contentsBtn{
-    box-shadow: 0 -0.25em #FF8164 inset;
+    /*box-shadow: 0 -0.25em #FF8164 inset;*/
     background-image: url(../images/contentsBtn.png);
 }
 

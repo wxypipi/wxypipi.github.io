@@ -30,6 +30,7 @@ var $mainBox = $("#mainBox"),
     $searchBtn = $("#searchBtn"),
     $settingBtn = $("#settingBtn"),
     $menu = $("#menu"),
+    menuFooterLine = document.getElementById("menuFooterLine"),
     $menuBtn = $("#menuBtn,#headerText"),
     $mainMask = $("#mainMask"),
     $contentsItem = $("#contentsPage li li"),
@@ -115,17 +116,14 @@ function closeMenuBar() {
     mainMask.style.pointerEvents = "none";
 };
 
-function menuTagTo(tag,translateX) {
+function menuTagTo(tag,lineTranslate,pageTranslate) {
     var $tag = $(tag);
-    $contentsBtn.css({"box-shadow":"0 0 #FF8164 inset",
-                      "opacity":"0.5"});
-    $searchBtn.css({"box-shadow":"0 0 #FF8164 inset",
-                      "opacity":"0.5"});
-    $settingBtn.css({"box-shadow":"0 0 #FF8164 inset",
-                      "opacity":"0.5"});
-    $tag.css({"box-shadow":"0 -0.25em #FF8164 inset",
-                      "opacity":"1"});
-    $menu.css("-webkit-transform","translate3d(" + translateX + ", 0, 0)");
+    $contentsBtn.css("opacity","0.75");
+    $searchBtn.css("opacity","0.75");
+    $settingBtn.css("opacity","0.75");
+    $tag.css("opacity","1");
+    menuFooterLine.style.webkitTransform = "translate3d(" + lineTranslate + ", 0, 0)"
+    $menu.css("-webkit-transform","translate3d(" + pageTranslate + ", 0, 0)");
 };
 
 function selectStep(item) {
@@ -136,7 +134,7 @@ function selectStep(item) {
         lastItem.style.boxShadow = "0 0 #FF8164 inset";
         lastItem.style.color = "#9A9FA8";
     };
-    item.style.boxShadow = "0.25em 0 #FF8164 inset";
+    item.style.boxShadow = "2px 0 #FF8164 inset";
     item.style.color = "#CCD3DD";
     lastItem = item;
 };
@@ -251,15 +249,15 @@ $mainMask.bind('touchstart', function() {
 });
 
 $contentsBtn.bind('touchstart', function() { 
-    menuTagTo(this,"0");
+    menuTagTo(this,"0","0");
 });
 
 $searchBtn.bind('touchstart', function() { 
-    menuTagTo(this,"-15em");
+    menuTagTo(this,"5em","-16.75em");
 });
 
 $settingBtn.bind('touchstart', function() { 
-    menuTagTo(this,"-30em");
+    menuTagTo(this,"10em","-31.75em");
 });
 
 $contentsItem.bind('touchend', function() { 
