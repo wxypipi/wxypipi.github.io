@@ -46,6 +46,7 @@ var $mainBox = $("#mainBox"),
     $aniBox2 = $("#aniBox2"),
     aniBox2 = document.getElementById("aniBox2"),
     stepText = document.getElementById("stepText"),
+    gradient = document.getElementById("menuFooterGradient"),
     // $animation1 = $("#animation1"),
     lastItem = false,
     separate = true,
@@ -274,6 +275,11 @@ $previousBtn.bind('touchstart', function() {
 previousGlow.addEventListener('webkitAnimationEnd', function(){
     previousGlow.style.webkitAnimation = "none";
 }, false);
+
+gradient.addEventListener('touchstart', function(){
+    gradient.style.display = "none";
+}, false);
+
 
 $nextBtn.bind('touchstart', function() { 
     nextGlow.style.webkitAnimation = "glow 0.3s cubic-bezier(0, .36, .44, .84)";

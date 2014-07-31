@@ -265,7 +265,7 @@ body, html{
     height: 90px;
     width: 100%;
     background-image: url(../images/menuTitle.png);
-    background-size: 240px 276px;
+    background-size: 240px 636px;
     /*background-position: 0 96px;*/
     /*border-radius: 0 1.75em 1.75em 0;*/
     /*font-weight: bold;*/
@@ -277,6 +277,22 @@ body, html{
 
 #menuTitle2{
     background-position: 0 -186px;
+}
+
+#menuTitle3{
+    background-position: 0 -276px;
+}
+
+#menuTitle4{
+    background-position: 0 -366px;
+}
+
+#menuTitle5{
+    background-position: 0 -456px;
+}
+
+#menuTitle6{
+    background-position: 0 -546px;
 }
 
 /*#contentsPage ul div div{
@@ -304,7 +320,7 @@ body, html{
     font-size: 1.2em;
     color: #9A9FA8;
     background-image: url(../images/menuTitle.png);
-    background-size: 240px 276px;
+    background-size: 240px 636px;
     background-position: 0 -48px;
 }
 
@@ -312,7 +328,7 @@ body, html{
     font-size: 0.5em;
     margin-left: 1.2em;
     /*color: #8C9199;*/
-    opacity: 0.5;
+    opacity: 0.75;
 }
 
 #searchPage{
@@ -333,12 +349,14 @@ body, html{
 }
 
 #menuFooterGradient{
-    height: 80px;
+    height: 60px;
     width: 100%;
     background-image: url(../images/menuFooterGradient.png);
-    background-size: 1px 80px;
-    position: absolute;
-    bottom: 55px;
+    background-size: 1px 60px;
+    position: fixed;
+    bottom: 54px;
+    pointer-events: none;
+    z-index: 100;
 }
 
 #menuFooterBtn{
