@@ -111,7 +111,7 @@ body, html{
 
 #previousGlow, #nextGlow{
     border-radius: 50%;
-    background-color: #65B89C;
+    background-color: #C6C6C6;
     -webkit-animation: none;
     position: absolute;
     width: 4em;

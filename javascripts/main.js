@@ -192,8 +192,8 @@ aniBox2.addEventListener('webkitAnimationEnd', function(){
         aniBox2.style.backgroundImage = "url(./images/" + padding(currentStep) + ".png), url(./images/" + padding(currentStep-1) + ".png), url(./images/" + padding(currentStep+1) + ".png)";
     };
     aniBox2.style.webkitAnimation = "none";
-    nextGlow.style.backgroundColor = "#65B89C";
-    previousGlow.style.backgroundColor = "#65B89C";
+    nextGlow.style.backgroundColor = "#C6C6C6";
+    previousGlow.style.backgroundColor = "#C6C6C6";
 }, false);
 
 function padding(n) {
