@@ -103,7 +103,7 @@ body, html{
     position: absolute;
     top: 0em;
     bottom: 2em;
-    background-image: url(pandn.svg);
+    background-image: url(../images/pnBtn.png);
     background-size: 3em 3em;  
     background-repeat: no-repeat;
     background-position: 1.5em 2em;
@@ -114,19 +114,20 @@ body, html{
     background-color: #65B89C;
     -webkit-animation: none;
     position: absolute;
-    width: 2.8em;
-    height: 2.8em;
-    top: 2.1em;
-    bottom: 2.1em;
+    width: 4em;
+    height: 4em;
+    top: 1.5em;
+    bottom: 1.5em;
+    opacity: 0;
 }
 
 #previousGlow{
-    left: 1.6em; 
+    left: 1em; 
     background-color: #FF9D82;
 }
 
 #nextGlow{
-    right: 1.6em;
+    right: 1em;
 }
 
 #previousBtn{
@@ -143,11 +144,11 @@ body, html{
 @-webkit-keyframes glow {
     from{
         opacity: 1;
-        -webkit-transform: scale3d(1, 1, 1);
+        /*-webkit-transform: scale3d(1, 1, 1);*/
     }
     to{
         opacity: 0;
-        -webkit-transform: scale3d(2, 2, 1);
+        /*-webkit-transform: scale3d(2, 2, 1);*/
     }
 }
 
@@ -246,7 +247,7 @@ body, html{
     position: absolute; 
     top: 0;
     left:0;
-    bottom: 4.25em; 
+    bottom: 55px; 
     right:0; 
     -webkit-transition: -webkit-transform 0.35s cubic-bezier(.08, .47, 0, 1);
 }

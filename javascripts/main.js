@@ -268,7 +268,7 @@ $contentsItem.bind('touchend', function() {
 });
 
 $previousBtn.bind('touchstart', function() { 
-    previousGlow.style.webkitAnimation = "glow 0.3s cubic-bezier(0, .36, .44, .84)";
+    previousGlow.style.webkitAnimation = "glow 0.3s linear";
     changeStepP();
 });
 
@@ -276,13 +276,13 @@ previousGlow.addEventListener('webkitAnimationEnd', function(){
     previousGlow.style.webkitAnimation = "none";
 }, false);
 
-gradient.addEventListener('touchstart', function(){
-    gradient.style.display = "none";
-}, false);
+// gradient.addEventListener('touchstart', function(){
+//     gradient.style.display = "none";
+// }, false);
 
 
 $nextBtn.bind('touchstart', function() { 
-    nextGlow.style.webkitAnimation = "glow 0.3s cubic-bezier(0, .36, .44, .84)";
+    nextGlow.style.webkitAnimation = "glow 0.3s linear";
     changeStepN();
 });
 
