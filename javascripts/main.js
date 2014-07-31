@@ -131,10 +131,10 @@ function selectStep(item) {
         return;
     };
     if(lastItem){
-        lastItem.style.boxShadow = "0 0 #FF8164 inset";
+        lastItem.style.backgroundPosition = "0 -48px";
         lastItem.style.color = "#9A9FA8";
     };
-    item.style.boxShadow = "2px 0 #FF8164 inset";
+    item.style.backgroundPosition = "0 0";
     item.style.color = "#CCD3DD";
     lastItem = item;
 };
@@ -253,11 +253,11 @@ $contentsBtn.bind('touchstart', function() {
 });
 
 $searchBtn.bind('touchstart', function() { 
-    menuTagTo(this,"5em","-16.75em");
+    menuTagTo(this,"5em","-15em");
 });
 
 $settingBtn.bind('touchstart', function() { 
-    menuTagTo(this,"10em","-31.75em");
+    menuTagTo(this,"10em","-30em");
 });
 
 $contentsItem.bind('touchend', function() { 

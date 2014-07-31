@@ -241,7 +241,7 @@ body, html{
 
 
 #menu{
-    width: 46.75em;
+    width: 45em;
     height: auto;
     position: absolute; 
     top: 0;
@@ -258,26 +258,28 @@ body, html{
     background-color: #63666E;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
-}
-
-#contentsPage{
-    width: 16.75em;
+    -webkit-transform: translateZ(0);
 }
 
 #contentsPage ul div{
-    line-height: 95px;
-    text-indent: 0.8em;
-    font-size: 1.4em;
-    font-weight: lighter;
-    color: #EAEAEA;
-    height: 95px;
+    height: 90px;
     width: 100%;
-    letter-spacing: 0.5em;
+    background-image: url(../images/menuTitle.png);
+    background-size: 240px 276px;
+    /*background-position: 0 96px;*/
     /*border-radius: 0 1.75em 1.75em 0;*/
     /*font-weight: bold;*/
 }
 
-#contentsPage ul div div{
+#menuTitle1{
+    background-position: 0 -96px;
+}
+
+#menuTitle2{
+    background-position: 0 -186px;
+}
+
+/*#contentsPage ul div div{
     position: relative;
     height: 40px;
     width: 40px;
@@ -292,31 +294,25 @@ body, html{
     font-size: 0.7em;
     letter-spacing: 0;
     color: #CCD3DD;
-}
+}*/
 
 #contentsPage li li{
     /*font-size: 0.8em;*/
-    text-indent: 54px;
-    line-height: 46px;
+    text-indent: 67px;
+    line-height: 48px;
+    height: 48px;
     font-size: 1.2em;
     color: #9A9FA8;
+    background-image: url(../images/menuTitle.png);
+    background-size: 240px 276px;
+    background-position: 0 -48px;
 }
 
 #contentsPage li li span{
     font-size: 0.5em;
-    margin-left: 1em;
-    color: #8C9199;
-}
-
-#contentsLine{
-    z-index: 0;
-    height: 100%;
-    width: 2px;
-    position: absolute;
-    left: 31px;
- /*   top: 45px;*/
-    background-color: #73777F;
-    /*z-index: -1;*/
+    margin-left: 1.2em;
+    /*color: #8C9199;*/
+    opacity: 0.5;
 }
 
 #searchPage{
@@ -328,12 +324,21 @@ body, html{
 }
 
 #menuFooter{
-    height: 4.25em;
+    height: 55px;
     width: 100%;
     background-color: #54575E;
     position: absolute;
     bottom: 0;
-    box-shadow: 0 0 3em 1.5em #54575E;
+    /*box-shadow: 0 0 3em 1.5em #54575E;*/
+}
+
+#menuFooterGradient{
+    height: 80px;
+    width: 100%;
+    background-image: url(../images/menuFooterGradient.png);
+    background-size: 1px 80px;
+    position: absolute;
+    bottom: 55px;
 }
 
 #menuFooterBtn{
@@ -347,7 +352,7 @@ body, html{
     width: 5em;
     height: 100%;
     background-size: 30px 30px;
-    background-position: 25px 12px;
+    background-position: 25px 0;
     background-repeat: no-repeat;
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-transition: opacity 0.2s linear;
