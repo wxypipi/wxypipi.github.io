@@ -244,7 +244,7 @@ function mainAnimationS() {
         };
         setTimeout(function(){
             changeImage();
-        },30)
+        },40)
     };
 };
 
@@ -260,7 +260,7 @@ function mainAnimationC() {
         };
         setTimeout(function(){
             changeImage();
-        },30)
+        },40)
     };
 };
 
