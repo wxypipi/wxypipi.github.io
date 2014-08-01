@@ -47,6 +47,7 @@ var $mainBox = $("#mainBox"),
     imgL = document.getElementById("imgL"),
     imgR = document.getElementById("imgR"),
     imgM = document.getElementById("imgM"),
+    testImg = document.getElementById("testImg"),
     aniBox2 = document.getElementById("aniBox2"),
     stepText = document.getElementById("stepText"),
     gradient = document.getElementById("menuFooterGradient"),
@@ -243,9 +244,11 @@ function btnAnimationC() {
 
 function mainAnimationC() {
     var i = 0;
+
     changeImage();
     function changeImage() {
-        imgM.style.backgroundImage = "url(images/testAnimation/001_00" + padding(i) + ".png)";
+        testImg.src = "./images/testAnimation/001_00" + padding(i) + ".png";
+        // imgM.style.backgroundImage = "url(images/testAnimation/001_00" + padding(i) + ".png)";
         i += 1;
         if (i > 23) {
             return;
