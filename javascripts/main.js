@@ -81,7 +81,7 @@ function resize() {
     var cssAnimation = document.createElement('style');
     cssAnimation.type = 'text/css';
     var rules = document.createTextNode(
-    "#imgBoxM,#imgBoxL,#imgBoxR{"+
+    "#imgBoxM,#imgBoxL,#imgBoxR,#imgM,#imgL,#imgR{"+
         "height: " + newWidth + "px;"+
         "width: " + newWidth + "px;}"+
         // "background-size: " + newWidth + "px " + newWidth + "px}"+
