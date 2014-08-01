@@ -81,10 +81,10 @@ function resize() {
     var cssAnimation = document.createElement('style');
     cssAnimation.type = 'text/css';
     var rules = document.createTextNode(
-    "#imgBoxM,#imgBoxL,#imgBoxR{"+
+    "#imgBoxM,#imgBoxL,#imgBoxR,#imgM,#imgL,#imgR{"+
         "height: " + newWidth + "px;"+
-        "width: " + newWidth + "px;}"+
-        // "background-size: " + newWidth + "px " + newWidth + "px}"+
+        "width: " + newWidth + "px}"+
+        
     "#aniBox2{"+
         "height: " + newWidth + "px;"+
         "width: " + newBoxwidth + "px;"+
@@ -234,34 +234,24 @@ function btnAnimationC() {
 
 function mainAnimationS() {
     var i = 23;
-    changeImage();
-    function changeImage() {
+    var animation = setInterval(function(){
         imgM.src = "./images/testAnimation/001_00" + padding(i) + ".png";
-        // imgM.src = "url(images/testAnimation/001_00" + padding(i) + ".png)";
         i -= 1;
         if (i < 0) {
-            return;
+            clearInterval(animation);
         };
-        setTimeout(function(){
-            changeImage();
-        },50)
-    };
+    }, 40);
 };
 
 function mainAnimationC() {
     var i = 0;
-    changeImage();
-    function changeImage() {
+    var animation = setInterval(function(){
         imgM.src = "./images/testAnimation/001_00" + padding(i) + ".png";
-        // imgM.src = "url(images/testAnimation/001_00" + padding(i) + ".png)";
         i += 1;
         if (i > 23) {
-            return;
+            clearInterval(animation);
         };
-        setTimeout(function(){
-            changeImage();
-        },50)
-    };
+    }, 40);
 };
 
 
