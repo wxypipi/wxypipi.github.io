@@ -174,17 +174,17 @@ function changeStepJ(target) {
         return
     }else if (target == 1) {
         // aniBox2.style.backgroundImage = "url(./images/001.png), none, url(./images/002.png)";
-        imgM.src = "images/001.png";
-        imgR.src = "images/002.png";
+        imgM.style.backgroundImage = "url(images/001.png)";
+        imgR.style.backgroundImage = "url(images/002.png";
     }else if (target == maxStep) {
         // aniBox2.style.backgroundImage = "url(./images/" + padding(target) + ".png), url(./images/" + padding((target-1)) + ".png)";
-        imgM.src = "images/" + padding(target) + ".png";
-        imgL.src = "images/" + padding(target-1) + ".png";
+        imgM.style.backgroundImage = "url(images/" + padding(target) + ".png)";
+        imgL.style.backgroundImage = "url(images/" + padding(target-1) + ".png)";
     }else {
         // aniBox2.style.backgroundImage = "url(./images/" + padding(target) + ".png), url(./images/" + padding((target-1)) + ".png), url(./images/" + padding((target+1)) + ".png)";
-        imgM.src = "images/" + padding(target) + ".png";
-        imgL.src = "images/" + padding(target-1) + ".png";
-        imgR.src = "images/" + padding(target+1) + ".png";
+        imgM.style.backgroundImage = "url(images/" + padding(target) + ".png)";
+        imgL.style.backgroundImage = "url(images/" + padding(target-1) + ".png)";
+        imgR.style.backgroundImage = "url(images/" + padding(target+1) + ".png)";
     };
     if (!separate) {
         btnAnimationS();
@@ -196,20 +196,20 @@ function changeStepJ(target) {
 aniBox2.addEventListener('webkitAnimationEnd', function(){
     if (currentStep == 1) {
         // aniBox2.style.backgroundImage = "url(./images/001.png), none, url(./images/002.png)";
-        imgM.src = "images/001.png";
+        imgM.style.backgroundImage = "url(images/001.png)";
         aniBox2.style.webkitAnimation = "none";
-        imgR.src = "images/002.png";
+        imgR.style.backgroundImage = "url(images/002.png)";
     }else if (currentStep == maxStep) {
         // aniBox2.style.backgroundImage = "url(./images/" + padding(currentStep) + ".png), url(./images/" + padding(currentStep-1) + ".png)";
-        imgM.src = "images/" + padding(currentStep) + ".png";
+        imgM.style.backgroundImage = "url(images/" + padding(currentStep) + ".png)";
         aniBox2.style.webkitAnimation = "none";
-        imgL.src = "images/" + padding(currentStep-1) + ".png";
+        imgL.style.backgroundImage = "url(images/" + padding(currentStep-1) + ".png)";
     }else {
         // aniBox2.style.backgroundImage = "url(./images/" + padding(currentStep) + ".png), url(./images/" + padding(currentStep-1) + ".png), url(./images/" + padding(currentStep+1) + ".png)";
-        imgM.src = "images/" + padding(currentStep) + ".png";
+        imgM.style.backgroundImage = "url(images/" + padding(currentStep) + ".png)";
         aniBox2.style.webkitAnimation = "none";
-        imgL.src = "images/" + padding(currentStep-1) + ".png";
-        imgR.src = "images/" + padding(currentStep+1) + ".png";
+        imgL.style.backgroundImage = "url(images/" + padding(currentStep-1) + ".png)";
+        imgR.style.backgroundImage = "url(images/" + padding(currentStep+1) + ".png)";
     };
     // aniBox2.style.webkitAnimation = "none";
     nextGlow.style.backgroundColor = "#C6C6C6";

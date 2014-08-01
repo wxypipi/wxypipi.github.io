@@ -193,10 +193,12 @@ body, html{
     height: 20em;
     width: 20em;
     position: relative;
+    background-size: 20em 20em;
 }
 
 #imgM{
     margin: auto;
+    background-image: url(../images/001.png);
 }
 
 #imgL{
@@ -205,6 +207,7 @@ body, html{
 
 #imgR{
     float: right;
+    background-image: url(../images/002.png);
 }
 
 /*#imageL{
