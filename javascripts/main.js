@@ -11,8 +11,8 @@ function imagesPreload(){
         j.src = "images/testAnimation/001_00" + padding(i) + ".png";
         i += 1;
         j.onload = function() {
-            console.log("Loaded");
             if (i > 23) {
+                stepText.innerHTML = "loaded";
                 return;
             };
             preload();
@@ -218,30 +218,24 @@ function changeStepJ(target) {
 aniBox2.addEventListener('webkitAnimationEnd', function(){
     if (currentStep == 1) {
         imgM.src = "images/001.png";
-        // aniBox2.style.webkitAnimation = "none";
         imgM.onload = function() {
             aniBox2.style.webkitAnimation = "none";
             imgR.src = "images/002.png";
-            console.log("here");
         };
         
     }else if (currentStep == maxStep) {
         imgM.src = "images/" + padding(currentStep) + ".png";
-        // aniBox2.style.webkitAnimation = "none";
         imgM.onload = function() {
             aniBox2.style.webkitAnimation = "none";
             imgL.src = "images/" + padding(currentStep-1) + ".png";
-            console.log("here");
         };
         
     }else {
         imgM.src = "images/" + padding(currentStep) + ".png";
-        // aniBox2.style.webkitAnimation = "none";
         imgM.onload = function() {
-        aniBox2.style.webkitAnimation = "none";
+            aniBox2.style.webkitAnimation = "none";
             imgL.src = "images/" + padding(currentStep-1) + ".png";
             imgR.src = "images/" + padding(currentStep+1) + ".png";
-            console.log("here");
         };
     };
 
