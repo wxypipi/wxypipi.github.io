@@ -81,6 +81,17 @@ function resize() {
                   // "background-size":newWidth + "px " + newWidth + "px"
     });
 
+    imgM.style.height = newWidth + "px";
+    imgM.style.width = newWidth + "px";
+    imgM.style.backgroundSize = newWidth + "px " + newWidth + "px";
+    imgL.style.height = newWidth + "px";
+    imgL.style.width = newWidth + "px";
+    imgL.style.backgroundSize = newWidth + "px " + newWidth + "px";
+    imgR.style.height = newWidth + "px";
+    imgR.style.width = newWidth + "px";
+    imgR.style.backgroundSize = newWidth + "px " + newWidth + "px";
+
+
     // $animation1.css({"height":(newWidth*8) + "px",
     //                 "width":newWidth + "px",
     //                 "top":(newWidth+marginTop) + "px",
