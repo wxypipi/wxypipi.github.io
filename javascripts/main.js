@@ -72,36 +72,20 @@ function resize() {
         var newBoxwidth = width+height*2;
         var marginTop = 0;
     };
-    
-    $aniBox2.css({"height":newWidth + "px",
-                  "width":newBoxwidth + "px",
-                  "margin-top":marginTop + "px",
-                  "left":"-" + newWidth + "px",
-                  // "background-position":moveDis + "px 0, " + "0 0, " + moveDis*2 + "px 0",
-                  // "background-size":newWidth + "px " + newWidth + "px"
-    });
-
-    imgM.style.height = newWidth + "px";
-    imgM.style.width = newWidth + "px";
-    imgM.style.backgroundSize = newWidth + "px " + newWidth + "px";
-    imgL.style.height = newWidth + "px";
-    imgL.style.width = newWidth + "px";
-    imgL.style.backgroundSize = newWidth + "px " + newWidth + "px";
-    imgR.style.height = newWidth + "px";
-    imgR.style.width = newWidth + "px";
-    imgR.style.backgroundSize = newWidth + "px " + newWidth + "px";
-
-
-    // $animation1.css({"height":(newWidth*8) + "px",
-    //                 "width":newWidth + "px",
-    //                 "top":(newWidth+marginTop) + "px",
-    //                 // "background-position":"0 0, 0 " + (newWidth*8) + "px, 0 " + (newWidth*16) + "px",
-    //                 "background-size":newWidth + "px " + (newWidth*8) + "px"
-    // });
 
     var cssAnimation = document.createElement('style');
     cssAnimation.type = 'text/css';
     var rules = document.createTextNode(
+    "#imgM,#imgL,#imgR{"+
+        "height: " + newWidth + "px;"+
+        "width: " + newWidth + "px;"+
+        "background-size: " + newWidth + "px " + newWidth + "px}"+
+    "#aniBox2{"+
+        "height: " + newWidth + "px;"+
+        "width: " + newBoxwidth + "px;"+
+        "margin-top: " + marginTop + "px;"+
+        "left: -" + newWidth + "px}"+
+
     '@-webkit-keyframes moveR {'+
     'from {-webkit-transform: translate3d(0, 0, 0)}'+
     'to {-webkit-transform: translate3d('+moveDis+'px, 0, 0)}}'+
@@ -112,7 +96,6 @@ function resize() {
     '@-webkit-keyframes animation1 {'+
     'from {-webkit-transform: translate3d(0, 0, 0)}'+
     'to {-webkit-transform: translate3d( 0, -'+(newWidth*7)+'px, 0)}}'
-
     );
     cssAnimation.appendChild(rules);
     document.getElementsByTagName("head")[0].appendChild(cssAnimation);
@@ -184,15 +167,12 @@ function changeStepJ(target) {
     if (currentStep == target) {
         return
     }else if (target == 1) {
-        // aniBox2.style.backgroundImage = "url(./images/001.png), none, url(./images/002.png)";
         imgM.style.backgroundImage = "url(images/001.png)";
         imgR.style.backgroundImage = "url(images/002.png";
     }else if (target == maxStep) {
-        // aniBox2.style.backgroundImage = "url(./images/" + padding(target) + ".png), url(./images/" + padding((target-1)) + ".png)";
         imgM.style.backgroundImage = "url(images/" + padding(target) + ".png)";
         imgL.style.backgroundImage = "url(images/" + padding(target-1) + ".png)";
     }else {
-        // aniBox2.style.backgroundImage = "url(./images/" + padding(target) + ".png), url(./images/" + padding((target-1)) + ".png), url(./images/" + padding((target+1)) + ".png)";
         imgM.style.backgroundImage = "url(images/" + padding(target) + ".png)";
         imgL.style.backgroundImage = "url(images/" + padding(target-1) + ".png)";
         imgR.style.backgroundImage = "url(images/" + padding(target+1) + ".png)";
@@ -206,23 +186,19 @@ function changeStepJ(target) {
 
 aniBox2.addEventListener('webkitAnimationEnd', function(){
     if (currentStep == 1) {
-        // aniBox2.style.backgroundImage = "url(./images/001.png), none, url(./images/002.png)";
         imgM.style.backgroundImage = "url(images/001.png)";
         aniBox2.style.webkitAnimation = "none";
         imgR.style.backgroundImage = "url(images/002.png)";
     }else if (currentStep == maxStep) {
-        // aniBox2.style.backgroundImage = "url(./images/" + padding(currentStep) + ".png), url(./images/" + padding(currentStep-1) + ".png)";
         imgM.style.backgroundImage = "url(images/" + padding(currentStep) + ".png)";
         aniBox2.style.webkitAnimation = "none";
         imgL.style.backgroundImage = "url(images/" + padding(currentStep-1) + ".png)";
     }else {
-        // aniBox2.style.backgroundImage = "url(./images/" + padding(currentStep) + ".png), url(./images/" + padding(currentStep-1) + ".png), url(./images/" + padding(currentStep+1) + ".png)";
         imgM.style.backgroundImage = "url(images/" + padding(currentStep) + ".png)";
         aniBox2.style.webkitAnimation = "none";
         imgL.style.backgroundImage = "url(images/" + padding(currentStep-1) + ".png)";
         imgR.style.backgroundImage = "url(images/" + padding(currentStep+1) + ".png)";
     };
-    // aniBox2.style.webkitAnimation = "none";
     nextGlow.style.backgroundColor = "#C6C6C6";
     previousGlow.style.backgroundColor = "#C6C6C6";
 }, false);
@@ -264,6 +240,21 @@ function btnAnimationC() {
 //     });
 
 // };
+
+function mainAnimationC() {
+    var i = 0;
+    changeImage();
+    function changeImage() {
+        imgM.style.backgroundImage = "url(images/testAnimation/001_00" + padding(i) + ".png)";
+        i += 1;
+        if (i > 23) {
+            return;
+        };
+        setTimeout(function(){
+            changeImage();
+        },30)
+    };
+};
 
 
 $(window).bind('onorientationchange resize', function() {
@@ -324,7 +315,7 @@ nextGlow.addEventListener('webkitAnimationEnd', function(){
 $aniBtn.bind('touchstart', function() { 
     if (separate) {
         btnAnimationC();
-        // mainAnimationC();
+        mainAnimationC();
     }else {
         btnAnimationS();
         // mainAnimationS();
@@ -528,6 +519,31 @@ $aniBtn.bind('touchstart', function() {
     // };
 // };
 
+    
+    // $aniBox2.css({"height":newWidth + "px",
+    //               "width":newBoxwidth + "px",
+    //               "margin-top":marginTop + "px",
+    //               "left":"-" + newWidth + "px",
+    //               // "background-position":moveDis + "px 0, " + "0 0, " + moveDis*2 + "px 0",
+    //               // "background-size":newWidth + "px " + newWidth + "px"
+    // });
 
+    // imgM.style.height = newWidth + "px";
+    // imgM.style.width = newWidth + "px";
+    // imgM.style.backgroundSize = newWidth + "px " + newWidth + "px";
+    // imgL.style.height = newWidth + "px";
+    // imgL.style.width = newWidth + "px";
+    // imgL.style.backgroundSize = newWidth + "px " + newWidth + "px";
+    // imgR.style.height = newWidth + "px";
+    // imgR.style.width = newWidth + "px";
+    // imgR.style.backgroundSize = newWidth + "px " + newWidth + "px";
+
+
+    // $animation1.css({"height":(newWidth*8) + "px",
+    //                 "width":newWidth + "px",
+    //                 "top":(newWidth+marginTop) + "px",
+    //                 // "background-position":"0 0, 0 " + (newWidth*8) + "px, 0 " + (newWidth*16) + "px",
+    //                 "background-size":newWidth + "px " + (newWidth*8) + "px"
+    // });
 
 });

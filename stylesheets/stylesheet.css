@@ -189,12 +189,7 @@ body, html{
     /*-webkit-perspective: 1000;*/
 }
 
-#imgM,#imgL,#imgR{
-    height: 20em;
-    width: 20em;
-    position: relative;
-    background-size: 20em 20em;
-}
+
 
 #imgM{
     margin: auto;
