@@ -44,6 +44,9 @@ var $mainBox = $("#mainBox"),
     aniBtn = document.getElementById("aniBtnBox"),
     $aniBox1 = $("#aniBox1"),
     $aniBox2 = $("#aniBox2"),
+    imgL = document.getElementById("imgL"),
+    imgR = document.getElementById("imgR"),
+    imgM = document.getElementById("imgM"),
     aniBox2 = document.getElementById("aniBox2"),
     stepText = document.getElementById("stepText"),
     gradient = document.getElementById("menuFooterGradient"),
@@ -74,8 +77,8 @@ function resize() {
                   "width":newBoxwidth + "px",
                   "margin-top":marginTop + "px",
                   "left":"-" + newWidth + "px",
-                  "background-position":moveDis + "px 0, " + "0 0, " + moveDis*2 + "px 0",
-                  "background-size":newWidth + "px " + newWidth + "px"
+                  // "background-position":moveDis + "px 0, " + "0 0, " + moveDis*2 + "px 0",
+                  // "background-size":newWidth + "px " + newWidth + "px"
     });
 
     // $animation1.css({"height":(newWidth*8) + "px",
@@ -170,11 +173,18 @@ function changeStepJ(target) {
     if (currentStep == target) {
         return
     }else if (target == 1) {
-        aniBox2.style.backgroundImage = "url(./images/001.png), none, url(./images/002.png)";
+        // aniBox2.style.backgroundImage = "url(./images/001.png), none, url(./images/002.png)";
+        imgM.src = "images/001.png";
+        imgR.src = "images/002.png";
     }else if (target == maxStep) {
-        aniBox2.style.backgroundImage = "url(./images/" + padding(target) + ".png), url(./images/" + padding((target-1)) + ".png)";
+        // aniBox2.style.backgroundImage = "url(./images/" + padding(target) + ".png), url(./images/" + padding((target-1)) + ".png)";
+        imgM.src = "images/" + padding(target) + ".png";
+        imgL.src = "images/" + padding(target-1) + ".png";
     }else {
-        aniBox2.style.backgroundImage = "url(./images/" + padding(target) + ".png), url(./images/" + padding((target-1)) + ".png), url(./images/" + padding((target+1)) + ".png)";
+        // aniBox2.style.backgroundImage = "url(./images/" + padding(target) + ".png), url(./images/" + padding((target-1)) + ".png), url(./images/" + padding((target+1)) + ".png)";
+        imgM.src = "images/" + padding(target) + ".png";
+        imgL.src = "images/" + padding(target-1) + ".png";
+        imgR.src = "images/" + padding(target+1) + ".png";
     };
     if (!separate) {
         btnAnimationS();
@@ -185,13 +195,23 @@ function changeStepJ(target) {
 
 aniBox2.addEventListener('webkitAnimationEnd', function(){
     if (currentStep == 1) {
-        aniBox2.style.backgroundImage = "url(./images/001.png), none, url(./images/002.png)";
+        // aniBox2.style.backgroundImage = "url(./images/001.png), none, url(./images/002.png)";
+        imgM.src = "images/001.png";
+        aniBox2.style.webkitAnimation = "none";
+        imgR.src = "images/002.png";
     }else if (currentStep == maxStep) {
-        aniBox2.style.backgroundImage = "url(./images/" + padding(currentStep) + ".png), url(./images/" + padding(currentStep-1) + ".png)";
+        // aniBox2.style.backgroundImage = "url(./images/" + padding(currentStep) + ".png), url(./images/" + padding(currentStep-1) + ".png)";
+        imgM.src = "images/" + padding(currentStep) + ".png";
+        aniBox2.style.webkitAnimation = "none";
+        imgL.src = "images/" + padding(currentStep-1) + ".png";
     }else {
-        aniBox2.style.backgroundImage = "url(./images/" + padding(currentStep) + ".png), url(./images/" + padding(currentStep-1) + ".png), url(./images/" + padding(currentStep+1) + ".png)";
+        // aniBox2.style.backgroundImage = "url(./images/" + padding(currentStep) + ".png), url(./images/" + padding(currentStep-1) + ".png), url(./images/" + padding(currentStep+1) + ".png)";
+        imgM.src = "images/" + padding(currentStep) + ".png";
+        aniBox2.style.webkitAnimation = "none";
+        imgL.src = "images/" + padding(currentStep-1) + ".png";
+        imgR.src = "images/" + padding(currentStep+1) + ".png";
     };
-    aniBox2.style.webkitAnimation = "none";
+    // aniBox2.style.webkitAnimation = "none";
     nextGlow.style.backgroundColor = "#C6C6C6";
     previousGlow.style.backgroundColor = "#C6C6C6";
 }, false);
