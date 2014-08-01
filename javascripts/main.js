@@ -1,5 +1,31 @@
 $(document).ready(function(){
 
+
+function imagesPreload(){
+     // var imgArray = new Array("path/to/img1.jpg", "path/to/img2.jpg", "path/to/img3.jpg");
+    // for (var ii=0; ii<23; ii++) {
+    var i = 0;
+    preload();
+    function preload(){
+        var j = new Image();
+        j.src = "images/testAnimation/001_00" + padding(i) + ".png";
+        i += 1;
+        j.onload = function() {
+            console.log("Loaded");
+            if (i > 23) {
+                return;
+            };
+            preload();
+        };
+    };
+
+    // };
+ };
+
+ imagesPreload();
+
+
+
 document.documentElement.style.webkitTouchCallout = "none";
 //uses document because document will be topmost level in bubbling
 $(document).on('touchmove',function(e){
@@ -236,7 +262,7 @@ function mainAnimationS() {
     var i = 23;
     changeImage();
     function changeImage() {
-        imgM.src = "./images/testAnimation/001_00" + padding(i) + ".png";
+        imgM.src = "images/testAnimation/001_00" + padding(i) + ".png";
         // imgM.src = "url(images/testAnimation/001_00" + padding(i) + ".png)";
         i -= 1;
         if (i < 0) {
@@ -252,7 +278,7 @@ function mainAnimationC() {
     var i = 0;
     changeImage();
     function changeImage() {
-        imgM.src = "./images/testAnimation/001_00" + padding(i) + ".png";
+        imgM.src = "images/testAnimation/001_00" + padding(i) + ".png";
         // imgM.src = "url(images/testAnimation/001_00" + padding(i) + ".png)";
         i += 1;
         if (i > 23) {
