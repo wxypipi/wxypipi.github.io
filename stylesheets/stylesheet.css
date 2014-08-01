@@ -184,14 +184,15 @@ body, html{
     height: 100%;
     overflow: hidden;
     /*background-image: url(../images/001.png),none,url(../images/002.png);*/
-    background-repeat: no-repeat,no-repeat,no-repeat;
-    -webkit-backface-visibility: hidden;
+    /*background-repeat: no-repeat,no-repeat,no-repeat;*/
+    /*-webkit-backface-visibility: hidden;*/
     /*-webkit-perspective: 1000;*/
 }
 
 #imgM,#imgL,#imgR{
     height: 20em;
     width: 20em;
+    position: relative;
 }
 
 #imgM{
