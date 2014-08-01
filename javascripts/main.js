@@ -81,10 +81,10 @@ function resize() {
     var cssAnimation = document.createElement('style');
     cssAnimation.type = 'text/css';
     var rules = document.createTextNode(
-    "#imgBoxM,#imgBoxL,#imgBoxR,#imgM,#imgL,#imgR{"+
+    "#imgBoxM,#imgBoxL,#imgBoxR{"+
         "height: " + newWidth + "px;"+
-        "width: " + newWidth + "px}"+
-        
+        "width: " + newWidth + "px;}"+
+        // "background-size: " + newWidth + "px " + newWidth + "px}"+
     "#aniBox2{"+
         "height: " + newWidth + "px;"+
         "width: " + newBoxwidth + "px;"+
@@ -234,25 +234,57 @@ function btnAnimationC() {
 
 function mainAnimationS() {
     var i = 23;
-    var animation = setInterval(function(){
+    changeImage();
+    function changeImage() {
         imgM.src = "./images/testAnimation/001_00" + padding(i) + ".png";
+        // imgM.src = "url(images/testAnimation/001_00" + padding(i) + ".png)";
         i -= 1;
         if (i < 0) {
-            clearInterval(animation);
+            return;
         };
-    }, 40);
+        setTimeout(function(){
+            changeImage();
+        },40)
+    };
 };
 
 function mainAnimationC() {
     var i = 0;
-    var animation = setInterval(function(){
+    changeImage();
+    function changeImage() {
         imgM.src = "./images/testAnimation/001_00" + padding(i) + ".png";
+        // imgM.src = "url(images/testAnimation/001_00" + padding(i) + ".png)";
         i += 1;
         if (i > 23) {
-            clearInterval(animation);
+            return;
         };
-    }, 40);
+        setTimeout(function(){
+            changeImage();
+        },40)
+    };
 };
+
+// function mainAnimationS() {
+//     var i = 23;
+//     var animation = setInterval(function(){
+//         imgM.src = "./images/testAnimation/001_00" + padding(i) + ".png";
+//         i -= 1;
+//         if (i < 0) {
+//             clearInterval(animation);
+//         };
+//     }, 40);
+// };
+
+// function mainAnimationC() {
+//     var i = 0;
+//     var animation = setInterval(function(){
+//         imgM.src = "./images/testAnimation/001_00" + padding(i) + ".png";
+//         i += 1;
+//         if (i > 23) {
+//             clearInterval(animation);
+//         };
+//     }, 40);
+// };
 
 
 $(window).bind('onorientationchange resize', function() {
