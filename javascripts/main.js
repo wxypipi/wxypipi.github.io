@@ -232,59 +232,59 @@ function btnAnimationC() {
     separate = false;
 };
 
-// function mainAnimationS() {
-//     var i = 23;
-//     changeImage();
-//     function changeImage() {
-//         imgM.src = "./images/testAnimation/001_00" + padding(i) + ".png";
-//         // imgM.src = "url(images/testAnimation/001_00" + padding(i) + ".png)";
-//         i -= 1;
-//         if (i < 0) {
-//             return;
-//         };
-//         setTimeout(function(){
-//             changeImage();
-//         },40)
-//     };
-// };
-
-// function mainAnimationC() {
-//     var i = 0;
-//     changeImage();
-//     function changeImage() {
-//         imgM.src = "./images/testAnimation/001_00" + padding(i) + ".png";
-//         // imgM.src = "url(images/testAnimation/001_00" + padding(i) + ".png)";
-//         i += 1;
-//         if (i > 23) {
-//             return;
-//         };
-//         setTimeout(function(){
-//             changeImage();
-//         },40)
-//     };
-// };
-
 function mainAnimationS() {
     var i = 23;
-    var a = setInterval(function(){
+    changeImage();
+    function changeImage() {
         imgM.src = "./images/testAnimation/001_00" + padding(i) + ".png";
+        // imgM.src = "url(images/testAnimation/001_00" + padding(i) + ".png)";
         i -= 1;
         if (i < 0) {
-            clearInterval(a);
+            return;
         };
-    }, 40);
+        setTimeout(function(){
+            changeImage();
+        },40)
+    };
 };
 
 function mainAnimationC() {
     var i = 0;
-    var a = setInterval(function(){
+    changeImage();
+    function changeImage() {
         imgM.src = "./images/testAnimation/001_00" + padding(i) + ".png";
+        // imgM.src = "url(images/testAnimation/001_00" + padding(i) + ".png)";
         i += 1;
         if (i > 23) {
-            clearInterval(a);
+            return;
         };
-    }, 40);
+        setTimeout(function(){
+            changeImage();
+        },40)
+    };
 };
+
+// function mainAnimationS() {
+//     var i = 23;
+//     var a = setInterval(function(){
+//         imgM.src = "./images/testAnimation/001_00" + padding(i) + ".png";
+//         i -= 1;
+//         if (i < 0) {
+//             clearInterval(a);
+//         };
+//     }, 40);
+// };
+
+// function mainAnimationC() {
+//     var i = 0;
+//     var a = setInterval(function(){
+//         imgM.src = "./images/testAnimation/001_00" + padding(i) + ".png";
+//         i += 1;
+//         if (i > 23) {
+//             clearInterval(a);
+//         };
+//     }, 40);
+// };
 
 
 $(window).bind('onorientationchange resize', function() {
