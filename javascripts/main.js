@@ -219,21 +219,32 @@ aniBox2.addEventListener('webkitAnimationEnd', function(){
     if (currentStep == 1) {
         imgM.src = "images/001.png";
         // aniBox2.style.webkitAnimation = "none";
-        imgR.src = "images/002.png";
+        imgM.onload = function() {
+            aniBox2.style.webkitAnimation = "none";
+            imgR.src = "images/002.png";
+            console.log("here");
+        };
+        
     }else if (currentStep == maxStep) {
         imgM.src = "images/" + padding(currentStep) + ".png";
         // aniBox2.style.webkitAnimation = "none";
-        imgL.src = "images/" + padding(currentStep-1) + ".png";
+        imgM.onload = function() {
+            aniBox2.style.webkitAnimation = "none";
+            imgL.src = "images/" + padding(currentStep-1) + ".png";
+            console.log("here");
+        };
+        
     }else {
         imgM.src = "images/" + padding(currentStep) + ".png";
         // aniBox2.style.webkitAnimation = "none";
-        imgL.src = "images/" + padding(currentStep-1) + ".png";
-        imgR.src = "images/" + padding(currentStep+1) + ".png";
-    };
-    imgM.onload = function() {
+        imgM.onload = function() {
         aniBox2.style.webkitAnimation = "none";
-        console.log("here");
+            imgL.src = "images/" + padding(currentStep-1) + ".png";
+            imgR.src = "images/" + padding(currentStep+1) + ".png";
+            console.log("here");
+        };
     };
+
     nextGlow.style.backgroundColor = "#C6C6C6";
     previousGlow.style.backgroundColor = "#C6C6C6";
 }, false);
