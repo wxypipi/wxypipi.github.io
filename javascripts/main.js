@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+document.documentElement.style.webkitTouchCallout = "none";
 //uses document because document will be topmost level in bubbling
 $(document).on('touchmove',function(e){
   e.preventDefault();
@@ -47,6 +48,9 @@ var $mainBox = $("#mainBox"),
     imgL = document.getElementById("imgL"),
     imgR = document.getElementById("imgR"),
     imgM = document.getElementById("imgM"),
+    // imgBoxL = document.getElementById("imgBoxL"),
+    // imgBoxR = document.getElementById("imgBoxR"),
+    // imgBoxM = document.getElementById("imgBoxM"),
     testImg = document.getElementById("testImg"),
     aniBox2 = document.getElementById("aniBox2"),
     stepText = document.getElementById("stepText"),
@@ -77,10 +81,10 @@ function resize() {
     var cssAnimation = document.createElement('style');
     cssAnimation.type = 'text/css';
     var rules = document.createTextNode(
-    "#imgM,#imgL,#imgR{"+
+    "#imgBoxM,#imgBoxL,#imgBoxR{"+
         "height: " + newWidth + "px;"+
-        "width: " + newWidth + "px;"+
-        "background-size: " + newWidth + "px " + newWidth + "px}"+
+        "width: " + newWidth + "px;}"+
+        // "background-size: " + newWidth + "px " + newWidth + "px}"+
     "#aniBox2{"+
         "height: " + newWidth + "px;"+
         "width: " + newBoxwidth + "px;"+
@@ -168,15 +172,15 @@ function changeStepJ(target) {
     if (currentStep == target) {
         return
     }else if (target == 1) {
-        imgM.style.backgroundImage = "url(images/001.png)";
-        imgR.style.backgroundImage = "url(images/002.png";
+        imgM.src = "images/001.png";
+        imgR.src = "images/002.png";
     }else if (target == maxStep) {
-        imgM.style.backgroundImage = "url(images/" + padding(target) + ".png)";
-        imgL.style.backgroundImage = "url(images/" + padding(target-1) + ".png)";
+        imgM.src = "images/" + padding(target) + ".png";
+        imgL.src = "images/" + padding(target-1) + ".png";
     }else {
-        imgM.style.backgroundImage = "url(images/" + padding(target) + ".png)";
-        imgL.style.backgroundImage = "url(images/" + padding(target-1) + ".png)";
-        imgR.style.backgroundImage = "url(images/" + padding(target+1) + ".png)";
+        imgM.src = "images/" + padding(target) + ".png";
+        imgL.src = "images/" + padding(target-1) + ".png";
+        imgR.src = "images/" + padding(target+1) + ".png";
     };
     if (!separate) {
         btnAnimationS();
@@ -187,18 +191,18 @@ function changeStepJ(target) {
 
 aniBox2.addEventListener('webkitAnimationEnd', function(){
     if (currentStep == 1) {
-        imgM.style.backgroundImage = "url(images/001.png)";
+        imgM.src = "images/001.png";
         aniBox2.style.webkitAnimation = "none";
-        imgR.style.backgroundImage = "url(images/002.png)";
+        imgR.src = "images/002.png";
     }else if (currentStep == maxStep) {
-        imgM.style.backgroundImage = "url(images/" + padding(currentStep) + ".png)";
+        imgM.src = "images/" + padding(currentStep) + ".png";
         aniBox2.style.webkitAnimation = "none";
-        imgL.style.backgroundImage = "url(images/" + padding(currentStep-1) + ".png)";
+        imgL.src = "images/" + padding(currentStep-1) + ".png";
     }else {
-        imgM.style.backgroundImage = "url(images/" + padding(currentStep) + ".png)";
+        imgM.src = "images/" + padding(currentStep) + ".png";
         aniBox2.style.webkitAnimation = "none";
-        imgL.style.backgroundImage = "url(images/" + padding(currentStep-1) + ".png)";
-        imgR.style.backgroundImage = "url(images/" + padding(currentStep+1) + ".png)";
+        imgL.src = "images/" + padding(currentStep-1) + ".png";
+        imgR.src = "images/" + padding(currentStep+1) + ".png";
     };
     nextGlow.style.backgroundColor = "#C6C6C6";
     previousGlow.style.backgroundColor = "#C6C6C6";
@@ -228,34 +232,35 @@ function btnAnimationC() {
     separate = false;
 };
 
-// function mainAnimationS() {
-//     $animation1.css("-webkit-animation","none");
-// };
-
-// function mainAnimationC() {
-//     $animation1.css("-webkit-animation","animation1 0.3s forwards steps(7)");
-//     $animation1.bind('webkitAnimationEnd', function() {
-//         $animation1.css("background-image","url(./images/1_2.png)");
-//         $animation1.css("-webkit-animation","none");
-//         $animation1.unbind();
-//     });
-
-// };
+function mainAnimationS() {
+    var i = 23;
+    changeImage();
+    function changeImage() {
+        imgM.src = "./images/testAnimation/001_00" + padding(i) + ".png";
+        // imgM.src = "url(images/testAnimation/001_00" + padding(i) + ".png)";
+        i -= 1;
+        if (i < 0) {
+            return;
+        };
+        setTimeout(function(){
+            changeImage();
+        },50)
+    };
+};
 
 function mainAnimationC() {
     var i = 0;
-
     changeImage();
     function changeImage() {
-        testImg.src = "./images/testAnimation/001_00" + padding(i) + ".png";
-        // imgM.style.backgroundImage = "url(images/testAnimation/001_00" + padding(i) + ".png)";
+        imgM.src = "./images/testAnimation/001_00" + padding(i) + ".png";
+        // imgM.src = "url(images/testAnimation/001_00" + padding(i) + ".png)";
         i += 1;
         if (i > 23) {
             return;
         };
         setTimeout(function(){
             changeImage();
-        },30)
+        },50)
     };
 };
 
@@ -321,7 +326,7 @@ $aniBtn.bind('touchstart', function() {
         mainAnimationC();
     }else {
         btnAnimationS();
-        // mainAnimationS();
+        mainAnimationS();
     };
 });
 
