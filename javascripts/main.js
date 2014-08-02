@@ -1,28 +1,24 @@
 $(document).ready(function(){
 
 
-function imagesPreload(){
-     // var imgArray = new Array("path/to/img1.jpg", "path/to/img2.jpg", "path/to/img3.jpg");
-    // for (var ii=0; ii<23; ii++) {
-    var i = 0;
-    preload();
-    function preload(){
-        var j = new Image();
-        j.src = "images/testAnimation/001_00" + padding(i) + ".png";
-        i += 1;
-        j.onload = function() {
-            if (i > 23) {
-                stepText.innerHTML = "loaded";
-                return;
-            };
-            preload();
-        };
-    };
+// function imagesPreload(){
+//     var i = 0;
+//     preload();
+//     function preload(){
+//         var j = new Image();
+//         j.src = "images/testAnimation/001_00" + padding(i) + ".png";
+//         i += 1;
+//         j.onload = function() {
+//             if (i > 23) {
+//                 stepText.innerHTML = "loaded";
+//                 return;
+//             };
+//             preload();
+//         };
+//     };
+//  };
 
-    // };
- };
-
- imagesPreload();
+//  imagesPreload();
 
 
 
@@ -50,6 +46,7 @@ $('body').on('touchmove','.scrollable',function(e) {
 var $mainBox = $("#mainBox"),
     $menuBox = $("#menuBox"),
     $mainMask = $("#mainMask"),
+    mask = document.getElementById("mask"),
     mainBox = document.getElementById("mainBox"),
     menuBox = document.getElementById("menuBox"),
     mainMask = document.getElementById("mainMask"),
@@ -171,6 +168,7 @@ function selectStep(item) {
 function changeStepN() {
     if (currentStep == maxStep) {
         nextGlow.style.backgroundColor = "#FF9D82";
+        mask.style.display = "none";
         return
     };
     aniBox2.style.webkitAnimation = "moveL 0.3s forwards ease-in-out";
@@ -184,6 +182,7 @@ function changeStepN() {
 function changeStepP() {
     if (currentStep == 1) {
         previousGlow.style.backgroundColor = "#FF9D82";
+        mask.style.display = "none";
         return
     };
     aniBox2.style.webkitAnimation = "moveR 0.3s forwards ease-in-out";
@@ -218,25 +217,38 @@ function changeStepJ(target) {
 aniBox2.addEventListener('webkitAnimationEnd', function(){
     if (currentStep == 1) {
         imgM.src = "images/001.png";
-        imgM.onload = function() {
+        setTimeout(function(){
             aniBox2.style.webkitAnimation = "none";
-            imgR.src = "images/002.png";
-        };
-        
+            console.log("now!");
+            setTimeout(function(){
+                imgR.src = "images/002.png";
+                console.log("now!!!");
+                mask.style.display = "none";
+            },25);
+        },25);
     }else if (currentStep == maxStep) {
         imgM.src = "images/" + padding(currentStep) + ".png";
-        imgM.onload = function() {
+        setTimeout(function(){
             aniBox2.style.webkitAnimation = "none";
-            imgL.src = "images/" + padding(currentStep-1) + ".png";
-        };
-        
+            console.log("now!");
+            setTimeout(function(){
+                imgL.src = "images/" + padding(currentStep-1) + ".png";
+                console.log("now!!!");
+                mask.style.display = "none";
+            },25);  
+        },25);      
     }else {
         imgM.src = "images/" + padding(currentStep) + ".png";
-        imgM.onload = function() {
+        setTimeout(function(){
             aniBox2.style.webkitAnimation = "none";
-            imgL.src = "images/" + padding(currentStep-1) + ".png";
-            imgR.src = "images/" + padding(currentStep+1) + ".png";
-        };
+            console.log("now!");
+            setTimeout(function(){
+                imgL.src = "images/" + padding(currentStep-1) + ".png";
+                imgR.src = "images/" + padding(currentStep+1) + ".png";
+                console.log("now!!!");
+                mask.style.display = "none";
+            },25);  
+        },25);
     };
 
     nextGlow.style.backgroundColor = "#C6C6C6";
@@ -355,6 +367,7 @@ $contentsItem.bind('touchend', function() {
 });
 
 $previousBtn.bind('touchstart', function() { 
+    mask.style.display = "block";
     previousGlow.style.webkitAnimation = "glow 0.3s linear";
     changeStepP();
 });
@@ -363,12 +376,8 @@ previousGlow.addEventListener('webkitAnimationEnd', function(){
     previousGlow.style.webkitAnimation = "none";
 }, false);
 
-// gradient.addEventListener('touchstart', function(){
-//     gradient.style.display = "none";
-// }, false);
-
-
 $nextBtn.bind('touchstart', function() { 
+    mask.style.display = "block";
     nextGlow.style.webkitAnimation = "glow 0.3s linear";
     changeStepN();
 });
