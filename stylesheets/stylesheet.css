@@ -74,18 +74,30 @@ body, html{
 #mainHeader{
     height: 3em;
     top: 0;
-    background-color: #65B89C;
-    text-align: left;
+    background-color: #78A9BB;
+    text-align: center;
 }
 
 #headerText{
     height: 3em;
     line-height: 3em;
-    float: left;
+    margin: auto;
+    /*margin-right: 1em;*/
+    /*float: left;*/
 }
 
 #headerText span{
     font-size: 0.5em;
+}
+
+#menuBtn{
+    height: 48px;
+    width: 50px;
+    background: url(../images/menuBtn.png);
+    background-size: 50px 48px;
+    /*background-color: #65B89C;*/
+    float: left;
+    position: absolute;
 }
 
 #mainFooter{
@@ -169,14 +181,7 @@ body, html{
 }*/
 
 
-#menuBtn{
-    height: 3em;
-    width: 1.5em;
-    background: url(menu.svg);
-    background-size: 3em 3em;
-    /*background-color: #65B89C;*/
-    float: left;
-}
+
 
 #aniBox1{
     width: 100%;
@@ -278,7 +283,7 @@ body, html{
     width: 15em;
     height: 100%;
     float: left;
-    background-color: #63666E;
+    background-color: #4A5260;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     -webkit-transform: translateZ(0);
@@ -365,17 +370,17 @@ body, html{
 #menuFooter{
     height: 55px;
     width: 100%;
-    background-color: #54575E;
+    background-color: #4A5260;
     position: absolute;
     bottom: 0;
     /*box-shadow: 0 0 3em 1.5em #54575E;*/
 }
 
 #menuFooterGradient{
-    height: 60px;
+    height: 25px;
     width: 100%;
     background-image: url(../images/menuFooterGradient.png);
-    background-size: 1px 60px;
+    background-size: 1px 25px;
     position: fixed;
     bottom: 54px;
     pointer-events: none;
@@ -392,8 +397,8 @@ body, html{
     float: left;
     width: 5em;
     height: 100%;
-    background-size: 30px 30px;
-    background-position: 25px 0;
+    background-image: url(../images/menuFooterIcons.png);
+    background-size: 240px 55px;
     background-repeat: no-repeat;
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-transition: opacity 0.2s linear;
@@ -411,16 +416,16 @@ body, html{
 
 #contentsBtn{
     /*box-shadow: 0 -0.25em #FF8164 inset;*/
-    background-image: url(../images/contentsBtn.png);
+    background-position: 0 0;
 }
 
 #searchBtn{
-    background-image: url(../images/searchBtn.png);
+    background-position: -80px 0;
     opacity: 0.8;
 }
 
 #settingBtn{
-    background-image: url(../images/settingBtn.png);
+    background-position: -160px 0;
     opacity: 0.8;
 }
 

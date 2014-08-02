@@ -219,36 +219,36 @@ aniBox2.addEventListener('webkitAnimationEnd', function(){
         imgM.src = "images/001.png";
         setTimeout(function(){
             aniBox2.style.webkitAnimation = "none";
-            console.log("now!");
+            // console.log("now!");
             setTimeout(function(){
                 imgR.src = "images/002.png";
-                console.log("now!!!");
+                // console.log("now!!!");
                 mask.style.display = "none";
-            },25);
-        },25);
+            },10);
+        },20);
     }else if (currentStep == maxStep) {
         imgM.src = "images/" + padding(currentStep) + ".png";
         setTimeout(function(){
             aniBox2.style.webkitAnimation = "none";
-            console.log("now!");
+            // console.log("now!");
             setTimeout(function(){
                 imgL.src = "images/" + padding(currentStep-1) + ".png";
-                console.log("now!!!");
+                // console.log("now!!!");
                 mask.style.display = "none";
-            },25);  
-        },25);      
+            },10);  
+        },20);      
     }else {
         imgM.src = "images/" + padding(currentStep) + ".png";
         setTimeout(function(){
             aniBox2.style.webkitAnimation = "none";
-            console.log("now!");
+            // console.log("now!");
             setTimeout(function(){
                 imgL.src = "images/" + padding(currentStep-1) + ".png";
                 imgR.src = "images/" + padding(currentStep+1) + ".png";
-                console.log("now!!!");
+                // console.log("now!!!");
                 mask.style.display = "none";
-            },25);  
-        },25);
+            },10);  
+        },20);
     };
 
     nextGlow.style.backgroundColor = "#C6C6C6";
