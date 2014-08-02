@@ -222,6 +222,12 @@ body, html{
     /*background-image: url(../images/002.png);*/
 }
 
+#mainAnimation{
+    position: relative;
+    margin: auto;
+    -webkit-transform: translate3d(0,0,0);
+}
+
 /*#imageL{
     position: absolute;
     left: 0;

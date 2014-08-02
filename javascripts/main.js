@@ -74,8 +74,8 @@ var $mainBox = $("#mainBox"),
     // imgBoxL = document.getElementById("imgBoxL"),
     // imgBoxR = document.getElementById("imgBoxR"),
     // imgBoxM = document.getElementById("imgBoxM"),
-    testImg = document.getElementById("testImg"),
     aniBox2 = document.getElementById("aniBox2"),
+    mainAnimation = document.getElementById("mainAnimation"),
     stepText = document.getElementById("stepText"),
     gradient = document.getElementById("menuFooterGradient"),
     // $animation1 = $("#animation1"),
@@ -104,7 +104,7 @@ function resize() {
     var cssAnimation = document.createElement('style');
     cssAnimation.type = 'text/css';
     var rules = document.createTextNode(
-    "#imgBoxM,#imgBoxL,#imgBoxR,#imgM,#imgL,#imgR{"+
+    "#imgBoxM,#imgBoxL,#imgBoxR,#imgM,#imgL,#imgR,#mainAnimation{"+
         "height: " + newWidth + "px;"+
         "width: " + newWidth + "px;}"+
         // "background-size: " + newWidth + "px " + newWidth + "px}"+
@@ -114,16 +114,29 @@ function resize() {
         "margin-top: " + marginTop + "px;"+
         "left: -" + newWidth + "px}"+
 
+    "#mainAni1,#mainAni2,#mainAni3{"+
+        "height: " + newWidth*8 + "px;"+
+        "width: " + newWidth + "px;"+
+        "z-index: 100}"+
+
+    "#mainAnimation{"+
+        "top: " + (marginTop + newWidth) + "px}"+
+        // "float: left}"+
+
     '@-webkit-keyframes moveR {'+
     'from {-webkit-transform: translate3d(0, 0, 0)}'+
     'to {-webkit-transform: translate3d('+moveDis+'px, 0, 0)}}'+
     '@-webkit-keyframes moveL {'+
     'from {-webkit-transform: translate3d(0, 0, 0)}'+
-    'to {-webkit-transform: translate3d(-'+moveDis+'px, 0, 0)}}'
-    +
+    'to {-webkit-transform: translate3d(-'+moveDis+'px, 0, 0)}}'+
+
     '@-webkit-keyframes animation1 {'+
     'from {-webkit-transform: translate3d(0, 0, 0)}'+
-    'to {-webkit-transform: translate3d( 0, -'+(newWidth*7)+'px, 0)}}'
+    'to {-webkit-transform: translate3d( 0, -'+(newWidth*7)+'px, 0)}}'+
+
+    '@-webkit-keyframes mainAnimation {'+
+    'from {-webkit-transform: translate3d(0, 0, 0)}'+
+    'to {-webkit-transform: translate3d( 0, -'+(newWidth*23)+'px, 0)}}'
     );
     cssAnimation.appendChild(rules);
     document.getElementsByTagName("head")[0].appendChild(cssAnimation);
@@ -334,6 +347,14 @@ function mainAnimationC() {
 };
 
 
+function mainAnimationC2() {
+    mainAnimation.style.webkitAnimation = "mainAnimation 1s forwards steps(23)";
+};
+
+function mainAnimationS2() {
+    mainAnimation.style.webkitAnimation = "none";
+};
+
 $(window).bind('onorientationchange resize', function() {
     resize();
 });
@@ -389,10 +410,10 @@ nextGlow.addEventListener('webkitAnimationEnd', function(){
 $aniBtn.bind('touchstart', function() { 
     if (separate) {
         btnAnimationC();
-        mainAnimationC();
+        mainAnimationC2();
     }else {
         btnAnimationS();
-        mainAnimationS();
+        mainAnimationS2();
     };
 });
 
