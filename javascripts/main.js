@@ -270,6 +270,7 @@ aniBox2.addEventListener('webkitAnimationEnd', function(){
         previousGlow.style.backgroundColor = "#C6C6C6";
     }else{
         isChangeStep = true;
+        imgM.src = "images/" + padding(currentStep) + ".png";
         imgM.style.webkitAnimation = "none";
     };
 }, false);
