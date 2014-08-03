@@ -137,7 +137,7 @@ function resize() {
 
     '@-webkit-keyframes mainAnimation {'+
     'from {-webkit-transform: translate3d(0, 0, 0)}'+
-    'to {-webkit-transform: translate3d( 0, -'+(newWidth*23)+'px, 0)}}'
+    'to {-webkit-transform: translate3d( 0, -'+(newWidth*19)+'px, 0)}}'
     );
     cssAnimation.appendChild(rules);
     document.getElementsByTagName("head")[0].appendChild(cssAnimation);
@@ -270,7 +270,7 @@ aniBox2.addEventListener('webkitAnimationEnd', function(){
         previousGlow.style.backgroundColor = "#C6C6C6";
     }else{
         isChangeStep = true;
-        imgM.src = "images/" + padding(currentStep) + ".png";
+        imgM.src = "images/" + padding(currentStep) + "_end.png";
         imgM.style.webkitAnimation = "none";
     };
 }, false);
@@ -381,7 +381,7 @@ function mainAnimationC2() {
     isChangeStep = false;
     imgM.style.height = "auto";
     imgM.src = "images/mainAnimationTest.png";
-    imgM.style.webkitAnimation = "mainAnimation 1s forwards steps(23)";
+    imgM.style.webkitAnimation = "mainAnimation 0.75s steps(19)";
     
 };
 
@@ -447,7 +447,7 @@ $aniBtn.bind('touchstart', function() {
         mainAnimationC2();
     }else {
         btnAnimationS();
-        mainAnimationS2();
+        // mainAnimationS2();
     };
 });
 
