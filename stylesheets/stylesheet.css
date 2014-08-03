@@ -210,6 +210,7 @@ body, html{
 
 #imgBoxM{
     margin: auto;
+    position: relative;
     /*background-image: url(../images/001.png);*/
 }
 
