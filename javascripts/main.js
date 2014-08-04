@@ -286,7 +286,7 @@ aniBox2.addEventListener('webkitAnimationEnd', function(){
         setTimeout(function(){
             // imgAnimation.style.display = "none";
             imgAnimation.style.webkitAnimation = "none";
-        },30); 
+        },300); 
     };
 }, false);
 
@@ -339,13 +339,13 @@ function mainAnimationC() {
 function mainAnimationC2() {
     isChangeStep = false;
     // imgAnimation.style.display = "block";
-    imgAnimation.style.webkitAnimation = "mainAnimation 0.75s forwards steps(19)";
+    imgAnimation.style.webkitAnimation = "mainAnimation 0.5s forwards steps(19)";
 };
 
 function mainAnimationS2() {
     isChangeStep = false;
     // imgAnimation.style.display = "block";
-    imgAnimation.style.webkitAnimation = "mainAnimation 0.75s reverse forwards steps(19)";
+    imgAnimation.style.webkitAnimation = "mainAnimation 0.5s reverse forwards steps(19)";
 };
 
 // function mainAnimationS2() {
