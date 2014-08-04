@@ -109,6 +109,11 @@ function resize() {
     "#imgBoxM,#imgBoxL,#imgBoxR,#imgM,#imgL,#imgR,#mainAnimation{"+
         "height: " + newWidth + "px;"+
         "width: " + newWidth + "px;}"+
+
+    "#imgM{"+
+        "height: auto;"+
+        "position: relative;"+
+        "bottom: 0}"+
         // "background-size: " + newWidth + "px " + newWidth + "px}"+
     "#aniBox2{"+
         "height: " + newWidth + "px;"+
@@ -328,16 +333,22 @@ function mainAnimationC() {
 
 function mainAnimationC2() {
     isChangeStep = false;
-    imgM.style.height = "auto";
+    // imgM.style.height = "auto";
     imgM.src = "images/mainAnimationTest.png";
-    imgM.style.webkitAnimation = "mainAnimation 0.75s steps(19)";
+    setTimeout(function(){
+        imgM.style.webkitAnimation = "mainAnimation 0.75s steps(19)";
+    },200);
 };
 
 function mainAnimationS2() {
     isChangeStep = false;
-    imgM.style.height = "auto";
+    // imgM.style.height = "auto";
     imgM.src = "images/mainAnimationTest.png";
-    imgM.style.webkitAnimation = "mainAnimation 0.75s reverse steps(19)";
+    imgM.style.webkitTransform = "translate3d(0, -" + (newWidth*19) +"px, 0)"
+    setTimeout(function(){
+        imgM.style.webkitAnimation = "mainAnimation 0.75s reverse steps(19)";
+        imgM.style.webkitTransform = "none";
+    },200); 
 };
 
 $(window).bind('onorientationchange resize', function() {

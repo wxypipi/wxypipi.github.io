@@ -204,10 +204,6 @@ body, html{
     /*-webkit-perspective: 1000;*/
 }
 
-#imgM{
-    -webkit-transform: translate3d(0,0,0);
-}
-
 #imgBoxM{
     margin: auto;
     position: relative;
