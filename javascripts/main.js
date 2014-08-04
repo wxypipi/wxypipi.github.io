@@ -345,7 +345,7 @@ function mainAnimationC2() {
 function mainAnimationS2() {
     isChangeStep = false;
     // imgAnimation.style.display = "block";
-    imgAnimation.style.webkitAnimation = "mainAnimation 0.5s reverse forwards steps(19)";
+    imgAnimation.style.webkitAnimation = "mainAnimation 0.5s forwards reverse steps(19)";
 };
 
 // function mainAnimationS2() {
