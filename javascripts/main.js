@@ -1,24 +1,25 @@
 $(document).ready(function(){
 
 
-// function imagesPreload(){
-//     var i = 0;
-//     preload();
-//     function preload(){
-//         var j = new Image();
-//         j.src = "images/testAnimation/001_00" + padding(i) + ".png";
-//         i += 1;
-//         j.onload = function() {
-//             if (i > 23) {
-//                 stepText.innerHTML = "loaded";
-//                 return;
-//             };
-//             preload();
-//         };
-//     };
-//  };
+function imagesPreload(){
+    var images = ["images/001.png","images/mainAnimationTest.png","images/001_end.png"];
+    var i = 0;
+    preload();
+    function preload(){
+        var j = new Image();
+        j.src = images[i];
+        i += 1;
+        j.onload = function() {
+            if (i == 3) {
+                stepText.innerHTML = "loaded";
+                return;
+            };
+            preload();
+        };
+    };
+ };
 
-//  imagesPreload();
+ imagesPreload();
 
 
 
@@ -270,7 +271,11 @@ aniBox2.addEventListener('webkitAnimationEnd', function(){
         previousGlow.style.backgroundColor = "#C6C6C6";
     }else{
         isChangeStep = true;
-        imgM.src = "images/001_end.png";
+        if (separate) {
+            imgM.src = "images/001.png";
+        }else{
+            imgM.src = "images/001_end.png";
+        };
         imgM.style.webkitAnimation = "none";
     };
 }, false);
@@ -299,38 +304,6 @@ function btnAnimationC() {
     separate = false;
 };
 
-// function mainAnimationS() {
-//     var i = 23;
-//     changeImage();
-//     function changeImage() {
-//         imgM.src = "images/testAnimation/001_00" + padding(i) + ".png";
-//         // imgM.src = "url(images/testAnimation/001_00" + padding(i) + ".png)";
-//         i -= 1;
-//         if (i < 0) {
-//             return;
-//         };
-//         setTimeout(function(){
-//             changeImage();
-//         },40)
-//     };
-// };
-
-// function mainAnimationC() {
-//     var i = 0;
-//     changeImage();
-//     function changeImage() {
-//         imgM.src = "images/testAnimation/001_00" + padding(i) + ".png";
-//         // imgM.src = "url(images/testAnimation/001_00" + padding(i) + ".png)";
-//         i += 1;
-//         if (i > 23) {
-//             return;
-//         };
-//         setTimeout(function(){
-//             changeImage();
-//         },40)
-//     };
-// };
-
 function mainAnimationS() {
     var i = 23;
     var a = setInterval(function(){
@@ -353,40 +326,18 @@ function mainAnimationC() {
     }, 40);
 };
 
-
-// function mainAnimationC2() {
-//     imgM.style.height = "auto";
-//     imgM.src = "images/1_1.png";
-//     var i = 0;
-//     var j = 0;
-//     var a = setInterval(function(){
-//         imgM.style.webkitTransform = "translate3d(0,-" + i*newWidth + "px,0)";
-//         i += 1;
-//         if (i == 7) {
-//             imgM.src = "images/1_2.png";
-//             imgM.style.top = String(-newWidth*8);
-//         };
-//         if (i == 15) {
-//             imgM.src = "images/1_3.png";
-//             imgM.style.top = String(-newWidth*16);
-//         };
-//         if (i == 23) {
-//             clearInterval(a);
-//         };
-//     }, 30);
-// };
-
-
 function mainAnimationC2() {
     isChangeStep = false;
     imgM.style.height = "auto";
     imgM.src = "images/mainAnimationTest.png";
     imgM.style.webkitAnimation = "mainAnimation 0.75s steps(19)";
-    
 };
 
 function mainAnimationS2() {
-    imgM.style.webkitAnimation = "none";
+    isChangeStep = false;
+    imgM.style.height = "auto";
+    imgM.src = "images/mainAnimationTest.png";
+    imgM.style.webkitAnimation = "mainAnimation 0.75s reverse steps(19)";
 };
 
 $(window).bind('onorientationchange resize', function() {
@@ -447,7 +398,7 @@ $aniBtn.bind('touchstart', function() {
         mainAnimationC2();
     }else {
         btnAnimationS();
-        // mainAnimationS2();
+        mainAnimationS2();
     };
 });
 
@@ -674,5 +625,59 @@ $aniBtn.bind('touchstart', function() {
     //                 // "background-position":"0 0, 0 " + (newWidth*8) + "px, 0 " + (newWidth*16) + "px",
     //                 "background-size":newWidth + "px " + (newWidth*8) + "px"
     // });
+
+// function mainAnimationS() {
+//     var i = 23;
+//     changeImage();
+//     function changeImage() {
+//         imgM.src = "images/testAnimation/001_00" + padding(i) + ".png";
+//         // imgM.src = "url(images/testAnimation/001_00" + padding(i) + ".png)";
+//         i -= 1;
+//         if (i < 0) {
+//             return;
+//         };
+//         setTimeout(function(){
+//             changeImage();
+//         },40)
+//     };
+// };
+
+// function mainAnimationC() {
+//     var i = 0;
+//     changeImage();
+//     function changeImage() {
+//         imgM.src = "images/testAnimation/001_00" + padding(i) + ".png";
+//         // imgM.src = "url(images/testAnimation/001_00" + padding(i) + ".png)";
+//         i += 1;
+//         if (i > 23) {
+//             return;
+//         };
+//         setTimeout(function(){
+//             changeImage();
+//         },40)
+//     };
+// };
+
+// function mainAnimationC2() {
+//     imgM.style.height = "auto";
+//     imgM.src = "images/1_1.png";
+//     var i = 0;
+//     var j = 0;
+//     var a = setInterval(function(){
+//         imgM.style.webkitTransform = "translate3d(0,-" + i*newWidth + "px,0)";
+//         i += 1;
+//         if (i == 7) {
+//             imgM.src = "images/1_2.png";
+//             imgM.style.top = String(-newWidth*8);
+//         };
+//         if (i == 15) {
+//             imgM.src = "images/1_3.png";
+//             imgM.style.top = String(-newWidth*16);
+//         };
+//         if (i == 23) {
+//             clearInterval(a);
+//         };
+//     }, 30);
+// };
 
 });
