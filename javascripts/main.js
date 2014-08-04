@@ -123,25 +123,12 @@ function resize() {
         "margin-top: " + marginTop + "px;"+
         "left: -" + newWidth + "px}"+
 
-    "#mainAni1,#mainAni2,#mainAni3{"+
-        "height: " + newWidth*8 + "px;"+
-        "width: " + newWidth + "px;"+
-        "z-index: 100}"+
-
-    "#mainAnimation{"+
-        "top: " + (marginTop + newWidth) + "px}"+
-        // "float: left}"+
-
     '@-webkit-keyframes moveR {'+
     'from {-webkit-transform: translate3d(0, 0, 0)}'+
     'to {-webkit-transform: translate3d('+moveDis+'px, 0, 0)}}'+
     '@-webkit-keyframes moveL {'+
     'from {-webkit-transform: translate3d(0, 0, 0)}'+
     'to {-webkit-transform: translate3d(-'+moveDis+'px, 0, 0)}}'+
-
-    '@-webkit-keyframes animation1 {'+
-    'from {-webkit-transform: translate3d(0, 0, 0)}'+
-    'to {-webkit-transform: translate3d( 0, -'+(newWidth*7)+'px, 0)}}'+
 
     '@-webkit-keyframes mainAnimationC {'+
     'from {-webkit-transform: translate3d(0, -'+newWidth+'px, 0)}'+
@@ -288,9 +275,9 @@ aniBox2.addEventListener('webkitAnimationEnd', function(){
             imgM.src = "images/001_end.png";
         };
         setTimeout(function(){
-            // imgAnimation.style.display = "none";
             imgAnimation.style.webkitAnimation = "none";
-        },300); 
+            mask.style.display = "none";
+        },30); 
     };
 }, false);
 
@@ -318,50 +305,15 @@ function btnAnimationC() {
     separate = false;
 };
 
-function mainAnimationS() {
-    var i = 23;
-    var a = setInterval(function(){
-        imgM.src = "images/1_1.png";
-        i -= 1;
-        if (i < 0) {
-            clearInterval(a);
-        };
-    }, 40);
-};
-
 function mainAnimationC() {
-    var i = 0;
-    var a = setInterval(function(){
-        imgM.src = "./images/testAnimation/001_00" + padding(i) + ".png";
-        i += 1;
-        if (i > 23) {
-            clearInterval(a);
-        };
-    }, 40);
-};
-
-function mainAnimationC2() {
     isChangeStep = false;
-    // imgAnimation.style.display = "block";
     imgAnimation.style.webkitAnimation = "mainAnimationC 0.5s forwards steps(19)";
 };
 
-function mainAnimationS2() {
+function mainAnimationS() {
     isChangeStep = false;
-    // imgAnimation.style.display = "block";
     imgAnimation.style.webkitAnimation = "mainAnimationS 0.5s forwards steps(19)";
 };
-
-// function mainAnimationS2() {
-//     isChangeStep = false;
-//     // imgM.style.height = "auto";
-//     imgM.src = "images/mainAnimationTest.png";
-//     imgM.style.webkitTransform = "translate3d(0, -" + (newWidth*19) +"px, 0)"
-//     setTimeout(function(){
-//         imgM.style.webkitAnimation = "mainAnimation 0.75s reverse steps(20)";
-//         imgM.style.webkitTransform = "none";
-//     },200); 
-// };
 
 $(window).bind('onorientationchange resize', function() {
     resize();
@@ -416,12 +368,13 @@ nextGlow.addEventListener('webkitAnimationEnd', function(){
 }, false);
 
 $aniBtn.bind('touchstart', function() { 
+    mask.style.display = "block";
     if (separate) {
         btnAnimationC();
-        mainAnimationC2();
+        mainAnimationC();
     }else {
         btnAnimationS();
-        mainAnimationS2();
+        mainAnimationS();
     };
 });
 
@@ -701,6 +654,39 @@ $aniBtn.bind('touchstart', function() {
 //             clearInterval(a);
 //         };
 //     }, 30);
+// };
+
+// function mainAnimationS2() {
+//     isChangeStep = false;
+//     // imgM.style.height = "auto";
+//     imgM.src = "images/mainAnimationTest.png";
+//     imgM.style.webkitTransform = "translate3d(0, -" + (newWidth*19) +"px, 0)"
+//     setTimeout(function(){
+//         imgM.style.webkitAnimation = "mainAnimation 0.75s reverse steps(20)";
+//         imgM.style.webkitTransform = "none";
+//     },200); 
+// };
+
+// function mainAnimationS() {
+//     var i = 23;
+//     var a = setInterval(function(){
+//         imgM.src = "images/1_1.png";
+//         i -= 1;
+//         if (i < 0) {
+//             clearInterval(a);
+//         };
+//     }, 40);
+// };
+
+// function mainAnimationC() {
+//     var i = 0;
+//     var a = setInterval(function(){
+//         imgM.src = "./images/testAnimation/001_00" + padding(i) + ".png";
+//         i += 1;
+//         if (i > 23) {
+//             clearInterval(a);
+//         };
+//     }, 40);
 // };
 
 });
