@@ -143,9 +143,13 @@ function resize() {
     'from {-webkit-transform: translate3d(0, 0, 0)}'+
     'to {-webkit-transform: translate3d( 0, -'+(newWidth*7)+'px, 0)}}'+
 
-    '@-webkit-keyframes mainAnimation {'+
+    '@-webkit-keyframes mainAnimationC {'+
     'from {-webkit-transform: translate3d(0, -'+newWidth+'px, 0)}'+
-    'to {-webkit-transform: translate3d( 0, -'+(newWidth*20)+'px, 0)}}'
+    'to {-webkit-transform: translate3d( 0, -'+(newWidth*20)+'px, 0)}}'+
+
+    '@-webkit-keyframes mainAnimationS {'+
+    'from {-webkit-transform: translate3d(0, -'+(newWidth*20)+'px, 0)}'+
+    'to {-webkit-transform: translate3d( 0, -'+newWidth+'px, 0)}}'
     );
     cssAnimation.appendChild(rules);
     document.getElementsByTagName("head")[0].appendChild(cssAnimation);
@@ -339,13 +343,13 @@ function mainAnimationC() {
 function mainAnimationC2() {
     isChangeStep = false;
     // imgAnimation.style.display = "block";
-    imgAnimation.style.webkitAnimation = "mainAnimation 0.5s forwards steps(19)";
+    imgAnimation.style.webkitAnimation = "mainAnimationC 0.5s forwards steps(19)";
 };
 
 function mainAnimationS2() {
     isChangeStep = false;
     // imgAnimation.style.display = "block";
-    imgAnimation.style.webkitAnimation = "mainAnimation 0.5s forwards reverse steps(19)";
+    imgAnimation.style.webkitAnimation = "mainAnimationS 0.5s forwards steps(19)";
 };
 
 // function mainAnimationS2() {
