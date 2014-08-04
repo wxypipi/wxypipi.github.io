@@ -284,7 +284,7 @@ aniBox2.addEventListener('webkitAnimationEnd', function(){
             imgM.src = "images/001_end.png";
         };
         setTimeout(function(){
-            imgAnimation.style.display = "none";
+            // imgAnimation.style.display = "none";
             imgAnimation.style.webkitAnimation = "none";
         },30); 
     };
@@ -338,13 +338,13 @@ function mainAnimationC() {
 
 function mainAnimationC2() {
     isChangeStep = false;
-    imgAnimation.style.display = "block";
+    // imgAnimation.style.display = "block";
     imgAnimation.style.webkitAnimation = "mainAnimation 0.75s forwards steps(19)";
 };
 
 function mainAnimationS2() {
     isChangeStep = false;
-    imgAnimation.style.display = "block";
+    // imgAnimation.style.display = "block";
     imgAnimation.style.webkitAnimation = "mainAnimation 0.75s reverse forwards steps(19)";
 };
 
