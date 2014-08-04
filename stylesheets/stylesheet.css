@@ -207,7 +207,7 @@ body, html{
 #imgBoxM{
     margin: auto;
     position: relative;
-    /*background-image: url(../images/001.png);*/
+    font-size:0;/*用来去掉img之间的间距*/
 }
 
 #imgBoxL{
@@ -218,6 +218,8 @@ body, html{
     float: right;
     /*background-image: url(../images/002.png);*/
 }
+
+
 
 #mainAnimation{
     position: relative;
