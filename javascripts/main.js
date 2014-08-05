@@ -66,7 +66,7 @@ var $mainBox = $("#mainBox"),
     $nextGlow = $("#nextGlow"),
     nextGlow = document.getElementById("nextGlow"),
     $aniBtn = $("#aniBtnBox"),
-    aniBtn = document.getElementById("aniBtnBox"),
+    aniBtn = document.getElementById("aniBtn"),
     $aniBox1 = $("#aniBox1"),
     $aniBox2 = $("#aniBox2"),
     imgL = document.getElementById("imgL"),
@@ -285,15 +285,15 @@ function padding(n) {
     return(("00" + n).slice(-3));
 };
 
-function btnAnimation() {
-    if (separate) {
-        aniBtn.style.backgroundPosition = "0em -84em";
-        separate = false;
-    }else {
-        aniBtn.style.backgroundPosition = "0 0";
-        separate = true;
-    };
-};
+// function btnAnimation() {
+//     if (separate) {
+//         aniBtn.style.backgroundPosition = "0em -84em";
+//         separate = false;
+//     }else {
+//         aniBtn.style.backgroundPosition = "0 0";
+//         separate = true;
+//     };
+// };
 
 function btnAnimationS() {
     aniBtn.style.webkitTransform = "translate3d(0,0,0)";
