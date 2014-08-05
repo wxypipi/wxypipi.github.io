@@ -51,9 +51,9 @@ var $mainBox = $("#mainBox"),
     mainBox = document.getElementById("mainBox"),
     menuBox = document.getElementById("menuBox"),
     mainMask = document.getElementById("mainMask"),
-    $contentsBtn = $("#contentsBtn"),
-    $searchBtn = $("#searchBtn"),
-    $settingBtn = $("#settingBtn"),
+    $contentsTab = $("#contentsTab"),
+    $searchTab = $("#searchTab"),
+    $settingTab = $("#settingTab"),
     $menu = $("#menu"),
     menuFooterLine = document.getElementById("menuFooterLine"),
     $menuBtn = $("#menuBtn,#headerText"),
@@ -156,9 +156,9 @@ function closeMenuBar() {
 
 function menuTagTo(tag,lineTranslate,pageTranslate) {
     var $tag = $(tag);
-    $contentsBtn.css("opacity","0.8");
-    $searchBtn.css("opacity","0.8");
-    $settingBtn.css("opacity","0.8");
+    $contentsTab.css("opacity","0.6");
+    $searchTab.css("opacity","0.6");
+    $settingTab.css("opacity","0.6");
     $tag.css("opacity","1");
     menuFooterLine.style.webkitTransform = "translate3d(" + lineTranslate + ", 0, 0)"
     $menu.css("-webkit-transform","translate3d(" + pageTranslate + ", 0, 0)");
@@ -328,15 +328,15 @@ $mainMask.bind('touchstart', function() {
     closeMenuBar();
 });
 
-$contentsBtn.bind('touchstart', function() { 
+$contentsTab.bind('touchstart', function() { 
     menuTagTo(this,"0","0");
 });
 
-$searchBtn.bind('touchstart', function() { 
+$searchTab.bind('touchstart', function() { 
     menuTagTo(this,"5em","-15em");
 });
 
-$settingBtn.bind('touchstart', function() { 
+$settingTab.bind('touchstart', function() { 
     menuTagTo(this,"10em","-30em");
 });
 
