@@ -307,12 +307,12 @@ function btnAnimationC() {
 
 function mainAnimationC() {
     isChangeStep = false;
-    imgAnimation.style.webkitAnimation = "mainAnimationC 0.5s forwards steps(19)";
+    imgAnimation.style.webkitAnimation = "mainAnimationC 0.5s forwards steps(19) 0.5s";
 };
 
 function mainAnimationS() {
     isChangeStep = false;
-    imgAnimation.style.webkitAnimation = "mainAnimationS 0.5s forwards steps(19)";
+    imgAnimation.style.webkitAnimation = "mainAnimationS 0.5s forwards steps(19) 0.5s";
 };
 
 $(window).bind('onorientationchange resize', function() {
