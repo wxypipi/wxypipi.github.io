@@ -282,27 +282,17 @@ aniBox2.addEventListener('webkitAnimationEnd', function(){
     };
 }, false);
 
-aniBtn.addEventListener('webkitTransitionEnd', function(){
-    if (separate) {
-        mainAnimationS();
-    }else{
-        mainAnimationC();
-    };
-}, false);
+// aniBtn.addEventListener('webkitTransitionEnd', function(){
+//     if (separate) {
+//         mainAnimationS();
+//     }else{
+//         mainAnimationC();
+//     };
+// }, false);
 
 function padding(n) {
     return(("00" + n).slice(-3));
 };
-
-// function btnAnimation() {
-//     if (separate) {
-//         aniBtn.style.backgroundPosition = "0em -84em";
-//         separate = false;
-//     }else {
-//         aniBtn.style.backgroundPosition = "0 0";
-//         separate = true;
-//     };
-// };
 
 function btnAnimationS() {
     aniBtn.style.webkitTransform = "translate3d(0,0,0)";
@@ -380,10 +370,10 @@ $aniBtn.bind('touchstart', function() {
     mask.style.display = "block";
     if (separate) {
         btnAnimationC();
-        // mainAnimationC();
+        mainAnimationC();
     }else {
         btnAnimationS();
-        // mainAnimationS();
+        mainAnimationS();
     };
 });
 
