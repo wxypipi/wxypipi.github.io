@@ -227,6 +227,14 @@ function changeStepJ(target) {
     stepText.innerHTML = padding(currentStep);
 };
 
+aniBtn.addEventListener('webkitTransitionEnd', function(){
+    if (separate) {
+        mainAnimationS();
+    }else{
+        mainAnimationC();
+    };
+}, false);
+
 aniBox2.addEventListener('webkitAnimationEnd', function(){
     if (isChangeStep) {
         if (currentStep == 1) {
@@ -307,12 +315,12 @@ function btnAnimationC() {
 
 function mainAnimationC() {
     isChangeStep = false;
-    imgAnimation.style.webkitAnimation = "mainAnimationC 0.5s forwards steps(19) 0.5s";
+    imgAnimation.style.webkitAnimation = "mainAnimationC 0.5s forwards steps(19)";
 };
 
 function mainAnimationS() {
     isChangeStep = false;
-    imgAnimation.style.webkitAnimation = "mainAnimationS 0.5s forwards steps(19) 0.5s";
+    imgAnimation.style.webkitAnimation = "mainAnimationS 0.5s forwards steps(19)";
 };
 
 $(window).bind('onorientationchange resize', function() {
@@ -371,10 +379,10 @@ $aniBtn.bind('touchstart', function() {
     mask.style.display = "block";
     if (separate) {
         btnAnimationC();
-        mainAnimationC();
+        // mainAnimationC();
     }else {
         btnAnimationS();
-        mainAnimationS();
+        // mainAnimationS();
     };
 });
 
