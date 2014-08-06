@@ -306,43 +306,43 @@ body, html{
     height: 90px;
     width: 100%;
     background-image: url(../images/menuTitle.png);
-    background-size: 240px 636px;
+    background-size: 240px 620px;
 }
 
 #menuTitle1{
-    background-position: 0 -96px;
+    background-position: 0 -80px;
 }
 
 #menuTitle2{
-    background-position: 0 -186px;
+    background-position: 0 -170px;
 }
 
 #menuTitle3{
-    background-position: 0 -276px;
+    background-position: 0 -260px;
 }
 
 #menuTitle4{
-    background-position: 0 -366px;
+    background-position: 0 -350px;
 }
 
 #menuTitle5{
-    background-position: 0 -456px;
+    background-position: 0 -440px;
 }
 
 #menuTitle6{
-    background-position: 0 -546px;
+    background-position: 0 -430px;
 }
 
 #contentsPage li li{
     /*font-size: 0.8em;*/
     text-indent: 60px;
-    line-height: 48px;
-    height: 48px;
+    line-height: 40px;
+    height: 36px;
     font-size: 1.2em;
     color: #9A9FA8;
     background-image: url(../images/menuTitle.png);
-    background-size: 240px 636px;
-    background-position: 0 -48px;
+    background-size: 240px 620px;
+    background-position: 0 -40px;
 }
 
 #contentsPage li li span{
