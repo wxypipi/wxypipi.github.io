@@ -339,7 +339,7 @@ body, html{
     text-indent: 60px;
     line-height: 40px;
     height: 36px;
-    font-size: 1.2em;
+    font-size: 1.1em;
     color: #9A9FA8;
     background-image: url(../images/menuTitle.png);
     background-size: 240px 620px;
@@ -350,7 +350,8 @@ body, html{
     font-size: 0.5em;
     margin-left: 1.2em;
     /*color: #8C9199;*/
-    opacity: 0.75;
+    opacity: 0.5;
+    -webkit-transform: scale3d(0.5, 0.5, 1);
 }
 
 /****search****/
