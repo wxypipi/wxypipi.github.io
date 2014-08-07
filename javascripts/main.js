@@ -59,6 +59,7 @@ var $mainBox = $("#mainBox"),
     $menuBtn = $("#menuBtn,#headerText"),
     $mainMask = $("#mainMask"),
     $contentsItem = $("#contentsPage li li"),
+    $colorItem = $("#panelColor li"),
     $previousBtn = $("#previousBtn"),
     $nextBtn = $("#nextBtn"),
     $previousGlow = $("#previousGlow"),
@@ -81,7 +82,8 @@ var $mainBox = $("#mainBox"),
     stepText = document.getElementById("stepText"),
     gradient = document.getElementById("menuFooterGradient"),
     // $animation1 = $("#animation1"),
-    lastItem = false,
+    lastContentsItem = false,
+    lastColorItem = $colorItem[0],
     separate = true,
     isChangeStep = true,
     currentStep = 1,
@@ -165,16 +167,16 @@ function menuTagTo(tag,lineTranslate,pageTranslate) {
 };
 
 function selectStep(item) {
-    if (item == lastItem) {
+    if (item == lastContentsItem) {
         return;
     };
-    if(lastItem){
-        lastItem.style.backgroundPosition = "0 -48px";
-        lastItem.style.color = "#9A9FA8";
+    if(lastContentsItem){
+        lastContentsItem.style.backgroundPosition = "0 -40px";
+        lastContentsItem.style.color = "#9A9FA8";
     };
     item.style.backgroundPosition = "0 0";
     item.style.color = "#CCD3DD";
-    lastItem = item;
+    lastContentsItem = item;
 };
 
 function changeStepN() {
@@ -282,13 +284,7 @@ aniBox2.addEventListener('webkitAnimationEnd', function(){
     };
 }, false);
 
-// aniBtn.addEventListener('webkitTransitionEnd', function(){
-//     if (separate) {
-//         mainAnimationS();
-//     }else{
-//         mainAnimationC();
-//     };
-// }, false);
+
 
 function padding(n) {
     return(("00" + n).slice(-3));
@@ -313,6 +309,21 @@ function mainAnimationS() {
     isChangeStep = false;
     imgAnimation.style.webkitAnimation = "mainAnimationS 0.5s forwards steps(19)";
 };
+
+function selectColor(item) {
+    lastColorItem.style.backgroundPositionY = "0";
+    item.style.backgroundPositionY = "-50px";
+    lastColorItem = item;
+
+};
+
+
+
+
+
+
+
+
 
 $(window).bind('onorientationchange resize', function() {
     resize();
@@ -344,6 +355,10 @@ $contentsItem.bind('touchend', function() {
     changeStepJ(($contentsItem.index(this))+1);
     selectStep(this);
     closeMenuBar();
+});
+
+$colorItem.bind('touchend', function() { 
+    selectColor(this);
 });
 
 $previousBtn.bind('touchstart', function() { 
@@ -687,5 +702,13 @@ $aniBtn.bind('touchstart', function() {
 //         };
 //     }, 40);
 // };
+
+// aniBtn.addEventListener('webkitTransitionEnd', function(){
+//     if (separate) {
+//         mainAnimationS();
+//     }else{
+//         mainAnimationC();
+//     };
+// }, false);
 
 });
