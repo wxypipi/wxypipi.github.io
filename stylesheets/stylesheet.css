@@ -306,7 +306,7 @@ body, html{
 #contentsPage ul div{
     height: 90px;
     width: 100%;
-    background-image: url(../images/menuTitle.png);
+    background-image: url(../images/menuTitlezh.png);
     background-size: 240px 620px;
 }
 
@@ -331,7 +331,7 @@ body, html{
 }
 
 #contentsTitle6{
-    background-position: 0 -430px;
+    background-position: 0 -530px;
 }
 
 #contentsPage li li{
@@ -341,13 +341,13 @@ body, html{
     height: 36px;
     font-size: 1.1em;
     color: #9A9FA8;
-    background-image: url(../images/menuTitle.png);
+    background-image: url(../images/menuTitlezh.png);
     background-size: 240px 620px;
     background-position: 0 -40px;
 }
 
 #contentsPage li li span{
-    font-size: 0.5em;
+    font-size: 12px;
     margin-left: 1.2em;
     /*color: #8C9199;*/
     opacity: 0.5;
