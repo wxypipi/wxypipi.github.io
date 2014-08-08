@@ -110,12 +110,13 @@ body, html{
 
 #aniBtnBox{
     width: 7em;
-    height: 7em;
-    /*background-image: url(../images/button.png);*/
-    /*background-size: 7em 91em;*/
-    /*background-position: 0 0;*/
+    height: 91em;
+    background-image: url(../images/button.png);
+    background-size: 7em 91em;
+    background-position: 0 0;
     position: relative;
     margin: auto;
+    -webkit-transition: -webkit-transform 0.3s steps(12);
     
 }
 
@@ -306,7 +307,7 @@ body, html{
 #contentsPage ul div{
     height: 90px;
     width: 100%;
-    background-image: url(../images/menuTitlezh.png);
+    background-image: url(../images/menuTitle.png);
     background-size: 240px 620px;
 }
 
@@ -340,8 +341,8 @@ body, html{
     line-height: 40px;
     height: 36px;
     font-size: 1.1em;
-    color: #9A9FA8;
-    background-image: url(../images/menuTitlezh.png);
+    color: #B0B9C6;
+    background-image: url(../images/menuTitle.png);
     background-size: 240px 620px;
     background-position: 0 -40px;
 }
@@ -440,7 +441,7 @@ body, html{
     float: left;
     text-align: center;
     line-height: 30px;
-    color: #9A9FA8;
+    color: #B0B9C6;
 }
 
 #searchBtn{

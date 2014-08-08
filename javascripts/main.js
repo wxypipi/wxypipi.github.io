@@ -66,8 +66,8 @@ var $mainBox = $("#mainBox"),
     previousGlow = document.getElementById("previousGlow"),
     $nextGlow = $("#nextGlow"),
     nextGlow = document.getElementById("nextGlow"),
-    $aniBtn = $("#aniBtnBox"),
-    aniBtn = document.getElementById("aniBtn"),
+    $aniBtnBox = $("#aniBtnBox"),
+    aniBtnBox = document.getElementById("aniBtnBox"),
     $aniBox1 = $("#aniBox1"),
     $aniBox2 = $("#aniBox2"),
     imgL = document.getElementById("imgL"),
@@ -172,10 +172,10 @@ function selectStep(item) {
     };
     if(lastContentsItem){
         lastContentsItem.style.backgroundPosition = "0 -40px";
-        lastContentsItem.style.color = "#9A9FA8";
+        lastContentsItem.style.color = "#B0B9C6";
     };
     item.style.backgroundPosition = "0 0";
-    item.style.color = "#CCD3DD";
+    item.style.color = "#EAEAEA";
     lastContentsItem = item;
 };
 
@@ -291,12 +291,12 @@ function padding(n) {
 };
 
 function btnAnimationS() {
-    aniBtn.style.webkitTransform = "translate3d(0,0,0)";
+    aniBtnBox.style.webkitTransform = "translate3d(0,0,0)";
     separate = true;
 };
 
 function btnAnimationC() {
-    aniBtn.style.webkitTransform = "translate3d(0,-84em,0)";
+    aniBtnBox.style.webkitTransform = "translate3d(0,-84em,0)";
     separate = false;
 };
 
@@ -381,7 +381,7 @@ nextGlow.addEventListener('webkitAnimationEnd', function(){
     nextGlow.style.webkitAnimation = "none";
 }, false);
 
-$aniBtn.bind('touchstart', function() { 
+$aniBtnBox.bind('touchstart', function() { 
     mask.style.display = "block";
     if (separate) {
         btnAnimationC();
