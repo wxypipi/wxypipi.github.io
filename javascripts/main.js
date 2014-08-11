@@ -82,13 +82,14 @@ var $mainBox = $("#mainBox"),
     stepText = document.getElementById("stepText"),
     gradient = document.getElementById("menuFooterGradient"),
     // $animation1 = $("#animation1"),
+    canvas = document.getElementById("mainAnimation"),
     lastContentsItem = false,
     lastColorItem = $colorItem[0],
     separate = true,
     isChangeStep = true,
+    animationStop = false,
     currentStep = 1,
-    maxStep = 4,
-    newWidth
+    maxStep = 4
     ;
 
 function resize() {
@@ -97,7 +98,7 @@ function resize() {
     var width = Number($aniBox1.css("width").slice(0,-2));
     if (height > width) {
         var moveDis = width;
-        newWidth = Number(width);
+        newWidth = width;
         var newBoxwidth = width*3;
         var marginTop = (height - width) / 2;
     }else{
@@ -107,6 +108,10 @@ function resize() {
         var marginTop = 0;
     };
 
+    canvas.width = newWidth;
+    canvas.height = newWidth;
+
+
     var cssAnimation = document.createElement('style');
     cssAnimation.type = 'text/css';
     var rules = document.createTextNode(
@@ -114,10 +119,9 @@ function resize() {
         "height: " + newWidth + "px;"+
         "width: " + newWidth + "px;}"+
 
-    "#imgAnimation{"+
-        "width: " + newWidth + "px;"+
-        "height: auto;"+
-        "position: relative}"+
+    "#mainAnimation{"+
+        "margin-top: " + marginTop + "px;"+
+        "margin-left: " + ((width - newWidth) / 2) + "px}"+
 
     "#aniBox2{"+
         "height: " + newWidth + "px;"+
@@ -222,7 +226,7 @@ function changeStepJ(target) {
         imgL.src = "images/" + padding(target-1) + "_S.png";
         imgR.src = "images/" + padding(target+1) + "_S.png";
     };
-    imgAnimation.src = "images/" + padding(target) + "_Animation.png";
+    // imgAnimation.src = "images/" + padding(target) + "_Animation.png";
 
     if (!separate) {
         btnAnimationS();
@@ -240,7 +244,7 @@ aniBox2.addEventListener('webkitAnimationEnd', function(){
                 // console.log("now!");
                 setTimeout(function(){
                     imgR.src = "images/002_S.png";
-                    imgAnimation.src = "images/001_Animation.png";
+                    // imgAnimation.src = "images/001_Animation.png";
                     mask.style.display = "none";
                 },10);
             },20);
@@ -251,7 +255,7 @@ aniBox2.addEventListener('webkitAnimationEnd', function(){
                 // console.log("now!");
                 setTimeout(function(){
                     imgL.src = "images/" + padding(currentStep-1) + "_S.png";
-                    imgAnimation.src = "images/" + padding(currentStep) + "_Animation.png";
+                    // imgAnimation.src = "images/" + padding(currentStep) + "_Animation.png";
                     mask.style.display = "none";
                 },10);  
             },20);      
@@ -263,7 +267,7 @@ aniBox2.addEventListener('webkitAnimationEnd', function(){
                 setTimeout(function(){
                     imgL.src = "images/" + padding(currentStep-1) + "_S.png";
                     imgR.src = "images/" + padding(currentStep+1) + "_S.png";
-                    imgAnimation.src = "images/" + padding(currentStep) + "_Animation.png";
+                    // imgAnimation.src = "images/" + padding(currentStep) + "_Animation.png";
                     mask.style.display = "none";
                 },10);  
             },20);
@@ -279,7 +283,7 @@ aniBox2.addEventListener('webkitAnimationEnd', function(){
             imgM.src = "images/" + padding(currentStep) + "_C.png";
         };
         setTimeout(function(){
-            imgAnimation.style.webkitAnimation = "none";
+            // imgAnimation.style.webkitAnimation = "none";
             mask.style.display = "none";
         },30); 
     };
@@ -301,15 +305,15 @@ function btnAnimationC() {
     separate = false;
 };
 
-function mainAnimationC() {
-    isChangeStep = false;
-    imgAnimation.style.webkitAnimation = "mainAnimationC 0.5s forwards steps(19)";
-};
+// function mainAnimationC() {
+//     isChangeStep = false;
+//     // imgAnimation.style.webkitAnimation = "mainAnimationC 0.5s forwards steps(19)";
+// };
 
-function mainAnimationS() {
-    isChangeStep = false;
-    imgAnimation.style.webkitAnimation = "mainAnimationS 0.5s forwards steps(19)";
-};
+// function mainAnimationS() {
+//     isChangeStep = false;
+//     // imgAnimation.style.webkitAnimation = "mainAnimationS 0.5s forwards steps(19)";
+// };
 
 function selectColor(item) {
     lastColorItem.style.backgroundPositionY = "0";
@@ -322,83 +326,130 @@ function selectColor(item) {
 
 // canvas test====================================================
 
-var canvas = document.getElementById("mainAnimation");
-canvas.width = 320;
-canvas.height = 320;
 
 
-var coinImage = new Image();
-coinImage.src = "images/001_Animation.png";
 
-function sprite (options) {
+// var coinImage = new Image();
+// coinImage.src = "images/001_Animation.png";
+
+// function sprite (options) {
                 
-    var that = {},
-        frameIndex = 0,
-        tickCount = 0,
-        ticksPerFrame = options.ticksPerFrame || 0;
-        numberOfFrames = options.numberOfFrames || 1;
+//     var that = {},
+//         frameIndex = 0,
+//         tickCount = 0,
+//         ticksPerFrame = options.ticksPerFrame || 0;
+//         numberOfFrames = options.numberOfFrames || 1;
                     
-    that.context = options.context;
-    that.width = options.width;
-    that.height = options.height;
-    that.image = options.image;
-    that.loop = options.loop;
+//     that.context = options.context;
+//     that.width = options.width;
+//     that.height = options.height;
+//     that.image = options.image;
+//     that.loop = options.loop;
 
-    that.render = function () {
-        that.context.drawImage(
-           that.image,
-           0,
-           400 * frameIndex,
-           400,
-           400,
-           0,
-           0,
-           that.width,
-           that.height);
-    };
+//     that.render = function () {
+//         that.context.clearRect(0, 0, that.width, that.height);
+//         that.context.drawImage(
+//            that.image,
+//            0,
+//            400 * frameIndex,
+//            400,
+//            400,
+//            0,
+//            0,
+//            that.width,
+//            that.height);
+//     };
 
-    that.update = function () {
-
-        tickCount += 1;
+//     that.update = function () {
+//         tickCount += 1;
             
-        if (tickCount > ticksPerFrame) {
-        
-            tickCount = 0;
-            
-            // If the current frame index is in range
-            if (frameIndex < numberOfFrames - 1) {  
-                // Go to the next frame
-                frameIndex += 1;
-            } else if (that.loop) {
-                frameIndex = 0;
-            };
-        }
-    }; 
+//         if (tickCount > ticksPerFrame) {
+//             tickCount = 0;
+//             if (frameIndex < numberOfFrames - 1) {  
+//                 frameIndex += 1;
+//             } else if (that.loop) {
+//                 frameIndex = 0;
+//             } else {
+//                 // frameIndex = 0;
+//                 animationStop = true;
+//             };
+//         };
+//     }; 
 
-    return that;
+//     return that;
+// };
+
+
+
+
+// var mainAnimationC = sprite({
+//     context: canvas.getContext("2d"),
+//     width: 320,
+//     height: 320,
+//     image: coinImage,
+//     numberOfFrames: 20,
+//     ticksPerFrame: 2,
+//     // loop: true
+// });
+
+// // coinImage.addEventListener("load", gameLoop);
+
+// function gameLoop () {
+//     if (animationStop) {
+//         window.cancelAnimationFrame(gameLoop);
+//         mainAnimationC.context.clearRect(0, 0, mainAnimationC.width, mainAnimationC.height);
+//         animationStop = false;
+//     }else{
+//         window.requestAnimationFrame(gameLoop);
+//         mainAnimationC.update();
+//         mainAnimationC.render();
+//     };
+  
+    
+// }
+
+// canvas test 2 =======================================
+
+var cxt = canvas.getContext("2d");
+var animationImage = new Image();
+animationImage.src = "images/001_Animation.png";
+var frameIndex = 0;
+
+function render() {
+    cxt.drawImage(
+    animationImage,
+    0,
+    400 * frameIndex,
+    400,
+    400,
+    0,
+    0,
+    320,
+    320);
 };
 
-var coin = sprite({
-    context: canvas.getContext("2d"),
-    width: 320,
-    height: 320,
-    image: coinImage,
-    numberOfFrames: 20,
-    ticksPerFrame: 2,
-    loop: true
-});
+function mainAnimationC() {
+    if (frameIndex < 19) {
+        frameIndex += 1;
+        render();
+        window.requestAnimationFrame(mainAnimationC);
+    } else {
+        window.cancelAnimationFrame(mainAnimationC);
+        cxt.clearRect(0, 0, 320, 320);
+        frameIndex = 0;
+    }; 
+};
 
-coinImage.addEventListener("load", gameLoop);
-
-function gameLoop () {
-
-  window.requestAnimationFrame(gameLoop);
-  
-  coin.update();
-  coin.render();
-}
-
-
+function mainAnimationS() {
+    if (frameIndex > 0) {
+        frameIndex -= 1;
+        render();
+        window.requestAnimationFrame(mainAnimationC);
+    } else {
+        window.cancelAnimationFrame(mainAnimationC);
+        // cxt.clearRect(0, 0, mainAnimationC.width, mainAnimationC.height);
+    }; 
+};
 
 
 
@@ -460,7 +511,7 @@ nextGlow.addEventListener('webkitAnimationEnd', function(){
 }, false);
 
 $aniBtnBox.bind('touchstart', function() { 
-    mask.style.display = "block";
+    // mask.style.display = "block";
     if (separate) {
         btnAnimationC();
         mainAnimationC();

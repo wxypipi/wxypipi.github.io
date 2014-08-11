@@ -206,7 +206,7 @@ body, html{
     width: 20em;
     height: 100%;
     overflow: hidden;
-    display: none;
+    /*display: none;*/
     /*background-image: url(../images/001.png),none,url(../images/002.png);*/
     /*background-repeat: no-repeat,no-repeat,no-repeat;*/
     /*-webkit-backface-visibility: hidden;*/
