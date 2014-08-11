@@ -335,7 +335,7 @@ function sprite (options) {
     var that = {},
         frameIndex = 0,
         tickCount = 0,
-        ticksPerFrame = 0;
+        ticksPerFrame = options.ticksPerFrame || 0;
         numberOfFrames = options.numberOfFrames || 1;
                     
     that.context = options.context;
@@ -384,7 +384,8 @@ var coin = sprite({
     height: 320,
     image: coinImage,
     numberOfFrames: 20,
-    ticksPerFrame: 4
+    ticksPerFrame: 2,
+    loop: true
 });
 
 coinImage.addEventListener("load", gameLoop);
