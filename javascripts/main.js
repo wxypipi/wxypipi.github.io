@@ -326,7 +326,7 @@ function mainAnimationC() {
             render();
         } else {
             tickCount += 1;
-            if (frameIndex == 10) {
+            if (frameIndex == 1) {
                 imgM.src = "images/" + padding(currentStep) + "_C.png";
             };
         }
@@ -345,7 +345,7 @@ function mainAnimationS() {
             render();
         } else {
             tickCount += 1;
-            if (frameIndex == 10) {
+            if (frameIndex == 1) {
                 imgM.src = "images/" + padding(currentStep) + "_S.png";
             };
         }
