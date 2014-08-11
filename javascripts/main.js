@@ -418,7 +418,7 @@ var ticksPerFrame = 1;
 var tickCount = 0;
 
 function render() {
-    cxt.clearRect(0, 0, 320, 320);
+    cxt.clearRect(0, 0, newWidth, newWidth);
     cxt.drawImage(
     animationImage,
     0,
@@ -443,19 +443,25 @@ function mainAnimationC() {
         window.requestAnimationFrame(mainAnimationC);
     } else {
         window.cancelAnimationFrame(mainAnimationC);
-        cxt.clearRect(0, 0, 320, 320);
-        frameIndex = 0;
+        // cxt.clearRect(0, 0, newWidth, newWidth);
+        // frameIndex = 0;
     }; 
 };
 
 function mainAnimationS() {
     if (frameIndex > 0) {
-        frameIndex -= 1;
-        render();
-        window.requestAnimationFrame(mainAnimationC);
+        if (tickCount > ticksPerFrame) {
+            tickCount = 0;
+            frameIndex -= 1;
+            render();
+        } else {
+            tickCount += 1;
+        }
+        window.requestAnimationFrame(mainAnimationS);
     } else {
-        window.cancelAnimationFrame(mainAnimationC);
-        // cxt.clearRect(0, 0, mainAnimationC.width, mainAnimationC.height);
+        window.cancelAnimationFrame(mainAnimationS);
+        cxt.clearRect(0, 0, newWidth, newWidth);
+        // frameIndex = 0;
     }; 
 };
 
@@ -525,7 +531,7 @@ $aniBtnBox.bind('touchstart', function() {
         mainAnimationC();
     }else {
         btnAnimationS();
-        // mainAnimationS();
+        mainAnimationS();
     };
 });
 
