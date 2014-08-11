@@ -265,7 +265,7 @@ var ticksPerFrame = 1;
 var tickCount = 0;
 
 function render() {
-    cxt.clearRect(0, 0, newWidth, newWidth);
+    // cxt.clearRect(0, 0, newWidth, newWidth);
     cxt.drawImage(
     animationImage,
     0,
