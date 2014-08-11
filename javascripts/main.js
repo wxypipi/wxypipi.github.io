@@ -60,7 +60,8 @@ var $mainBox = $("#mainBox"),
     separate = true,
     isChangeStep = true,
     currentStep = 1,
-    maxStep = 4
+    maxStep = 4,
+    newWidth
     ;
 
 function resize() {
@@ -105,16 +106,8 @@ function resize() {
     'to {-webkit-transform: translate3d('+moveDis+'px, 0, 0)}}'+
     '@-webkit-keyframes moveL {'+
     'from {-webkit-transform: translate3d(0, 0, 0)}'+
-    'to {-webkit-transform: translate3d(-'+moveDis+'px, 0, 0)}}'+
+    'to {-webkit-transform: translate3d(-'+moveDis+'px, 0, 0)}}');
 
-    '@-webkit-keyframes mainAnimationC {'+
-    'from {-webkit-transform: translate3d(0, -'+newWidth+'px, 0)}'+
-    'to {-webkit-transform: translate3d( 0, -'+(newWidth*20)+'px, 0)}}'+
-
-    '@-webkit-keyframes mainAnimationS {'+
-    'from {-webkit-transform: translate3d(0, -'+(newWidth*20)+'px, 0)}'+
-    'to {-webkit-transform: translate3d( 0, -'+newWidth+'px, 0)}}'
-    );
     cssAnimation.appendChild(rules);
     document.getElementsByTagName("head")[0].appendChild(cssAnimation);
 };
@@ -204,63 +197,51 @@ function changeStepJ(target) {
     };
     currentStep = target;
     stepText.innerHTML = padding(currentStep);
+    frameIndex = 0;//切换步骤时让动画回到第一帧，否则无法再次触发动画。
 };
 
 aniBox2.addEventListener('webkitAnimationEnd', function(){
-    if (isChangeStep) {
-        if (currentStep == 1) {
-            imgM.src = "images/001_S.png";
-            setTimeout(function(){
-                aniBox2.style.webkitAnimation = "none";
-                // console.log("now!");
-                setTimeout(function(){
-                    imgR.src = "images/002_S.png";
-                    // imgAnimation.src = "images/001_Animation.png";
-                    mask.style.display = "none";
-                },10);
-            },20);
-        }else if (currentStep == maxStep) {
-            imgM.src = "images/" + padding(currentStep) + "_S.png";
-            setTimeout(function(){
-                aniBox2.style.webkitAnimation = "none";
-                // console.log("now!");
-                setTimeout(function(){
-                    imgL.src = "images/" + padding(currentStep-1) + "_S.png";
-                    // imgAnimation.src = "images/" + padding(currentStep) + "_Animation.png";
-                    mask.style.display = "none";
-                },10);  
-            },20);      
-        }else {
-            imgM.src = "images/" + padding(currentStep) + "_S.png";
-            setTimeout(function(){
-                aniBox2.style.webkitAnimation = "none";
-                // console.log("now!");
-                setTimeout(function(){
-                    imgL.src = "images/" + padding(currentStep-1) + "_S.png";
-                    imgR.src = "images/" + padding(currentStep+1) + "_S.png";
-                    // imgAnimation.src = "images/" + padding(currentStep) + "_Animation.png";
-                    mask.style.display = "none";
-                },10);  
-            },20);
-        };
-    
-        nextGlow.style.backgroundColor = "#C6C6C6";
-        previousGlow.style.backgroundColor = "#C6C6C6";
-    }else{
-        isChangeStep = true;
-        if (separate) {
-            imgM.src = "images/" + padding(currentStep) + "_S.png";
-        }else{
-            imgM.src = "images/" + padding(currentStep) + "_C.png";
-        };
+    if (currentStep == 1) {
+        imgM.src = "images/001_S.png";
         setTimeout(function(){
-            // imgAnimation.style.webkitAnimation = "none";
-            mask.style.display = "none";
-        },30); 
+            aniBox2.style.webkitAnimation = "none";
+            // console.log("now!");
+            setTimeout(function(){
+                imgR.src = "images/002_S.png";
+                // imgAnimation.src = "images/001_Animation.png";
+                mask.style.display = "none";
+            },10);
+        },20);
+    }else if (currentStep == maxStep) {
+        imgM.src = "images/" + padding(currentStep) + "_S.png";
+        setTimeout(function(){
+            aniBox2.style.webkitAnimation = "none";
+            // console.log("now!");
+            setTimeout(function(){
+                imgL.src = "images/" + padding(currentStep-1) + "_S.png";
+                // imgAnimation.src = "images/" + padding(currentStep) + "_Animation.png";
+                mask.style.display = "none";
+            },10);  
+        },20);      
+    }else {
+        imgM.src = "images/" + padding(currentStep) + "_S.png";
+        setTimeout(function(){
+            aniBox2.style.webkitAnimation = "none";
+            // console.log("now!");
+            setTimeout(function(){
+                imgL.src = "images/" + padding(currentStep-1) + "_S.png";
+                imgR.src = "images/" + padding(currentStep+1) + "_S.png";
+                // imgAnimation.src = "images/" + padding(currentStep) + "_Animation.png";
+                mask.style.display = "none";
+            },10);  
+        },20);
     };
+
+    nextGlow.style.backgroundColor = "#C6C6C6";
+    previousGlow.style.backgroundColor = "#C6C6C6";
+    frameIndex = 0;//切换步骤时让动画回到第一帧，否则无法再次触发动画。
+
 }, false);
-
-
 
 function padding(n) {
     return(("00" + n).slice(-3));
@@ -275,27 +256,6 @@ function btnAnimationC() {
     aniBtnBox.style.webkitTransform = "translate3d(0,-84em,0)";
     separate = false;
 };
-
-// function mainAnimationC() {
-//     isChangeStep = false;
-//     // imgAnimation.style.webkitAnimation = "mainAnimationC 0.5s forwards steps(19)";
-// };
-
-// function mainAnimationS() {
-//     isChangeStep = false;
-//     // imgAnimation.style.webkitAnimation = "mainAnimationS 0.5s forwards steps(19)";
-// };
-
-function selectColor(item) {
-    lastColorItem.style.backgroundPositionY = "0";
-    item.style.backgroundPositionY = "-50px";
-    lastColorItem = item;
-
-};
-
-
-
-// canvas test 2 =======================================
 
 var cxt = canvas.getContext("2d");
 var animationImage = new Image();
@@ -345,7 +305,7 @@ function mainAnimationS() {
             render();
         } else {
             tickCount += 1;
-            if (frameIndex == 1) {
+            if (frameIndex == 18) {
                 imgM.src = "images/" + padding(currentStep) + "_S.png";
             };
         }
@@ -356,7 +316,12 @@ function mainAnimationS() {
     }; 
 };
 
-// ===================================
+function selectColor(item) {
+    lastColorItem.style.backgroundPositionY = "0";
+    item.style.backgroundPositionY = "-50px";
+    lastColorItem = item;
+};
+
 
 $(window).bind('onorientationchange resize', function() {
     resize();
@@ -447,6 +412,13 @@ $aniBtnBox.bind('touchstart', function() {
 //  imagesPreload();
 
 
+    // '@-webkit-keyframes mainAnimationC {'+
+    // 'from {-webkit-transform: translate3d(0, -'+newWidth+'px, 0)}'+
+    // 'to {-webkit-transform: translate3d( 0, -'+(newWidth*20)+'px, 0)}}'+
+
+    // '@-webkit-keyframes mainAnimationS {'+
+    // 'from {-webkit-transform: translate3d(0, -'+(newWidth*20)+'px, 0)}'+
+    // 'to {-webkit-transform: translate3d( 0, -'+newWidth+'px, 0)}}'
 
 // 这个方法太麻烦了
 // function changeStep(target) {
@@ -849,5 +821,16 @@ $aniBtnBox.bind('touchstart', function() {
   
     
 // }
+
+
+// function mainAnimationC() {
+//     isChangeStep = false;
+//     // imgAnimation.style.webkitAnimation = "mainAnimationC 0.5s forwards steps(19)";
+// };
+
+// function mainAnimationS() {
+//     isChangeStep = false;
+//     // imgAnimation.style.webkitAnimation = "mainAnimationS 0.5s forwards steps(19)";
+// };
 
 });

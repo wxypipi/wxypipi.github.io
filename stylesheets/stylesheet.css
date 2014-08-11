@@ -35,7 +35,6 @@ body, html{
     top: 0;
     bottom: 0;
     display: none;
-    /*pointer-events: none;*/
 }
 
 /*****************main*****************/
@@ -77,14 +76,15 @@ body, html{
     top: 0;
     background-color: #78A9BB;
     text-align: center;
+    border-bottom: solid;
+    border-color: #6F9BA5;
+    border-width: 2px;
 }
 
 #headerText{
     height: 3em;
     line-height: 3em;
     margin: auto;
-    /*margin-right: 1em;*/
-    /*float: left;*/
 }
 
 #headerText span{
