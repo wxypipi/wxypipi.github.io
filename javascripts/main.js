@@ -414,6 +414,8 @@ var cxt = canvas.getContext("2d");
 var animationImage = new Image();
 animationImage.src = "images/001_Animation.png";
 var frameIndex = 0;
+var ticksPerFrame = 1;
+var tickCount = 0;
 
 function render() {
     cxt.clearRect(0, 0, 320, 320);
@@ -425,14 +427,19 @@ function render() {
     400,
     0,
     0,
-    320,
-    320);
+    newWidth,
+    newWidth);
 };
 
 function mainAnimationC() {
     if (frameIndex < 19) {
-        frameIndex += 1;
-        render();
+        if (tickCount > ticksPerFrame) {
+            tickCount = 0;
+            frameIndex += 1;
+            render();
+        } else {
+            tickCount += 1;
+        }
         window.requestAnimationFrame(mainAnimationC);
     } else {
         window.cancelAnimationFrame(mainAnimationC);
@@ -453,7 +460,7 @@ function mainAnimationS() {
 };
 
 
-
+// ===================================
 
 $(window).bind('onorientationchange resize', function() {
     resize();
