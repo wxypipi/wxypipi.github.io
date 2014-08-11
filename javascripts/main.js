@@ -416,6 +416,7 @@ animationImage.src = "images/001_Animation.png";
 var frameIndex = 0;
 
 function render() {
+    cxt.clearRect(0, 0, 320, 320);
     cxt.drawImage(
     animationImage,
     0,
@@ -517,7 +518,7 @@ $aniBtnBox.bind('touchstart', function() {
         mainAnimationC();
     }else {
         btnAnimationS();
-        mainAnimationS();
+        // mainAnimationS();
     };
 });
 
