@@ -78,7 +78,7 @@ var $mainBox = $("#mainBox"),
     // imgBoxR = document.getElementById("imgBoxR"),
     // imgBoxM = document.getElementById("imgBoxM"),
     aniBox2 = document.getElementById("aniBox2"),
-    mainAnimation = document.getElementById("mainAnimation"),
+    // mainAnimation = document.getElementById("mainAnimation"),
     stepText = document.getElementById("stepText"),
     gradient = document.getElementById("menuFooterGradient"),
     // $animation1 = $("#animation1"),
@@ -87,7 +87,8 @@ var $mainBox = $("#mainBox"),
     separate = true,
     isChangeStep = true,
     currentStep = 1,
-    maxStep = 4
+    maxStep = 4,
+    newWidth
     ;
 
 function resize() {
@@ -96,7 +97,7 @@ function resize() {
     var width = Number($aniBox1.css("width").slice(0,-2));
     if (height > width) {
         var moveDis = width;
-        newWidth = width;
+        newWidth = Number(width);
         var newBoxwidth = width*3;
         var marginTop = (height - width) / 2;
     }else{
@@ -319,6 +320,82 @@ function selectColor(item) {
 
 
 
+// canvas test====================================================
+
+var canvas = document.getElementById("mainAnimation");
+canvas.width = 320;
+canvas.height = 320;
+
+
+var coinImage = new Image();
+coinImage.src = "images/001_Animation.png";
+
+function sprite (options) {
+                
+    var that = {},
+        frameIndex = 0,
+        tickCount = 0,
+        ticksPerFrame = 0;
+        numberOfFrames = options.numberOfFrames || 1;
+                    
+    that.context = options.context;
+    that.width = options.width;
+    that.height = options.height;
+    that.image = options.image;
+    that.loop = options.loop;
+
+    that.render = function () {
+        that.context.drawImage(
+           that.image,
+           0,
+           400 * frameIndex,
+           400,
+           400,
+           0,
+           0,
+           that.width,
+           that.height);
+    };
+
+    that.update = function () {
+
+        tickCount += 1;
+            
+        if (tickCount > ticksPerFrame) {
+        
+            tickCount = 0;
+            
+            // If the current frame index is in range
+            if (frameIndex < numberOfFrames - 1) {  
+                // Go to the next frame
+                frameIndex += 1;
+            } else if (that.loop) {
+                frameIndex = 0;
+            };
+        }
+    }; 
+
+    return that;
+};
+
+var coin = sprite({
+    context: canvas.getContext("2d"),
+    width: 320,
+    height: 320,
+    image: coinImage,
+    numberOfFrames: 20,
+    ticksPerFrame: 4
+});
+
+coinImage.addEventListener("load", gameLoop);
+
+function gameLoop () {
+
+  window.requestAnimationFrame(gameLoop);
+  
+  coin.update();
+  coin.render();
+}
 
 
 
