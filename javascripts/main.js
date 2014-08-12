@@ -80,9 +80,6 @@ function resize() {
         var marginTop = 0;
     };
 
-    mainAnimation.width = newWidth;
-    mainAnimation.height = newWidth;
-
 
     var cssAnimation = document.createElement('style');
     cssAnimation.type = 'text/css';
@@ -93,6 +90,8 @@ function resize() {
 
     "#mainAnimation{"+
         "margin-top: " + marginTop + "px;"+
+        "height: " + newWidth + "px;"+
+        "width: " + newWidth + "px;"+
         "margin-left: " + ((width - newWidth) / 2) + "px}"+
 
     "#aniBox2{"+
@@ -248,103 +247,59 @@ function padding(n) {
     return(("00" + n).slice(-3));
 };
 
-// function btnAnimationS() {
-//     // btnAnimation.style.webkitTransform = "translate3d(0,0,0)";
-//     separate = true;
-// };
-
-// function btnAnimationC() {
-//     // btnAnimation.style.webkitTransform = "translate3d(0,-84em,0)";
-//     separate = false;
-// };
-
-// ===============================================================
-
-btnAnimation.width = 112;
-btnAnimation.height = 112;
-
-var btnAnimationCxt = btnAnimation.getContext("2d");
-var btnAnimationImage = new Image();
-    btnAnimationImage.src = "images/button.png";
-var btnFrameIndex = 0;
-var btnTickCount = 0;
+function btnAnimationS() {
+    btnAnimation.style.webkitTransform = "translate3d(0,0,0)";
+    separate = true;
+};
 
 function btnAnimationC() {
-    if (btnFrameIndex < 12) {
-        // if (btnTickCount > 0) {
-            btnTickCount = 0;
-            btnFrameIndex += 1;
-            btnAnimationCxt.drawImage(btnAnimationImage,
-            0,336 * btnFrameIndex,336,336,0,0,112,112);
-        // } else {
-            // btnTickCount += 1;
-        // };
-        window.requestAnimationFrame(btnAnimationC);
-    } else {
-        window.cancelAnimationFrame(btnAnimationC);
-        imgM.src = "images/" + padding(currentStep) + "_C.png";
-        // btnAnimationCxt.clearRect(0, 0, 112, 112);
-    }; 
-}
-
-function btnAnimationS() {
-    if (btnFrameIndex > 0) {
-        // if (btnTickCount > 0) {
-            btnTickCount = 0;
-            btnFrameIndex -= 1;
-            btnAnimationCxt.drawImage(btnAnimationImage,
-            0,336 * btnFrameIndex,336,336,0,0,112,112);
-        // } else {
-            // btnTickCount += 1;
-        // };
-        window.requestAnimationFrame(btnAnimationS);
-    } else {
-        window.cancelAnimationFrame(btnAnimationS);
-        imgM.src = "images/" + padding(currentStep) + "_S.png";
-        // btnAnimationCxt.clearRect(0, 0, 112, 112);
-    }; 
-}
+    btnAnimation.style.webkitTransform = "translate3d(0,-84em,0)";
+    separate = false;
+};
 
 // ================================================================
 
-var mainAnimationCxt = mainAnimation.getContext("2d");
+
+mainAnimation.width = 400;
+mainAnimation.height = 400;
+var cxt = mainAnimation.getContext("2d");
 var mainAnimationImage = new Image();
     mainAnimationImage.src = "images/001_Animation.png";
-var mainFrameIndex = 0;
+var frameIndex = 0;
 var ticksPerFrame = 1;
-var mainTickCount = 0;
+var tickCount = 0;
 
 function mainAnimationC() {
-    if (mainFrameIndex < 19) {
-        if (mainTickCount > ticksPerFrame) {
-            mainTickCount = 0;
-            mainFrameIndex += 1;
-            mainAnimationCxt.drawImage(mainAnimationImage,
-            0,400 * mainFrameIndex,400,400,0,0,newWidth,newWidth);
+    if (frameIndex < 19) {
+        if (tickCount > ticksPerFrame) {
+            tickCount = 0;
+            frameIndex += 1;
+            cxt.drawImage(mainAnimationImage,
+            0,400 * frameIndex, 400, 400, 0, 0, 400, 400);
         } else {
-            mainTickCount += 1;
+            tickCount += 1;
         };
         window.requestAnimationFrame(mainAnimationC);
     } else {
         window.cancelAnimationFrame(mainAnimationC);
-        mainAnimationCxt.clearRect(0, 0, newWidth, newWidth);
+        cxt.clearRect(0, 0, 400, 400);
     }; 
 };
 
 function mainAnimationS() {
-    if (mainFrameIndex > 0) {
-        if (mainTickCount > ticksPerFrame) {
-            mainTickCount = 0;
-            mainFrameIndex -= 1;
-            mainAnimationCxt.drawImage(mainAnimationImage,
-            0,400 * mainFrameIndex,400,400,0,0,newWidth,newWidth);
+    if (frameIndex > 0) {
+        if (tickCount > ticksPerFrame) {
+            tickCount = 0;
+            frameIndex -= 1;
+            cxt.drawImage(mainAnimationImage,
+            0,400 * frameIndex,400,400,0,0, 400, 400);
         } else {
-            mainTickCount += 1;
+            tickCount += 1;
         }
         window.requestAnimationFrame(mainAnimationS);
     } else {
         window.cancelAnimationFrame(mainAnimationS);
-        mainAnimationCxt.clearRect(0, 0, newWidth, newWidth);
+        cxt.clearRect(0, 0, 400, 400);
     }; 
 };
 
@@ -417,23 +372,21 @@ nextGlow.addEventListener('webkitAnimationEnd', function(){
 btnAnimation.addEventListener('touchstart', function(){
     // mask.style.display = "block";
     if (separate) {
-        separate = false;
         btnAnimationC();
         mainAnimationC();
     }else {
-        separate = true;
         btnAnimationS();
         mainAnimationS();
     };
 }, false);
 
-// btnAnimation.addEventListener('webkitTransitionEnd', function(){
-//     if (separate) {
-//         imgM.src = "images/" + padding(currentStep) + "_S.png";
-//     }else {
-//         imgM.src = "images/" + padding(currentStep) + "_C.png";
-//     };
-// }, false);
+btnAnimation.addEventListener('webkitTransitionEnd', function(){
+    if (separate) {
+        imgM.src = "images/" + padding(currentStep) + "_S.png";
+    }else {
+        imgM.src = "images/" + padding(currentStep) + "_C.png";
+    };
+}, false);
 
 
 // function imagesPreload(){

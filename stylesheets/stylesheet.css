@@ -109,14 +109,14 @@ body, html{
 }
 
 #btnAnimation{
-    /*width: 7em;
-    height: 7em;
+    width: 7em;
+    height: 91em;
     background-image: url(../images/button.png);
     background-size: 7em 91em;
-    background-position: 0 0;*/
+    background-position: 0 0;
     position: relative;
     margin: auto;
-    /*-webkit-transition: -webkit-transform 0.3s steps(12);*/
+    -webkit-transition: -webkit-transform 0.3s steps(12);
     
 }
 
