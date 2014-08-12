@@ -274,9 +274,9 @@ function mainAnimationC() {
             0,400 * frameIndex,400,400,0,0,newWidth,newWidth);
         } else {
             tickCount += 1;
-            if (frameIndex == 1 && tickCount == 1) {
-                imgM.src = "images/" + padding(currentStep) + "_C.png";
-            };
+            // if (frameIndex == 1 && tickCount == 1) {
+            //     imgM.src = "images/" + padding(currentStep) + "_C.png";
+            // };
         };
         window.requestAnimationFrame(mainAnimationC);
     } else {
@@ -294,9 +294,9 @@ function mainAnimationS() {
             0,400 * frameIndex,400,400,0,0,newWidth,newWidth);
         } else {
             tickCount += 1;
-            if (frameIndex == 18 && tickCount == 1) {
-                imgM.src = "images/" + padding(currentStep) + "_S.png";
-            };
+            // if (frameIndex == 18 && tickCount == 1) {
+            //     imgM.src = "images/" + padding(currentStep) + "_S.png";
+            // };
         }
         window.requestAnimationFrame(mainAnimationS);
     } else {
@@ -377,6 +377,14 @@ btnAnimation.addEventListener('touchstart', function(){
     }else {
         btnAnimationS();
         mainAnimationS();
+    };
+}, false);
+
+btnAnimation.addEventListener('webkitTransitionEnd', function(){
+    if (separate) {
+        imgM.src = "images/" + padding(currentStep) + "_S.png";
+    }else {
+        imgM.src = "images/" + padding(currentStep) + "_C.png";
     };
 }, false);
 
