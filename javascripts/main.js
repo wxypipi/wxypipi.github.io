@@ -248,62 +248,107 @@ function padding(n) {
     return(("00" + n).slice(-3));
 };
 
-function btnAnimationS() {
-    // btnAnimation.style.webkitTransform = "translate3d(0,0,0)";
-    separate = true;
-};
+// function btnAnimationS() {
+//     // btnAnimation.style.webkitTransform = "translate3d(0,0,0)";
+//     separate = true;
+// };
+
+// function btnAnimationC() {
+//     // btnAnimation.style.webkitTransform = "translate3d(0,-84em,0)";
+//     separate = false;
+// };
+
+// ===============================================================
+
+btnAnimation.width = 112;
+btnAnimation.height = 112;
+
+var btnAnimationCxt = btnAnimation.getContext("2d");
+var btnAnimationImage = new Image();
+    btnAnimationImage.src = "images/button.png";
+var btnFrameIndex = 0;
+var btnTickCount = 0;
 
 function btnAnimationC() {
-    // btnAnimation.style.webkitTransform = "translate3d(0,-84em,0)";
-    separate = false;
-};
+    if (btnFrameIndex < 12) {
+        // if (btnTickCount > 0) {
+            btnTickCount = 0;
+            btnFrameIndex += 1;
+            btnAnimationCxt.drawImage(btnAnimationImage,
+            0,336 * btnFrameIndex,336,336,0,0,112,112);
+        // } else {
+            // btnTickCount += 1;
+        // };
+        window.requestAnimationFrame(btnAnimationC);
+    } else {
+        window.cancelAnimationFrame(btnAnimationC);
+        imgM.src = "images/" + padding(currentStep) + "_C.png";
+        // btnAnimationCxt.clearRect(0, 0, 112, 112);
+    }; 
+}
 
-var cxt = mainAnimation.getContext("2d");
+function btnAnimationS() {
+    if (btnFrameIndex > 0) {
+        // if (btnTickCount > 0) {
+            btnTickCount = 0;
+            btnFrameIndex -= 1;
+            btnAnimationCxt.drawImage(btnAnimationImage,
+            0,336 * btnFrameIndex,336,336,0,0,112,112);
+        // } else {
+            // btnTickCount += 1;
+        // };
+        window.requestAnimationFrame(btnAnimationS);
+    } else {
+        window.cancelAnimationFrame(btnAnimationS);
+        imgM.src = "images/" + padding(currentStep) + "_S.png";
+        // btnAnimationCxt.clearRect(0, 0, 112, 112);
+    }; 
+}
+
+// ================================================================
+
+var mainAnimationCxt = mainAnimation.getContext("2d");
 var mainAnimationImage = new Image();
     mainAnimationImage.src = "images/001_Animation.png";
-var frameIndex = 0;
+var mainFrameIndex = 0;
 var ticksPerFrame = 1;
-var tickCount = 0;
+var mainTickCount = 0;
 
 function mainAnimationC() {
-    if (frameIndex < 19) {
-        if (tickCount > ticksPerFrame) {
-            tickCount = 0;
-            frameIndex += 1;
-            cxt.drawImage(mainAnimationImage,
-            0,400 * frameIndex,400,400,0,0,newWidth,newWidth);
+    if (mainFrameIndex < 19) {
+        if (mainTickCount > ticksPerFrame) {
+            mainTickCount = 0;
+            mainFrameIndex += 1;
+            mainAnimationCxt.drawImage(mainAnimationImage,
+            0,400 * mainFrameIndex,400,400,0,0,newWidth,newWidth);
         } else {
-            tickCount += 1;
-            // if (frameIndex == 1 && tickCount == 1) {
-            //     imgM.src = "images/" + padding(currentStep) + "_C.png";
-            // };
+            mainTickCount += 1;
         };
         window.requestAnimationFrame(mainAnimationC);
     } else {
         window.cancelAnimationFrame(mainAnimationC);
-        cxt.clearRect(0, 0, newWidth, newWidth);
+        mainAnimationCxt.clearRect(0, 0, newWidth, newWidth);
     }; 
 };
 
 function mainAnimationS() {
-    if (frameIndex > 0) {
-        if (tickCount > ticksPerFrame) {
-            tickCount = 0;
-            frameIndex -= 1;
-            cxt.drawImage(mainAnimationImage,
-            0,400 * frameIndex,400,400,0,0,newWidth,newWidth);
+    if (mainFrameIndex > 0) {
+        if (mainTickCount > ticksPerFrame) {
+            mainTickCount = 0;
+            mainFrameIndex -= 1;
+            mainAnimationCxt.drawImage(mainAnimationImage,
+            0,400 * mainFrameIndex,400,400,0,0,newWidth,newWidth);
         } else {
-            tickCount += 1;
-            // if (frameIndex == 18 && tickCount == 1) {
-            //     imgM.src = "images/" + padding(currentStep) + "_S.png";
-            // };
+            mainTickCount += 1;
         }
         window.requestAnimationFrame(mainAnimationS);
     } else {
         window.cancelAnimationFrame(mainAnimationS);
-        cxt.clearRect(0, 0, newWidth, newWidth);
+        mainAnimationCxt.clearRect(0, 0, newWidth, newWidth);
     }; 
 };
+
+// ================================================================
 
 function selectColor(item) {
     lastColorItem.style.backgroundPositionY = "0";
@@ -372,21 +417,23 @@ nextGlow.addEventListener('webkitAnimationEnd', function(){
 btnAnimation.addEventListener('touchstart', function(){
     // mask.style.display = "block";
     if (separate) {
+        separate = false;
         btnAnimationC();
         mainAnimationC();
     }else {
+        separate = true;
         btnAnimationS();
         mainAnimationS();
     };
 }, false);
 
-btnAnimation.addEventListener('webkitTransitionEnd', function(){
-    if (separate) {
-        imgM.src = "images/" + padding(currentStep) + "_S.png";
-    }else {
-        imgM.src = "images/" + padding(currentStep) + "_C.png";
-    };
-}, false);
+// btnAnimation.addEventListener('webkitTransitionEnd', function(){
+//     if (separate) {
+//         imgM.src = "images/" + padding(currentStep) + "_S.png";
+//     }else {
+//         imgM.src = "images/" + padding(currentStep) + "_C.png";
+//     };
+// }, false);
 
 
 // function imagesPreload(){
