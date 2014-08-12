@@ -108,7 +108,7 @@ body, html{
     overflow: hidden;
 }
 
-#aniBtnBox{
+#btnAnimation{
     width: 7em;
     height: 91em;
     background-image: url(../images/button.png);

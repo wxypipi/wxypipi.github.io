@@ -21,10 +21,7 @@ $('body').on('touchmove','.scrollable',function(e) {
 
 // alert("33");
 
-var $mainBox = $("#mainBox"),
-    $menuBox = $("#menuBox"),
-    $mainMask = $("#mainMask"),
-    mask = document.getElementById("mask"),
+var mask = document.getElementById("mask"),
     mainBox = document.getElementById("mainBox"),
     menuBox = document.getElementById("menuBox"),
     mainMask = document.getElementById("mainMask"),
@@ -39,35 +36,38 @@ var $mainBox = $("#mainBox"),
     $colorItem = $("#panelColor li"),
     $previousBtn = $("#previousBtn"),
     $nextBtn = $("#nextBtn"),
-    $previousGlow = $("#previousGlow"),
+    // $previousGlow = $("#previousGlow"),
     previousGlow = document.getElementById("previousGlow"),
-    $nextGlow = $("#nextGlow"),
+    // $nextGlow = $("#nextGlow"),
     nextGlow = document.getElementById("nextGlow"),
-    $aniBtnBox = $("#aniBtnBox"),
-    aniBtnBox = document.getElementById("aniBtnBox"),
-    $aniBox1 = $("#aniBox1"),
-    $aniBox2 = $("#aniBox2"),
+    // $aniBtnBox = $("#aniBtnBox"),
+    // $aniBox1 = $("#aniBox1"),
+    // $aniBox2 = $("#aniBox2"),
     imgL = document.getElementById("imgL"),
     imgR = document.getElementById("imgR"),
     imgM = document.getElementById("imgM"),
-    imgAnimation = document.getElementById("imgAnimation"),
+    aniBox1 = document.getElementById("aniBox1"),
     aniBox2 = document.getElementById("aniBox2"),
     stepText = document.getElementById("stepText"),
-    gradient = document.getElementById("menuFooterGradient"),
-    canvas = document.getElementById("mainAnimation"),
+    // gradient = document.getElementById("menuFooterGradient"),
+    mainAnimation = document.getElementById("mainAnimation"),
+    btnAnimation = document.getElementById("btnAnimation"),
     lastContentsItem = false,
     lastColorItem = $colorItem[0],
     separate = true,
-    isChangeStep = true,
+    // isChangeStep = true,
     currentStep = 1,
     maxStep = 4,
     newWidth
     ;
 
 function resize() {
-    $("style").remove();
-    var height = Number($aniBox1.css("height").slice(0,-2));
-    var width = Number($aniBox1.css("width").slice(0,-2));
+    var style = document.getElementsByTagName("style")[0];
+    if (style) {
+        style.parentNode.removeChild(style);
+    };
+    var height = Number((window.getComputedStyle(aniBox1).getPropertyValue('height')).slice(0,-2));
+    var width = Number((window.getComputedStyle(aniBox1).getPropertyValue('width')).slice(0,-2));
     if (height > width) {
         var moveDis = width;
         newWidth = width;
@@ -80,8 +80,8 @@ function resize() {
         var marginTop = 0;
     };
 
-    canvas.width = newWidth;
-    canvas.height = newWidth;
+    mainAnimation.width = newWidth;
+    mainAnimation.height = newWidth;
 
 
     var cssAnimation = document.createElement('style');
@@ -240,6 +240,7 @@ aniBox2.addEventListener('webkitAnimationEnd', function(){
     nextGlow.style.backgroundColor = "#C6C6C6";
     previousGlow.style.backgroundColor = "#C6C6C6";
     frameIndex = 0;//切换步骤时让动画回到第一帧，否则无法再次触发动画。
+    mainAnimationImage.src = "images/" + padding(currentStep) + "_Animation.png";
 
 }, false);
 
@@ -248,48 +249,35 @@ function padding(n) {
 };
 
 function btnAnimationS() {
-    aniBtnBox.style.webkitTransform = "translate3d(0,0,0)";
+    btnAnimation.style.webkitTransform = "translate3d(0,0,0)";
     separate = true;
 };
 
 function btnAnimationC() {
-    aniBtnBox.style.webkitTransform = "translate3d(0,-84em,0)";
+    btnAnimation.style.webkitTransform = "translate3d(0,-84em,0)";
     separate = false;
 };
 
-var cxt = canvas.getContext("2d");
-var animationImage = new Image();
-animationImage.src = "images/001_Animation.png";
+var cxt = mainAnimation.getContext("2d");
+var mainAnimationImage = new Image();
+    mainAnimationImage.src = "images/001_Animation.png";
 var frameIndex = 0;
 var ticksPerFrame = 1;
 var tickCount = 0;
-
-function render() {
-    // cxt.clearRect(0, 0, newWidth, newWidth);
-    cxt.drawImage(
-    animationImage,
-    0,
-    400 * frameIndex,
-    400,
-    400,
-    0,
-    0,
-    newWidth,
-    newWidth);
-};
 
 function mainAnimationC() {
     if (frameIndex < 19) {
         if (tickCount > ticksPerFrame) {
             tickCount = 0;
             frameIndex += 1;
-            render();
+            cxt.drawImage(mainAnimationImage,
+            0,400 * frameIndex,400,400,0,0,newWidth,newWidth);
         } else {
             tickCount += 1;
-            if (frameIndex == 1) {
+            if (frameIndex == 1 && tickCount == 1) {
                 imgM.src = "images/" + padding(currentStep) + "_C.png";
             };
-        }
+        };
         window.requestAnimationFrame(mainAnimationC);
     } else {
         window.cancelAnimationFrame(mainAnimationC);
@@ -302,10 +290,11 @@ function mainAnimationS() {
         if (tickCount > ticksPerFrame) {
             tickCount = 0;
             frameIndex -= 1;
-            render();
+            cxt.drawImage(mainAnimationImage,
+            0,400 * frameIndex,400,400,0,0,newWidth,newWidth);
         } else {
             tickCount += 1;
-            if (frameIndex == 18) {
+            if (frameIndex == 18 && tickCount == 1) {
                 imgM.src = "images/" + padding(currentStep) + "_S.png";
             };
         }
@@ -379,7 +368,8 @@ nextGlow.addEventListener('webkitAnimationEnd', function(){
     nextGlow.style.webkitAnimation = "none";
 }, false);
 
-$aniBtnBox.bind('touchstart', function() { 
+
+btnAnimation.addEventListener('touchstart', function(){
     // mask.style.display = "block";
     if (separate) {
         btnAnimationC();
@@ -388,7 +378,7 @@ $aniBtnBox.bind('touchstart', function() {
         btnAnimationS();
         mainAnimationS();
     };
-});
+}, false);
 
 
 // function imagesPreload(){
