@@ -58,28 +58,30 @@ var mask = document.getElementById("mask"),
     // isChangeStep = true,
     currentStep = 1,
     maxStep = 4,
-    newWidth
+    dragging = false
     ;
 
 function resize() {
+    // 删掉上次resize后产生的style
     var style = document.getElementsByTagName("style")[0];
     if (style) {
         style.parentNode.removeChild(style);
     };
+
     var height = Number((window.getComputedStyle(aniBox1).getPropertyValue('height')).slice(0,-2));
     var width = Number((window.getComputedStyle(aniBox1).getPropertyValue('width')).slice(0,-2));
+    
     if (height > width) {
-        var moveDis = width;
-        newWidth = width;
-        var newBoxwidth = width*3;
-        var marginTop = (height - width) / 2;
+        var moveDis = width,
+            newWidth = width,
+            newBoxwidth = width*3,
+            marginTop = (height - width) / 2;
     }else{
-        var moveDis = (width+height)/2;
-        newWidth = height;
-        var newBoxwidth = width+height*2;
-        var marginTop = 0;
+        var moveDis = (width+height)/2,
+            newWidth = height,
+            newBoxwidth = width+height*2,
+            marginTop = 0;
     };
-
 
     var cssAnimation = document.createElement('style');
     cssAnimation.type = 'text/css';
@@ -110,7 +112,6 @@ function resize() {
     cssAnimation.appendChild(rules);
     document.getElementsByTagName("head")[0].appendChild(cssAnimation);
 };
-
 
 function openMenuBar() {
     mainBox.style.webkitTransform = "translate3d(15em, 0, 0)";
@@ -338,10 +339,18 @@ $settingTab.bind('touchstart', function() {
     menuTagTo(this,"10em","-30em");
 });
 
+menuBox.addEventListener('touchmove', function(){
+    dragging = true;
+}, false);
+
+
 $contentsItem.bind('touchend', function() { 
-    changeStepJ(($contentsItem.index(this))+1);
-    selectStep(this);
-    closeMenuBar();
+    if (!dragging) {
+        changeStepJ(($contentsItem.index(this))+1);
+        selectStep(this);
+        closeMenuBar();
+    };
+    dragging = false;
 });
 
 $colorItem.bind('touchend', function() { 
