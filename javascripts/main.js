@@ -249,12 +249,12 @@ function padding(n) {
 };
 
 function btnAnimationS() {
-    btnAnimation.style.webkitTransform = "translate3d(0,0,0)";
+    // btnAnimation.style.webkitTransform = "translate3d(0,0,0)";
     separate = true;
 };
 
 function btnAnimationC() {
-    btnAnimation.style.webkitTransform = "translate3d(0,-84em,0)";
+    // btnAnimation.style.webkitTransform = "translate3d(0,-84em,0)";
     separate = false;
 };
 
