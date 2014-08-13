@@ -46,6 +46,9 @@ var mask = document.getElementById("mask"),
     imgL = document.getElementById("imgL"),
     imgR = document.getElementById("imgR"),
     imgM = document.getElementById("imgM"),
+    imgBoxL = document.getElementById("imgBoxL"),
+    imgBoxR = document.getElementById("imgBoxR"),
+    imgBoxM = document.getElementById("imgBoxM"),
     aniBox1 = document.getElementById("aniBox1"),
     aniBox2 = document.getElementById("aniBox2"),
     stepText = document.getElementById("stepText"),
@@ -58,7 +61,8 @@ var mask = document.getElementById("mask"),
     // isChangeStep = true,
     currentStep = 1,
     maxStep = 4,
-    dragging = false
+    dragging = false,
+    moveDis = 0
     ;
 
 function resize() {
@@ -72,21 +76,32 @@ function resize() {
     var width = Number((window.getComputedStyle(aniBox1).getPropertyValue('width')).slice(0,-2));
     
     if (height > width) {
-        var moveDis = width,
-            newWidth = width,
+        var newWidth = width,
             newBoxwidth = width*3,
             marginTop = (height - width) / 2;
+            moveDis = width;
     }else{
-        var moveDis = (width+height)/2,
-            newWidth = height,
+        var newWidth = height,
             newBoxwidth = width+height*2,
             marginTop = 0;
+            moveDis = (width+height)/2;
     };
+
+    imgBoxL.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+    imgBoxR.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+    imgBoxM.style.webkitTransform = "translate3d(0,0,0)";
+    // alert(moveDis);
 
     var cssAnimation = document.createElement('style');
     cssAnimation.type = 'text/css';
     var rules = document.createTextNode(
-    "#imgBoxM,#imgBoxL,#imgBoxR,#imgM,#imgL,#imgR{"+
+    "#aniBox2 li{"+
+        "position: absolute;"+
+        "display: block;"+
+        "height: " + newWidth + "px;"+
+        "width: " + newWidth + "px;}"+
+
+    "#aniBox2 li img{"+
         "height: " + newWidth + "px;"+
         "width: " + newWidth + "px;}"+
 
@@ -98,9 +113,9 @@ function resize() {
 
     "#aniBox2{"+
         "height: " + newWidth + "px;"+
-        "width: " + newBoxwidth + "px;"+
-        "margin-top: " + marginTop + "px;"+
-        "left: -" + newWidth + "px}"+
+        "width: " + newWidth + "px;"+
+        "top: " + marginTop + "px;"+
+        "left: " + ((width - newWidth) / 2) + "px}"+
 
     '@-webkit-keyframes moveR {'+
     'from {-webkit-transform: translate3d(0, 0, 0)}'+
@@ -395,6 +410,25 @@ btnAnimation.addEventListener('webkitTransitionEnd', function(){
     }else {
         imgM.src = "images/" + padding(currentStep) + "_C.png";
     };
+}, false);
+
+var touchPos = 0;
+
+
+aniBox1.addEventListener('touchstart', function(e){
+    touchPos = e.touches[0].clientX;
+    // console.log(aaa);
+    // alert("here");
+}, false);
+
+aniBox1.addEventListener('touchmove', function(e){
+    var aaa = (e.touches[0].clientX) - touchPos;
+    // console.log(aaa - touchPos);
+    // alert("here");
+    imgBoxL.style.webkitTransform = "translate3d(-" + (moveDis + aaa) + "px,0,0)";
+    imgBoxR.style.webkitTransform = "translate3d(" + (moveDis + aaa) + "px,0,0)";
+    imgBoxM.style.webkitTransform = "translate3d(" + aaa + "px,0,0)";
+
 }, false);
 
 

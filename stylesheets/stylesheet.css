@@ -205,7 +205,6 @@ body, html{
     margin: 0 auto;
     width: 20em;
     height: 100%;
-    overflow: hidden;
     /*display: none;*/
     /*background-image: url(../images/001.png),none,url(../images/002.png);*/
     /*background-repeat: no-repeat,no-repeat,no-repeat;*/
@@ -213,20 +212,27 @@ body, html{
     /*-webkit-perspective: 1000;*/
 }
 
-#imgBoxM{
+
+/*#aniBox2 li{
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+}*/
+
+/*#imgBoxM{
     margin: auto;
     position: relative;
-    font-size:0;/*用来去掉img之间的间距*/
-}
+    font-size:0;用来去掉img之间的间距
+}*/
 
-#imgBoxL{
-    float: left;
-}
+/*#imgBoxL{
+    -webkit-transform: translate3d(-320px,0,0);
+}*/
 
-#imgBoxR{
+/*#imgBoxR{
     float: right;
-    /*background-image: url(../images/002.png);*/
-}
+}*/
 
 
 
