@@ -87,7 +87,7 @@ function resize() {
             marginTop = 0;
             moveDis = (width+height)/2;
     };
-    
+
     imgBox[0].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
     imgBox[1].style.webkitTransform = "translate3d(0,0,0)";
     imgBox[2].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
@@ -100,6 +100,7 @@ function resize() {
     "#aniBox2 li{"+
         "position: absolute;"+
         "display: block;"+
+        "background-size: " + newWidth + "px " + newWidth + "px;"+
         "height: " + newWidth + "px;"+
         "width: " + newWidth + "px;}"+
 
@@ -166,31 +167,67 @@ function selectStep(item) {
 };
 
 function changeStepN() {
+    imgBox[1].style.webkitTransition = "-webkit-transform 0.2s ease-out";
+    imgBox[2].style.webkitTransition = "-webkit-transform 0.2s ease-out";
+
     if (currentStep == maxStep) {
-        nextGlow.style.backgroundColor = "#FF9D82";
-        mask.style.display = "none";
-        return
+        imgBox[0].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+        imgBox[1].style.webkitTransform = "translate3d(0,0,0)";
+        imgBox[2].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+    //     nextGlow.style.backgroundColor = "#FF9D82";
+    //     mask.style.display = "none";
+    //     return
+    } else {
+        imgBox[0].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+        imgBox[1].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+        imgBox[2].style.webkitTransform = "translate3d(0,0,0)";
+    
+        imgBox[0].style.backgroundImage = "url(images/" + padding(currentStep+2) + "_S.png)";
+
+        var first = imgBox.shift();
+        imgBox.push(first);
+
+        currentStep += 1;
+        stepText.innerHTML = padding(currentStep);
     };
-    aniBox2.style.webkitAnimation = "moveL 0.3s forwards ease-in-out";
-    if (!separate) {
-        btnAnimationS();
-    };
-    currentStep += 1;
-    stepText.innerHTML = padding(currentStep);
+
+    // if (!separate) {
+    //     btnAnimationS();
+    // };
+    // currentStep += 1;
+    // stepText.innerHTML = padding(currentStep);
 };
 
 function changeStepP() {
+    imgBox[0].style.webkitTransition = "-webkit-transform 0.2s ease-out";
+    imgBox[1].style.webkitTransition = "-webkit-transform 0.2s ease-out";
+
     if (currentStep == 1) {
-        previousGlow.style.backgroundColor = "#FF9D82";
-        mask.style.display = "none";
-        return
+        imgBox[0].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+        imgBox[1].style.webkitTransform = "translate3d(0,0,0)";
+        imgBox[2].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+        // previousGlow.style.backgroundColor = "#FF9D82";
+        // mask.style.display = "none";
+    } else {
+        imgBox[0].style.webkitTransform = "translate3d(0,0,0)";
+        imgBox[1].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+        imgBox[2].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+
+        imgBox[2].style.backgroundImage = "url(images/" + padding(currentStep-2) + "_S.png)";
+    
+        var first = imgBox.shift();
+        imgBox.push(first);
+        first = imgBox.shift();
+        imgBox.push(first);
+
+        currentStep -= 1;
+        stepText.innerHTML = padding(currentStep);
     };
-    aniBox2.style.webkitAnimation = "moveR 0.3s forwards ease-in-out";
-    if (!separate) {
-        btnAnimationS();
-    };
-    currentStep -= 1;
-    stepText.innerHTML = padding(currentStep);
+
+    // if (!separate) {
+    //     btnAnimationS();
+    // };
+    
 };
 
 function changeStepJ(target) {
@@ -375,7 +412,7 @@ $colorItem.bind('touchend', function() {
 });
 
 $previousBtn.bind('touchstart', function() { 
-    mask.style.display = "block";
+    // mask.style.display = "block";
     previousGlow.style.webkitAnimation = "glow 0.3s linear";
     changeStepP();
 });
@@ -385,7 +422,7 @@ previousGlow.addEventListener('webkitAnimationEnd', function(){
 }, false);
 
 $nextBtn.bind('touchstart', function() { 
-    mask.style.display = "block";
+    // mask.style.display = "block";
     nextGlow.style.webkitAnimation = "glow 0.3s linear";
     changeStepN();
 });
@@ -418,9 +455,7 @@ var touchPos = 0;
 
 
 aniBox1.addEventListener('touchstart', function(e){
-    imgBox[0].style.webkitTransition = "none";
-    imgBox[1].style.webkitTransition = "none";
-    imgBox[2].style.webkitTransition = "none";
+    
 
     touchPos = e.touches[0].clientX;
     // console.log(aaa);
@@ -429,44 +464,30 @@ aniBox1.addEventListener('touchstart', function(e){
 
 aniBox1.addEventListener('touchmove', function(e){
     var aaa = (e.touches[0].clientX) - touchPos;
-    // console.log(aaa - touchPos);
-    // alert("here");
+
     imgBox[0].style.webkitTransform = "translate3d(" + (- moveDis + aaa) + "px,0,0)";
     imgBox[1].style.webkitTransform = "translate3d(" + aaa + "px,0,0)";
     imgBox[2].style.webkitTransform = "translate3d(" + (moveDis + aaa) + "px,0,0)";
     
-
 }, false);
 
-aniBox1.addEventListener('touchend', function(e){
-    
 
+
+aniBox1.addEventListener('touchend', function(e){
     var aaa = e.changedTouches[0].clientX
     if (aaa > touchPos) {
-        imgBox[0].style.webkitTransition = "-webkit-transform 0.2s ease-out";
-        imgBox[1].style.webkitTransition = "-webkit-transform 0.2s ease-out";
-
-        imgBox[0].style.webkitTransform = "translate3d(0,0,0)";
-        imgBox[1].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
-        imgBox[2].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
-
-        var first = imgBox.shift();
-        imgBox.push(first);
-        first = imgBox.shift();
-        imgBox.push(first);
+        changeStepP();
     } else if (aaa < touchPos) {
-        imgBox[1].style.webkitTransition = "-webkit-transform 0.2s ease-out";
-        imgBox[2].style.webkitTransition = "-webkit-transform 0.2s ease-out";
-
-        imgBox[0].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
-        imgBox[1].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
-        imgBox[2].style.webkitTransform = "translate3d(0,0,0)";
-
-        var first = imgBox.shift();
-        imgBox.push(first);
+        changeStepN();
     };
     // console.log(aaa);
     // alert("here");
+}, false);
+
+aniBox2.addEventListener('webkitTransitionEnd', function(){
+    imgBox[0].style.webkitTransition = "none";
+    imgBox[1].style.webkitTransition = "none";
+    imgBox[2].style.webkitTransition = "none";
 }, false);
 
 
@@ -910,6 +931,58 @@ aniBox1.addEventListener('touchend', function(e){
 // function mainAnimationS() {
 //     isChangeStep = false;
 //     // imgAnimation.style.webkitAnimation = "mainAnimationS 0.5s forwards steps(19)";
+// };
+
+// function changeStepN() {
+//     if (currentStep == maxStep) {
+//         nextGlow.style.backgroundColor = "#FF9D82";
+//         mask.style.display = "none";
+//         return
+//     };
+//     aniBox2.style.webkitAnimation = "moveL 0.3s forwards ease-in-out";
+//     if (!separate) {
+//         btnAnimationS();
+//     };
+//     currentStep += 1;
+//     stepText.innerHTML = padding(currentStep);
+// };
+
+// function changeStepP() {
+//     if (currentStep == 1) {
+//         previousGlow.style.backgroundColor = "#FF9D82";
+//         mask.style.display = "none";
+//         return
+//     };
+//     aniBox2.style.webkitAnimation = "moveR 0.3s forwards ease-in-out";
+//     if (!separate) {
+//         btnAnimationS();
+//     };
+//     currentStep -= 1;
+//     stepText.innerHTML = padding(currentStep);
+// };
+
+// function changeStepJ(target) {
+//     if (currentStep == target) {
+//         return
+//     }else if (target == 1) {
+//         imgM.src = "images/001_S.png";
+//         imgR.src = "images/002_S.png";
+//     }else if (target == maxStep) {
+//         imgM.src = "images/" + padding(target) + "_S.png";
+//         imgL.src = "images/" + padding(target-1) + "_S.png";
+//     }else {
+//         imgM.src = "images/" + padding(target) + "_S.png";
+//         imgL.src = "images/" + padding(target-1) + "_S.png";
+//         imgR.src = "images/" + padding(target+1) + "_S.png";
+//     };
+//     // imgAnimation.src = "images/" + padding(target) + "_Animation.png";
+
+//     if (!separate) {
+//         btnAnimationS();
+//     };
+//     currentStep = target;
+//     stepText.innerHTML = padding(currentStep);
+//     frameIndex = 0;//切换步骤时让动画回到第一帧，否则无法再次触发动画。
 // };
 
 });

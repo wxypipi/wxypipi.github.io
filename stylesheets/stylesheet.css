@@ -213,12 +213,17 @@ body, html{
 }
 
 
-/*#aniBox2 li{
-    position: absolute;
-    display: block;
-    width: 100%;
-    height: 100%;
-}*/
+#imgBox1{
+    background-image: url(../images/003_S.png);
+}
+
+#imgBox2{
+    background-image: url(../images/001_S.png);
+}
+
+#imgBox3{
+    background-image: url(../images/002_S.png);
+}
 
 /*#imgBoxM{
     margin: auto;
