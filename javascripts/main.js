@@ -46,9 +46,10 @@ var mask = document.getElementById("mask"),
     imgL = document.getElementById("imgL"),
     imgR = document.getElementById("imgR"),
     imgM = document.getElementById("imgM"),
-    imgBoxL = document.getElementById("imgBoxL"),
-    imgBoxR = document.getElementById("imgBoxR"),
-    imgBoxM = document.getElementById("imgBoxM"),
+    imgBox1 = document.getElementById("imgBox1"),
+    imgBox2 = document.getElementById("imgBox2"),
+    imgBox3 = document.getElementById("imgBox3"),
+    imgBox = [imgBox1,imgBox2,imgBox3],
     aniBox1 = document.getElementById("aniBox1"),
     aniBox2 = document.getElementById("aniBox2"),
     stepText = document.getElementById("stepText"),
@@ -86,10 +87,11 @@ function resize() {
             marginTop = 0;
             moveDis = (width+height)/2;
     };
-
-    imgBoxL.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
-    imgBoxR.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
-    imgBoxM.style.webkitTransform = "translate3d(0,0,0)";
+    
+    imgBox[0].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+    imgBox[1].style.webkitTransform = "translate3d(0,0,0)";
+    imgBox[2].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+    
     // alert(moveDis);
 
     var cssAnimation = document.createElement('style');
@@ -416,6 +418,10 @@ var touchPos = 0;
 
 
 aniBox1.addEventListener('touchstart', function(e){
+    imgBox[0].style.webkitTransition = "none";
+    imgBox[1].style.webkitTransition = "none";
+    imgBox[2].style.webkitTransition = "none";
+
     touchPos = e.touches[0].clientX;
     // console.log(aaa);
     // alert("here");
@@ -425,10 +431,42 @@ aniBox1.addEventListener('touchmove', function(e){
     var aaa = (e.touches[0].clientX) - touchPos;
     // console.log(aaa - touchPos);
     // alert("here");
-    imgBoxL.style.webkitTransform = "translate3d(-" + (moveDis + aaa) + "px,0,0)";
-    imgBoxR.style.webkitTransform = "translate3d(" + (moveDis + aaa) + "px,0,0)";
-    imgBoxM.style.webkitTransform = "translate3d(" + aaa + "px,0,0)";
+    imgBox[0].style.webkitTransform = "translate3d(" + (- moveDis + aaa) + "px,0,0)";
+    imgBox[1].style.webkitTransform = "translate3d(" + aaa + "px,0,0)";
+    imgBox[2].style.webkitTransform = "translate3d(" + (moveDis + aaa) + "px,0,0)";
+    
 
+}, false);
+
+aniBox1.addEventListener('touchend', function(e){
+    
+
+    var aaa = e.changedTouches[0].clientX
+    if (aaa > touchPos) {
+        imgBox[0].style.webkitTransition = "-webkit-transform 0.2s ease-out";
+        imgBox[1].style.webkitTransition = "-webkit-transform 0.2s ease-out";
+
+        imgBox[0].style.webkitTransform = "translate3d(0,0,0)";
+        imgBox[1].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+        imgBox[2].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+
+        var first = imgBox.shift();
+        imgBox.push(first);
+        first = imgBox.shift();
+        imgBox.push(first);
+    } else if (aaa < touchPos) {
+        imgBox[1].style.webkitTransition = "-webkit-transform 0.2s ease-out";
+        imgBox[2].style.webkitTransition = "-webkit-transform 0.2s ease-out";
+
+        imgBox[0].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+        imgBox[1].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+        imgBox[2].style.webkitTransform = "translate3d(0,0,0)";
+
+        var first = imgBox.shift();
+        imgBox.push(first);
+    };
+    // console.log(aaa);
+    // alert("here");
 }, false);
 
 
