@@ -465,15 +465,25 @@ var touchMoveImageEnd = false;
 
 aniBox1.addEventListener('touchstart', function(e){
     touchStartPos = e.touches[0].clientX;
-    touchMoveImageEnd = false;
+    
     if (touchStartPos > 30) {
+        touchMoveImageEnd = false;
+        imgBox[0].style.webkitTransition = "none";
+        imgBox[1].style.webkitTransition = "none";
+        imgBox[2].style.webkitTransition = "none";
         touchMoveImage()
     };
 }, false);
 
 var touchMoveDis = 0;
+var firstTouchMove = true;
 
 aniBox1.addEventListener('touchmove', function(e){
+    if (firstTouchMove) {
+        touchStartPos = e.touches[0].clientX;
+        firstTouchMove = false;
+    };
+    
     touchMoveDis = (e.touches[0].clientX) - touchStartPos;
     // stepText.innerHTML = touchMoveDis;
 }, false);
@@ -492,6 +502,7 @@ function touchMoveImage() {
 
 aniBox1.addEventListener('touchend', function(e){
     touchMoveImageEnd = true;
+    firstTouchMove = true;
     // 
     var touchEndPos = e.changedTouches[0].clientX
     if (touchEndPos - touchStartPos > 50) {
@@ -505,12 +516,6 @@ aniBox1.addEventListener('touchend', function(e){
         notChangeStep();
     }
     
-}, false);
-
-aniBox2.addEventListener('webkitTransitionEnd', function(){
-    imgBox[0].style.webkitTransition = "none";
-    imgBox[1].style.webkitTransition = "none";
-    imgBox[2].style.webkitTransition = "none";
 }, false);
 
 
