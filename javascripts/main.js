@@ -167,30 +167,33 @@ function selectStep(item) {
 };
 
 function changeStepN() {
-    
-
-    if (currentStep == maxStep) {
-        notChangeStep()
     //     nextGlow.style.backgroundColor = "#FF9D82";
     //     mask.style.display = "none";
-    //     return
-    } else {
-        imgBox[1].style.webkitTransition = "-webkit-transform 0.3s cubic-bezier(.20, 0, .41, 1)";
-        imgBox[2].style.webkitTransition = "-webkit-transform 0.3s cubic-bezier(.20, 0, .41, 1)";
+    imgBox[1].style.webkitTransition = "-webkit-transform 0.3s cubic-bezier(.20, 0, .41, 1)";
+    imgBox[2].style.webkitTransition = "-webkit-transform 0.3s cubic-bezier(.20, 0, .41, 1)";
 
-        imgBox[0].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
-        imgBox[1].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
-        imgBox[2].style.webkitTransform = "translate3d(0,0,0)";
-    
-        imgBox[0].style.backgroundImage = "url(images/" + padding(currentStep+2) + "_S.png)";
+    imgBox[0].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+    imgBox[1].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+    imgBox[2].style.webkitTransform = "translate3d(0,0,0)";
+
+    aniBox2.addEventListener('webkitTransitionEnd', afterChangeStepN, false);
+
+    function afterChangeStepN() {
+        // alert("N");
+        imgBox[1].style.webkitTransition = "none";
+        imgBox[2].style.webkitTransition = "none";
+        if (currentStep != maxStep) {
+            imgBox[0].style.backgroundImage = "url(images/" + padding(currentStep+2) + "_S.png)";
+        };
 
         var first = imgBox.shift();
         imgBox.push(first);
 
         currentStep += 1;
         stepText.innerHTML = padding(currentStep);
-    };
 
+        aniBox2.removeEventListener('webkitTransitionEnd', afterChangeStepN, false);
+    };
     // if (!separate) {
     //     btnAnimationS();
     // };
@@ -199,35 +202,40 @@ function changeStepN() {
 };
 
 function changeStepP() {
-    
+    // previousGlow.style.backgroundColor = "#FF9D82";
+    // mask.style.display = "none";
+    imgBox[0].style.webkitTransition = "-webkit-transform 0.3s cubic-bezier(.20, 0, .41, 1)";
+    imgBox[1].style.webkitTransition = "-webkit-transform 0.3s cubic-bezier(.20, 0, .41, 1)";
 
-    if (currentStep == 1) {
-        notChangeStep()
-        // previousGlow.style.backgroundColor = "#FF9D82";
-        // mask.style.display = "none";
-    } else {
-        imgBox[0].style.webkitTransition = "-webkit-transform 0.3s cubic-bezier(.20, 0, .41, 1)";
-        imgBox[1].style.webkitTransition = "-webkit-transform 0.3s cubic-bezier(.20, 0, .41, 1)";
+    imgBox[0].style.webkitTransform = "translate3d(0,0,0)";
+    imgBox[1].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+    imgBox[2].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
 
-        imgBox[0].style.webkitTransform = "translate3d(0,0,0)";
-        imgBox[1].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
-        imgBox[2].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+    aniBox2.addEventListener('webkitTransitionEnd', afterChangeStepP, false);
 
-        imgBox[2].style.backgroundImage = "url(images/" + padding(currentStep-2) + "_S.png)";
-    
+    function afterChangeStepP() {
+        // alert("P");
+        imgBox[0].style.webkitTransition = "none";
+        imgBox[1].style.webkitTransition = "none";
+
+        if (currentStep != 1) {
+            imgBox[2].style.backgroundImage = "url(images/" + padding(currentStep-2) + "_S.png)";
+        };
+
         var first = imgBox.shift();
         imgBox.push(first);
         first = imgBox.shift();
         imgBox.push(first);
-
+              
         currentStep -= 1;
         stepText.innerHTML = padding(currentStep);
-    };
+
+        aniBox2.removeEventListener('webkitTransitionEnd', afterChangeStepP, false);
+    };   
 
     // if (!separate) {
     //     btnAnimationS();
     // };
-    
 };
 
 function notChangeStep(){
@@ -238,7 +246,18 @@ function notChangeStep(){
     imgBox[0].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
     imgBox[1].style.webkitTransform = "translate3d(0,0,0)";
     imgBox[2].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
-}
+
+    aniBox2.addEventListener('webkitTransitionEnd', afterNotChangeStep, false);
+
+    function afterNotChangeStep() {
+        // alert("Not");
+        imgBox[0].style.webkitTransition = "none";
+        imgBox[1].style.webkitTransition = "none";
+        imgBox[2].style.webkitTransition = "none";
+        aniBox2.removeEventListener('webkitTransitionEnd', afterNotChangeStep, false);
+    };
+};
+
 
 function changeStepJ(target) {
     if (currentStep == target) {
@@ -484,10 +503,10 @@ aniBox1.addEventListener('touchmove', function(e){
     if (firstTouchMove) {
         touchStartPos = e.touches[0].clientX;
         touchMoveImageEnd = false;
-        if (touchStartPos > 30) {
-            imgBox[0].style.webkitTransition = "none";
-            imgBox[1].style.webkitTransition = "none";
-            imgBox[2].style.webkitTransition = "none";
+        if (touchStartPos > 60) {
+            // imgBox[0].style.webkitTransition = "none";
+            // imgBox[1].style.webkitTransition = "none";
+            // imgBox[2].style.webkitTransition = "none";
             touchMoveImage()
         } else {
             mainBox.style.webkitTransition = "none";
@@ -534,10 +553,10 @@ aniBox1.addEventListener('touchend', function(e){
     // 
     var touchEndPos = e.changedTouches[0].clientX;
 
-    if (touchStartPos > 30) {
-        if (touchEndPos - touchStartPos > 50) {
+    if (touchStartPos > 60) {
+        if (touchEndPos - touchStartPos > 50 && currentStep != 1) {
             changeStepP();
-        } else if (touchStartPos - touchEndPos > 50) {
+        } else if (touchStartPos - touchEndPos > 50 && currentStep != maxStep) {
             changeStepN();
         } else {
             notChangeStep();
@@ -550,7 +569,7 @@ aniBox1.addEventListener('touchend', function(e){
         } else {
             closeMenuBar();
         };
-    }
+    };
         
     
 }, false);
