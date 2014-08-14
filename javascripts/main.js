@@ -167,17 +167,17 @@ function selectStep(item) {
 };
 
 function changeStepN() {
-    imgBox[1].style.webkitTransition = "-webkit-transform 0.2s ease-out";
-    imgBox[2].style.webkitTransition = "-webkit-transform 0.2s ease-out";
+    
 
     if (currentStep == maxStep) {
-        imgBox[0].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
-        imgBox[1].style.webkitTransform = "translate3d(0,0,0)";
-        imgBox[2].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+        notChangeStep()
     //     nextGlow.style.backgroundColor = "#FF9D82";
     //     mask.style.display = "none";
     //     return
     } else {
+        imgBox[1].style.webkitTransition = "-webkit-transform 0.2s ease-out";
+        imgBox[2].style.webkitTransition = "-webkit-transform 0.2s ease-out";
+
         imgBox[0].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
         imgBox[1].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
         imgBox[2].style.webkitTransform = "translate3d(0,0,0)";
@@ -199,16 +199,16 @@ function changeStepN() {
 };
 
 function changeStepP() {
-    imgBox[0].style.webkitTransition = "-webkit-transform 0.2s ease-out";
-    imgBox[1].style.webkitTransition = "-webkit-transform 0.2s ease-out";
+    
 
     if (currentStep == 1) {
-        imgBox[0].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
-        imgBox[1].style.webkitTransform = "translate3d(0,0,0)";
-        imgBox[2].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+        notChangeStep()
         // previousGlow.style.backgroundColor = "#FF9D82";
         // mask.style.display = "none";
     } else {
+        imgBox[0].style.webkitTransition = "-webkit-transform 0.2s ease-out";
+        imgBox[1].style.webkitTransition = "-webkit-transform 0.2s ease-out";
+
         imgBox[0].style.webkitTransform = "translate3d(0,0,0)";
         imgBox[1].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
         imgBox[2].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
@@ -229,6 +229,15 @@ function changeStepP() {
     // };
     
 };
+
+function notChangeStep(){
+    imgBox[0].style.webkitTransition = "-webkit-transform 0.2s ease-out";
+    imgBox[1].style.webkitTransition = "-webkit-transform 0.2s ease-out";
+
+    imgBox[0].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+    imgBox[1].style.webkitTransform = "translate3d(0,0,0)";
+    imgBox[2].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+}
 
 function changeStepJ(target) {
     if (currentStep == target) {
@@ -451,37 +460,43 @@ btnAnimation.addEventListener('webkitTransitionEnd', function(){
     };
 }, false);
 
-var touchPos = 0;
-
+var touchStartPos = 0;
 
 aniBox1.addEventListener('touchstart', function(e){
-    
-
-    touchPos = e.touches[0].clientX;
-    // console.log(aaa);
-    // alert("here");
+    touchStartPos = e.touches[0].clientX;
+    if (touchStartPos > 50) {
+        touchMoveImage()
+    };
 }, false);
+
+var touchMoveDis = 0;
 
 aniBox1.addEventListener('touchmove', function(e){
-    var aaa = (e.touches[0].clientX) - touchPos;
-
-    imgBox[0].style.webkitTransform = "translate3d(" + (- moveDis + aaa) + "px,0,0)";
-    imgBox[1].style.webkitTransform = "translate3d(" + aaa + "px,0,0)";
-    imgBox[2].style.webkitTransform = "translate3d(" + (moveDis + aaa) + "px,0,0)";
-    
+    touchMoveDis = (e.touches[0].clientX) - touchStartPos;
 }, false);
 
-
+function touchMoveImage() {
+    imgBox[0].style.webkitTransform = "translate3d(" + (- moveDis + touchMoveDis) + "px,0,0)";
+    imgBox[1].style.webkitTransform = "translate3d(" + touchMoveDis + "px,0,0)";
+    imgBox[2].style.webkitTransform = "translate3d(" + (moveDis + touchMoveDis) + "px,0,0)";
+    window.requestAnimationFrame(touchMoveImage);
+};
 
 aniBox1.addEventListener('touchend', function(e){
-    var aaa = e.changedTouches[0].clientX
-    if (aaa > touchPos) {
+    window.cancelAnimationFrame(touchMoveImage);
+    touchMoveDis = 0;
+    var touchEndPos = e.changedTouches[0].clientX
+    if (touchEndPos - touchStartPos > 50) {
+        // alert("P");
         changeStepP();
-    } else if (aaa < touchPos) {
+    } else if (touchStartPos - touchEndPos > 50) {
+        // alert("N");
         changeStepN();
-    };
-    // console.log(aaa);
-    // alert("here");
+    } else {
+        // alert("No");
+        notChangeStep();
+    }
+    
 }, false);
 
 aniBox2.addEventListener('webkitTransitionEnd', function(){
