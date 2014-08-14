@@ -176,24 +176,17 @@ function changeStepN() {
     imgBox[1].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
     imgBox[2].style.webkitTransform = "translate3d(0,0,0)";
 
-    aniBox2.addEventListener('webkitTransitionEnd', afterChangeStepN, false);
+    currentStep += 1;
+    stepText.innerHTML = padding(currentStep);
 
-    function afterChangeStepN() {
-        // alert("N");
-        imgBox[1].style.webkitTransition = "none";
-        imgBox[2].style.webkitTransition = "none";
-        if (currentStep != maxStep) {
-            imgBox[0].style.backgroundImage = "url(images/" + padding(currentStep+2) + "_S.png)";
-        };
-
-        var first = imgBox.shift();
-        imgBox.push(first);
-
-        currentStep += 1;
-        stepText.innerHTML = padding(currentStep);
-
-        aniBox2.removeEventListener('webkitTransitionEnd', afterChangeStepN, false);
+    if (currentStep != maxStep) {
+        imgBox[0].style.backgroundImage = "url(images/" + padding(currentStep+1) + "_S.png)";
     };
+    mainAnimationImage.src = "images/" + padding(currentStep) + "_Animation.png";
+
+    var first = imgBox.shift();
+    imgBox.push(first);
+    
     // if (!separate) {
     //     btnAnimationS();
     // };
@@ -211,27 +204,20 @@ function changeStepP() {
     imgBox[1].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
     imgBox[2].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
 
-    aniBox2.addEventListener('webkitTransitionEnd', afterChangeStepP, false);
+    currentStep -= 1;
+    stepText.innerHTML = padding(currentStep);
 
-    function afterChangeStepP() {
-        // alert("P");
-        imgBox[0].style.webkitTransition = "none";
-        imgBox[1].style.webkitTransition = "none";
+    if (currentStep != 1) {
+        imgBox[2].style.backgroundImage = "url(images/" + padding(currentStep-1) + "_S.png)";
+    };
+    mainAnimationImage.src = "images/" + padding(currentStep) + "_Animation.png";
 
-        if (currentStep != 1) {
-            imgBox[2].style.backgroundImage = "url(images/" + padding(currentStep-2) + "_S.png)";
-        };
-
-        var first = imgBox.shift();
-        imgBox.push(first);
-        first = imgBox.shift();
-        imgBox.push(first);
-              
-        currentStep -= 1;
-        stepText.innerHTML = padding(currentStep);
-
-        aniBox2.removeEventListener('webkitTransitionEnd', afterChangeStepP, false);
-    };   
+    var first = imgBox.shift();
+    imgBox.push(first);
+    first = imgBox.shift();
+    imgBox.push(first);
+          
+    
 
     // if (!separate) {
     //     btnAnimationS();
@@ -246,16 +232,6 @@ function notChangeStep(){
     imgBox[0].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
     imgBox[1].style.webkitTransform = "translate3d(0,0,0)";
     imgBox[2].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
-
-    aniBox2.addEventListener('webkitTransitionEnd', afterNotChangeStep, false);
-
-    function afterNotChangeStep() {
-        // alert("Not");
-        imgBox[0].style.webkitTransition = "none";
-        imgBox[1].style.webkitTransition = "none";
-        imgBox[2].style.webkitTransition = "none";
-        aniBox2.removeEventListener('webkitTransitionEnd', afterNotChangeStep, false);
-    };
 };
 
 
@@ -283,49 +259,49 @@ function changeStepJ(target) {
     frameIndex = 0;//切换步骤时让动画回到第一帧，否则无法再次触发动画。
 };
 
-aniBox2.addEventListener('webkitAnimationEnd', function(){
-    if (currentStep == 1) {
-        imgM.src = "images/001_S.png";
-        setTimeout(function(){
-            aniBox2.style.webkitAnimation = "none";
-            // console.log("now!");
-            setTimeout(function(){
-                imgR.src = "images/002_S.png";
-                // imgAnimation.src = "images/001_Animation.png";
-                mask.style.display = "none";
-            },10);
-        },20);
-    }else if (currentStep == maxStep) {
-        imgM.src = "images/" + padding(currentStep) + "_S.png";
-        setTimeout(function(){
-            aniBox2.style.webkitAnimation = "none";
-            // console.log("now!");
-            setTimeout(function(){
-                imgL.src = "images/" + padding(currentStep-1) + "_S.png";
-                // imgAnimation.src = "images/" + padding(currentStep) + "_Animation.png";
-                mask.style.display = "none";
-            },10);  
-        },20);      
-    }else {
-        imgM.src = "images/" + padding(currentStep) + "_S.png";
-        setTimeout(function(){
-            aniBox2.style.webkitAnimation = "none";
-            // console.log("now!");
-            setTimeout(function(){
-                imgL.src = "images/" + padding(currentStep-1) + "_S.png";
-                imgR.src = "images/" + padding(currentStep+1) + "_S.png";
-                // imgAnimation.src = "images/" + padding(currentStep) + "_Animation.png";
-                mask.style.display = "none";
-            },10);  
-        },20);
-    };
+// aniBox2.addEventListener('webkitAnimationEnd', function(){
+//     if (currentStep == 1) {
+//         imgM.src = "images/001_S.png";
+//         setTimeout(function(){
+//             aniBox2.style.webkitAnimation = "none";
+//             // console.log("now!");
+//             setTimeout(function(){
+//                 imgR.src = "images/002_S.png";
+//                 // imgAnimation.src = "images/001_Animation.png";
+//                 mask.style.display = "none";
+//             },10);
+//         },20);
+//     }else if (currentStep == maxStep) {
+//         imgM.src = "images/" + padding(currentStep) + "_S.png";
+//         setTimeout(function(){
+//             aniBox2.style.webkitAnimation = "none";
+//             // console.log("now!");
+//             setTimeout(function(){
+//                 imgL.src = "images/" + padding(currentStep-1) + "_S.png";
+//                 // imgAnimation.src = "images/" + padding(currentStep) + "_Animation.png";
+//                 mask.style.display = "none";
+//             },10);  
+//         },20);      
+//     }else {
+//         imgM.src = "images/" + padding(currentStep) + "_S.png";
+//         setTimeout(function(){
+//             aniBox2.style.webkitAnimation = "none";
+//             // console.log("now!");
+//             setTimeout(function(){
+//                 imgL.src = "images/" + padding(currentStep-1) + "_S.png";
+//                 imgR.src = "images/" + padding(currentStep+1) + "_S.png";
+//                 // imgAnimation.src = "images/" + padding(currentStep) + "_Animation.png";
+//                 mask.style.display = "none";
+//             },10);  
+//         },20);
+//     };
 
-    nextGlow.style.backgroundColor = "#C6C6C6";
-    previousGlow.style.backgroundColor = "#C6C6C6";
-    frameIndex = 0;//切换步骤时让动画回到第一帧，否则无法再次触发动画。
-    mainAnimationImage.src = "images/" + padding(currentStep) + "_Animation.png";
+//     nextGlow.style.backgroundColor = "#C6C6C6";
+//     previousGlow.style.backgroundColor = "#C6C6C6";
+//     frameIndex = 0;//切换步骤时让动画回到第一帧，否则无法再次触发动画。
+//     mainAnimationImage.src = "images/" + padding(currentStep) + "_Animation.png";
 
-}, false);
+// }, false);
 
 function padding(n) {
     return(("00" + n).slice(-3));
@@ -364,7 +340,13 @@ function mainAnimationC() {
             tickCount += 1;
         };
         window.requestAnimationFrame(mainAnimationC);
+    } else if (frameIndex == 19) {
+        imgBox[1].style.backgroundImage = "url(images/" + padding(currentStep) + "_C.png)";
+        frameIndex += 1;
+    } else if (frameIndex < 29) {
+        frameIndex += 1;
     } else {
+        frameIndex = 19;
         window.cancelAnimationFrame(mainAnimationC);
         cxt.clearRect(0, 0, 400, 400);
     }; 
@@ -381,7 +363,13 @@ function mainAnimationS() {
             tickCount += 1;
         }
         window.requestAnimationFrame(mainAnimationS);
+    } else if (frameIndex == 0) {
+        imgBox[1].style.backgroundImage = "url(images/" + padding(currentStep) + "_S.png)";
+        frameIndex -= 1;
+    } else if (frameIndex > -10) {
+        frameIndex += 1;
     } else {
+        frameIndex = 0;
         window.cancelAnimationFrame(mainAnimationS);
         cxt.clearRect(0, 0, 400, 400);
     }; 
@@ -472,29 +460,17 @@ btnAnimation.addEventListener('touchstart', function(){
     };
 }, false);
 
-btnAnimation.addEventListener('webkitTransitionEnd', function(){
-    if (separate) {
-        imgM.src = "images/" + padding(currentStep) + "_S.png";
-    }else {
-        imgM.src = "images/" + padding(currentStep) + "_C.png";
-    };
-}, false);
-
-var touchStartPos = 0;
-var touchMoveImageEnd = false;
-
-// aniBox1.addEventListener('touchstart', function(e){
-//     touchStartPos = e.touches[0].clientX;
-    
-//     if (touchStartPos > 30) {
-//         touchMoveImageEnd = false;
-//         imgBox[0].style.webkitTransition = "none";
-//         imgBox[1].style.webkitTransition = "none";
-//         imgBox[2].style.webkitTransition = "none";
-//         touchMoveImage()
+// btnAnimation.addEventListener('webkitTransitionEnd', function(){
+//     if (separate) {
+//         imgM.src = "images/" + padding(currentStep) + "_S.png";
+//     }else {
+//         imgM.src = "images/" + padding(currentStep) + "_C.png";
 //     };
 // }, false);
 
+var touchStartPos = false;
+var touchEndPos = 0
+var touchMoveImageEnd = false;
 var touchMoveDis = 0;
 var firstTouchMove = true;
 
@@ -504,9 +480,9 @@ aniBox1.addEventListener('touchmove', function(e){
         touchStartPos = e.touches[0].clientX;
         touchMoveImageEnd = false;
         if (touchStartPos > 60) {
-            // imgBox[0].style.webkitTransition = "none";
-            // imgBox[1].style.webkitTransition = "none";
-            // imgBox[2].style.webkitTransition = "none";
+            imgBox[0].style.webkitTransition = "none";
+            imgBox[1].style.webkitTransition = "none";
+            imgBox[2].style.webkitTransition = "none";
             touchMoveImage()
         } else {
             mainBox.style.webkitTransition = "none";
@@ -550,30 +526,45 @@ function touchOpenMenu() {
 aniBox1.addEventListener('touchend', function(e){
     touchMoveImageEnd = true;
     firstTouchMove = true;
-    // 
-    var touchEndPos = e.changedTouches[0].clientX;
 
-    if (touchStartPos > 60) {
-        if (touchEndPos - touchStartPos > 50 && currentStep != 1) {
-            changeStepP();
-        } else if (touchStartPos - touchEndPos > 50 && currentStep != maxStep) {
-            changeStepN();
+    touchEndPos = e.changedTouches[0].clientX;
+
+    if (touchStartPos) {//判断有没有触发touchmove
+        if (touchStartPos > 60) {
+            if (touchEndPos - touchStartPos > 50 && currentStep != 1) {
+                changeStepP();
+            } else if (touchStartPos - touchEndPos > 50 && currentStep != maxStep) {
+                changeStepN();
+            } else {
+                notChangeStep();
+            };
         } else {
-            notChangeStep();
-        };
-    } else {
-        mainBox.style.webkitTransition = "-webkit-transform 0.35s cubic-bezier(.08, .47, 0, 1)";
-        menuBox.style.webkitTransition = "-webkit-transform 0.35s cubic-bezier(.08, .47, 0, 1)";
-        if (touchEndPos - touchStartPos > 50) {
-            openMenuBar();
-        } else {
-            closeMenuBar();
+            mainBox.style.webkitTransition = "-webkit-transform 0.35s cubic-bezier(.08, .47, 0, 1)";
+            menuBox.style.webkitTransition = "-webkit-transform 0.35s cubic-bezier(.08, .47, 0, 1)";
+            if (touchEndPos - touchStartPos > 50) {
+                openMenuBar();
+            } else {
+                closeMenuBar();
+            };
         };
     };
-        
+
+    touchStartPos = false;
     
 }, false);
 
+
+// aniBox1.addEventListener('touchstart', function(e){
+//     touchStartPos = e.touches[0].clientX;
+    
+//     if (touchStartPos > 30) {
+//         touchMoveImageEnd = false;
+//         imgBox[0].style.webkitTransition = "none";
+//         imgBox[1].style.webkitTransition = "none";
+//         imgBox[2].style.webkitTransition = "none";
+//         touchMoveImage()
+//     };
+// }, false);
 
 // function imagesPreload(){
 //     var images = ["images/001.png","images/mainAnimationTest.png","images/001_end.png"];
