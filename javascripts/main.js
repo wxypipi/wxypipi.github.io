@@ -139,7 +139,7 @@ function openMenuBar() {
 
 function closeMenuBar() {
     mainBox.style.webkitTransform = "translate3d(0em, 0, 0)";
-    menuBox.style.webkitTransform = "translate3d(-8em, 0, 0)";
+    menuBox.style.webkitTransform = "translate3d(-7.5em, 0, 0)";
     mainMask.style.pointerEvents = "none";
 };
 
@@ -175,8 +175,8 @@ function changeStepN() {
     //     mask.style.display = "none";
     //     return
     } else {
-        imgBox[1].style.webkitTransition = "-webkit-transform 0.2s ease-out";
-        imgBox[2].style.webkitTransition = "-webkit-transform 0.2s ease-out";
+        imgBox[1].style.webkitTransition = "-webkit-transform 0.3s cubic-bezier(.20, 0, .41, 1)";
+        imgBox[2].style.webkitTransition = "-webkit-transform 0.3s cubic-bezier(.20, 0, .41, 1)";
 
         imgBox[0].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
         imgBox[1].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
@@ -206,8 +206,8 @@ function changeStepP() {
         // previousGlow.style.backgroundColor = "#FF9D82";
         // mask.style.display = "none";
     } else {
-        imgBox[0].style.webkitTransition = "-webkit-transform 0.2s ease-out";
-        imgBox[1].style.webkitTransition = "-webkit-transform 0.2s ease-out";
+        imgBox[0].style.webkitTransition = "-webkit-transform 0.3s cubic-bezier(.20, 0, .41, 1)";
+        imgBox[1].style.webkitTransition = "-webkit-transform 0.3s cubic-bezier(.20, 0, .41, 1)";
 
         imgBox[0].style.webkitTransform = "translate3d(0,0,0)";
         imgBox[1].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
@@ -231,8 +231,9 @@ function changeStepP() {
 };
 
 function notChangeStep(){
-    imgBox[0].style.webkitTransition = "-webkit-transform 0.2s ease-out";
-    imgBox[1].style.webkitTransition = "-webkit-transform 0.2s ease-out";
+    imgBox[0].style.webkitTransition = "-webkit-transform 0.3s cubic-bezier(.20, 0, .41, 1)";
+    imgBox[1].style.webkitTransition = "-webkit-transform 0.3s cubic-bezier(.20, 0, .41, 1)";
+    imgBox[2].style.webkitTransition = "-webkit-transform 0.3s cubic-bezier(.20, 0, .41, 1)";
 
     imgBox[0].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
     imgBox[1].style.webkitTransform = "translate3d(0,0,0)";
@@ -483,10 +484,17 @@ aniBox1.addEventListener('touchmove', function(e){
     if (firstTouchMove) {
         touchStartPos = e.touches[0].clientX;
         touchMoveImageEnd = false;
-        imgBox[0].style.webkitTransition = "none";
-        imgBox[1].style.webkitTransition = "none";
-        imgBox[2].style.webkitTransition = "none";
-        touchMoveImage()
+        if (touchStartPos > 30) {
+            imgBox[0].style.webkitTransition = "none";
+            imgBox[1].style.webkitTransition = "none";
+            imgBox[2].style.webkitTransition = "none";
+            touchMoveImage()
+        } else {
+            mainBox.style.webkitTransition = "none";
+            menuBox.style.webkitTransition = "none";
+            touchOpenMenu()
+        };
+        
         firstTouchMove = false;
     };
     
@@ -506,21 +514,44 @@ function touchMoveImage() {
     };
 };
 
+function touchOpenMenu() {
+    if (touchMoveImageEnd) {
+        window.cancelAnimationFrame(touchOpenMenu);
+        touchMoveDis = 0;
+    } else {
+        if (touchMoveDis <= 240 && touchMoveDis > 0) {
+            stepText.innerHTML = touchMoveDis;
+            mainBox.style.webkitTransform = "translate3d(" + touchMoveDis + "px, 0, 0)";
+            menuBox.style.webkitTransform = "translate3d(" + (-120 + touchMoveDis / 2) + "px, 0, 0)";
+        }; 
+        window.requestAnimationFrame(touchOpenMenu);
+    }
+}
+
 aniBox1.addEventListener('touchend', function(e){
     touchMoveImageEnd = true;
     firstTouchMove = true;
     // 
-    var touchEndPos = e.changedTouches[0].clientX
-    if (touchEndPos - touchStartPos > 50) {
-        // alert("P");
-        changeStepP();
-    } else if (touchStartPos - touchEndPos > 50) {
-        // alert("N");
-        changeStepN();
+    var touchEndPos = e.changedTouches[0].clientX;
+
+    if (touchStartPos > 30) {
+        if (touchEndPos - touchStartPos > 50) {
+            changeStepP();
+        } else if (touchStartPos - touchEndPos > 50) {
+            changeStepN();
+        } else {
+            notChangeStep();
+        };
     } else {
-        // alert("No");
-        notChangeStep();
+        mainBox.style.webkitTransition = "-webkit-transform 0.35s cubic-bezier(.08, .47, 0, 1)";
+        menuBox.style.webkitTransition = "-webkit-transform 0.35s cubic-bezier(.08, .47, 0, 1)";
+        if (touchEndPos - touchStartPos > 50) {
+            openMenuBar();
+        } else {
+            closeMenuBar();
+        };
     }
+        
     
 }, false);
 
