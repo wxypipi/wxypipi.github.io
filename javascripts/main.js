@@ -461,10 +461,12 @@ btnAnimation.addEventListener('webkitTransitionEnd', function(){
 }, false);
 
 var touchStartPos = 0;
+var touchMoveImageEnd = false;
 
 aniBox1.addEventListener('touchstart', function(e){
     touchStartPos = e.touches[0].clientX;
-    if (touchStartPos > 50) {
+    touchMoveImageEnd = false;
+    if (touchStartPos > 30) {
         touchMoveImage()
     };
 }, false);
@@ -473,18 +475,24 @@ var touchMoveDis = 0;
 
 aniBox1.addEventListener('touchmove', function(e){
     touchMoveDis = (e.touches[0].clientX) - touchStartPos;
+    // stepText.innerHTML = touchMoveDis;
 }, false);
 
 function touchMoveImage() {
-    imgBox[0].style.webkitTransform = "translate3d(" + (- moveDis + touchMoveDis) + "px,0,0)";
-    imgBox[1].style.webkitTransform = "translate3d(" + touchMoveDis + "px,0,0)";
-    imgBox[2].style.webkitTransform = "translate3d(" + (moveDis + touchMoveDis) + "px,0,0)";
-    window.requestAnimationFrame(touchMoveImage);
+    if (touchMoveImageEnd) {
+        window.cancelAnimationFrame(touchMoveImage);
+        touchMoveDis = 0;
+    } else {
+        imgBox[0].style.webkitTransform = "translate3d(" + (- moveDis + touchMoveDis) + "px,0,0)";
+        imgBox[1].style.webkitTransform = "translate3d(" + touchMoveDis + "px,0,0)";
+        imgBox[2].style.webkitTransform = "translate3d(" + (moveDis + touchMoveDis) + "px,0,0)";
+        window.requestAnimationFrame(touchMoveImage);
+    };
 };
 
 aniBox1.addEventListener('touchend', function(e){
-    window.cancelAnimationFrame(touchMoveImage);
-    touchMoveDis = 0;
+    touchMoveImageEnd = true;
+    // 
     var touchEndPos = e.changedTouches[0].clientX
     if (touchEndPos - touchStartPos > 50) {
         // alert("P");
