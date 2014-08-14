@@ -341,14 +341,21 @@ function mainAnimationC() {
         };
         window.requestAnimationFrame(mainAnimationC);
     } else if (frameIndex == 19) {
+
         imgBox[1].style.backgroundImage = "url(images/" + padding(currentStep) + "_C.png)";
         frameIndex += 1;
-    } else if (frameIndex < 29) {
+        // console.log("2" + frameIndex);
+        window.requestAnimationFrame(mainAnimationC);
+    } else if (frameIndex < 24) {
+        // console.log(frameIndex);
         frameIndex += 1;
+        window.requestAnimationFrame(mainAnimationC);
     } else {
-        frameIndex = 19;
+        // alert("here");
+        // console.log("clean");
         window.cancelAnimationFrame(mainAnimationC);
         cxt.clearRect(0, 0, 400, 400);
+        frameIndex = 19;
     }; 
 };
 
@@ -366,12 +373,14 @@ function mainAnimationS() {
     } else if (frameIndex == 0) {
         imgBox[1].style.backgroundImage = "url(images/" + padding(currentStep) + "_S.png)";
         frameIndex -= 1;
-    } else if (frameIndex > -10) {
-        frameIndex += 1;
+        window.requestAnimationFrame(mainAnimationS);
+    } else if (frameIndex > -5) {
+        frameIndex -= 1;
+        window.requestAnimationFrame(mainAnimationS);
     } else {
-        frameIndex = 0;
         window.cancelAnimationFrame(mainAnimationS);
         cxt.clearRect(0, 0, 400, 400);
+        frameIndex = 0;
     }; 
 };
 
