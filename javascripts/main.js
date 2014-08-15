@@ -169,8 +169,8 @@ function selectStep(item) {
 function changeStepN() {
     //     nextGlow.style.backgroundColor = "#FF9D82";
     //     mask.style.display = "none";
-    imgBox2.style.webkitTransition = "-webkit-transform 0.225s cubic-bezier(.20, 0, .41, 1)";
-    imgBox3.style.webkitTransition = "-webkit-transform 0.225s cubic-bezier(.20, 0, .41, 1)";
+    imgBox2.style.webkitTransition = "-webkit-transform 0.2s cubic-bezier(.14, .28, .43, 1)";
+    imgBox3.style.webkitTransition = "-webkit-transform 0.2s cubic-bezier(.14, .28, .43, 1)";
 
     imgBox1.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
     imgBox2.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
@@ -197,8 +197,8 @@ function changeStepN() {
 function changeStepP() {
     // previousGlow.style.backgroundColor = "#FF9D82";
     // mask.style.display = "none";
-    imgBox1.style.webkitTransition = "-webkit-transform 0.225s cubic-bezier(.20, 0, .41, 1)";
-    imgBox2.style.webkitTransition = "-webkit-transform 0.225s cubic-bezier(.20, 0, .41, 1)";
+    imgBox1.style.webkitTransition = "-webkit-transform 0.2s cubic-bezier(.14, .28, .43, 1)";
+    imgBox2.style.webkitTransition = "-webkit-transform 0.2s cubic-bezier(.14, .28, .43, 1)";
 
     imgBox1.style.webkitTransform = "translate3d(0,0,0)";
     imgBox2.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
@@ -225,14 +225,14 @@ function changeStepP() {
 function notChangeStep(){
     if (touchMoveDis > 0) {
         touchMoveDis = 0;
-        imgBox1.style.webkitTransition = "-webkit-transform 0.225s cubic-bezier(.20, 0, .41, 1)";
-        imgBox2.style.webkitTransition = "-webkit-transform 0.225s cubic-bezier(.20, 0, .41, 1)";
+        imgBox1.style.webkitTransition = "-webkit-transform 0.175s cubic-bezier(.25, 0, .43, 1)";
+        imgBox2.style.webkitTransition = "-webkit-transform 0.175s cubic-bezier(.25, 0, .43, 1)";
         imgBox1.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
         imgBox2.style.webkitTransform = "translate3d(0,0,0)";
     } else {
         touchMoveDis = 0;
-        imgBox2.style.webkitTransition = "-webkit-transform 0.225s cubic-bezier(.20, 0, .41, 1)";
-        imgBox3.style.webkitTransition = "-webkit-transform 0.225s cubic-bezier(.20, 0, .41, 1)";
+        imgBox2.style.webkitTransition = "-webkit-transform 0.175s cubic-bezier(.25, 0, .43, 1)";
+        imgBox3.style.webkitTransition = "-webkit-transform 0.175s cubic-bezier(.25, 0, .43, 1)";
         imgBox2.style.webkitTransform = "translate3d(0,0,0)";
         imgBox3.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
     };
@@ -513,12 +513,11 @@ aniBox1.addEventListener('touchmove', function(e){
     // stepText.innerHTML = firstTouchMove;
     touchMovePos = e.touches[0].clientX;
     if (firstTouchMove) {
+        touchMoveImageEnd = false;
         touchStartPos = touchMovePos;
         if (touchStartPos > 60) {
             touchMoveImage()
         } else {
-            mainBox.style.webkitTransition = "none";
-            menuBox.style.webkitTransition = "none";
             touchOpenMenu()
         };
         firstTouchMove = false;
@@ -568,8 +567,14 @@ aniBox2.addEventListener('webkitTransitionEnd', function(){
     imgBox1.style.webkitTransition = "none";
     imgBox2.style.webkitTransition = "none";
     imgBox3.style.webkitTransition = "none";
-    touchMoveImageEnd = false;
 }, false);
+
+mainBox.addEventListener('webkitTransitionEnd', function(){
+    mainBox.style.webkitTransition = "none";
+    menuBox.style.webkitTransition = "none";
+}, false);
+
+
 // aniBox1.addEventListener('touchmove', function(e){
 //     // stepText.innerHTML = firstTouchMove;
 //     if (firstTouchMove) {
