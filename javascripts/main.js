@@ -169,18 +169,18 @@ function selectStep(item) {
 function changeStepN() {
     //     nextGlow.style.backgroundColor = "#FF9D82";
     //     mask.style.display = "none";
-    imgBox[1].style.webkitTransition = "-webkit-transform 0.3s cubic-bezier(.20, 0, .41, 1)";
-    imgBox[2].style.webkitTransition = "-webkit-transform 0.3s cubic-bezier(.20, 0, .41, 1)";
+    imgBox2.style.webkitTransition = "-webkit-transform 0.225s cubic-bezier(.20, 0, .41, 1)";
+    imgBox3.style.webkitTransition = "-webkit-transform 0.225s cubic-bezier(.20, 0, .41, 1)";
 
-    imgBox[0].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
-    imgBox[1].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
-    imgBox[2].style.webkitTransform = "translate3d(0,0,0)";
+    imgBox1.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+    imgBox2.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+    imgBox3.style.webkitTransform = "translate3d(0,0,0)";
 
     currentStep += 1;
     stepText.innerHTML = padding(currentStep);
 
     if (currentStep != maxStep) {
-        imgBox[0].style.backgroundImage = "url(images/" + padding(currentStep+1) + "_S.png)";
+        imgBox1.style.backgroundImage = "url(images/" + padding(currentStep+1) + "_S.png)";
     };
     mainAnimationImage.src = "images/" + padding(currentStep) + "_Animation.png";
 
@@ -197,18 +197,18 @@ function changeStepN() {
 function changeStepP() {
     // previousGlow.style.backgroundColor = "#FF9D82";
     // mask.style.display = "none";
-    imgBox[0].style.webkitTransition = "-webkit-transform 0.3s cubic-bezier(.20, 0, .41, 1)";
-    imgBox[1].style.webkitTransition = "-webkit-transform 0.3s cubic-bezier(.20, 0, .41, 1)";
+    imgBox1.style.webkitTransition = "-webkit-transform 0.225s cubic-bezier(.20, 0, .41, 1)";
+    imgBox2.style.webkitTransition = "-webkit-transform 0.225s cubic-bezier(.20, 0, .41, 1)";
 
-    imgBox[0].style.webkitTransform = "translate3d(0,0,0)";
-    imgBox[1].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
-    imgBox[2].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+    imgBox1.style.webkitTransform = "translate3d(0,0,0)";
+    imgBox2.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+    imgBox3.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
 
     currentStep -= 1;
     stepText.innerHTML = padding(currentStep);
 
     if (currentStep != 1) {
-        imgBox[2].style.backgroundImage = "url(images/" + padding(currentStep-1) + "_S.png)";
+        imgBox3.style.backgroundImage = "url(images/" + padding(currentStep-1) + "_S.png)";
     };
     mainAnimationImage.src = "images/" + padding(currentStep) + "_Animation.png";
 
@@ -216,8 +216,6 @@ function changeStepP() {
     imgBox.push(first);
     first = imgBox.shift();
     imgBox.push(first);
-          
-    
 
     // if (!separate) {
     //     btnAnimationS();
@@ -225,13 +223,19 @@ function changeStepP() {
 };
 
 function notChangeStep(){
-    imgBox[0].style.webkitTransition = "-webkit-transform 0.3s cubic-bezier(.20, 0, .41, 1)";
-    imgBox[1].style.webkitTransition = "-webkit-transform 0.3s cubic-bezier(.20, 0, .41, 1)";
-    imgBox[2].style.webkitTransition = "-webkit-transform 0.3s cubic-bezier(.20, 0, .41, 1)";
-
-    imgBox[0].style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
-    imgBox[1].style.webkitTransform = "translate3d(0,0,0)";
-    imgBox[2].style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+    if (touchMoveDis > 0) {
+        touchMoveDis = 0;
+        imgBox1.style.webkitTransition = "-webkit-transform 0.225s cubic-bezier(.20, 0, .41, 1)";
+        imgBox2.style.webkitTransition = "-webkit-transform 0.225s cubic-bezier(.20, 0, .41, 1)";
+        imgBox1.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+        imgBox2.style.webkitTransform = "translate3d(0,0,0)";
+    } else {
+        touchMoveDis = 0;
+        imgBox2.style.webkitTransition = "-webkit-transform 0.225s cubic-bezier(.20, 0, .41, 1)";
+        imgBox3.style.webkitTransition = "-webkit-transform 0.225s cubic-bezier(.20, 0, .41, 1)";
+        imgBox2.style.webkitTransform = "translate3d(0,0,0)";
+        imgBox3.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+    };
 };
 
 
@@ -493,8 +497,6 @@ var touchMoveEvent;
 // }, false);
 function touchMoveImage() {   
     if (!touchMoveImageEnd) {
-        // window.cancelAnimationFrame(touchMoveImage);
-    // } else {
         touchMoveDis = touchMovePos - touchStartPos;
         if (touchMoveDis > 0) {
             imgBox1.style.webkitTransform = "translate3d(" + (- moveDis + touchMoveDis) + "px,0,0)";
@@ -507,23 +509,18 @@ function touchMoveImage() {
     };
 };
 
-
-
 aniBox1.addEventListener('touchmove', function(e){
     // stepText.innerHTML = firstTouchMove;
     touchMovePos = e.touches[0].clientX;
     if (firstTouchMove) {
         touchStartPos = touchMovePos;
-        touchMoveImageEnd = false;
         if (touchStartPos > 60) {
-            
             touchMoveImage()
         } else {
             mainBox.style.webkitTransition = "none";
             menuBox.style.webkitTransition = "none";
             touchOpenMenu()
         };
-        
         firstTouchMove = false;
     };
 
@@ -536,7 +533,7 @@ aniBox1.addEventListener('touchmove', function(e){
 
 aniBox1.addEventListener('touchend', function(e){
     touchMoveImageEnd = true;
-    firstTouchMove = true;
+    
     if (touchStartPos) {//判断有没有触发touchmove
         if (touchStartPos > 60) {
             if (touchMoveDis > 50 && currentStep != 1) {
@@ -546,7 +543,6 @@ aniBox1.addEventListener('touchend', function(e){
                 touchMoveDis = 0;
                 changeStepN();
             } else {
-                touchMoveDis = 0;
                 notChangeStep();
             };
         } else {
@@ -558,6 +554,7 @@ aniBox1.addEventListener('touchend', function(e){
                 closeMenuBar();
             };
         };
+        firstTouchMove = true;
     };
 
     touchStartPos = false;
@@ -571,6 +568,7 @@ aniBox2.addEventListener('webkitTransitionEnd', function(){
     imgBox1.style.webkitTransition = "none";
     imgBox2.style.webkitTransition = "none";
     imgBox3.style.webkitTransition = "none";
+    touchMoveImageEnd = false;
 }, false);
 // aniBox1.addEventListener('touchmove', function(e){
 //     // stepText.innerHTML = firstTouchMove;
