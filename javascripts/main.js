@@ -482,10 +482,36 @@ var touchEndPos = 0
 var touchMoveImageEnd = false;
 var touchMoveDis = 0;
 var firstTouchMove = true;
+var touchStartPoint = false;
+var touchMoveEvent;
+
+// aniBox1.addEventListener('touchstart', function(e){
+//     touchStartPoint = e.touches[0];
+//     touchStartPos = touchStartPoint.clientX;
+//     touchMoveImage()
+// }, false);
+function touchMoveImage() {
+    
+    if (touchMoveImageEnd) {
+        window.cancelAnimationFrame(touchMoveImage);
+    } else {
+        touchMoveDis = touchMoveEvent.touches[0].clientX - touchStartPos;
+        // console.log(e);
+        // console.log(myEvent.touches[0].clientX);
+        imgBox[0].style.webkitTransform = "translate3d(" + (- moveDis + touchMoveDis) + "px,0,0)";
+        imgBox[1].style.webkitTransform = "translate3d(" + touchMoveDis + "px,0,0)";
+        imgBox[2].style.webkitTransform = "translate3d(" + (moveDis + touchMoveDis) + "px,0,0)";
+        window.requestAnimationFrame(touchMoveImage);
+    };
+};
+
+
 
 aniBox1.addEventListener('touchmove', function(e){
     // stepText.innerHTML = firstTouchMove;
+    touchMoveEvent = e;
     if (firstTouchMove) {
+        
         touchStartPos = e.touches[0].clientX;
         touchMoveImageEnd = false;
         if (touchStartPos > 60) {
@@ -501,50 +527,27 @@ aniBox1.addEventListener('touchmove', function(e){
         
         firstTouchMove = false;
     };
-    
-    touchMoveDis = (e.touches[0].clientX) - touchStartPos;
+
+
+    // touchStartPoint = e.touches[0];
+
+    // touchMoveDis = e.touches[0].clientX - touchStartPos;
     // stepText.innerHTML = touchMoveDis;
 }, false);
-
-function touchMoveImage() {
-    if (touchMoveImageEnd) {
-        window.cancelAnimationFrame(touchMoveImage);
-        touchMoveDis = 0;
-    } else {
-        imgBox[0].style.webkitTransform = "translate3d(" + (- moveDis + touchMoveDis) + "px,0,0)";
-        imgBox[1].style.webkitTransform = "translate3d(" + touchMoveDis + "px,0,0)";
-        imgBox[2].style.webkitTransform = "translate3d(" + (moveDis + touchMoveDis) + "px,0,0)";
-        window.requestAnimationFrame(touchMoveImage);
-    };
-};
-
-function touchOpenMenu() {
-    if (touchMoveImageEnd) {
-        window.cancelAnimationFrame(touchOpenMenu);
-        touchMoveDis = 0;
-    } else {
-        if (touchMoveDis <= 240 && touchMoveDis > 0) {
-            stepText.innerHTML = touchMoveDis;
-            mainBox.style.webkitTransform = "translate3d(" + touchMoveDis + "px, 0, 0)";
-            menuBox.style.webkitTransform = "translate3d(" + (-120 + touchMoveDis / 2) + "px, 0, 0)";
-        }; 
-        window.requestAnimationFrame(touchOpenMenu);
-    }
-}
 
 aniBox1.addEventListener('touchend', function(e){
     touchMoveImageEnd = true;
     firstTouchMove = true;
-
-    touchEndPos = e.changedTouches[0].clientX;
-
     if (touchStartPos) {//判断有没有触发touchmove
         if (touchStartPos > 60) {
-            if (touchEndPos - touchStartPos > 50 && currentStep != 1) {
+            if (touchMoveDis > 50 && currentStep != 1) {
+                touchMoveDis = 0;
                 changeStepP();
-            } else if (touchStartPos - touchEndPos > 50 && currentStep != maxStep) {
+            } else if (touchMoveDis < -50 && currentStep != maxStep) {
+                touchMoveDis = 0;
                 changeStepN();
             } else {
+                touchMoveDis = 0;
                 notChangeStep();
             };
         } else {
@@ -561,6 +564,88 @@ aniBox1.addEventListener('touchend', function(e){
     touchStartPos = false;
     
 }, false);
+
+
+
+
+// aniBox1.addEventListener('touchmove', function(e){
+//     // stepText.innerHTML = firstTouchMove;
+//     if (firstTouchMove) {
+//         touchStartPos = e.touches[0].clientX;
+//         touchMoveImageEnd = false;
+//         if (touchStartPos > 60) {
+//             imgBox[0].style.webkitTransition = "none";
+//             imgBox[1].style.webkitTransition = "none";
+//             imgBox[2].style.webkitTransition = "none";
+//             touchMoveImage()
+//         } else {
+//             mainBox.style.webkitTransition = "none";
+//             menuBox.style.webkitTransition = "none";
+//             touchOpenMenu()
+//         };
+        
+//         firstTouchMove = false;
+//     };
+    
+//     touchMoveDis = (e.touches[0].clientX) - touchStartPos;
+//     // stepText.innerHTML = touchMoveDis;
+// }, false);
+
+// function touchMoveImage() {
+//     if (touchMoveImageEnd) {
+//         window.cancelAnimationFrame(touchMoveImage);
+//         touchMoveDis = 0;
+//     } else {
+//         imgBox[0].style.webkitTransform = "translate3d(" + (- moveDis + touchMoveDis) + "px,0,0)";
+//         imgBox[1].style.webkitTransform = "translate3d(" + touchMoveDis + "px,0,0)";
+//         imgBox[2].style.webkitTransform = "translate3d(" + (moveDis + touchMoveDis) + "px,0,0)";
+//         window.requestAnimationFrame(touchMoveImage);
+//     };
+// };
+
+// function touchOpenMenu() {
+//     if (touchMoveImageEnd) {
+//         window.cancelAnimationFrame(touchOpenMenu);
+//         touchMoveDis = 0;
+//     } else {
+//         if (touchMoveDis <= 240 && touchMoveDis > 0) {
+//             stepText.innerHTML = touchMoveDis;
+//             mainBox.style.webkitTransform = "translate3d(" + touchMoveDis + "px, 0, 0)";
+//             menuBox.style.webkitTransform = "translate3d(" + (-120 + touchMoveDis / 2) + "px, 0, 0)";
+//         }; 
+//         window.requestAnimationFrame(touchOpenMenu);
+//     }
+// }
+
+// aniBox1.addEventListener('touchend', function(e){
+//     touchMoveImageEnd = true;
+//     firstTouchMove = true;
+
+//     touchEndPos = e.changedTouches[0].clientX;
+
+//     if (touchStartPos) {//判断有没有触发touchmove
+//         if (touchStartPos > 60) {
+//             if (touchEndPos - touchStartPos > 50 && currentStep != 1) {
+//                 changeStepP();
+//             } else if (touchStartPos - touchEndPos > 50 && currentStep != maxStep) {
+//                 changeStepN();
+//             } else {
+//                 notChangeStep();
+//             };
+//         } else {
+//             mainBox.style.webkitTransition = "-webkit-transform 0.35s cubic-bezier(.08, .47, 0, 1)";
+//             menuBox.style.webkitTransition = "-webkit-transform 0.35s cubic-bezier(.08, .47, 0, 1)";
+//             if (touchEndPos - touchStartPos > 50) {
+//                 openMenuBar();
+//             } else {
+//                 closeMenuBar();
+//             };
+//         };
+//     };
+
+//     touchStartPos = false;
+    
+// }, false);
 
 
 // aniBox1.addEventListener('touchstart', function(e){
