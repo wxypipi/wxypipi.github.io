@@ -462,6 +462,7 @@ function touchMoveImage() {
         };
         window.requestAnimationFrame(touchMoveImage);
     } else {
+        
         if (touchMoveDis > 50 && currentStep != 1) {
             changeStepP();
         } else if (touchMoveDis < -50 && currentStep != maxStep) {
@@ -471,6 +472,8 @@ function touchMoveImage() {
         };
         touchStartPos = false;
         touchMoveDis = 0;
+        mainMask.style.pointerEvents = "auto";
+        firstTouchMove = true;
     };
 };
 
@@ -488,8 +491,6 @@ aniBox1.addEventListener('touchmove', function(e){
 aniBox1.addEventListener('touchend', function(e){
     if (touchStartPos) {//判断有没有触发touchmove
         touchMoveImageEnd = true;
-        firstTouchMove = true;
-        mainMask.style.pointerEvents = "auto";
     };
 }, false);
 
