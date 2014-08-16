@@ -449,6 +449,7 @@ var firstTouchMove = true;
 var touchStartPoint = false;
 var touchMoveEvent;
 
+var factor = 1;
 
 function touchMoveImage() {   
     if (!touchMoveImageEnd) {
@@ -462,18 +463,24 @@ function touchMoveImage() {
         };
         window.requestAnimationFrame(touchMoveImage);
     } else {
-        
         if (touchMoveDis > 50 && currentStep != 1) {
             changeStepP();
+
         } else if (touchMoveDis < -50 && currentStep != maxStep) {
-            changeStepN();
+            // changeStepN();
+            factor -= 0.01
+            touchMoveDis -= 20*factor;
+            // imgBox1.style.webkitTransform = "translate3d(" + (- moveDis + touchMoveDis) + "px,0,0)";
+            imgBox2.style.webkitTransform = "translate3d(" + touchMoveDis + "px,0,0)";
+            imgBox3.style.webkitTransform = "translate3d(" + (moveDis + touchMoveDis) + "px,0,0)";
+            window.requestAnimationFrame(touchMoveImage);
         } else {
             notChangeStep();
         };
-        touchStartPos = false;
-        touchMoveDis = 0;
-        mainMask.style.pointerEvents = "auto";
-        firstTouchMove = true;
+        // touchStartPos = false;
+        // touchMoveDis = 0;
+        // mainMask.style.pointerEvents = "auto";
+        // firstTouchMove = true;
     };
 };
 
@@ -509,7 +516,6 @@ aniBox2.addEventListener('webkitTransitionEnd', function(){
     imgBox1.style.webkitTransition = "none";
     imgBox2.style.webkitTransition = "none";
     imgBox3.style.webkitTransition = "none";
-    
 }, false);
 
 
