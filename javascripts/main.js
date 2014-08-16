@@ -471,7 +471,6 @@ function touchMoveImage() {
         };
         touchStartPos = false;
         touchMoveDis = 0;
-        mainMask.style.pointerEvents = "auto";
     };
 };
 
@@ -480,14 +479,17 @@ aniBox1.addEventListener('touchmove', function(e){
     touchMovePos = e.touches[0].clientX;
     if (firstTouchMove) {
         touchStartPos = e.touches[0].clientX;
+        touchMoveImageEnd = false;
         touchMoveImage();
         firstTouchMove = false;
+
     };
 }, false);
 
 aniBox1.addEventListener('touchend', function(e){
     if (touchStartPos) {//判断有没有触发touchmove
         touchMoveImageEnd = true;
+        mainMask.style.pointerEvents = "auto";
     };
 }, false);
 
@@ -505,7 +507,6 @@ aniBox2.addEventListener('webkitTransitionEnd', function(){
     imgBox1.style.webkitTransition = "none";
     imgBox2.style.webkitTransition = "none";
     imgBox3.style.webkitTransition = "none";
-    touchMoveImageEnd = false;
     firstTouchMove = true;
     mainMask.style.pointerEvents = "none";
 }, false);
