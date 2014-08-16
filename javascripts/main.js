@@ -167,77 +167,77 @@ function selectStep(item) {
     lastContentsItem = item;
 };
 
-function changeStepN() {
-    //     nextGlow.style.backgroundColor = "#FF9D82";
-    //     mask.style.display = "none";
-    imgBox2.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.14, .28, .43, 1)";
-    imgBox3.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.14, .28, .43, 1)";
+// function changeStepN() {
+//     //     nextGlow.style.backgroundColor = "#FF9D82";
+//     //     mask.style.display = "none";
+//     imgBox2.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.14, .28, .43, 1)";
+//     imgBox3.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.14, .28, .43, 1)";
 
-    imgBox1.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
-    imgBox2.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
-    imgBox3.style.webkitTransform = "translate3d(0,0,0)";
+//     imgBox1.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+//     imgBox2.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+//     imgBox3.style.webkitTransform = "translate3d(0,0,0)";
 
-    if (!separate) {
-        btnAnimationS();
-        lastStep = currentStep;
-    };
+//     if (!separate) {
+//         btnAnimationS();
+//         lastStep = currentStep;
+//     };
 
-    currentStep += 1;
-    stepText.innerHTML = padding(currentStep);
+//     currentStep += 1;
+//     stepText.innerHTML = padding(currentStep);
 
-    if (currentStep != maxStep) {
-        imgBox1.style.backgroundImage = "url(images/" + padding(currentStep+1) + "_S.png)";
-    };
-    mainAnimationImage.src = "images/" + padding(currentStep) + "_Animation.png";
+//     if (currentStep != maxStep) {
+//         imgBox1.style.backgroundImage = "url(images/" + padding(currentStep+1) + "_S.png)";
+//     };
+//     mainAnimationImage.src = "images/" + padding(currentStep) + "_Animation.png";
 
-    var first = imgBox.shift();
-    imgBox.push(first);
-};
+//     var first = imgBox.shift();
+//     imgBox.push(first);
+// };
 
-function changeStepP() {
-    // previousGlow.style.backgroundColor = "#FF9D82";
-    // mask.style.display = "none";
-    imgBox1.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.14, .28, .43, 1)";
-    imgBox2.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.14, .28, .43, 1)";
+// function changeStepP() {
+//     // previousGlow.style.backgroundColor = "#FF9D82";
+//     // mask.style.display = "none";
+//     imgBox1.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.14, .28, .43, 1)";
+//     imgBox2.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.14, .28, .43, 1)";
 
-    imgBox1.style.webkitTransform = "translate3d(0,0,0)";
-    imgBox2.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
-    imgBox3.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+//     imgBox1.style.webkitTransform = "translate3d(0,0,0)";
+//     imgBox2.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+//     imgBox3.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
 
-    if (!separate) {
-        btnAnimationS();
-        lastStep = currentStep;
-    };
+//     if (!separate) {
+//         btnAnimationS();
+//         lastStep = currentStep;
+//     };
 
-    currentStep -= 1;
-    stepText.innerHTML = padding(currentStep);
+//     currentStep -= 1;
+//     stepText.innerHTML = padding(currentStep);
 
-    if (currentStep != 1) {
-        imgBox3.style.backgroundImage = "url(images/" + padding(currentStep-1) + "_S.png)";
-    };
-    mainAnimationImage.src = "images/" + padding(currentStep) + "_Animation.png";
+//     if (currentStep != 1) {
+//         imgBox3.style.backgroundImage = "url(images/" + padding(currentStep-1) + "_S.png)";
+//     };
+//     mainAnimationImage.src = "images/" + padding(currentStep) + "_Animation.png";
 
-    var first = imgBox.shift();
-    imgBox.push(first);
-    first = imgBox.shift();
-    imgBox.push(first);
-};
+//     var first = imgBox.shift();
+//     imgBox.push(first);
+//     first = imgBox.shift();
+//     imgBox.push(first);
+// };
 
-function notChangeStep(){
-    if (touchMoveDis > 0) {
-        // touchMoveDis = 0;
-        imgBox1.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.25, 0, .43, 1)";
-        imgBox2.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.25, 0, .43, 1)";
-        imgBox1.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
-        imgBox2.style.webkitTransform = "translate3d(0,0,0)";
-    } else {
-        // touchMoveDis = 0;
-        imgBox2.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.25, 0, .43, 1)";
-        imgBox3.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.25, 0, .43, 1)";
-        imgBox2.style.webkitTransform = "translate3d(0,0,0)";
-        imgBox3.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
-    };
-};
+// function notChangeStep(){
+//     if (touchMoveDis > 0) {
+//         // touchMoveDis = 0;
+//         imgBox1.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.25, 0, .43, 1)";
+//         imgBox2.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.25, 0, .43, 1)";
+//         imgBox1.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+//         imgBox2.style.webkitTransform = "translate3d(0,0,0)";
+//     } else {
+//         // touchMoveDis = 0;
+//         imgBox2.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.25, 0, .43, 1)";
+//         imgBox3.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.25, 0, .43, 1)";
+//         imgBox2.style.webkitTransform = "translate3d(0,0,0)";
+//         imgBox3.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+//     };
+// };
 
 
 function changeStepJ(target) {
@@ -449,7 +449,9 @@ var firstTouchMove = true;
 var touchStartPoint = false;
 var touchMoveEvent;
 
-var factor = 1;
+var factor = 10;
+var iii = 10;
+var averageDis = 0;
 
 function touchMoveImage() {   
     if (!touchMoveImageEnd) {
@@ -463,24 +465,94 @@ function touchMoveImage() {
         };
         window.requestAnimationFrame(touchMoveImage);
     } else {
+        iii = 10;
         if (touchMoveDis > 50 && currentStep != 1) {
+            averageDis = (moveDis - touchMoveDis)/5.5;//剩余的距离/[0.5*(总次数+1)]
             changeStepP();
-
         } else if (touchMoveDis < -50 && currentStep != maxStep) {
-            // changeStepN();
-            factor -= 0.01
-            touchMoveDis -= 20*factor;
-            // imgBox1.style.webkitTransform = "translate3d(" + (- moveDis + touchMoveDis) + "px,0,0)";
-            imgBox2.style.webkitTransform = "translate3d(" + touchMoveDis + "px,0,0)";
-            imgBox3.style.webkitTransform = "translate3d(" + (moveDis + touchMoveDis) + "px,0,0)";
-            window.requestAnimationFrame(touchMoveImage);
+            averageDis = (moveDis + touchMoveDis)/5.5;//剩余的距离/[0.5*(总次数+1)]
+            changeStepN();
         } else {
-            notChangeStep();
+            averageDis = (touchMoveDis)/5.5;//剩余的距离/[0.5*(总次数+1)]
+            if (averageDis > 0) {
+                notChangeStepP();
+            } else {
+                notChangeStepN();
+            };
         };
+            
+        // } else {
+            // notChangeStep();
+        // };
         // touchStartPos = false;
         // touchMoveDis = 0;
         // mainMask.style.pointerEvents = "auto";
-        // firstTouchMove = true;
+        firstTouchMove = true;
+    };
+};
+
+function changeStepN(){
+    touchMoveDis -= averageDis * iii / 10;
+    iii -= 1;
+    imgBox2.style.webkitTransform = "translate3d(" + touchMoveDis + "px,0,0)";
+    imgBox3.style.webkitTransform = "translate3d(" + (moveDis + touchMoveDis) + "px,0,0)";
+    if (iii < 0) {
+        //do something after change step next
+        var first = imgBox.shift();
+        imgBox.push(first);
+        imgBox1 = imgBox[0];
+        imgBox2 = imgBox[1];
+        imgBox3 = imgBox[2];
+        currentStep += 1;
+        stepText.innerHTML = padding(currentStep);
+    } else {
+        window.requestAnimationFrame(changeStepN);
+    };
+};
+
+function changeStepP(){
+    touchMoveDis += averageDis * iii / 10;
+    iii -= 1;
+    imgBox1.style.webkitTransform = "translate3d(" + (- moveDis + touchMoveDis) + "px,0,0)";
+    imgBox2.style.webkitTransform = "translate3d(" + touchMoveDis + "px,0,0)";
+    if (iii < 0) {
+        var first = imgBox.shift();
+        imgBox.push(first);
+        first = imgBox.shift();
+        imgBox.push(first);
+        imgBox1 = imgBox[0];
+        imgBox2 = imgBox[1];
+        imgBox3 = imgBox[2];
+        currentStep -= 1;
+        stepText.innerHTML = padding(currentStep);
+        //do something after change step next
+    } else {
+        window.requestAnimationFrame(changeStepP);
+    };
+};
+
+function notChangeStepP(){
+    touchMoveDis -= averageDis * iii / 10;
+    iii -= 1;
+    imgBox1.style.webkitTransform = "translate3d(" + (- moveDis + touchMoveDis) + "px,0,0)";
+    imgBox2.style.webkitTransform = "translate3d(" + touchMoveDis + "px,0,0)";
+    if (iii < 0) {
+        //do something after change step next
+        
+    } else {
+        window.requestAnimationFrame(notChangeStepP);
+    };
+};
+
+function notChangeStepN(){
+    touchMoveDis -= averageDis * iii / 10;
+    iii -= 1;
+    imgBox2.style.webkitTransform = "translate3d(" + touchMoveDis + "px,0,0)";
+    imgBox3.style.webkitTransform = "translate3d(" + (moveDis + touchMoveDis) + "px,0,0)";
+    if (iii < 0) {
+        //do something after change step next
+    } else {
+        window.requestAnimationFrame(notChangeStepN);
     };
 };
 
@@ -496,9 +568,9 @@ aniBox1.addEventListener('touchmove', function(e){
 }, false);
 
 aniBox1.addEventListener('touchend', function(e){
-    if (touchStartPos) {//判断有没有触发touchmove
+    // if (touchStartPos) {//判断有没有触发touchmove
         touchMoveImageEnd = true;
-    };
+    // };
 }, false);
 
 var lastStep = 1;
