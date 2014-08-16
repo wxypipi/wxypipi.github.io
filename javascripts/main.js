@@ -482,13 +482,13 @@ aniBox1.addEventListener('touchmove', function(e){
         touchMoveImageEnd = false;
         touchMoveImage();
         firstTouchMove = false;
-
     };
 }, false);
 
 aniBox1.addEventListener('touchend', function(e){
     if (touchStartPos) {//判断有没有触发touchmove
         touchMoveImageEnd = true;
+        firstTouchMove = true;
         mainMask.style.pointerEvents = "auto";
     };
 }, false);
@@ -507,7 +507,6 @@ aniBox2.addEventListener('webkitTransitionEnd', function(){
     imgBox1.style.webkitTransition = "none";
     imgBox2.style.webkitTransition = "none";
     imgBox3.style.webkitTransition = "none";
-    firstTouchMove = true;
     mainMask.style.pointerEvents = "none";
 }, false);
 
