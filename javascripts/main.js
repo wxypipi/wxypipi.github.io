@@ -170,8 +170,8 @@ function selectStep(item) {
 function changeStepN() {
     //     nextGlow.style.backgroundColor = "#FF9D82";
     //     mask.style.display = "none";
-    imgBox2.style.webkitTransition = "-webkit-transform 0.25s cubic-bezier(.14, .28, .43, 1)";
-    imgBox3.style.webkitTransition = "-webkit-transform 0.25s cubic-bezier(.14, .28, .43, 1)";
+    imgBox2.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.14, .28, .43, 1)";
+    imgBox3.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.14, .28, .43, 1)";
 
     imgBox1.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
     imgBox2.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
@@ -197,8 +197,8 @@ function changeStepN() {
 function changeStepP() {
     // previousGlow.style.backgroundColor = "#FF9D82";
     // mask.style.display = "none";
-    imgBox1.style.webkitTransition = "-webkit-transform 0.25s cubic-bezier(.14, .28, .43, 1)";
-    imgBox2.style.webkitTransition = "-webkit-transform 0.25s cubic-bezier(.14, .28, .43, 1)";
+    imgBox1.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.14, .28, .43, 1)";
+    imgBox2.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.14, .28, .43, 1)";
 
     imgBox1.style.webkitTransform = "translate3d(0,0,0)";
     imgBox2.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
@@ -496,6 +496,7 @@ aniBox1.addEventListener('touchend', function(e){
 var lastStep = 1;
 
 aniBox2.addEventListener('webkitTransitionEnd', function(){
+    mainMask.style.pointerEvents = "none";
     if (lastStep) {//如果主动画处于组合状态，则将其恢复到分离状态。
         frameIndex = 0;
         imgBox2.style.backgroundImage = "url(images/" + padding(lastStep) + "_S.png)";
@@ -507,7 +508,7 @@ aniBox2.addEventListener('webkitTransitionEnd', function(){
     imgBox1.style.webkitTransition = "none";
     imgBox2.style.webkitTransition = "none";
     imgBox3.style.webkitTransition = "none";
-    mainMask.style.pointerEvents = "none";
+    
 }, false);
 
 
