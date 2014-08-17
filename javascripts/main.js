@@ -442,8 +442,8 @@ aniBox1.addEventListener('touchend', function(e){
 function changeStepN(){
     touchMoveDis -= averageDis * changeStepFrameIndex / 10;
     changeStepFrameIndex -= 1;
-    imgBox2.style.webkitTransform = "translate3d(" + touchMoveDis + "px,0,0)";
-    imgBox3.style.webkitTransform = "translate3d(" + (moveDis + touchMoveDis) + "px,0,0)";
+    imgBox2.style.webkitTransform = "translate3d(" + Math.round(touchMoveDis) + "px,0,0)";
+    imgBox3.style.webkitTransform = "translate3d(" + Math.round(moveDis + touchMoveDis) + "px,0,0)";
     if (!separate) {
         btnAnimation.style.webkitTransform = "translate3d(0,-" + (112 * changeStepFrameIndex) + "px,0)";
     };
@@ -457,8 +457,8 @@ function changeStepN(){
         currentStep += 1;
         stepText.innerHTML = padding(currentStep);
         imgBox1.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
-        imgBox2.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
-        imgBox3.style.webkitTransform = "translate3d(0,0,0)";
+        // imgBox2.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+        // imgBox3.style.webkitTransform = "translate3d(0,0,0)";
         if (currentStep != maxStep) {
             imgBox1.style.backgroundImage = "url(images/" + padding(currentStep+1) + "_S.png)";
         };
@@ -478,8 +478,8 @@ var imageBoxIndex = 1
 function changeStepP(){
     touchMoveDis += averageDis * changeStepFrameIndex / 10;
     
-    imgBox1.style.webkitTransform = "translate3d(" + (- moveDis + touchMoveDis) + "px,0,0)";
-    imgBox2.style.webkitTransform = "translate3d(" + touchMoveDis + "px,0,0)";
+    imgBox1.style.webkitTransform = "translate3d(" + Math.round(- moveDis + touchMoveDis) + "px,0,0)";
+    imgBox2.style.webkitTransform = "translate3d(" + Math.round(touchMoveDis) + "px,0,0)";
     if (!separate) {
         btnAnimation.style.webkitTransform = "translate3d(0,-" + (112 * changeStepFrameIndex) + "px,0)";
     };
@@ -501,8 +501,8 @@ function changeStepP(){
         // stepText.innerHTML = padding(currentStep);
         //将图片位置归位，并且替换图片
         
-        imgBox1.style.webkitTransform = "translate3d(0,0,0)";
-        imgBox2.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+        // imgBox1.style.webkitTransform = "translate3d(0,0,0)";
+        // imgBox2.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
         imgBox3.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
         if (currentStep != 1) {
             imgBox3.style.backgroundImage = "url(images/" + padding(currentStep-1) + "_S.png)";
@@ -526,8 +526,8 @@ function changeStepP(){
 function notChangeStepP(){
     touchMoveDis -= averageDis * changeStepFrameIndex / 10;
     changeStepFrameIndex -= 1;
-    imgBox1.style.webkitTransform = "translate3d(" + (- moveDis + touchMoveDis) + "px,0,0)";
-    imgBox2.style.webkitTransform = "translate3d(" + touchMoveDis + "px,0,0)";
+    imgBox1.style.webkitTransform = "translate3d(" + Math.round(- moveDis + touchMoveDis) + "px,0,0)";
+    imgBox2.style.webkitTransform = "translate3d(" + Math.round(touchMoveDis) + "px,0,0)";
     if (changeStepFrameIndex < 0) {
     } else {
         window.requestAnimationFrame(notChangeStepP);
@@ -537,8 +537,8 @@ function notChangeStepP(){
 function notChangeStepN(){
     touchMoveDis -= averageDis * changeStepFrameIndex / 10;
     changeStepFrameIndex -= 1;
-    imgBox2.style.webkitTransform = "translate3d(" + touchMoveDis + "px,0,0)";
-    imgBox3.style.webkitTransform = "translate3d(" + (moveDis + touchMoveDis) + "px,0,0)";
+    imgBox2.style.webkitTransform = "translate3d(" + Math.round(touchMoveDis) + "px,0,0)";
+    imgBox3.style.webkitTransform = "translate3d(" + Math.round(moveDis + touchMoveDis) + "px,0,0)";
     if (changeStepFrameIndex < 0) {
         //do something after change step next
     } else {
