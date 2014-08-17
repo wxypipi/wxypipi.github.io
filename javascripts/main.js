@@ -119,13 +119,6 @@ function resize() {
         "width: " + newWidth + "px;"+
         "top: " + marginTop + "px;"+
         "left: " + ((width - newWidth) / 2) + "px}"
-
-    // '@-webkit-keyframes moveR {'+
-    // 'from {-webkit-transform: translate3d(0, 0, 0)}'+
-    // 'to {-webkit-transform: translate3d('+moveDis+'px, 0, 0)}}'+
-    // '@-webkit-keyframes moveL {'+
-    // 'from {-webkit-transform: translate3d(0, 0, 0)}'+
-    // 'to {-webkit-transform: translate3d(-'+moveDis+'px, 0, 0)}}'
     );
 
     cssAnimation.appendChild(rules);
@@ -167,77 +160,7 @@ function selectStep(item) {
     lastContentsItem = item;
 };
 
-// function changeStepN() {
-//     //     nextGlow.style.backgroundColor = "#FF9D82";
-//     //     mask.style.display = "none";
-//     imgBox2.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.14, .28, .43, 1)";
-//     imgBox3.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.14, .28, .43, 1)";
 
-//     imgBox1.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
-//     imgBox2.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
-//     imgBox3.style.webkitTransform = "translate3d(0,0,0)";
-
-//     if (!separate) {
-//         btnAnimationS();
-//         lastStep = currentStep;
-//     };
-
-//     currentStep += 1;
-//     stepText.innerHTML = padding(currentStep);
-
-//     if (currentStep != maxStep) {
-//         imgBox1.style.backgroundImage = "url(images/" + padding(currentStep+1) + "_S.png)";
-//     };
-//     mainAnimationImage.src = "images/" + padding(currentStep) + "_Animation.png";
-
-//     var first = imgBox.shift();
-//     imgBox.push(first);
-// };
-
-// function changeStepP() {
-//     // previousGlow.style.backgroundColor = "#FF9D82";
-//     // mask.style.display = "none";
-//     imgBox1.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.14, .28, .43, 1)";
-//     imgBox2.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.14, .28, .43, 1)";
-
-//     imgBox1.style.webkitTransform = "translate3d(0,0,0)";
-//     imgBox2.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
-//     imgBox3.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
-
-//     if (!separate) {
-//         btnAnimationS();
-//         lastStep = currentStep;
-//     };
-
-//     currentStep -= 1;
-//     stepText.innerHTML = padding(currentStep);
-
-//     if (currentStep != 1) {
-//         imgBox3.style.backgroundImage = "url(images/" + padding(currentStep-1) + "_S.png)";
-//     };
-//     mainAnimationImage.src = "images/" + padding(currentStep) + "_Animation.png";
-
-//     var first = imgBox.shift();
-//     imgBox.push(first);
-//     first = imgBox.shift();
-//     imgBox.push(first);
-// };
-
-// function notChangeStep(){
-//     if (touchMoveDis > 0) {
-//         // touchMoveDis = 0;
-//         imgBox1.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.25, 0, .43, 1)";
-//         imgBox2.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.25, 0, .43, 1)";
-//         imgBox1.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
-//         imgBox2.style.webkitTransform = "translate3d(0,0,0)";
-//     } else {
-//         // touchMoveDis = 0;
-//         imgBox2.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.25, 0, .43, 1)";
-//         imgBox3.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.25, 0, .43, 1)";
-//         imgBox2.style.webkitTransform = "translate3d(0,0,0)";
-//         imgBox3.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
-//     };
-// };
 
 
 function changeStepJ(target) {
@@ -261,7 +184,7 @@ function changeStepJ(target) {
     };
     currentStep = target;
     stepText.innerHTML = padding(currentStep);
-    frameIndex = 0;//切换步骤时让动画回到第一帧，否则无法再次触发动画。
+    mainFrameIndex = 0;//切换步骤时让动画回到第一帧，否则无法再次触发动画。
 };
 
 
@@ -270,15 +193,7 @@ function padding(n) {
     return(("00" + n).slice(-3));
 };
 
-// function btnAnimationS() {
-//     btnAnimation.style.webkitTransform = "translate3d(0,0,0)";
-//     separate = true;
-// };
 
-// function btnAnimationC() {
-//     btnAnimation.style.webkitTransform = "translate3d(0,-84em,0)";
-//     separate = false;
-// };
 
 // ================================================================
 
@@ -288,77 +203,93 @@ mainAnimation.height = 400;
 var cxt = mainAnimation.getContext("2d");
 var mainAnimationImage = new Image();
     mainAnimationImage.src = "images/001_Animation.png";
-var frameIndex = 0;
+var mainFrameIndex = 0;
+var btnFrameIndex = 0;
 var ticksPerFrame = 1;
 var tickCount = 0;
-var iiii = 0;
+
 
 function mainAnimationC() {
-    if (iiii < 13) {
-        // if (iiii < 13) {
-            btnAnimation.style.webkitTransform = "translate3d(0,-" + (112 * iiii) + "px,0)";
-            iiii += 1;
+    if (btnFrameIndex < 12) {
+        // if (changeStepFrameIndexi < 13) {
+        btnFrameIndex += 1;
+        btnAnimation.style.webkitTransform = "translate3d(0,-" + (112 * btnFrameIndex) + "px,0)";
         // };
         if (tickCount > ticksPerFrame) {
             tickCount = 0;
-            frameIndex += 1;
+            mainFrameIndex += 1;
             cxt.drawImage(mainAnimationImage,
-            0,400 * frameIndex, 400, 400, 0, 0, 400, 400);
+            0,400 * mainFrameIndex, 400, 400, 0, 0, 400, 400);
         } else {
             tickCount += 1;
         };
         window.requestAnimationFrame(mainAnimationC);
-    } else if (frameIndex < 19) {
+    } else if (mainFrameIndex < 19) {
         if (tickCount > ticksPerFrame) {
             tickCount = 0;
-            frameIndex += 1;
+            mainFrameIndex += 1;
             cxt.drawImage(mainAnimationImage,
-            0,400 * frameIndex, 400, 400, 0, 0, 400, 400);
+            0,400 * mainFrameIndex, 400, 400, 0, 0, 400, 400);
         } else {
             tickCount += 1;
         };
         window.requestAnimationFrame(mainAnimationC);
-    } else if (frameIndex == 19) {
+    } else if (mainFrameIndex == 19) {
 
         imgBox2.style.backgroundImage = "url(images/" + padding(currentStep) + "_C.png)";
-        frameIndex += 1;
-        // console.log("2" + frameIndex);
+        mainFrameIndex += 1;
+        // console.log("2" + mainFrameIndex);
         window.requestAnimationFrame(mainAnimationC);
-    } else if (frameIndex < 24) {
-        // console.log(frameIndex);
-        frameIndex += 1;
+    } else if (mainFrameIndex < 24) {
+        // console.log(mainFrameIndex);
+        mainFrameIndex += 1;
         window.requestAnimationFrame(mainAnimationC);
     } else {
         // alert("here");
         // console.log("clean");
-        window.cancelAnimationFrame(mainAnimationC);
+        // window.cancelAnimationFrame(mainAnimationC);
+        separate = false;
         cxt.clearRect(0, 0, 400, 400);
-        frameIndex = 19;
+        mainFrameIndex = 19;
     }; 
 };
 
 function mainAnimationS() {
-    if (frameIndex > 0) {
+    if (btnFrameIndex > 0) {
+        // if (changeStepFrameIndexi < 13) {
+        btnFrameIndex -= 1;
+        btnAnimation.style.webkitTransform = "translate3d(0,-" + (112 * btnFrameIndex) + "px,0)";
         if (tickCount > ticksPerFrame) {
             tickCount = 0;
-            frameIndex -= 1;
+            mainFrameIndex -= 1;
             cxt.drawImage(mainAnimationImage,
-            0,400 * frameIndex,400,400,0,0, 400, 400);
+            0,400 * mainFrameIndex,400,400,0,0, 400, 400);
         } else {
             tickCount += 1;
         }
         window.requestAnimationFrame(mainAnimationS);
-    } else if (frameIndex == 0) {
-        imgBox2.style.backgroundImage = "url(images/" + padding(currentStep) + "_S.png)";
-        frameIndex -= 1;
+    } else if (mainFrameIndex > 0) {
+        if (tickCount > ticksPerFrame) {
+            tickCount = 0;
+            mainFrameIndex -= 1;
+            cxt.drawImage(mainAnimationImage,
+            0,400 * mainFrameIndex,400,400,0,0, 400, 400);
+        } else {
+            tickCount += 1;
+        }
         window.requestAnimationFrame(mainAnimationS);
-    } else if (frameIndex > -5) {
-        frameIndex -= 1;
+    } else if (mainFrameIndex == 0) {
+        imgBox2.style.backgroundImage = "url(images/" + padding(currentStep) + "_S.png)";
+        mainFrameIndex -= 1;
+        window.requestAnimationFrame(mainAnimationS);
+    } else if (mainFrameIndex > -5) {
+        mainFrameIndex -= 1;
         window.requestAnimationFrame(mainAnimationS);
     } else {
-        window.cancelAnimationFrame(mainAnimationS);
+        // window.cancelAnimationFrame(mainAnimationS);
+        separate = true;
         cxt.clearRect(0, 0, 400, 400);
-        frameIndex = 0;
+        mainFrameIndex = 0;
     }; 
 };
 
@@ -439,21 +370,13 @@ nextGlow.addEventListener('webkitAnimationEnd', function(){
 btnAnimation.addEventListener('touchstart', function(){
     // mask.style.display = "block";
     if (separate) {
-        // btnAnimationC();
         mainAnimationC();
     }else {
-        // btnAnimationS();
         mainAnimationS();
     };
 }, false);
 
-// btnAnimation.addEventListener('webkitTransitionEnd', function(){
-//     if (separate) {
-//         imgM.src = "images/" + padding(currentStep) + "_S.png";
-//     }else {
-//         imgM.src = "images/" + padding(currentStep) + "_C.png";
-//     };
-// }, false);
+
 
 var touchStartPos = false;
 var touchMovePos = false;
@@ -465,7 +388,7 @@ var touchStartPoint = false;
 var touchMoveEvent;
 
 var factor = 10;
-var iii = 10;
+var changeStepFrameIndex = 10;
 var averageDis = 0;
 
 function touchMoveImage() {   
@@ -482,7 +405,7 @@ function touchMoveImage() {
     } else {
         touchMoveImageEnd = false;
         firstTouchMove = true;
-        iii = 10;
+        changeStepFrameIndex = 10;
         if (touchMoveDis > 50 && currentStep != 1) {
             averageDis = (moveDis - touchMoveDis)/5.5;//剩余的距离/[0.5*(总次数+1)]
             changeStepP();
@@ -509,7 +432,6 @@ function touchMoveImage() {
 };
 
 
-
 aniBox1.addEventListener('touchmove', function(e){
     // stepText.innerHTML = firstTouchMove;
     touchMovePos = e.touches[0].clientX;
@@ -527,11 +449,20 @@ aniBox1.addEventListener('touchend', function(e){
 }, false);
 
 function changeStepN(){
-    touchMoveDis -= averageDis * iii / 10;
-    iii -= 1;
+    touchMoveDis -= averageDis * changeStepFrameIndex / 10;
+    changeStepFrameIndex -= 1;
     imgBox2.style.webkitTransform = "translate3d(" + touchMoveDis + "px,0,0)";
     imgBox3.style.webkitTransform = "translate3d(" + (moveDis + touchMoveDis) + "px,0,0)";
-    if (iii < 0) {
+    if (!separate) {
+        btnAnimation.style.webkitTransform = "translate3d(0,-" + (112 * changeStepFrameIndex) + "px,0)";
+    };
+    if (changeStepFrameIndex < 0) {
+        if (!separate) {
+            separate = true;
+            mainFrameIndex = 0;
+            btnFrameIndex = 0;
+            imgBox2.style.backgroundImage = "url(images/" + padding(currentStep) + "_S.png)";
+        };
         currentStep += 1;
         stepText.innerHTML = padding(currentStep);
         imgBox1.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
@@ -552,15 +483,25 @@ function changeStepN(){
 var imageBoxIndex = 1
 
 function changeStepP(){
-    touchMoveDis += averageDis * iii / 10;
+    touchMoveDis += averageDis * changeStepFrameIndex / 10;
     
     imgBox1.style.webkitTransform = "translate3d(" + (- moveDis + touchMoveDis) + "px,0,0)";
     imgBox2.style.webkitTransform = "translate3d(" + touchMoveDis + "px,0,0)";
-    // if (!separate) {
-        btnAnimation.style.webkitTransform = "translate3d(0,-" + (112 * iii) + "px,0)";
-    // };
-    iii -= 1;
-    if (iii < 0) {
+    if (!separate) {
+        btnAnimation.style.webkitTransform = "translate3d(0,-" + (112 * changeStepFrameIndex) + "px,0)";
+    };
+    changeStepFrameIndex -= 1;
+    if (changeStepFrameIndex < 0) {
+        if (!separate) {
+            //按钮状态归位
+            separate = true;
+            //主动画帧数归零
+            mainFrameIndex = 0;
+            //按钮动画帧数归零
+            btnFrameIndex = 0;
+            //图片恢复为分离状态的图片
+            imgBox2.style.backgroundImage = "url(images/" + padding(currentStep) + "_S.png)";
+        };
         //改变标题栏的步骤
         currentStep -= 1;
         stepText.innerHTML = padding(currentStep);
@@ -586,22 +527,22 @@ function changeStepP(){
 };
 
 function notChangeStepP(){
-    touchMoveDis -= averageDis * iii / 10;
-    iii -= 1;
+    touchMoveDis -= averageDis * changeStepFrameIndex / 10;
+    changeStepFrameIndex -= 1;
     imgBox1.style.webkitTransform = "translate3d(" + (- moveDis + touchMoveDis) + "px,0,0)";
     imgBox2.style.webkitTransform = "translate3d(" + touchMoveDis + "px,0,0)";
-    if (iii < 0) {
+    if (changeStepFrameIndex < 0) {
     } else {
         window.requestAnimationFrame(notChangeStepP);
     };
 };
 
 function notChangeStepN(){
-    touchMoveDis -= averageDis * iii / 10;
-    iii -= 1;
+    touchMoveDis -= averageDis * changeStepFrameIndex / 10;
+    changeStepFrameIndex -= 1;
     imgBox2.style.webkitTransform = "translate3d(" + touchMoveDis + "px,0,0)";
     imgBox3.style.webkitTransform = "translate3d(" + (moveDis + touchMoveDis) + "px,0,0)";
-    if (iii < 0) {
+    if (changeStepFrameIndex < 0) {
         //do something after change step next
     } else {
         window.requestAnimationFrame(notChangeStepN);
@@ -611,10 +552,108 @@ function notChangeStepN(){
 
 var lastStep = 1;
 
+// '@-webkit-keyframes moveR {'+
+    // 'from {-webkit-transform: translate3d(0, 0, 0)}'+
+    // 'to {-webkit-transform: translate3d('+moveDis+'px, 0, 0)}}'+
+    // '@-webkit-keyframes moveL {'+
+    // 'from {-webkit-transform: translate3d(0, 0, 0)}'+
+    // 'to {-webkit-transform: translate3d(-'+moveDis+'px, 0, 0)}}'
+
+
+// btnAnimation.addEventListener('webkitTransitionEnd', function(){
+//     if (separate) {
+//         imgM.src = "images/" + padding(currentStep) + "_S.png";
+//     }else {
+//         imgM.src = "images/" + padding(currentStep) + "_C.png";
+//     };
+// }, false);
+
+// function changeStepN() {
+//     //     nextGlow.style.backgroundColor = "#FF9D82";
+//     //     mask.style.display = "none";
+//     imgBox2.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.14, .28, .43, 1)";
+//     imgBox3.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.14, .28, .43, 1)";
+
+//     imgBox1.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+//     imgBox2.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+//     imgBox3.style.webkitTransform = "translate3d(0,0,0)";
+
+//     if (!separate) {
+//         btnAnimationS();
+//         lastStep = currentStep;
+//     };
+
+//     currentStep += 1;
+//     stepText.innerHTML = padding(currentStep);
+
+//     if (currentStep != maxStep) {
+//         imgBox1.style.backgroundImage = "url(images/" + padding(currentStep+1) + "_S.png)";
+//     };
+//     mainAnimationImage.src = "images/" + padding(currentStep) + "_Animation.png";
+
+//     var first = imgBox.shift();
+//     imgBox.push(first);
+// };
+
+// function changeStepP() {
+//     // previousGlow.style.backgroundColor = "#FF9D82";
+//     // mask.style.display = "none";
+//     imgBox1.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.14, .28, .43, 1)";
+//     imgBox2.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.14, .28, .43, 1)";
+
+//     imgBox1.style.webkitTransform = "translate3d(0,0,0)";
+//     imgBox2.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+//     imgBox3.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+
+//     if (!separate) {
+//         btnAnimationS();
+//         lastStep = currentStep;
+//     };
+
+//     currentStep -= 1;
+//     stepText.innerHTML = padding(currentStep);
+
+//     if (currentStep != 1) {
+//         imgBox3.style.backgroundImage = "url(images/" + padding(currentStep-1) + "_S.png)";
+//     };
+//     mainAnimationImage.src = "images/" + padding(currentStep) + "_Animation.png";
+
+//     var first = imgBox.shift();
+//     imgBox.push(first);
+//     first = imgBox.shift();
+//     imgBox.push(first);
+// };
+
+// function notChangeStep(){
+//     if (touchMoveDis > 0) {
+//         // touchMoveDis = 0;
+//         imgBox1.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.25, 0, .43, 1)";
+//         imgBox2.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.25, 0, .43, 1)";
+//         imgBox1.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+//         imgBox2.style.webkitTransform = "translate3d(0,0,0)";
+//     } else {
+//         // touchMoveDis = 0;
+//         imgBox2.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.25, 0, .43, 1)";
+//         imgBox3.style.webkitTransition = "-webkit-transform 0.15s cubic-bezier(.25, 0, .43, 1)";
+//         imgBox2.style.webkitTransform = "translate3d(0,0,0)";
+//         imgBox3.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+//     };
+// };
+
+// function btnAnimationS() {
+//     btnAnimation.style.webkitTransform = "translate3d(0,0,0)";
+//     separate = true;
+// };
+
+// function btnAnimationC() {
+//     btnAnimation.style.webkitTransform = "translate3d(0,-84em,0)";
+//     separate = false;
+// };
+
 // aniBox2.addEventListener('webkitTransitionEnd', function(){
 //     mainMask.style.pointerEvents = "none";
 //     if (lastStep) {//如果主动画处于组合状态，则将其恢复到分离状态。
-//         frameIndex = 0;
+//         mainFrameIndex = 0;
 //         imgBox2.style.backgroundImage = "url(images/" + padding(lastStep) + "_S.png)";
 //         lastStep = false;
 //     };
@@ -667,7 +706,7 @@ var lastStep = 1;
 
 //     nextGlow.style.backgroundColor = "#C6C6C6";
 //     previousGlow.style.backgroundColor = "#C6C6C6";
-//     frameIndex = 0;//切换步骤时让动画回到第一帧，否则无法再次触发动画。
+//     mainFrameIndex = 0;//切换步骤时让动画回到第一帧，否则无法再次触发动画。
 //     mainAnimationImage.src = "images/" + padding(currentStep) + "_Animation.png";
 
 // }, false);
@@ -1144,7 +1183,7 @@ var lastStep = 1;
 // function sprite (options) {
                 
 //     var that = {},
-//         frameIndex = 0,
+//         mainFrameIndex = 0,
 //         tickCount = 0,
 //         ticksPerFrame = options.ticksPerFrame || 0;
 //         numberOfFrames = options.numberOfFrames || 1;
@@ -1160,7 +1199,7 @@ var lastStep = 1;
 //         that.context.drawImage(
 //            that.image,
 //            0,
-//            400 * frameIndex,
+//            400 * mainFrameIndex,
 //            400,
 //            400,
 //            0,
@@ -1174,12 +1213,12 @@ var lastStep = 1;
             
 //         if (tickCount > ticksPerFrame) {
 //             tickCount = 0;
-//             if (frameIndex < numberOfFrames - 1) {  
-//                 frameIndex += 1;
+//             if (mainFrameIndex < numberOfFrames - 1) {  
+//                 mainFrameIndex += 1;
 //             } else if (that.loop) {
-//                 frameIndex = 0;
+//                 mainFrameIndex = 0;
 //             } else {
-//                 // frameIndex = 0;
+//                 // mainFrameIndex = 0;
 //                 animationStop = true;
 //             };
 //         };
@@ -1277,7 +1316,7 @@ var lastStep = 1;
 //     };
 //     currentStep = target;
 //     stepText.innerHTML = padding(currentStep);
-//     frameIndex = 0;//切换步骤时让动画回到第一帧，否则无法再次触发动画。
+//     mainFrameIndex = 0;//切换步骤时让动画回到第一帧，否则无法再次触发动画。
 // };
 
 });
