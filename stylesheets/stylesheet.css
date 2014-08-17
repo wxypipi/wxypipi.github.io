@@ -116,7 +116,7 @@ body, html{
     background-position: 0 0;
     position: relative;
     margin: auto;
-    -webkit-transition: -webkit-transform 0.25s steps(12);
+    /*-webkit-transition: -webkit-transform 0.25s steps(12);*/
     
 }
 /*
