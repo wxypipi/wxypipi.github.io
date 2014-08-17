@@ -211,10 +211,8 @@ var tickCount = 0;
 
 function mainAnimationC() {
     if (btnFrameIndex < 12) {
-        // if (changeStepFrameIndexi < 13) {
         btnFrameIndex += 1;
         btnAnimation.style.webkitTransform = "translate3d(0,-" + (112 * btnFrameIndex) + "px,0)";
-        // };
         if (tickCount > ticksPerFrame) {
             tickCount = 0;
             mainFrameIndex += 1;
@@ -235,19 +233,13 @@ function mainAnimationC() {
         };
         window.requestAnimationFrame(mainAnimationC);
     } else if (mainFrameIndex == 19) {
-
         imgBox2.style.backgroundImage = "url(images/" + padding(currentStep) + "_C.png)";
         mainFrameIndex += 1;
-        // console.log("2" + mainFrameIndex);
         window.requestAnimationFrame(mainAnimationC);
     } else if (mainFrameIndex < 24) {
-        // console.log(mainFrameIndex);
         mainFrameIndex += 1;
         window.requestAnimationFrame(mainAnimationC);
     } else {
-        // alert("here");
-        // console.log("clean");
-        // window.cancelAnimationFrame(mainAnimationC);
         separate = false;
         cxt.clearRect(0, 0, 400, 400);
         mainFrameIndex = 19;
@@ -256,7 +248,6 @@ function mainAnimationC() {
 
 function mainAnimationS() {
     if (btnFrameIndex > 0) {
-        // if (changeStepFrameIndexi < 13) {
         btnFrameIndex -= 1;
         btnAnimation.style.webkitTransform = "translate3d(0,-" + (112 * btnFrameIndex) + "px,0)";
         if (tickCount > ticksPerFrame) {
@@ -266,7 +257,7 @@ function mainAnimationS() {
             0,400 * mainFrameIndex,400,400,0,0, 400, 400);
         } else {
             tickCount += 1;
-        }
+        };
         window.requestAnimationFrame(mainAnimationS);
     } else if (mainFrameIndex > 0) {
         if (tickCount > ticksPerFrame) {
@@ -276,7 +267,7 @@ function mainAnimationS() {
             0,400 * mainFrameIndex,400,400,0,0, 400, 400);
         } else {
             tickCount += 1;
-        }
+        };
         window.requestAnimationFrame(mainAnimationS);
     } else if (mainFrameIndex == 0) {
         imgBox2.style.backgroundImage = "url(images/" + padding(currentStep) + "_S.png)";
@@ -367,7 +358,7 @@ nextGlow.addEventListener('webkitAnimationEnd', function(){
 }, false);
 
 
-btnAnimation.addEventListener('touchstart', function(){
+btnAnimation.addEventListener('touchend', function(){
     // mask.style.display = "block";
     if (separate) {
         mainAnimationC();
@@ -465,7 +456,9 @@ function changeStepN(){
         };
         currentStep += 1;
         stepText.innerHTML = padding(currentStep);
-        imgBox1.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+        imgBox1.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
+        imgBox2.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
+        imgBox3.style.webkitTransform = "translate3d(0,0,0)";
         if (currentStep != maxStep) {
             imgBox1.style.backgroundImage = "url(images/" + padding(currentStep+1) + "_S.png)";
         };
@@ -505,7 +498,11 @@ function changeStepP(){
         //改变标题栏的步骤
         currentStep -= 1;
         stepText.innerHTML = padding(currentStep);
+        // stepText.innerHTML = padding(currentStep);
         //将图片位置归位，并且替换图片
+        
+        imgBox1.style.webkitTransform = "translate3d(0,0,0)";
+        imgBox2.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
         imgBox3.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
         if (currentStep != 1) {
             imgBox3.style.backgroundImage = "url(images/" + padding(currentStep-1) + "_S.png)";
