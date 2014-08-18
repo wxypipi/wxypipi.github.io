@@ -239,7 +239,13 @@ body, html{
     float: right;
 }*/
 
-
+#openMenuTouchArea{
+    height: 100%;
+    width: 16px;
+    position: absolute;
+    left: 0;
+    /*background-color: red;*/
+}
 
 #mainAnimation{
     position: absolute;
