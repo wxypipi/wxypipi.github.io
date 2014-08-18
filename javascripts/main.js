@@ -343,7 +343,7 @@ function slideOpenMenu() {
     if (!touchEnd) {
         if (touchMovePos < 240) {
             mainBox.style.webkitTransform = "translate3d(" + touchMovePos + "px,0,0)";
-            menuBox.style.webkitTransform = "translate3d(" + (touchMovePos/2-120) + "px,0,0)";
+            menuBox.style.webkitTransform = "translate3d(" + Math.round(touchMovePos/2-120) + "px,0,0)";
         } else {
             touchMovePos = 240;//不设为240的话touchend之后的动画会出问题
         }
