@@ -394,7 +394,7 @@ function closeMenu() {
     menuBox.style.webkitTransform = "translate3d(" + Math.round(touchMovePos/2-120) + "px,0,0)";
     if (changeStepFrameIndex < 0) {
         openMenuTouchArea.style.left = "0";
-        openMenuTouchArea.style.width = "16px";
+        openMenuTouchArea.style.width = "32px";
         animationing = false;
         menuOpened = false;
     } else {
@@ -623,6 +623,7 @@ aniBox1.addEventListener('touchend', function(e){
 
 openMenuTouchArea.addEventListener('touchstart', function(e){
     if (!animationing) {
+        openMenuTouchArea.style.width = "100%";
         touchMovePos = e.touches[0].clientX;
         touchEnd = false;
         slideOpenMenu();
