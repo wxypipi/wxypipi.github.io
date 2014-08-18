@@ -219,6 +219,10 @@ function touchMoveImage() {
         };
         window.requestAnimationFrame(touchMoveImage);
     } else {
+        if (touchMoveDis == 0) {
+            //如果触摸点没有移动，执行这里的代码
+            return;
+        };
         animationing = true;
         changeStepFrameIndex = 10;
         if (touchMoveDis > changeStepThreshold && currentStep != 1) {
@@ -338,45 +342,67 @@ function notChangeStepN() {
 //==========================================滑动开启菜单栏===================================
 
 var menuOpened = false;
+var touchMoveDis2;
 
 function slideOpenMenu() {
     if (!touchEnd) {
-        if (touchMovePos < 240) {
-            mainBox.style.webkitTransform = "translate3d(" + touchMovePos + "px,0,0)";
-            menuBox.style.webkitTransform = "translate3d(" + Math.round(touchMovePos/2-120) + "px,0,0)";
-        } else {
-            touchMovePos = 240;//不设为240的话touchend之后的动画会出问题
-        }
+        touchMoveDis2 = touchMovePos - touchStartPos;
+        if (touchMoveDis2 > 0 && touchMoveDis2 < 240) {
+            // console.log("now!");
+            touchMoveDis = touchMoveDis2;
+            mainBox.style.webkitTransform = "translate3d(" + (touchMoveDis) + "px,0,0)";
+            menuBox.style.webkitTransform = "translate3d(" + Math.round(touchMoveDis/2-120) + "px,0,0)";
+        };
         window.requestAnimationFrame(slideOpenMenu);
     } else {
+        if (touchMoveDis2 == 0) {
+            return;
+        };
         animationing = true;
         changeStepFrameIndex = 6;
-        if (!menuOpened) {
-            if (touchMovePos > 60) {
-                averageDis = (240 - touchMovePos)/3.5;//剩余的距离/[0.5*(总次数+1)]
-                openMenu();
-            } else {
-                averageDis = touchMovePos/3.5;
-                notOpenMenu();
-            };
+        if (touchMoveDis > 60) {
+            averageDis = (240 - touchMoveDis)/3.5;//剩余的距离/[0.5*(总次数+1)]
+            openMenu();
         } else {
-            if (touchMovePos < 180) {
-                averageDis = touchMovePos/3.5;
-                closeMenu();
-            } else {
-                averageDis = (240 - touchMovePos)/3.5;
-                notCloseMenu();
-            };
+            averageDis = touchMoveDis/3.5;
+            notOpenMenu();
+        };
+    };
+};
+
+function slideCloseMenu() {
+    if (!touchEnd) {
+        touchMoveDis2 = touchMovePos - touchStartPos;
+        if (touchMoveDis2 > -240 && touchMoveDis2 < 0) {
+            console.log("now!");
+            touchMoveDis = touchMoveDis2;
+            mainBox.style.webkitTransform = "translate3d(" + (240 + touchMoveDis) + "px,0,0)";
+            menuBox.style.webkitTransform = "translate3d(" + Math.round((240 + touchMoveDis)/2-120) + "px,0,0)";
+        };
+        window.requestAnimationFrame(slideCloseMenu);
+    } else {
+        if (touchMoveDis2 == 0) {
+            //关闭菜单栏
+            return;
+        };
+        animationing = true;
+        changeStepFrameIndex = 6;
+        if (touchMoveDis < -60) {
+            averageDis = (240 + touchMoveDis)/3.5;
+            closeMenu();
+        } else {
+            averageDis = -touchMoveDis/3.5;
+            notCloseMenu();
         };
     };
 };
 
 
 function openMenu() {
-    touchMovePos += averageDis * changeStepFrameIndex / 6;
+    touchMoveDis += averageDis * changeStepFrameIndex / 6;
     changeStepFrameIndex -= 1;
-    mainBox.style.webkitTransform = "translate3d(" + Math.round(touchMovePos) + "px,0,0)";
-    menuBox.style.webkitTransform = "translate3d(" + Math.round(touchMovePos/2-120) + "px,0,0)";
+    mainBox.style.webkitTransform = "translate3d(" + Math.round(touchMoveDis) + "px,0,0)";
+    menuBox.style.webkitTransform = "translate3d(" + Math.round(touchMoveDis/2-120) + "px,0,0)";
     if (changeStepFrameIndex < 0) {
         openMenuTouchArea.style.left = "240px";
         openMenuTouchArea.style.width = "100%";
@@ -388,10 +414,10 @@ function openMenu() {
 };
 
 function closeMenu() {
-    touchMovePos -= averageDis * changeStepFrameIndex / 6;
+    touchMoveDis -= averageDis * changeStepFrameIndex / 6;
     changeStepFrameIndex -= 1;
-    mainBox.style.webkitTransform = "translate3d(" + Math.round(touchMovePos) + "px,0,0)";
-    menuBox.style.webkitTransform = "translate3d(" + Math.round(touchMovePos/2-120) + "px,0,0)";
+    mainBox.style.webkitTransform = "translate3d(" + Math.round(240 + touchMoveDis) + "px,0,0)";
+    menuBox.style.webkitTransform = "translate3d(" + Math.round((240 + touchMoveDis)/2-120) + "px,0,0)";
     if (changeStepFrameIndex < 0) {
         openMenuTouchArea.style.left = "0";
         openMenuTouchArea.style.width = "32px";
@@ -403,10 +429,10 @@ function closeMenu() {
 };
 
 function notOpenMenu() {
-    touchMovePos -= averageDis * changeStepFrameIndex / 6;
+    touchMoveDis -= averageDis * changeStepFrameIndex / 6;
     changeStepFrameIndex -= 1;
-    mainBox.style.webkitTransform = "translate3d(" + Math.round(touchMovePos) + "px,0,0)";
-    menuBox.style.webkitTransform = "translate3d(" + Math.round(touchMovePos/2-120) + "px,0,0)";
+    mainBox.style.webkitTransform = "translate3d(" + Math.round(touchMoveDis) + "px,0,0)";
+    menuBox.style.webkitTransform = "translate3d(" + Math.round(touchMoveDis/2-120) + "px,0,0)";
     if (changeStepFrameIndex < 0) {
         animationing = false;
     } else {
@@ -415,10 +441,10 @@ function notOpenMenu() {
 };
 
 function notCloseMenu() {
-    touchMovePos += averageDis * changeStepFrameIndex / 6;
+    touchMoveDis += averageDis * changeStepFrameIndex / 6;
     changeStepFrameIndex -= 1;
-    mainBox.style.webkitTransform = "translate3d(" + Math.round(touchMovePos) + "px,0,0)";
-    menuBox.style.webkitTransform = "translate3d(" + Math.round(touchMovePos/2-120) + "px,0,0)";
+    mainBox.style.webkitTransform = "translate3d(" + Math.round(240 + touchMoveDis) + "px,0,0)";
+    menuBox.style.webkitTransform = "translate3d(" + Math.round((240 + touchMoveDis)/2-120) + "px,0,0)";
     if (changeStepFrameIndex < 0) {
         animationing = false;
     } else {
@@ -623,10 +649,14 @@ aniBox1.addEventListener('touchend', function(e){
 
 openMenuTouchArea.addEventListener('touchstart', function(e){
     if (!animationing) {
-        // openMenuTouchArea.style.width = "100%";
-        touchMovePos = e.touches[0].clientX;
+        touchStartPos = e.touches[0].clientX;
+        touchMovePos = touchStartPos;
         touchEnd = false;
-        slideOpenMenu();
+        if (menuOpened) {
+            slideCloseMenu();
+        } else {
+            slideOpenMenu();
+        };
     };
 }, false);
 
