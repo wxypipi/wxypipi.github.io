@@ -396,6 +396,7 @@ function touchMoveImage() {
     } else {
         touchMoveImageEnd = false;
         firstTouchMove = true;
+        touchStartPos = false;
         changeStepFrameIndex = 10;
         if (touchMoveDis > 50 && currentStep != 1) {
             averageDis = (moveDis - touchMoveDis)/5.5;//剩余的距离/[0.5*(总次数+1)]
@@ -422,21 +423,27 @@ function touchMoveImage() {
     };
 };
 
+aniBox1.addEventListener('touchstart', function(e){
+    touchStartPos = e.touches[0].clientX;
+    touchMovePos = e.touches[0].clientX;
+    touchMoveImage();
+}, false);
+
 
 aniBox1.addEventListener('touchmove', function(e){
     // stepText.innerHTML = firstTouchMove;
     touchMovePos = e.touches[0].clientX;
-    if (firstTouchMove) {
-        touchStartPos = e.touches[0].clientX;
-        touchMoveImage();
-        firstTouchMove = false;
-    };
+    // if (firstTouchMove) {
+    //     touchStartPos = e.touches[0].clientX;
+    //     touchMoveImage();
+    //     firstTouchMove = false;
+    // };
 }, false);
 
 aniBox1.addEventListener('touchend', function(e){
-    // if (touchStartPos) {//判断有没有触发touchmove
+    if (touchStartPos) {//判断有没有触发touchmove
         touchMoveImageEnd = true;
-    // };
+    };
 }, false);
 
 function changeStepN(){
