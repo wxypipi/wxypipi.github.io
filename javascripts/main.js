@@ -623,7 +623,7 @@ aniBox1.addEventListener('touchend', function(e){
 
 openMenuTouchArea.addEventListener('touchstart', function(e){
     if (!animationing) {
-        openMenuTouchArea.style.width = "100%";
+        // openMenuTouchArea.style.width = "100%";
         touchMovePos = e.touches[0].clientX;
         touchEnd = false;
         slideOpenMenu();

@@ -49,13 +49,13 @@ body, html{
 #menuBox{
     width: 15em;
     -webkit-transform: translate3d(-7.5em, 0, 0);
-    -webkit-transition: -webkit-transform 0.35s cubic-bezier(.08, .47, 0, 1);
+    /*-webkit-transition: -webkit-transform 0.35s cubic-bezier(.08, .47, 0, 1);*/
 }
 
 #mainBox{
     box-shadow: 0 0 1em 0.25em rgba(0,0,0,0.3);
     -webkit-transform: translate3d(0, 0, 0);
-    -webkit-transition: -webkit-transform 0.35s cubic-bezier(.08, .47, 0, 1);
+    /*-webkit-transition: -webkit-transform 0.35s cubic-bezier(.08, .47, 0, 1);*/
 }
 
 #main{
