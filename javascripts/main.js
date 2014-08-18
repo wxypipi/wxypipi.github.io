@@ -345,7 +345,7 @@ function slideOpenMenu() {
             mainBox.style.webkitTransform = "translate3d(" + touchMovePos + "px,0,0)";
             menuBox.style.webkitTransform = "translate3d(" + (touchMovePos/2-120) + "px,0,0)";
         } else {
-            touchMovePos = 240;
+            touchMovePos = 240;//不设为240的话touchend之后的动画会出问题
         }
         window.requestAnimationFrame(slideOpenMenu);
     } else {
@@ -378,6 +378,8 @@ function openMenu() {
     mainBox.style.webkitTransform = "translate3d(" + Math.round(touchMovePos) + "px,0,0)";
     menuBox.style.webkitTransform = "translate3d(" + Math.round(touchMovePos/2-120) + "px,0,0)";
     if (changeStepFrameIndex < 0) {
+        openMenuTouchArea.style.left = "240px";
+        openMenuTouchArea.style.width = "100%";
         animationing = false;
         menuOpened = true;
     } else {
@@ -391,6 +393,8 @@ function closeMenu() {
     mainBox.style.webkitTransform = "translate3d(" + Math.round(touchMovePos) + "px,0,0)";
     menuBox.style.webkitTransform = "translate3d(" + Math.round(touchMovePos/2-120) + "px,0,0)";
     if (changeStepFrameIndex < 0) {
+        openMenuTouchArea.style.left = "0";
+        openMenuTouchArea.style.width = "16px";
         animationing = false;
         menuOpened = false;
     } else {
