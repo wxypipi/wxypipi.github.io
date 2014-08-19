@@ -203,9 +203,11 @@ var touchStartPos = false,
     touchMovePos = false,
     touchEnd = false,
     touchMoveDis = 0,
+    touchEndMoveDis = 0,
     changeStepFrameIndex = 10,
     averageDis = 0,
-    animationing = false;
+    animationing = false,
+    factor = 0;
 
 function touchMoveImage() {
     if (!touchEnd) {
@@ -224,32 +226,29 @@ function touchMoveImage() {
             return;
         };
         animationing = true;
-        changeStepFrameIndex = 10;
+        changeStepFrameIndex = 12;
         if (touchMoveDis > changeStepThreshold && currentStep != 1) {
-            averageDis = (moveDis - touchMoveDis)/5.5;//剩余的距离/[0.5*(总次数+1)]
+            factor = moveDis/touchMoveDis-1;
             changeStepP();
         } else if (touchMoveDis < -changeStepThreshold && currentStep != maxStep) {
-            averageDis = (moveDis + touchMoveDis)/5.5;
+            factor = -moveDis/touchMoveDis-1;
             changeStepN();
+        } else if (touchMoveDis > 0) {
+            notChangeStepP();
         } else {
-            averageDis = (touchMoveDis)/5.5;
-            if (averageDis > 0) {
-                notChangeStepP();
-            } else {
-                notChangeStepN();
-            };
+            notChangeStepN();
         };
     };
 };
 
 function changeStepN() {
-    touchMoveDis -= averageDis * changeStepFrameIndex / 10;
-    changeStepFrameIndex -= 1;
-    imgBox2.style.webkitTransform = "translate3d(" + Math.round(touchMoveDis) + "px,0,0)";
-    imgBox3.style.webkitTransform = "translate3d(" + Math.round(moveDis + touchMoveDis) + "px,0,0)";
+    touchEndMoveDis = touchMoveDis * (1 + factor * (1 - Math.pow(changeStepFrameIndex / 12, 3)));
+    imgBox2.style.webkitTransform = "translate3d(" + Math.round(touchEndMoveDis) + "px,0,0)";
+    imgBox3.style.webkitTransform = "translate3d(" + Math.round(touchEndMoveDis + moveDis) + "px,0,0)";
     if (!separate) {
         btnAnimation.style.webkitTransform = "translate3d(0,-" + (112 * changeStepFrameIndex) + "px,0)";
     };
+    changeStepFrameIndex -= 1;
     if (changeStepFrameIndex < 0) {
         animationing = false;
         if (!separate) {
@@ -276,10 +275,9 @@ function changeStepN() {
 };
 
 function changeStepP() {
-    touchMoveDis += averageDis * changeStepFrameIndex / 10;
-    
-    imgBox1.style.webkitTransform = "translate3d(" + Math.round(- moveDis + touchMoveDis) + "px,0,0)";
-    imgBox2.style.webkitTransform = "translate3d(" + Math.round(touchMoveDis) + "px,0,0)";
+    touchEndMoveDis = touchMoveDis * (1 + factor * (1 - Math.pow(changeStepFrameIndex / 12, 3)));
+    imgBox1.style.webkitTransform = "translate3d(" + Math.round(touchEndMoveDis- moveDis) + "px,0,0)";
+    imgBox2.style.webkitTransform = "translate3d(" + Math.round(touchEndMoveDis) + "px,0,0)";
     if (!separate) {
         btnAnimation.style.webkitTransform = "translate3d(0,-" + (112 * changeStepFrameIndex) + "px,0)";
     };
@@ -316,10 +314,10 @@ function changeStepP() {
 };
 
 function notChangeStepP() {
-    touchMoveDis -= averageDis * changeStepFrameIndex / 10;
+    touchEndMoveDis = touchMoveDis * Math.pow(changeStepFrameIndex / 12, 3);
     changeStepFrameIndex -= 1;
-    imgBox1.style.webkitTransform = "translate3d(" + Math.round(- moveDis + touchMoveDis) + "px,0,0)";
-    imgBox2.style.webkitTransform = "translate3d(" + Math.round(touchMoveDis) + "px,0,0)";
+    imgBox1.style.webkitTransform = "translate3d(" + Math.round(touchEndMoveDis - moveDis) + "px,0,0)";
+    imgBox2.style.webkitTransform = "translate3d(" + Math.round(touchEndMoveDis) + "px,0,0)";
     if (changeStepFrameIndex < 0) {
         animationing = false;
     } else {
@@ -328,10 +326,10 @@ function notChangeStepP() {
 };
 
 function notChangeStepN() {
-    touchMoveDis -= averageDis * changeStepFrameIndex / 10;
+    touchEndMoveDis = touchMoveDis * Math.pow(changeStepFrameIndex / 12, 3);
     changeStepFrameIndex -= 1;
-    imgBox2.style.webkitTransform = "translate3d(" + Math.round(touchMoveDis) + "px,0,0)";
-    imgBox3.style.webkitTransform = "translate3d(" + Math.round(moveDis + touchMoveDis) + "px,0,0)";
+    imgBox2.style.webkitTransform = "translate3d(" + Math.round(touchEndMoveDis) + "px,0,0)";
+    imgBox3.style.webkitTransform = "translate3d(" + Math.round(touchEndMoveDis + moveDis) + "px,0,0)";
     if (changeStepFrameIndex < 0) {
         animationing = false;
     } else {
@@ -346,65 +344,66 @@ var touchMoveDis2;
 
 function slideOpenMenu() {
     if (!touchEnd) {
-        touchMoveDis2 = touchMovePos - touchStartPos;
-        if (touchMoveDis2 > 0 && touchMoveDis2 < 240) {
-            // console.log("now!");
-            touchMoveDis = touchMoveDis2;
-            mainBox.style.webkitTransform = "translate3d(" + (touchMoveDis) + "px,0,0)";
-            menuBox.style.webkitTransform = "translate3d(" + Math.round(touchMoveDis/2-120) + "px,0,0)";
+        touchMoveDis = touchMovePos - touchStartPos;
+        if (touchMoveDis > 240) {
+            touchMoveDis = 240;
+        } else if (touchMoveDis < 0) {
+            touchMoveDis = 0;
         };
+        mainBox.style.webkitTransform = "translate3d(" + (touchMoveDis) + "px,0,0)";
+        menuBox.style.webkitTransform = "translate3d(" + Math.round(touchMoveDis/2-120) + "px,0,0)";
         window.requestAnimationFrame(slideOpenMenu);
     } else {
-        if (touchMoveDis2 == 0) {
+        if (touchMoveDis <= 0) {
             return;
         };
         animationing = true;
-        changeStepFrameIndex = 6;
+        changeStepFrameIndex = 8;
         if (touchMoveDis > 60) {
-            averageDis = (240 - touchMoveDis)/3.5;//剩余的距离/[0.5*(总次数+1)]
+            factor = 240/touchMoveDis-1;
             openMenu();
         } else {
-            averageDis = touchMoveDis/3.5;
-            notOpenMenu();
+            touchMoveDis -= 240;
+            closeMenu();
         };
     };
 };
 
 function slideCloseMenu() {
     if (!touchEnd) {
-        touchMoveDis2 = touchMovePos - touchStartPos;
-        if (touchMoveDis2 > -240 && touchMoveDis2 < 0) {
-            console.log("now!");
-            touchMoveDis = touchMoveDis2;
-            mainBox.style.webkitTransform = "translate3d(" + (240 + touchMoveDis) + "px,0,0)";
-            menuBox.style.webkitTransform = "translate3d(" + Math.round((240 + touchMoveDis)/2-120) + "px,0,0)";
+        touchMoveDis = touchMovePos - touchStartPos;
+        if (touchMoveDis < -240) {
+            touchMoveDis = -240;
+        } else if (touchMoveDis > 0) {
+            touchMoveDis = 0;
         };
+        mainBox.style.webkitTransform = "translate3d(" + (240 + touchMoveDis) + "px,0,0)";
+        menuBox.style.webkitTransform = "translate3d(" + Math.round((240 + touchMoveDis)/2-120) + "px,0,0)";
         window.requestAnimationFrame(slideCloseMenu);
     } else {
-        if (touchMoveDis2 == 0) {
+        if (touchMoveDis >= 0) {
             //关闭菜单栏
             return;
         };
         animationing = true;
         changeStepFrameIndex = 6;
         if (touchMoveDis < -60) {
-            averageDis = (240 + touchMoveDis)/3.5;
             closeMenu();
         } else {
-            averageDis = -touchMoveDis/3.5;
-            notCloseMenu();
+            touchMoveDis += 240;
+            factor = 240/touchMoveDis-1;
+            openMenu();
         };
     };
 };
 
 
 function openMenu() {
-    touchMoveDis += averageDis * changeStepFrameIndex / 6;
+    touchEndMoveDis = touchMoveDis * (1 + factor * (1 - Math.pow(changeStepFrameIndex / 8, 3)));
     changeStepFrameIndex -= 1;
-    mainBox.style.webkitTransform = "translate3d(" + Math.round(touchMoveDis) + "px,0,0)";
-    menuBox.style.webkitTransform = "translate3d(" + Math.round(touchMoveDis/2-120) + "px,0,0)";
+    mainBox.style.webkitTransform = "translate3d(" + Math.round(touchEndMoveDis) + "px,0,0)";
+    menuBox.style.webkitTransform = "translate3d(" + Math.round(touchEndMoveDis/2-120) + "px,0,0)";
     if (changeStepFrameIndex < 0) {
-        openMenuTouchArea.style.left = "240px";
         openMenuTouchArea.style.width = "100%";
         animationing = false;
         menuOpened = true;
@@ -414,13 +413,12 @@ function openMenu() {
 };
 
 function closeMenu() {
-    touchMoveDis -= averageDis * changeStepFrameIndex / 6;
+    touchEndMoveDis = (240 + touchMoveDis) * Math.pow(changeStepFrameIndex / 8, 3);
     changeStepFrameIndex -= 1;
-    mainBox.style.webkitTransform = "translate3d(" + Math.round(240 + touchMoveDis) + "px,0,0)";
-    menuBox.style.webkitTransform = "translate3d(" + Math.round((240 + touchMoveDis)/2-120) + "px,0,0)";
+    mainBox.style.webkitTransform = "translate3d(" + Math.round(touchEndMoveDis) + "px,0,0)";
+    menuBox.style.webkitTransform = "translate3d(" + Math.round(touchEndMoveDis/2-120) + "px,0,0)";
     if (changeStepFrameIndex < 0) {
-        openMenuTouchArea.style.left = "0";
-        openMenuTouchArea.style.width = "32px";
+        openMenuTouchArea.style.width = "16px";
         animationing = false;
         menuOpened = false;
     } else {
@@ -560,8 +558,11 @@ $(window).bind('onorientationchange resize', function() {
 resize();
 
 $menuBtn.bind('touchend', function() {
-    selectStep($contentsItem[currentStep-1]);
-    openMenuBar();
+    // selectStep($contentsItem[currentStep-1]);
+    touchMoveDis = 0;
+    averageDis = 240/3.5;
+    changeStepFrameIndex = 6;
+    openMenu();
 });
 
 $mainMask.bind('touchstart', function() { 
