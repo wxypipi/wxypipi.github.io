@@ -241,9 +241,10 @@ body, html{
 
 #openMenuTouchArea{
     height: 100%;
-    width: 16px;
+    width: 12px;
     position: absolute;
     left: 0;
+    top: 48px;
     /*background-color: red;*/
 }
 

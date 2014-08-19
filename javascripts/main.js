@@ -207,9 +207,10 @@ var touchStartPos = false,
     changeStepFrameIndex = 10,
     averageDis = 0,
     animationing = false,
+    slideChangeStep2 = false,
     factor = 0;
 
-function touchMoveImage() {
+function slideChangeStep() {
     if (!touchEnd) {
         touchMoveDis = touchMovePos - touchStartPos;
         if (touchMoveDis > 0) {
@@ -219,7 +220,7 @@ function touchMoveImage() {
             imgBox2.style.webkitTransform = "translate3d(" + touchMoveDis + "px,0,0)";
             imgBox3.style.webkitTransform = "translate3d(" + (moveDis + touchMoveDis) + "px,0,0)";
         };
-        window.requestAnimationFrame(touchMoveImage);
+        window.requestAnimationFrame(slideChangeStep);
     } else {
         if (touchMoveDis == 0) {
             //如果触摸点没有移动，执行这里的代码
@@ -269,6 +270,11 @@ function changeStepN() {
         imgBox1 = imgBox[0];
         imgBox2 = imgBox[1];
         imgBox3 = imgBox[2];
+        if (slideChangeStep2 && !touchEnd) {
+            touchStartPos = touchMovePos;
+            slideChangeStep();
+            slideChangeStep2 = false;
+        };
     } else {
         window.requestAnimationFrame(changeStepN);
     };
@@ -308,6 +314,11 @@ function changeStepP() {
         imgBox1 = imgBox[0];
         imgBox2 = imgBox[1];
         imgBox3 = imgBox[2];
+        if (slideChangeStep2 && !touchEnd) {
+            touchStartPos = touchMovePos;
+            slideChangeStep();
+            slideChangeStep2 = false;
+        };
     } else {
         window.requestAnimationFrame(changeStepP);
     };
@@ -320,6 +331,11 @@ function notChangeStepP() {
     imgBox2.style.webkitTransform = "translate3d(" + Math.round(touchEndMoveDis) + "px,0,0)";
     if (changeStepFrameIndex < 0) {
         animationing = false;
+        if (slideChangeStep2 && !touchEnd) {
+            touchStartPos = touchMovePos;
+            slideChangeStep();
+            slideChangeStep2 = false;
+        };
     } else {
         window.requestAnimationFrame(notChangeStepP);
     };
@@ -332,6 +348,11 @@ function notChangeStepN() {
     imgBox3.style.webkitTransform = "translate3d(" + Math.round(touchEndMoveDis + moveDis) + "px,0,0)";
     if (changeStepFrameIndex < 0) {
         animationing = false;
+        if (slideChangeStep2 && !touchEnd) {
+            touchStartPos = touchMovePos;
+            slideChangeStep();
+            slideChangeStep2 = false;
+        };
     } else {
         window.requestAnimationFrame(notChangeStepN);
     };
@@ -404,9 +425,11 @@ function openMenu() {
     mainBox.style.webkitTransform = "translate3d(" + Math.round(touchEndMoveDis) + "px,0,0)";
     menuBox.style.webkitTransform = "translate3d(" + Math.round(touchEndMoveDis/2-120) + "px,0,0)";
     if (changeStepFrameIndex < 0) {
-        openMenuTouchArea.style.width = "100%";
+        if (!menuOpened) {
+            menuOpened = true;
+            openMenuTouchArea.style.width = "100%";
+        };
         animationing = false;
-        menuOpened = true;
     } else {
         window.requestAnimationFrame(openMenu);
     };
@@ -418,37 +441,39 @@ function closeMenu() {
     mainBox.style.webkitTransform = "translate3d(" + Math.round(touchEndMoveDis) + "px,0,0)";
     menuBox.style.webkitTransform = "translate3d(" + Math.round(touchEndMoveDis/2-120) + "px,0,0)";
     if (changeStepFrameIndex < 0) {
-        openMenuTouchArea.style.width = "16px";
+        if (menuOpened) {
+            menuOpened = false;
+            openMenuTouchArea.style.width = "12px";
+        };
         animationing = false;
-        menuOpened = false;
     } else {
         window.requestAnimationFrame(closeMenu);
     };
 };
 
-function notOpenMenu() {
-    touchMoveDis -= averageDis * changeStepFrameIndex / 6;
-    changeStepFrameIndex -= 1;
-    mainBox.style.webkitTransform = "translate3d(" + Math.round(touchMoveDis) + "px,0,0)";
-    menuBox.style.webkitTransform = "translate3d(" + Math.round(touchMoveDis/2-120) + "px,0,0)";
-    if (changeStepFrameIndex < 0) {
-        animationing = false;
-    } else {
-        window.requestAnimationFrame(notOpenMenu);
-    };
-};
+// function notOpenMenu() {
+//     touchMoveDis -= averageDis * changeStepFrameIndex / 6;
+//     changeStepFrameIndex -= 1;
+//     mainBox.style.webkitTransform = "translate3d(" + Math.round(touchMoveDis) + "px,0,0)";
+//     menuBox.style.webkitTransform = "translate3d(" + Math.round(touchMoveDis/2-120) + "px,0,0)";
+//     if (changeStepFrameIndex < 0) {
+//         animationing = false;
+//     } else {
+//         window.requestAnimationFrame(notOpenMenu);
+//     };
+// };
 
-function notCloseMenu() {
-    touchMoveDis += averageDis * changeStepFrameIndex / 6;
-    changeStepFrameIndex -= 1;
-    mainBox.style.webkitTransform = "translate3d(" + Math.round(240 + touchMoveDis) + "px,0,0)";
-    menuBox.style.webkitTransform = "translate3d(" + Math.round((240 + touchMoveDis)/2-120) + "px,0,0)";
-    if (changeStepFrameIndex < 0) {
-        animationing = false;
-    } else {
-        window.requestAnimationFrame(notCloseMenu);
-    };
-};
+// function notCloseMenu() {
+//     touchMoveDis += averageDis * changeStepFrameIndex / 6;
+//     changeStepFrameIndex -= 1;
+//     mainBox.style.webkitTransform = "translate3d(" + Math.round(240 + touchMoveDis) + "px,0,0)";
+//     menuBox.style.webkitTransform = "translate3d(" + Math.round((240 + touchMoveDis)/2-120) + "px,0,0)";
+//     if (changeStepFrameIndex < 0) {
+//         animationing = false;
+//     } else {
+//         window.requestAnimationFrame(notCloseMenu);
+//     };
+// };
 
 
 // ======================================主动画=============================================
@@ -636,7 +661,12 @@ aniBox1.addEventListener('touchstart', function(e){
         touchStartPos = e.touches[0].clientX;
         touchMovePos = touchStartPos;
         touchEnd = false;
-        touchMoveImage();
+        slideChangeStep();
+    } else {
+        slideChangeStep2 = true;
+        touchStartPos = e.touches[0].clientX;
+        touchMovePos = touchStartPos;
+        touchEnd = false;
     };
 }, false);
 
@@ -837,7 +867,7 @@ openMenuTouchArea.addEventListener('touchend', function(e){
 // aniBox1.addEventListener('touchstart', function(e){
 //     touchStartPoint = e.touches[0];
 //     touchStartPos = touchStartPoint.clientX;
-//     touchMoveImage()
+//     slideChangeStep()
 // }, false);
 
 // } else {
@@ -860,7 +890,7 @@ openMenuTouchArea.addEventListener('touchend', function(e){
 //             imgBox[0].style.webkitTransition = "none";
 //             imgBox[1].style.webkitTransition = "none";
 //             imgBox[2].style.webkitTransition = "none";
-//             touchMoveImage()
+//             slideChangeStep()
 //         } else {
 //             mainBox.style.webkitTransition = "none";
 //             menuBox.style.webkitTransition = "none";
@@ -874,15 +904,15 @@ openMenuTouchArea.addEventListener('touchend', function(e){
 //     // stepText.innerHTML = touchMoveDis;
 // }, false);
 
-// function touchMoveImage() {
+// function slideChangeStep() {
 //     if (touchEnd) {
-//         window.cancelAnimationFrame(touchMoveImage);
+//         window.cancelAnimationFrame(slideChangeStep);
 //         touchMoveDis = 0;
 //     } else {
 //         imgBox[0].style.webkitTransform = "translate3d(" + (- moveDis + touchMoveDis) + "px,0,0)";
 //         imgBox[1].style.webkitTransform = "translate3d(" + touchMoveDis + "px,0,0)";
 //         imgBox[2].style.webkitTransform = "translate3d(" + (moveDis + touchMoveDis) + "px,0,0)";
-//         window.requestAnimationFrame(touchMoveImage);
+//         window.requestAnimationFrame(slideChangeStep);
 //     };
 // };
 
@@ -939,7 +969,7 @@ openMenuTouchArea.addEventListener('touchend', function(e){
 //         imgBox[0].style.webkitTransition = "none";
 //         imgBox[1].style.webkitTransition = "none";
 //         imgBox[2].style.webkitTransition = "none";
-//         touchMoveImage()
+//         slideChangeStep()
 //     };
 // }, false);
 
