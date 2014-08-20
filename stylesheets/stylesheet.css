@@ -142,7 +142,6 @@ body, html{
 #previousGlow, #nextGlow{
     border-radius: 50%;
     background-color: #C6C6C6;
-    -webkit-animation: none;
     position: absolute;
     width: 4em;
     height: 4em;
@@ -153,7 +152,6 @@ body, html{
 
 #previousGlow{
     left: 1em; 
-    background-color: #FF9D82;
 }
 
 #nextGlow{
@@ -171,16 +169,16 @@ body, html{
 
 
 /*UC和海豚不兼容*/
-@-webkit-keyframes glow {
+/*@-webkit-keyframes glow {
     from{
         opacity: 1;
-        /*-webkit-transform: scale3d(1, 1, 1);*/
+        -webkit-transform: scale3d(1, 1, 1);
     }
     to{
         opacity: 0;
-        /*-webkit-transform: scale3d(2, 2, 1);*/
+        -webkit-transform: scale3d(2, 2, 1);
     }
-}
+}*/
 
 /*UC和海豚兼容但是效果怪怪的*/
 /*#previousGlow, #nextGlow{
@@ -241,7 +239,7 @@ body, html{
 
 #openMenuTouchArea{
     height: 100%;
-    width: 12px;
+    width: 16px;
     position: absolute;
     left: 0;
     top: 48px;
