@@ -324,7 +324,7 @@ body, html{
     height: 68px;
     width: 100%;
     background-image: url(../images/menuTitle.png);
-    background-size: 240px 620px;
+    background-size: 240px 488px;
 }
 
 #contentsTitle1{
@@ -332,23 +332,23 @@ body, html{
 }
 
 #contentsTitle2{
-    background-position: 0 -170px;
+    background-position: 0 -148px;
 }
 
 #contentsTitle3{
-    background-position: 0 -260px;
+    background-position: 0 -216px;
 }
 
 #contentsTitle4{
-    background-position: 0 -350px;
+    background-position: 0 -284px;
 }
 
 #contentsTitle5{
-    background-position: 0 -440px;
+    background-position: 0 -352px;
 }
 
 #contentsTitle6{
-    background-position: 0 -530px;
+    background-position: 0 -420px;
 }
 
 #contentsPage li li{
@@ -356,10 +356,10 @@ body, html{
     text-indent: 60px;
     line-height: 40px;
     height: 36px;
-    font-size: 1.1em;
+    font-size: 1em;
     color: #B0B9C6;
     background-image: url(../images/menuTitle.png);
-    background-size: 240px 620px;
+    background-size: 240px 488px;
     background-position: 0 -40px;
 }
 
@@ -480,7 +480,9 @@ body, html{
 /****setting****/
 
 #settingPage{
-    /*background-color: orange;*/
+    background-image: url(../images/settings.png);
+    background-size: 240px 531px;
+    background-repeat: no-repeat;
 }
 
 #titleSettings,#titleAbout{

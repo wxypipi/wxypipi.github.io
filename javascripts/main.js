@@ -138,10 +138,10 @@ function selectStep(item) {
     };
     if(lastContentsItem){
         lastContentsItem.style.backgroundPosition = "0 -40px";
-        lastContentsItem.style.color = "#B0B9C6";
+        // lastContentsItem.style.color = "#B0B9C6";
     };
     item.style.backgroundPosition = "0 0";
-    item.style.color = "#EAEAEA";
+    // item.style.color = "#EAEAEA";
     lastContentsItem = item;
 };
 
@@ -430,35 +430,7 @@ function notChangeStepP_Btn() {
     };
 };
 
-// var isNext = false,
-//     afterChangeStepP_Btn = false;
 
-// function changeStepN_Btn() {
-//     isNext = true;
-//     imgBoxM.style.webkitTransition = "-webkit-transform 250ms ease-in-out";
-//     imgBoxR.style.webkitTransition = "-webkit-transform 250ms ease-in-out";
-//     imgBoxM.style.webkitTransform = "translate3d(-" + moveDis + "px,0,0)";
-//     imgBoxR.style.webkitTransform = "translate3d(0,0,0)";
-// };
-
-// function changeStepP_Btn() {
-//     isNext = false;
-//     imgBoxM.style.webkitTransition = "-webkit-transform 250ms ease-in-out";
-//     imgBoxL.style.webkitTransition = "-webkit-transform 250ms ease-in-out";
-//     imgBoxM.style.webkitTransform = "translate3d(" + moveDis + "px,0,0)";
-//     imgBoxL.style.webkitTransform = "translate3d(0,0,0)";
-// };
-
-// aniBox2.addEventListener('webkitTransitionEnd', function(){
-//     if (isNext) {
-//         imgBoxM.style.webkitTransition = "none";
-//         imgBoxR.style.webkitTransition = "none";
-//         // afterChangeStepN();
-//     } else {
-//         imgBoxM.style.webkitTransition = "none";
-//         imgBoxL.style.webkitTransition = "none";
-//     };
-// }, false);
 
 
 
@@ -734,7 +706,6 @@ $colorItem.bind('touchend', function() {
 });
 
 nextBtn.addEventListener('touchstart', function(){
-    // nextGlow.style.webkitAnimation = "glow 0.3s linear";
     if (!animationing) {
         frameIndex = 20;
         if (currentStep != maxStep) {
@@ -746,7 +717,6 @@ nextBtn.addEventListener('touchstart', function(){
 }, false);
 
 previousBtn.addEventListener('touchstart', function(){
-    // previousGlow.style.webkitAnimation = "glow 0.3s linear";
     if (!animationing) {
         frameIndex = 20;
         if (currentStep != 1) {
@@ -756,15 +726,6 @@ previousBtn.addEventListener('touchstart', function(){
         };
     };
 }, false);
-
-// previousGlow.addEventListener('webkitAnimationEnd', function(){
-//     previousGlow.style.webkitAnimation = "none";
-// }, false);
-
-// nextGlow.addEventListener('webkitAnimationEnd', function(){
-//     nextGlow.style.webkitAnimation = "none";
-// }, false);
-
 
 btnAnimation.addEventListener('touchend', function(){
     if (!animationing) {
