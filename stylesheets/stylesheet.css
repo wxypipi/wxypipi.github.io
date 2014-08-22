@@ -503,7 +503,7 @@ body, html{
 
 
 #menuFooter{
-    height: 55px;
+    height: 56px;
     width: 100%;
     background-color: #4A5260;
     position: absolute;
@@ -533,7 +533,7 @@ body, html{
     width: 5em;
     height: 100%;
     background-image: url(../images/menuFooterIcons.png);
-    background-size: 240px 56px;
+    background-size: 300% 100%;
     background-repeat: no-repeat;
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-transition: opacity 0.2s linear;
