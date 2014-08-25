@@ -54,6 +54,8 @@ var mask = document.getElementById("mask"),
     btnAnimation = document.getElementById("btnAnimation"),
     lastContentsItem = false,
     lastColorItem = $colorItem[0],
+    zh = document.getElementById("zh"),
+    en = document.getElementById("en"),
     separate = true,
     // isChangeStep = true,
     currentStep = 1,
@@ -648,6 +650,79 @@ function selectColor(item) {
 };
 
 
+//================================================设置页==========================================
+var currentLang = "en",
+    zhRadioBtn = document.getElementById("zhRadioBtn"),
+    enRadioBtn = document.getElementById("enRadioBtn"),
+    saveSwitchTouchArea = document.getElementById("saveSwitchTouchArea"),
+    saveSwitch = document.getElementById("saveSwitch"),
+    saveStateOn = true,
+    savedStep = document.getElementById("savedStep"),
+    speedSliderTouchArea = document.getElementById("speedSliderTouchArea"),
+    speedSlider = document.getElementById("speedSlider");
+
+
+function changeLangZh() {
+    zhRadioBtn.style.webkitTransform = "scale3d(1,1,1)";
+    enRadioBtn.style.webkitTransform = "scale3d(0,0,1)";
+    currentLang = "zh";
+};
+
+function changeLangEn() {
+    zhRadioBtn.style.webkitTransform = "scale3d(0,0,1)";
+    enRadioBtn.style.webkitTransform = "scale3d(1,1,1)";
+    currentLang = "en";
+};
+
+function turnOnSave() {
+    saveSwitch.style.webkitTransform = "translate3d(0,0,0)";
+    saveSwitch.style.webkitFilter = "grayscale(0)";
+    savedStep.innerHTML = "Current Step - " + currentStep;
+    saveStateOn = true;
+};
+
+function turnOffSave() {
+    saveSwitch.style.webkitTransform = "translate3d(-24px,0,0)";
+    saveSwitch.style.webkitFilter = "grayscale(100%)";
+    savedStep.innerHTML = "Not Save";
+    saveStateOn = false;
+}
+
+zh.addEventListener('touchend', function(){
+    if (currentLang != "zh") {
+        changeLangZh();
+    };
+}, false);
+
+en.addEventListener('touchend', function(){
+    if (currentLang != "en") {
+        changeLangEn();
+    };
+}, false);
+
+saveSwitchTouchArea.addEventListener('touchend', function(){
+    if (saveStateOn) {
+        turnOffSave();
+    } else {
+        turnOnSave();
+    };
+}, false);
+
+speedSliderTouchArea.addEventListener('touchend', function(e){
+    changeSpeed(e.changedTouches[0].clientX);
+}, false);
+
+function changeSpeed(pos){
+    if (pos < 60) {
+        speedSlider.style.webkitTransform = "translate3d(-170px,0,0)";
+    } else if (pos < 120) {
+        speedSlider.style.webkitTransform = "translate3d(-115px,0,0)";
+    } else if (pos < 180) {
+        speedSlider.style.webkitTransform = "translate3d(-55px,0,0)";
+    } else {
+        speedSlider.style.webkitTransform = "translate3d(0,0,0)";
+    };
+};
 
 
 // ===========================================事件监听================================================
