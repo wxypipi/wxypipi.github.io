@@ -93,9 +93,9 @@ body, html{
 
 #menuBtn{
     height: 48px;
-    width: 50px;
+    width: 48px;
     background: url(../images/menuBtn.png);
-    background-size: 50px 48px;
+    background-size: 100% 100%;
     /*background-color: #65B89C;*/
     float: left;
     position: absolute;
@@ -373,6 +373,14 @@ body, html{
 
 /****search****/
 
+#searchBg{
+    width: 240px;
+    height: 384px;
+    background-image: url(../images/search.png);
+    background-size: 100% 100%;
+}
+
+
 #filterPanel{
     /*background: red;*/
     width: 100%;
@@ -486,7 +494,7 @@ body, html{
 }
 
 #settingsBg{
-    height: 546px;
+    height: 562px;
     width: 240px;
     background-image: url(../images/settings.png);
     background-size: 100% 100%;
@@ -540,7 +548,7 @@ body, html{
     float: left;
     width: 240px;
     height: 0;
-    margin-top: 64px;
+    margin-top: 68px;
     font-size: 11px;
     color: #B0B9C6;
     text-indent: 25px;
