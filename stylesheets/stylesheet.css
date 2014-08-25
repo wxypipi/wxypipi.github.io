@@ -480,9 +480,100 @@ body, html{
 /****setting****/
 
 #settingPage{
+    
+    
+    /*background-repeat: no-repeat;*/
+}
+
+#settingsBg{
+    height: 546px;
+    width: 240px;
     background-image: url(../images/settings.png);
-    background-size: 240px 531px;
-    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+#languagePanel{
+    height: 120px;
+    width: 240px;
+    /*opacity: 0.5;*/
+    position: relative;
+    /*background-color: blue;*/
+}
+
+#langRadioBtn{
+    height: 40px;
+    width: 40px;
+    background-image: url(../images/btn_1.png);
+    background-size: 100% 100%;
+    position: absolute;
+    top: 85px;
+    right: 18px;
+}
+
+#speedPanel{
+    height: 110px;
+    width: 240px;
+    position: relative;
+    /*background-color: pink;*/
+    /*opacity: 0.5;*/
+}
+
+#speedSlider{
+    height: 36px;
+    width: 36px;
+    background-image: url(../images/btn_2.png);
+    background-size: 100% 100%;
+    position: absolute;
+    top: 58px;
+    right: 18px;
+    -webkit-transform: translate3d(-55px,0,0);
+}
+
+#otherPanel{
+    height: 256px;
+    width: 240px;
+    position: relative;
+    /*background-color: blue;*/
+}
+
+#otherPanel span{
+    float: left;
+    width: 240px;
+    height: 0;
+    margin-top: 64px;
+    font-size: 11px;
+    color: #B0B9C6;
+    text-indent: 25px;
+}
+
+#saveSwitch{
+    height: 40px;
+    width: 40px;
+    background-image: url(../images/btn_1.png);
+    background-size: 100% 100%;
+    position: absolute;
+    top: 28px;
+    right: 18px;
+}
+
+#savedStep{
+    margin-top: 54px !important;
+}
+
+#zh, #en{
+    width: 240px;
+    height: 30px;
+    position: absolute;
+}
+
+#zh{
+    top: 60px;
+    /*background-color: red;*/
+}
+
+#en{
+    top: 90px;
+    /*background-color: green;*/
 }
 
 #titleSettings,#titleAbout{
